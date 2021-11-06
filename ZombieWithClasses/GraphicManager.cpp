@@ -15,7 +15,7 @@ Managers::GraphicManager::~GraphicManager()
         delete i->second;
     }
 }
-//a
+
 void Managers::GraphicManager::show()
 {
     window->display();

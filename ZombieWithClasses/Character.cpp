@@ -14,7 +14,7 @@ textPath(),
 text()
 {
 }
-//a
+
 Entities::Characters::Character::~Character()
 {
 }

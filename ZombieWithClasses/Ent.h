@@ -12,5 +12,3 @@ public:
 	virtual void move(float t) = 0;
 	void print();
 };
-
-//a

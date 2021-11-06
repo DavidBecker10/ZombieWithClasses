@@ -23,4 +23,4 @@ namespace Managers
 		sf::RenderWindow* getWindow();
 		void closeWindow();
 	};
-}//a
+}

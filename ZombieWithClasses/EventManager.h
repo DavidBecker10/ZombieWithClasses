@@ -19,4 +19,4 @@ namespace Managers
 
 		bool handleEvent();
 	};
-}//a
+}

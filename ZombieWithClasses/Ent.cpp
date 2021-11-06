@@ -12,4 +12,4 @@ Ent::~Ent()
 void Ent::print()
 {
 }
- //aaa//a
+ 

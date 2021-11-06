@@ -17,4 +17,4 @@ namespace Entities
         ~Entity();
         virtual void move(float t) = 0;
     };
-}//a
+}

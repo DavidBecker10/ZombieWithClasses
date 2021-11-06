@@ -12,7 +12,7 @@ Managers::EventManager::~EventManager()
 {
     window = NULL;
 }
-//a
+
 void Managers::EventManager::setWindow(sf::RenderWindow* w)
 {
     window = w;

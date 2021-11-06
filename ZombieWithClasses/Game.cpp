@@ -30,5 +30,5 @@ void Game::execute()
         GM.clear();
         Player.move(1.2);
     }
-    //A
+    
 }
