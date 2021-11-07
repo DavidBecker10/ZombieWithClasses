@@ -4,7 +4,7 @@
 Game::Game():
 GM(),
 close(false),
-Player(sf::Vector2f(0.f, 0.f), sf::Vector2f(0.02f, 0.02f), "walk6.png")
+Player(Vector2F(0.f, 0.f), Vector2F(2.0f, 2.0f), "walk6.png")
 {
     execute();
 }
@@ -17,6 +17,9 @@ void Game::execute()
 {
     while (!close)
     {
+        clock.restart();
+        sf::Time t = clock.getElapsedTime();
+        
         EM.setWindow(GM.getWindow());
         while (EM.checkEvent())
         {
@@ -25,10 +28,12 @@ void Game::execute()
         }
 
         Player.initialize(GM);
+        GM.clear();
+        printf("%lf", t);
+        Player.move(t.asSeconds());
         Player.draw(GM);
         GM.show();
-        GM.clear();
-        Player.move(1.2);
+
     }
     
 }

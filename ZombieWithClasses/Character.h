@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "GraphicManager.h"
+#include "Vector2D.h"
 
 namespace Entities
 {
@@ -15,7 +16,7 @@ namespace Entities
             sf::Sprite body;
 
         public:
-            Character(sf::Vector2f pos, sf::Vector2f v, const char* tPath = NULL);
+            Character(Vector2F pos, Vector2F v, const char* tPath = NULL);
             Character();
             ~Character();
             void initialize(Managers::GraphicManager &g);

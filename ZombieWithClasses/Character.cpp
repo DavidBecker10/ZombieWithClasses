@@ -1,7 +1,7 @@
 #include "Character.h"
 #include "GraphicManager.h"
 
-Entities::Characters::Character::Character(sf::Vector2f pos, sf::Vector2f v, const char* tPath):
+Entities::Characters::Character::Character(Vector2F pos, Vector2F v, const char* tPath):
 Entity(pos, v),
 textPath(tPath),
 text()
@@ -26,8 +26,9 @@ void Entities::Characters::Character::initialize(Managers::GraphicManager &g)
 
 void Entities::Characters::Character::move(float t)
 {
-	position.x += vel.x;
-	position.y += vel.y;
+	position.x += 0.1*t;
+	position.y += 0.005;
+	body.setPosition(position.x, position.y);
 }
 
 void Entities::Characters::Character::draw(Managers::GraphicManager &g)

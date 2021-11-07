@@ -26,7 +26,7 @@ void Managers::GraphicManager::clear(int r, int g, int b)
     window->clear(sf::Color(r, g, b));
 }
 
-void Managers::GraphicManager::draw(const std::string path, const sf::Vector2f position)
+void Managers::GraphicManager::draw(const std::string path, const Vector2F position)
 {
     if (!text.count(path)) //Se a textura nao esta no mapa
     {
@@ -65,7 +65,7 @@ bool Managers::GraphicManager::loadText(const std::string path)
     }
 }
 
-void Managers::GraphicManager::center(const sf::Vector2f center)
+void Managers::GraphicManager::center(const Vector2F center)
 {
     view.setCenter(sf::Vector2f(center.x, center.y));
 }

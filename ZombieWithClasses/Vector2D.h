@@ -25,6 +25,9 @@ public:
 	Vector2D orthogonalProjection(Vector2D v);
 };
 
+typedef Vector2D<float> Vector2F;
+typedef Vector2D<unsigned> Vector2U;
+
 template<typename T>
 Vector2D<T>::Vector2D(T x, T y)
 {
@@ -68,13 +71,13 @@ Vector2D<T> Vector2D<T>::operator*(double d)
 template<typename T>
 void Vector2D<T>::operator+=(Vector2D<T> v)
 {
-	return Vector2D<T>(x + v.x, y + v.y);
+	(x + v.x, y + v.y);
 }
 
 template<typename T>
 void Vector2D<T>::operator-=(Vector2D<T> v)
 {
-	return Vector2D<T>(x - v.x, y - v.y);
+	(x - v.x, y - v.y);
 }
 
 template<typename T>

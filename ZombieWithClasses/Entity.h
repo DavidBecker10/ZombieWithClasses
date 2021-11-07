@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 #include "Ent.h"
+#include "Vector2D.h"
 
 namespace Entities
 {
@@ -8,11 +9,11 @@ namespace Entities
         public Ent
     {
     protected:
-        sf::Vector2f position;
-        sf::Vector2f vel;
+        Vector2F position;
+        Vector2F vel;
 
     public:
-        Entity(sf::Vector2f pos, sf::Vector2f v);
+        Entity(Vector2F pos, Vector2F v);
         Entity();
         ~Entity();
         virtual void move(float t) = 0;

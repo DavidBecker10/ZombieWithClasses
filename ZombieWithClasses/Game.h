@@ -9,7 +9,8 @@ private:
 	Managers::GraphicManager GM;
 	Managers::EventManager EM;
 	bool close;
-	sf::Clock time;
+	sf::Clock clock;
+	//sf::Time t;
 	Entities::Characters::Character Player;
 
 public:
