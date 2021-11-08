@@ -15,7 +15,7 @@ namespace Entities
             Character(Vector2F pos, Vector2F v, const char* tPath = NULL);
             Character();
             ~Character();
-            void update(float t);
+            virtual void update(float t);
         };
     }
 }
