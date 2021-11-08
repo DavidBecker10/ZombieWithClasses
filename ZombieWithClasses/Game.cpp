@@ -4,7 +4,7 @@
 Game::Game():
 GM(),
 close(false),
-Player(Vector2F(5.f, 7.f), Vector2F(2.0f, 2.0f), "walk6.png")
+Player(Vector2F(0.f, 0.f), Vector2F(2.0f, 2.0f), "walk6.png")
 {
     execute();
 }
@@ -29,7 +29,7 @@ void Game::execute()
 
         Player.initialize(GM);
         GM.clear();
-        Player.move(t);
+        Player.update(t);
         Player.draw(GM);
         GM.show();
 

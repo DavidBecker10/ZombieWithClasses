@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Ent.h"
 #include "Vector2D.h"
+#include "GraphicManager.h"
 
 namespace Entities
 {
@@ -11,11 +12,16 @@ namespace Entities
     protected:
         Vector2F position;
         Vector2F vel;
+        sf::Texture* text;
+        sf::Sprite body;
+        const char* textPath;
 
     public:
-        Entity(Vector2F pos, Vector2F v);
+        Entity(Vector2F pos, Vector2F v, const char* tP);
         Entity();
         ~Entity();
-        virtual void move(float t) = 0;
+        virtual void update(float t) = 0;
+        void initialize(Managers::GraphicManager& g);
+        void draw(Managers::GraphicManager& g);
     };
 }

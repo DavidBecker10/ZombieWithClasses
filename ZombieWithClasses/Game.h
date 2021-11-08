@@ -10,7 +10,6 @@ private:
 	Managers::EventManager EM;
 	bool close;
 	sf::Clock clock;
-	//sf::Time t;
 	Entities::Characters::Character Player;
 
 public:

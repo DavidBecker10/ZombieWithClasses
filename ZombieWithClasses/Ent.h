@@ -9,6 +9,6 @@ public:
 
 	Ent(int i = -1);
 	~Ent();
-	virtual void move(float t) = 0;
+	virtual void update(float t) = 0;
 	void print();
 };

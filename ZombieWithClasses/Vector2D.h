@@ -30,8 +30,8 @@ typedef Vector2D<unsigned> Vector2U;
 
 template<typename T>
 Vector2D<T>::Vector2D(T xi, T yi):
-x(xi),
-y(yi)
+	x(xi),
+	y(yi)
 {
 }
 
