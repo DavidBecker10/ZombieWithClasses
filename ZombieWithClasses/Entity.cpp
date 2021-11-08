@@ -1,9 +1,10 @@
 #include "Entity.h"
 
 Entities::Entity::Entity(Vector2F pos, Vector2F v):
-position(pos.x, pos.y),
-vel(v.x, v.y)
+position(pos),
+vel(v)
 {
+
 }
 
 Entities::Entity::Entity()

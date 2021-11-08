@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "GraphicManager.h"
+#include "Vector2D.h"
 
 Entities::Characters::Character::Character(Vector2F pos, Vector2F v, const char* tPath):
 Entity(pos, v),
@@ -26,8 +27,9 @@ void Entities::Characters::Character::initialize(Managers::GraphicManager &g)
 
 void Entities::Characters::Character::move(float t)
 {
-	position.x += 0.1*t;
-	position.y += 0.005;
+	position.x += 50000*t;
+	position.y += 10000*t;
+	printf("%f", position.x);
 	body.setPosition(position.x, position.y);
 }
 

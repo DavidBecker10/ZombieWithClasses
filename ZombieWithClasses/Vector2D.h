@@ -7,7 +7,7 @@ class Vector2D
 public:
 	T x, y;
 
-	Vector2D(T x = 0.0, T y = 0.0);
+	Vector2D(T xi = 0.0, T yi = 0.0);
 	~Vector2D();
 	Vector2D operator+(Vector2D v);
 	Vector2D operator-(Vector2D v);
@@ -29,7 +29,9 @@ typedef Vector2D<float> Vector2F;
 typedef Vector2D<unsigned> Vector2U;
 
 template<typename T>
-Vector2D<T>::Vector2D(T x, T y)
+Vector2D<T>::Vector2D(T xi, T yi):
+x(xi),
+y(yi)
 {
 }
 
