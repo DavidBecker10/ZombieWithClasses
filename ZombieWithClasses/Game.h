@@ -2,6 +2,7 @@
 #include "GraphicManager.h"
 #include "EventManager.h"
 #include "Character.h"
+#include "EntityList.h"
 
 class Game
 {
@@ -10,7 +11,9 @@ private:
 	Managers::EventManager EM;
 	bool close;
 	sf::Clock clock;
-	Entities::Characters::Character Player;
+	Entities::Characters::Character Player1;
+	Entities::Characters::Character Player2;
+	Lists::EntityList EntityL;
 
 public:
 	Game();

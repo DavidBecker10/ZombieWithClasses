@@ -1,11 +1,17 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
 
-Game::Game():
-GM(),
-close(false),
-Player(Vector2F(0.f, 0.f), Vector2F(2.0f, 2.0f), "walk6.png")
+Game::Game() :
+    GM(),
+    EM(),
+    close(false),
+    clock(),
+    Player1(Vector2F(0.f, 0.f), Vector2F(20000.0f, 10000.0f), "../Sprites/Zombies/ZombieWoman/Animation/Attack1.png"),
+    Player2(Vector2F(0.f, 0.f), Vector2F(70000.0f, 30000.0f), "../Sprites/Zombies/ZombieMan/Animation/Attack1.png"),
+    EntityL()
 {
+    EntityL.insert(static_cast<Entities::Entity*>(&Player1));
+    EntityL.insert(static_cast<Entities::Entity*>(&Player2));
     execute();
 }
 
@@ -27,10 +33,10 @@ void Game::execute()
                 close = true;
         }
 
-        Player.initialize(GM);
+        EntityL.initialize(GM);
         GM.clear();
-        Player.update(t);
-        Player.draw(GM);
+        EntityL.update(t);
+        EntityL.draw(GM);
         GM.show();
 
     }

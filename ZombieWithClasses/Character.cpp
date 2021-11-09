@@ -18,7 +18,7 @@ Entities::Characters::Character::~Character()
 
 void Entities::Characters::Character::update(float t)
 {
-	position.x += 50000*t;
-	position.y += 10000*t;
+	position.x += vel.x*t;
+	position.y += vel.y*t;
 	body.setPosition(position.x, position.y);
 }

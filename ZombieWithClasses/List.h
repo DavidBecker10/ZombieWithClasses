@@ -44,6 +44,7 @@ namespace Lists
 		};
 
 		Element<TL>* pFirst;
+		Element<TL>* pCurrent;
 		Element<TL>* pLast;
 		int size;
 
@@ -58,14 +59,16 @@ namespace Lists
 		void addElement(Element<TL>* pEl);
 		Element<TL>* getpFirst() { return pFirst; }
 		Element<TL>* getpLast() { return pLast; }
+		Element<TL>* getpCurrent() { return pCurrent; }
+		TL* operator[](int x);
 
 	};
 
 	template<class TL>
-	List<TL>::List():
-	pFirst(),
-	pLast(),
-	size(0)
+	List<TL>::List() :
+		pFirst(),
+		pLast(),
+		size(0)
 	{
 		destroy();
 	}
@@ -140,4 +143,32 @@ namespace Lists
 			std::cout << "Erro! pEl nulo em List<TL>::addElement." << std::endl;
 		}
 	}
+
+	template<class TL>
+	TL* List<TL>::operator[](int x)
+	{
+		if(x < 0 || x >= getSize())
+		{
+			std::cerr << "Erro. Segmentation fault em List<TL>::operator[]." << std::endl;
+			exit(555);
+		}
+		else
+		{
+			Element<TL>* pAux = NULL;
+			pAux = pFirst;
+			for (int i = 0; i < x; i++)
+			{
+				pAux = pAux->getNext();
+			}
+
+			if (!pAux)
+			{
+				std::cerr << "Erro. Ponteiro pAux nulo em List<TL>::operator[]." << std::endl;
+				exit(1235);
+			}
+
+			return pAux->getInfo();
+		}
+	}
+
 }
