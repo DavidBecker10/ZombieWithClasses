@@ -6,8 +6,8 @@ Game::Game() :
     EM(),
     close(false),
     clock(),
-    Player1(Vector2F(0.f, 0.f), Vector2F(20000.0f, 10000.0f), "../Sprites/Zombies/ZombieWoman/Animation/Attack1.png"),
-    Player2(Vector2F(0.f, 0.f), Vector2F(70000.0f, 30000.0f), "../Sprites/Zombies/ZombieMan/Animation/Attack1.png"),
+    Player1(Vector2F(0.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Zombies/ZombieWoman/Animation/Attack1.png"),
+    Player2(Vector2F(0.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Zombies/ZombieMan/Animation/Attack1.png"),
     EntityL()
 {
     EntityL.insert(static_cast<Entities::Entity*>(&Player1));
@@ -21,6 +21,7 @@ Game::~Game()
 
 void Game::execute()
 {
+    EM.setCharacter(&Player1, &Player2);
     while (!close)
     {
         clock.restart();
@@ -38,7 +39,6 @@ void Game::execute()
         EntityL.update(t);
         EntityL.draw(GM);
         GM.show();
-
     }
     
 }

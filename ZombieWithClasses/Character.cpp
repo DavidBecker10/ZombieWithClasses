@@ -22,3 +22,23 @@ void Entities::Characters::Character::update(float t)
 	position.y += vel.y*t;
 	body.setPosition(position.x, position.y);
 }
+
+void Entities::Characters::Character::moveUp()
+{
+	position.y -= 5.0f;
+}
+
+void Entities::Characters::Character::moveLeft()
+{
+	position.x -= 5.0f;
+}
+
+void Entities::Characters::Character::moveDown()
+{
+	position.y += 5.0f;
+}
+
+void Entities::Characters::Character::moveRight()
+{
+	position.x += 5.0f;
+}

@@ -14,7 +14,7 @@ namespace Lists
 		EntityList();
 		~EntityList();
 
-		void insert(Entities::Entity* pE); //{ list.insert(pE); }
+		void insert(Entities::Entity* pE);
 
 		void update(float t);
 		void initialize(Managers::GraphicManager& g);

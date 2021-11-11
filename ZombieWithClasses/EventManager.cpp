@@ -34,15 +34,45 @@ bool Managers::EventManager::checkEvent()
     }
 }
 
+void Managers::EventManager::setCharacter(Entities::Characters::Character* p1, Entities::Characters::Character* p2)
+{
+    pP1 = p1;
+    pP2 = p2;
+}
+
 bool Managers::EventManager::handleEvent()
 {
+
     if (e.type == sf::Event::Closed)
     {
         window->close();
         close = true;
     }
 
-    /*Implementar demais eventos*/
+    if (e.type == sf::Event::KeyPressed || e.type == sf::Event::KeyReleased)
+    {
+        //Gerencia eventos do Player 1
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+            pP1->moveUp();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+            pP1->moveLeft();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+            pP1->moveDown();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+            pP1->moveRight();
+
+        //Gerencia eventos do Player 2
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+            pP2->moveUp();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+            pP2->moveLeft();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+            pP2->moveDown();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+            pP2->moveRight();
+        
+        close = false;
+    }
 
     return close;
 }
