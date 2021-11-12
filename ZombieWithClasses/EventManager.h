@@ -1,6 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "Character.h"
+#include "Player.h"
 
 namespace Managers
 {
@@ -9,8 +9,8 @@ namespace Managers
 	private:
 		sf::Event e;
 		sf::RenderWindow* window;
-		Entities::Characters::Character* pP1;
-		Entities::Characters::Character* pP2;
+		Entities::Characters::Player* pP1;
+		Entities::Characters::Player* pP2;
 		bool close;
 
 	public:
@@ -20,7 +20,7 @@ namespace Managers
 		void setWindow(sf::RenderWindow* w);
 		bool checkEvent();
 
-		void setCharacter(Entities::Characters::Character* p1, Entities::Characters::Character* p2);
+		void setCharacter(Entities::Characters::Player* p1, Entities::Characters::Player* p2);
 
 		bool handleEvent();
 	};

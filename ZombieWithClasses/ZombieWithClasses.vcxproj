@@ -152,6 +152,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ZombieWithClasses.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicManager.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -12,8 +12,6 @@ namespace Entities
     protected:
         Vector2F position;
         Vector2F vel;
-        sf::Texture* text;
-        sf::Sprite body;
         const char* textPath;
 
     public:
@@ -23,5 +21,6 @@ namespace Entities
         virtual void update(float t) = 0;
         void initialize(Managers::GraphicManager& g);
         void draw(Managers::GraphicManager& g);
+        Vector2F getPosition() { return position; }
     };
 }

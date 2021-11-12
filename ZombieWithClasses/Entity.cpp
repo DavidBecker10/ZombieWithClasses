@@ -4,8 +4,6 @@ Entities::Entity::Entity(Vector2F pos, Vector2F v, const char* tP):
 	Ent(),
 	position(pos),
 	vel(v),
-	text(),
-	body(),
 	textPath(tP)
 {
 
@@ -15,8 +13,6 @@ Entities::Entity::Entity():
 	Ent(),
 	position(),
 	vel(),
-	text(),
-	body(),
 	textPath()
 {
 }

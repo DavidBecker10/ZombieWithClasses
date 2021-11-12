@@ -34,7 +34,7 @@ bool Managers::EventManager::checkEvent()
     }
 }
 
-void Managers::EventManager::setCharacter(Entities::Characters::Character* p1, Entities::Characters::Character* p2)
+void Managers::EventManager::setCharacter(Entities::Characters::Player* p1, Entities::Characters::Player* p2)
 {
     pP1 = p1;
     pP2 = p2;

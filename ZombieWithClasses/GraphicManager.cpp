@@ -1,9 +1,13 @@
 #include "GraphicManager.h"
 #include <iostream>
+#define WIDTH 800;
+#define HEIGHT 400;
 
 Managers::GraphicManager::GraphicManager():
-window(new sf::RenderWindow(sf::VideoMode(800, 400), "Zombie With Classes"))
+    window(new sf::RenderWindow(sf::VideoMode(800, 400), "Zombie With Classes")),
+    view(sf::Vector2f(400.f, 200.f), sf::Vector2f(800.f, 400.f))
 {
+    initializeView();
 }
 
 Managers::GraphicManager::~GraphicManager()
@@ -35,12 +39,14 @@ void Managers::GraphicManager::draw(const std::string path, const Vector2F posit
     }
     
     sf::Texture* nText = text[path];
-    sf::Sprite sprite;
+    sf::RectangleShape body;
 
-    sprite.setTexture(*nText);
-    sprite.setPosition(position.x, position.y);
+    body.setTexture(nText);
+    body.setPosition(position.x, position.y);
+    body.setSize(sf::Vector2f(200.f, 200.f));
+    body.setScale(1, 1);
 
-    window->draw(sprite);
+    window->draw(body);
 
 }
 
@@ -65,9 +71,14 @@ bool Managers::GraphicManager::loadText(const std::string path)
     }
 }
 
+void Managers::GraphicManager::initializeView()
+{
+    window->setView(view);
+}
+
 void Managers::GraphicManager::center(const Vector2F center)
 {
-    view.setCenter(sf::Vector2f(center.x, center.y));
+    view.setCenter(center.x, center.y);
 }
 
 sf::RenderWindow* Managers::GraphicManager::getWindow()

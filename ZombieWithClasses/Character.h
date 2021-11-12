@@ -16,10 +16,6 @@ namespace Entities
             Character();
             ~Character();
             virtual void update(float t);
-            void moveUp();
-            void moveLeft();
-            void moveDown();
-            void moveRight();
         };
     }
 }
