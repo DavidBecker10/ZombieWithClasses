@@ -45,6 +45,7 @@ void Managers::GraphicManager::draw(const std::string path, const Vector2F posit
     body.setPosition(position.x, position.y);
     body.setSize(sf::Vector2f(200.f, 200.f));
     body.setScale(1, 1);
+    body.setOrigin(100, 100);
 
     window->draw(body);
 
