@@ -18,6 +18,9 @@ Entities::Characters::Character::~Character()
 
 void Entities::Characters::Character::update(float t)
 {
-	position.x += vel.x*t;
-	position.y += vel.y*t;
+	if (position.y < 200 )
+	{
+		position.x += vel.x * t;
+		position.y += 50000 * t;
+	}
 }

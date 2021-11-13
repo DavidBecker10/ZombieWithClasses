@@ -6,7 +6,7 @@ Game::Game() :
     EM(),
     close(false),
     clock(),
-    Player1(Vector2F(0.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"),
+    Player1(Vector2F(150.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"),
     Player2(Vector2F(0.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Masked/Attack1/Attack1_1.png"),
     EntityL()
 {
@@ -35,7 +35,8 @@ void Game::execute()
         }
 
         EntityL.initialize(GM);
-        GM.center(Player1.getPosition());
+        GM.center(Vector2F(100.f, 100.f));
+        CM.checkCollision(EntityL);
         GM.clear();
         GM.initializeView();
         EntityL.update(t);

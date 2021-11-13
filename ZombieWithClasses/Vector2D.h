@@ -19,6 +19,7 @@ public:
 	Vector2D operator*=(int i);
 	Vector2D operator*=(float f);
 	Vector2D operator*=(double d);
+	bool operator==(Vector2D v);
 	T operator*(Vector2D v);
 	T absValue();
 	Vector2D verse();
@@ -98,6 +99,12 @@ template<typename T>
 Vector2D<T> Vector2D<T>::operator*=(double d)
 {
 	return Vector2D<T>(x * d, y * d);
+}
+
+template<typename T>
+bool Vector2D<T>::operator==(Vector2D<T> v)
+{
+	return (v.x == x && v.y == y);
 }
 
 template<typename T>

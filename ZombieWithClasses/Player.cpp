@@ -18,7 +18,7 @@ Entities::Characters::Player::~Player()
 
 void Entities::Characters::Player::moveUp()
 {
-	position.y -= 5.0f;
+	position.y -= 100.0f;
 }
 
 void Entities::Characters::Player::moveLeft()
@@ -28,7 +28,8 @@ void Entities::Characters::Player::moveLeft()
 
 void Entities::Characters::Player::moveDown()
 {
-	position.y += 5.0f;
+	if (position.y < 200)
+		position.y += 5.0f;
 }
 
 void Entities::Characters::Player::moveRight()
