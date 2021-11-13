@@ -55,7 +55,7 @@ namespace Lists
 		void destroy();
 		int getSize() { return size; }
 		void insert(TL* pInfo);
-		//bool remove(TL* pR);
+		bool remove(TL* pTL);
 		void addElement(Element<TL>* pEl);
 		Element<TL>* getpFirst() { return pFirst; }
 		Element<TL>* getpLast() { return pLast; }
@@ -112,13 +112,29 @@ namespace Lists
 		}
 	}
 
-	/*
 	template<class TL>
-	bool List<TL>::remove(TL* pR)
+	bool List<TL>::remove(TL* pTL)
 	{
+		Element<TL>* pAux = pFirst;
+		Element<TL>* pPrev = NULL;
+		while (pAux != NULL) {
+			if (pAux->getInfo() == pTL) {
+				if (pAux == pFirst)
+					pFirst = pAux->getNext();
+				else
+					pPrev->setNext(pAux->getNext());
 
+				//delete (pTL);
+				delete (pAux);
+				size--;
+				return true;
+			}
+			pPrev = pAux;
+			pAux = pAux->getNext();
+		}
+		return false;
 	}
-	*/
+
 
 	template<class TL>
 	void List<TL>::addElement(Element<TL>* pEl)

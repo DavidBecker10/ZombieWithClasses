@@ -15,6 +15,7 @@ namespace Lists
 		~EntityList();
 
 		void insert(Entities::Entity* pE);
+		void remove(Entities::Entity* pE);
 		int getSize();
 
 		void update(float t);

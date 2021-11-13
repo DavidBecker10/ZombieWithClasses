@@ -19,6 +19,11 @@ void Lists::EntityList::insert(Entities::Entity* pE)
 		std::cerr << "Erro. Ponteiro pE nulo em Lists::EntityList::insert" << std::endl;
 }
 
+void Lists::EntityList::remove(Entities::Entity* pE)
+{
+	list.remove(pE);
+}
+
 int Lists::EntityList::getSize()
 {
 	return list.getSize();
