@@ -7,11 +7,13 @@ Game::Game() :
     close(false),
     clock(),
     Player1(Vector2F(150.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"),
-    Player2(Vector2F(0.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Masked/Attack1/Attack1_1.png"),
+    Player2(Vector2F(300.f, 0.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Masked/Attack1/Attack1_1.png"),
+    Zombie(Vector2F(0.f, 0.f), Vector2F(20000.0f, 0.0f), "../Sprites/Zombies/ZombieWoman/Animation/Attack1.png"),
     EntityL()
 {
     EntityL.insert(static_cast<Entities::Entity*>(&Player1));
     EntityL.insert(static_cast<Entities::Entity*>(&Player2));
+    EntityL.insert(static_cast<Entities::Entity*>(&Zombie));
     execute();
 }
 
