@@ -5,6 +5,7 @@
 #include "GraphicManager.h"
 #include "EventManager.h"
 #include "CollisionManager.h"
+#include "Ids.h"
 #include <vector>
 
 class TilesManager
@@ -22,14 +23,14 @@ private:
 	TileMap tileMap;
 	Vector2F tileDimensions;
 	const char* path;
-	std::vector<Tile> tiles;
+	std::vector<Tile*> tiles;
 
 public:
-	TilesManager(std::vector<Tile> tls, Vector2F tileDim, const char* p);
+	TilesManager(std::vector<Tile*> tls, Vector2F tileDim, const char* p);
 	~TilesManager();
-	void update(float t);
-	void initialize(Managers::GraphicManager& gm, Managers::EventManager& em, Managers::CollisionManager& cm);
+	void initialize(Managers::GraphicManager& gm, Managers::EventManager& em);
 	void draw(Managers::GraphicManager& g) const;
-	void checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
+	std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
+	const Vector2F coordinatesForScreen(const Vector2U pos) const;
 };
 

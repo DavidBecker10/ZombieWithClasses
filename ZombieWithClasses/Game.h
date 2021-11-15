@@ -2,6 +2,7 @@
 #include "GraphicManager.h"
 #include "CollisionManager.h"
 #include "EventManager.h"
+#include "TilesManager.h"
 #include "Character.h"
 #include "EntityList.h"
 #include "Player.h"
@@ -13,6 +14,7 @@ private:
 	Managers::GraphicManager GM;
 	Managers::EventManager EM;
 	Managers::CollisionManager CM;
+	TilesManager TM;
 	bool close;
 	sf::Clock clock;
 	Entities::Characters::Player Player1;

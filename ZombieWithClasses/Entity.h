@@ -10,7 +10,6 @@ namespace Entities
         public Ent
     {
     protected:
-        sf::RectangleShape body;
         Vector2F position;
         Vector2F vel;
         const char* textPath;
@@ -24,6 +23,5 @@ namespace Entities
         void draw(Managers::GraphicManager& g);
         Vector2F getPosition() { return position; }
         const char* getTextPath() { return textPath; }
-        sf::FloatRect getBounds() { return body.getGlobalBounds(); }
     };
 }

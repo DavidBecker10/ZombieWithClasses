@@ -12,9 +12,9 @@ public:
 		unsigned int length;
 
 	public:
-		TileMapLine(unsigned short l, unsigned int len);
+		TileMapLine(unsigned short* l, unsigned int len);
 		~TileMapLine();
-		const unsigned short operator[](unsigned int i);
+		unsigned short operator[](unsigned int i) const;
 	};
 	 
 private:
@@ -23,7 +23,7 @@ private:
 	const char* path;
 
 public:
-	TileMap(const char* filePath);
+	TileMap(const char* filePath = NULL);
 	~TileMap();
 	void printMap() const;
 	Vector2U getDimensions() const;

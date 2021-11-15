@@ -30,7 +30,7 @@ void Managers::GraphicManager::clear(int r, int g, int b)
     window->clear(sf::Color(r, g, b));
 }
 
-void Managers::GraphicManager::draw(const std::string path, const Vector2F position, sf::RectangleShape body)
+void Managers::GraphicManager::draw(const std::string path, const Vector2F position)
 {
     if (!text.count(path)) //Se a textura nao esta no mapa
     {
@@ -39,6 +39,7 @@ void Managers::GraphicManager::draw(const std::string path, const Vector2F posit
     }
     
     sf::Texture* nText = text[path];
+    sf::RectangleShape body;
 
     body.setTexture(nText);
     body.setPosition(position.x, position.y);

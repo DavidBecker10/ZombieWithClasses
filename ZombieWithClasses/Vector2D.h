@@ -1,5 +1,7 @@
 #pragma once
 #include <cmath>
+#include <ostream>
+#include "Vector2D.h"
 
 template<typename T>
 class Vector2D
@@ -28,6 +30,13 @@ public:
 
 typedef Vector2D<float> Vector2F;
 typedef Vector2D<unsigned> Vector2U;
+
+template<typename T>
+std::ostream& operator <<(std::ostream& out, const Vector2D<T> v)
+{
+	out << "(" << v.x << " , " << v.y << ")";
+	return out;
+}
 
 template<typename T>
 Vector2D<T>::Vector2D(T xi, T yi):

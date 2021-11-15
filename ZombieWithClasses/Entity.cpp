@@ -28,5 +28,5 @@ void Entities::Entity::initialize(Managers::GraphicManager& g)
 
 void Entities::Entity::draw(Managers::GraphicManager& g)
 {
-	g.draw(textPath, position, body);
+	g.draw(textPath, position);
 }
