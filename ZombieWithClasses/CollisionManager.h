@@ -1,19 +1,29 @@
-#pragma once
-#include "Player.h"
-#include "EntityList.h"
-#include "GraphicManager.h"
+//
+// Created by Gabriel on 10/11/2021.
+//
 
-namespace Managers
-{
-	class CollisionManager
-	{
-	private:
-		Managers::GraphicManager* GM;
+#ifndef ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
+#define ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 
-	public:
-		void setGraphicManager(Managers::GraphicManager* g) { GM = g; }
-		void checkCollision(Lists::EntityList& EL);
+#include<set>
 
-	};
+namespace Managers {
 
+    class Collide;
+
+    class CollisionManager {
+    private:
+        std::set<Collide*> collides;
+        bool isColliding(Collide* c1, Collide* c2);
+
+    public:
+        CollisionManager();
+        ~CollisionManager();
+        void addCollide(Collide* c);
+        void removeCollide(Collide* c);
+        void removeAll();
+        void verifyCollisions();
+    };
 }
+
+#endif //ZOMBIEWITHCLASSES_COLLISIONMANAGER_H

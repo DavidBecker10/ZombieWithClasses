@@ -1,26 +1,25 @@
 #include "GraphicManager.h"
-#include <iostream>
-#define WIDTH 800;
-#define HEIGHT 400;
 
-Managers::GraphicManager::GraphicManager():
-    window(new sf::RenderWindow(sf::VideoMode(800, 400), "Zombie With Classes")),
-    view(sf::Vector2f(400.f, 200.f), sf::Vector2f(800.f, 400.f))
+#include <iostream>
+
+Managers::GraphicManager::GraphicManager() :
+    window{ new sf::RenderWindow(sf::VideoMode(800, 600), "Zombie With Classes") },
+    //view{ sf::Vector2f(400, 300), sf::Vector2f(400,300) },
+    text{ nullptr }
 {
-    initializeView();
+
 }
 
 Managers::GraphicManager::~GraphicManager()
 {
     delete window;
 
-    for (auto i = text.begin(); i != text.end(); i++)
-    {
-        delete i->second;
+    for (auto i : textures) {
+        delete i.second;
     }
 }
 
-void Managers::GraphicManager::show()
+void Managers::GraphicManager::show() const
 {
     window->display();
 }
@@ -30,64 +29,90 @@ void Managers::GraphicManager::clear(int r, int g, int b)
     window->clear(sf::Color(r, g, b));
 }
 
-void Managers::GraphicManager::draw(const std::string path, const Vector2F position)
+void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
 {
-    if (!text.count(path)) //Se a textura nao esta no mapa
-    {
-        std::cout << "Erro. Textura nao carregada em GraphicManager::draw." << std::endl;
-        exit(1235);
+    if (textures.count(path) == 0) {
+        std::cout << "Erro. Imagem em " << path << " nao carregada!" << std::endl;
+        exit(714);
     }
-    
-    sf::Texture* nText = text[path];
-    sf::RectangleShape body;
 
-    body.setTexture(nText);
-    body.setPosition(position.x, position.y);
-    body.setSize(sf::Vector2f(200.f, 200.f));
-    body.setScale(1, 1);
-    body.setOrigin(100, 100);
+    text = textures[path];
 
-    window->draw(body);
+    //Seria possivel (aconselhável) verificar se a textura está completamente fora
+    //da câmera e não desenhá-la se for o caso
 
+    sprite.setTexture(*text, true);
+    sprite.setScale(0.25, 0.25);
+    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    sprite.setPosition(pos.x, pos.y);
+
+    window->draw(sprite);
 }
 
-bool Managers::GraphicManager::loadText(const std::string path)
+void Managers::GraphicManager::draw(const std::string& path, const Vector2F position, const Vector2U nFrames, const Vector2U frame)
 {
-    if (text.count(path)) //Se a textura ja esta no mapa
+    if (textures.count(path) == 0) {
+        std::cout << "Atencao! Imagem em " << path << " nao carregada!" << std::endl;
+        exit(714);
+    }
+
+    text = textures[path];
+    sprite.setTexture(*text);
+
+
+    sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
+    sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
+
+    sprite.setTextureRect({ positionFrame, size });
+
+    sprite.setOrigin({ size.x * 0.5f, size.y * 0.5f });
+    sprite.setPosition(size.x, size.y);
+
+    window->draw(sprite);
+}
+
+bool Managers::GraphicManager::loadTexture(const std::string& path)
+{
+    if (textures.count(path) == 1) return true;
+    else {
+
+
+        sf::Texture* text = new sf::Texture();
+        if (!text->loadFromFile(path)) {
+            std::cout << "Atencao! imagem em " << path << "nao encontrada!" << std::endl;
+            exit(715);
+        }
+
+        //texturas.insert(std::pair<const std::string, sf::Texture*>(caminho, text));
+        textures.emplace(path, text); //c++11
         return true;
-    else
-    {
-        sf::Texture* nText = new sf::Texture();
-        if (nText->loadFromFile(path))  //Se a textura nao esta no mapa, inclui
-        {
-            //text.insert(std::pair<const std::string, sf::Texture*>(path, nText));
-            text.emplace(path, nText);
-            return true;
-        }
-        else
-        {
-            std::cerr << "Erro ao carregar textura em GraphicManager::loadText." << std::endl;
-            exit(1234);
-        }
     }
 }
 
-void Managers::GraphicManager::initializeView()
+void Managers::GraphicManager::centralize(const Vector2F centro)
 {
-    window->setView(view);
+   // view.setCenter(sf::Vector2f(centro.x, centro.y));
+   // window->setView(view); //A RenderWindow faz uma cópia da View ao invés de usar o ponteiro, então é preciso a sobre-escrever sempre que for modificada.
 }
 
-void Managers::GraphicManager::center(const Vector2F center)
-{
-    view.setCenter(center.x, center.y);
-}
-
-sf::RenderWindow* Managers::GraphicManager::getWindow()
+sf::RenderWindow* Managers::GraphicManager::getWindow() const
 {
     return window;
 }
 
-void Managers::GraphicManager::closeWindow()
+const Vector2F Managers::GraphicManager::getSize(const std::string& path) const
 {
-    window->close();
+    if (textures.count(path) == 0) {
+        std::cout << "Atencao! Imagem em " << path << " nao carregada!" << std::endl;
+        exit(714);
+    }
+
+    sf::Vector2u dimensions = (textures.at(path))->getSize();
+
+    return Vector2F(dimensions.x, dimensions.y);
+}
+
+void Managers::GraphicManager::initializeView()
+{
+    //window->setView(view);
 }

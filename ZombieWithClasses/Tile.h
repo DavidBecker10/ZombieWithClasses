@@ -20,4 +20,3 @@ public:
 	const Ids::Ids getID() const;
 	virtual void collide(Ids::Ids idOther, Vector2F posOther, Vector2U pos);
 };
-

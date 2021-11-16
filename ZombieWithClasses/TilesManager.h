@@ -32,5 +32,6 @@ public:
 	void draw(Managers::GraphicManager& g) const;
 	std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
 	const Vector2F coordinatesForScreen(const Vector2U pos) const;
+	std::vector<Tile*> getTiles() const;
 };
 

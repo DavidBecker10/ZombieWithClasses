@@ -51,73 +51,73 @@ Vector2D<T>::~Vector2D()
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator+(Vector2D<T> v)
+Vector2D<T> Vector2D<T>::operator +(Vector2D<T> v)
 {
 	return Vector2D<T>(x + v.x, y + v.y);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator-(Vector2D<T> v)
+Vector2D<T> Vector2D<T>::operator -(Vector2D<T> v)
 {
 	return Vector2D<T>(x - v.x, y - v.y);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator*(int i)
+Vector2D<T> Vector2D<T>::operator *(int i)
 {
 	return Vector2D<T>(x * i, y * i);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator*(float f)
+Vector2D<T> Vector2D<T>::operator *(float f)
 {
-	return Vector2D<T>(x * f, y * f);
+	return Vector2D(x * f, y * f);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator*(double d)
+Vector2D<T> Vector2D<T>::operator *(double d)
 {
 	return Vector2D<T>(x * d, y * d);
 }
 
 template<typename T>
-void Vector2D<T>::operator+=(Vector2D<T> v)
+void Vector2D<T>::operator +=(Vector2D<T> v)
 {
 	(x + v.x, y + v.y);
 }
 
 template<typename T>
-void Vector2D<T>::operator-=(Vector2D<T> v)
+void Vector2D<T>::operator -=(Vector2D<T> v)
 {
 	(x - v.x, y - v.y);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator*=(int i)
+Vector2D<T> Vector2D<T>::operator *=(int i)
 {
 	return Vector2D<T>(x * i, y * i);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator*=(float f)
+Vector2D<T> Vector2D<T>::operator *=(float f)
 {
 	return Vector2D<T>(x * f, y * f);
 }
 
 template<typename T>
-Vector2D<T> Vector2D<T>::operator*=(double d)
+Vector2D<T> Vector2D<T>::operator *=(double d)
 {
 	return Vector2D<T>(x * d, y * d);
 }
 
 template<typename T>
-bool Vector2D<T>::operator==(Vector2D<T> v)
+bool Vector2D<T>::operator ==(Vector2D<T> v)
 {
 	return (v.x == x && v.y == y);
 }
 
 template<typename T>
-T Vector2D<T>::operator*(Vector2D<T> v)
+T Vector2D<T>::operator *(Vector2D<T> v)
 {
 	return (x*v.x + y*v.y);
 }

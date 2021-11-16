@@ -7,8 +7,8 @@
 using TileMapLine = TileMap::TileMapLine;
 
 TileMapLine::TileMapLine(unsigned short* l, unsigned int len):
-    line(l),
-    length(len)
+    line{ l },
+    length{ len }
 {
 }
 
@@ -27,9 +27,10 @@ unsigned short TileMapLine::operator[](unsigned int i) const
 }
 
 TileMap::TileMap(const char* filePath):
-    map(NULL),
-    path(filePath)
+    map{ NULL },
+    path{filePath}
 {
+    //std::cout << path << std::endl;
     if (path) loadMap();
 }
 
@@ -50,7 +51,7 @@ void TileMap::printMap() const
     {
         for (unsigned int j = 0; j < mapDimensions.x; j++)
             std::cout << std::setw(2) << map[i][j] << ' ';
-        std::cout << "\n";
+        std::cout << std::endl;;
     }
 
     std::cout.flush();
@@ -58,18 +59,18 @@ void TileMap::printMap() const
 
 Vector2U TileMap::getDimensions() const
 {
-    return Vector2U(mapDimensions.x, mapDimensions.y);
+    return mapDimensions;
 }
 
 void TileMap::setTile(Vector2U position, unsigned short newIndex)
 {
-    if (position.x > mapDimensions.x || position.y > mapDimensions.y)
+    if (position.x >= mapDimensions.x || position.y >= mapDimensions.y)
     {
         std::cout << "Erro. Segmentation fault em TileMap::setTile." << std::endl;
         exit(1235);
     }
 
-    map[position.x][position.y] = newIndex;
+    map[position.y][position.x] = newIndex;
 }
 
 const TileMapLine TileMap::operator[](unsigned int i) const
@@ -80,7 +81,7 @@ const TileMapLine TileMap::operator[](unsigned int i) const
         exit(1235);
     }
 
-    return TileMapLine(map[i], mapDimensions.x);
+    return { map[i], mapDimensions.x };
 }
 
 void TileMap::loadMap()
@@ -115,7 +116,7 @@ void TileMap::loadMap()
         if (j >= mapDimensions.x)
         {
             j = 0;
-            i++;
+            ++i;
         }
 
         if (i >= mapDimensions.y) break;

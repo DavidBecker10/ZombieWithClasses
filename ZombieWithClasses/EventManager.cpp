@@ -1,78 +1,76 @@
+//
+// Created by Gabriel on 09/11/2021.
+//
+
 #include "EventManager.h"
-#include <iostream>
 
-Managers::EventManager::EventManager():
-e(),
-window(NULL),
-close(false)
-{
+unsigned int Managers::EventManager::proxID{ 0 };
+
+Managers::EventManager::EventManager() {
+
 }
 
-Managers::EventManager::~EventManager()
-{
-    window = NULL;
+Managers::EventManager::~EventManager() {
+
 }
 
-void Managers::EventManager::setWindow(sf::RenderWindow* w)
-{
+void Managers::EventManager::manageEvent() {
+    while (window->pollEvent(event)) {
+        if (event.type == sf::Event::MouseWheelScrolled
+            || event.type == sf::Event::MouseButtonPressed
+            || event.type == sf::Event::MouseButtonReleased
+            || event.type == sf::Event::MouseMoved) {
+            for (auto it : listenMouse) {
+                it.second(event);
+            }
+        }
+        else if (event.type == sf::Event::KeyPressed
+            || event.type == sf::Event::KeyReleased) {
+            for (auto it : listenKeyboard) {
+                it.second(event);
+            }
+        }
+        else {
+            for (auto it : listenOthers) {
+                it.second(event);
+            }
+        }
+    }
+}
+
+void Managers::EventManager::setWindow(sf::RenderWindow* w) {
     window = w;
+
+    window->setKeyRepeatEnabled(false);
 }
 
-bool Managers::EventManager::checkEvent()
-{
-    if (window)
-    {
-        if (window->pollEvent(e))
-            return true;
+unsigned int Managers::EventManager::addListenMouse(std::function<void(const sf::Event&)> call) {
+    listenMouse.emplace(proxID, call);
 
-        return false;
-    }
-    else
-    {
-        std::cerr << "Erro! Ponteiro 'window' nulo em EventManager::checkEvent()." << std::endl;
-        exit(1234);
-    }
+    return proxID++;
 }
 
-void Managers::EventManager::setCharacter(Entities::Characters::Player* p1, Entities::Characters::Player* p2)
-{
-    pP1 = p1;
-    pP2 = p2;
+void Managers::EventManager::removeListenMouse(int id) {
+    listenMouse.erase(id);
 }
 
-bool Managers::EventManager::handleEvent()
+unsigned int Managers::EventManager::addListenKeyboard(std::function<void(const sf::Event&)> call) {
+    listenKeyboard.emplace(proxID, call);
+
+    return proxID++;
+}
+
+void Managers::EventManager::removeListenKeyboard(int id) {
+    listenKeyboard.erase(id);
+}
+
+unsigned int Managers::EventManager::addListenOthers(std::function<void(const sf::Event&)> call)
 {
+    listenOthers.emplace(proxID, call);
 
-    if (e.type == sf::Event::Closed)
-    {
-        window->close();
-        close = true;
-    }
+    return proxID++;
+}
 
-    if (e.type == sf::Event::KeyPressed || e.type == sf::Event::KeyReleased)
-    {
-        //Gerencia eventos do Player 1
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-            pP1->moveUp();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-            pP1->moveLeft();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-            pP1->moveDown();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-            pP1->moveRight();
-
-        //Gerencia eventos do Player 2
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-            pP2->moveUp();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-            pP2->moveLeft();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-            pP2->moveDown();
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-            pP2->moveRight();
-        
-        close = false;
-    }
-
-    return close;
+void Managers::EventManager::removeListenOthers(int id) {
+    listenOthers.erase(id);
 }

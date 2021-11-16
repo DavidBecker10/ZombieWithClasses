@@ -21,9 +21,11 @@ private:
 	Entities::Characters::Player Player2;
 	Entities::Characters::Enemy Zombie;
 	Lists::EntityList EntityL;
+	unsigned int IDwindowclosed;
 
 public:
 	Game();
 	~Game();
 	void execute();
+	void isWindowClosed(const sf::Event& e);
 };

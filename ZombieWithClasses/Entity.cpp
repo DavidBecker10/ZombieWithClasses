@@ -23,7 +23,7 @@ Entities::Entity::~Entity()
 
 void Entities::Entity::initialize(Managers::GraphicManager& g)
 {
-	g.loadText(textPath);
+	g.loadTexture(textPath);
 }
 
 void Entities::Entity::draw(Managers::GraphicManager& g)
