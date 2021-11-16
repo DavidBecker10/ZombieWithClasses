@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 09/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_EVENTMANAGER_H
 #define ZOMBIEWITHCLASSES_EVENTMANAGER_H
 

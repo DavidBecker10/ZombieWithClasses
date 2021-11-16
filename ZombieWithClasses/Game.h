@@ -17,9 +17,6 @@ private:
 	TilesManager TM;
 	bool close;
 	sf::Clock clock;
-	Entities::Characters::Player Player1;
-	Entities::Characters::Player Player2;
-	Entities::Characters::Enemy Zombie;
 	Lists::EntityList EntityL;
 	unsigned int IDwindowclosed;
 

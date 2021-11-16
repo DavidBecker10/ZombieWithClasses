@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 09/11/2021.
-//
-
 #include "EventManager.h"
 
 unsigned int Managers::EventManager::proxID{ 0 };

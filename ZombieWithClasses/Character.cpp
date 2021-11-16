@@ -18,9 +18,13 @@ Entities::Characters::Character::~Character()
 
 void Entities::Characters::Character::update(float t)
 {
-	if (position.y <  100)
-	{
-		position.x += vel.x * t;
-		position.y += 70000 * t;
-	}
+	//position += vel * t;
+}
+
+void Entities::Characters::Character::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
+{
+}
+
+void Entities::Characters::Character::draw(Managers::GraphicManager& g)
+{
 }

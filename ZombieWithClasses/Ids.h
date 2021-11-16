@@ -17,6 +17,7 @@ namespace Ids
 		ground10,
 		ground11,
 		ground12,
-		ground13
+		ground13,
+		Player
 	};
 }

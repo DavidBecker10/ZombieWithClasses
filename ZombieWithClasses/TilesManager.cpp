@@ -23,15 +23,12 @@ void TilesManager::initialize(Managers::GraphicManager& gm, Managers::EventManag
 
 void TilesManager::draw(Managers::GraphicManager& g) const
 {
-	//std::cout << tileDimensions.y << std::endl;
 	for (unsigned int i = 0; i < tileDimensions.y; i++)
 	{
-		//std::cout << "Desenhado" << std::endl;
 		for (unsigned int j = 0; j < tileDimensions.x; j++)
 		{
 			short index = tileMap[i][j] - 1;
 			if (index >= 0 && index < (long)tiles.size()) {
-				//std::cout << index << std::endl;
 				tiles[index]->draw(g, coordinatesForScreen(Vector2U{ j, i }));
 			}
 		}

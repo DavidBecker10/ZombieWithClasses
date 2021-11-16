@@ -4,10 +4,10 @@
 
 Managers::GraphicManager::GraphicManager() :
     window{ new sf::RenderWindow(sf::VideoMode(800, 600), "Zombie With Classes") },
-    //view{ sf::Vector2f(400, 300), sf::Vector2f(400,300) },
+    view{ sf::Vector2f(400, 300), sf::Vector2f(400,300) },
     text{ nullptr }
 {
-
+    initializeView();
 }
 
 Managers::GraphicManager::~GraphicManager()
@@ -35,11 +35,8 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
         std::cout << "Erro. Imagem em " << path << " nao carregada!" << std::endl;
         exit(714);
     }
-
+    
     text = textures[path];
-
-    //Seria possivel (aconselhável) verificar se a textura está completamente fora
-    //da câmera e não desenhá-la se for o caso
 
     sprite.setTexture(*text, true);
     sprite.setScale(0.25, 0.25);
@@ -75,8 +72,6 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
 {
     if (textures.count(path) == 1) return true;
     else {
-
-
         sf::Texture* text = new sf::Texture();
         if (!text->loadFromFile(path)) {
             std::cout << "Atencao! imagem em " << path << "nao encontrada!" << std::endl;
@@ -91,8 +86,8 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
 
 void Managers::GraphicManager::centralize(const Vector2F centro)
 {
-   // view.setCenter(sf::Vector2f(centro.x, centro.y));
-   // window->setView(view); //A RenderWindow faz uma cópia da View ao invés de usar o ponteiro, então é preciso a sobre-escrever sempre que for modificada.
+    view.setCenter(sf::Vector2f(centro.x, centro.y));
+    window->setView(view); //A RenderWindow faz uma cópia da View ao invés de usar o ponteiro, então é preciso a sobre-escrever sempre que for modificada.
 }
 
 sf::RenderWindow* Managers::GraphicManager::getWindow() const
@@ -114,5 +109,5 @@ const Vector2F Managers::GraphicManager::getSize(const std::string& path) const
 
 void Managers::GraphicManager::initializeView()
 {
-    //window->setView(view);
+    window->setView(view);
 }

@@ -16,6 +16,8 @@ namespace Entities
             Character();
             ~Character();
             virtual void update(float t);
+            virtual void initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM);
+            virtual void draw(Managers::GraphicManager& g);
         };
     }
 }

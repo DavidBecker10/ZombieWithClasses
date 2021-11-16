@@ -11,7 +11,7 @@ namespace Managers
     class GraphicManager {
     private:
         sf::RenderWindow* window;
-        //sf::View view;
+        sf::View view;
         std::map<const std::string, sf::Texture*> textures;
         sf::Texture* text;
         sf::Sprite sprite;

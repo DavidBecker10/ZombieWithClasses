@@ -35,10 +35,10 @@ void Lists::EntityList::update(float t)
 		list[i]->update(t);
 }
 
-void Lists::EntityList::initialize(Managers::GraphicManager& g)
+void Lists::EntityList::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
 {
 	for (int i = 0; i < list.getSize(); i++)
-		list[i]->initialize(g);
+		list[i]->initialize(GM, EM, CM);
 }
 
 void Lists::EntityList::draw(Managers::GraphicManager& g)
@@ -56,4 +56,9 @@ Entities::Entity* Lists::EntityList::operator[](int x)
 	}
 
 	return list[x];   //Operador [] sobrecarregado em List.h
+}
+
+void Lists::EntityList::destroyEntities()
+{
+	list.destroy();
 }

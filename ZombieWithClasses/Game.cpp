@@ -22,63 +22,52 @@ Game::Game() :
             new Tile(Ids::ground12, "../Sprites/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
             new Tile(Ids::ground13, "../Sprites/Tiles/Platformer/Ground_13.png", {32.0f, 32.0f}),
         },
-        {32.0f, 32.0f }, "map.json"
+        { 32.0f, 32.0f }, "map.json"
     },
     close(false),
     clock(),
-    Player1(Vector2F(0.f, 100.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"),
-    Player2(Vector2F(200.f, 100.f), Vector2F(0.0f, 0.0f), "../Sprites/Terrorists/Masked/Attack1/Attack1_1.png"),
-    Zombie(Vector2F(100.f, 100.f), Vector2F(20000.0f, 0.0f), "../Sprites/Zombies/ZombieWoman/Animation/Attack1.png"),
     EntityL(),
     IDwindowclosed{ EM.addListenOthers([this](const sf::Event& e) {isWindowClosed(e); }) }
 {
-    EntityL.insert(static_cast<Entities::Entity*>(&Player1));
-    EntityL.insert(static_cast<Entities::Entity*>(&Player2));
-    EntityL.insert(static_cast<Entities::Entity*>(&Zombie));
+    EntityL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"));
+    //EntityL.insert(new Entities::Characters::Enemy(Vector2F(100.f, 50.f), Vector2F(0.f, 0.f), "../Sprites/Zombies/ZombieWoman/animation/Attack1.png"));
+    
+    EntityL.initialize(GM, EM, CM);
 
     TM.initialize(GM, EM);
-
-    //std::vector<Tile*> tiles = TM.getTiles();
-    /*
-    for (int i = 0; i < tiles.size(); i++)
-        EntityL.insert(dynamic_cast<Entities::Entity*>(tiles[i]));
-    */
     
     EM.setWindow(GM.getWindow());
+
     execute();
 }
 
 Game::~Game()
 {
+    EntityL.destroyEntities();
 }
 
 void Game::execute()
 {
-
-    //std::vector<Tile*> tiles = TM.getTiles();
-    //EM.setCharacter(&Player1, &Player2);
     clock.restart();
     while (!close)
     {
         float t = clock.getElapsedTime().asSeconds();
         clock.restart();
 
-        EM.manageEvent();
-
+        //EntityL.initialize(GM, EM, CM);
         GM.clear();
         EntityL.update(t);
-        EntityL.initialize(GM);
         //CM.checkCollision(EntityL);
-        //EntityL.draw(GM);
         TM.draw(GM);
-        //GM.centralize(Vector2F(100.f, 100.f));
-        //GM.initializeView();
+        EntityL.draw(GM);
+        EM.manageEvent();
 
         GM.show();
     }
     
 }
 
-void Game::isWindowClosed(const sf::Event& e) {
+void Game::isWindowClosed(const sf::Event& e)
+{
     if (e.type == sf::Event::Closed) close = true;
 }

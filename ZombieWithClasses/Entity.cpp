@@ -6,7 +6,6 @@ Entities::Entity::Entity(Vector2F pos, Vector2F v, const char* tP):
 	vel(v),
 	textPath(tP)
 {
-
 }
 
 Entities::Entity::Entity():
@@ -21,9 +20,9 @@ Entities::Entity::~Entity()
 {
 }
 
-void Entities::Entity::initialize(Managers::GraphicManager& g)
+void Entities::Entity::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
 {
-	g.loadTexture(textPath);
+	GM.loadTexture(textPath);
 }
 
 void Entities::Entity::draw(Managers::GraphicManager& g)

@@ -1,14 +1,13 @@
 #include "Player.h"
 
 Entities::Characters::Player::Player(Vector2F pos, Vector2F vel, const char* tPath, int h) :
-	Character(pos, vel, tPath),
-	hp(h)
+	Character(pos, vel, tPath)
 {
+
 }
 
 Entities::Characters::Player::Player() :
-	Character(),
-	hp()
+	Character()
 {
 }
 
@@ -16,23 +15,74 @@ Entities::Characters::Player::~Player()
 {
 }
 
-void Entities::Characters::Player::moveUp()
+void Entities::Characters::Player::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
 {
-	position.y -= 100.0f;
+	GM.loadTexture(textPath);
+	dimensions = GM.getSize(textPath);
+	listenKey = EM.addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
+	//CM.addCollide(this);
 }
 
-void Entities::Characters::Player::moveLeft()
+void Entities::Characters::Player::update(float t)
 {
-	position.x -= 5.0f;
+    //printf("oi");
+	position += 30000 * t;
+    /*sf::Event e;
+    handleEvents(e);*/
 }
 
-void Entities::Characters::Player::moveDown()
+void Entities::Characters::Player::draw(Managers::GraphicManager& GM)
 {
-	if (position.y < 200)
-		position.y += 5.0f;
+    //printf("%s\n", textPath);
+	GM.draw(textPath, position);
+	GM.centralize(position);
 }
 
-void Entities::Characters::Player::moveRight()
+void Entities::Characters::Player::handleEvents(const sf::Event& e)
 {
-	position.x += 5.0f;
+    if (e.type == sf::Event::KeyPressed) {
+        //printf("%f\n", position.x);
+        switch (e.key.code) {
+        case sf::Keyboard::Key::Right:
+            position.x += 30;
+            /* code */
+            break;
+        case sf::Keyboard::Key::Left:
+            position.x -= 30;
+            /* code */
+            break;
+        case sf::Keyboard::Key::Up:
+            position.y -= 30;
+            /* code */
+            break;
+        case sf::Keyboard::Key::Down:
+            position.y += 30;
+            /* code */
+            break;
+        default:
+            break;
+        }
+    }
+    else if (e.type == sf::Event::KeyReleased) {
+        switch (e.key.code) {
+        case sf::Keyboard::Key::Right:
+            position.x += 30;
+            break;
+        case sf::Keyboard::Key::Left:
+            position.x -= 30;
+            break;
+        case sf::Keyboard::Key::Up:
+            position.y -= 30;
+            break;
+        case sf::Keyboard::Key::Down:
+            position.y += 30;
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void Entities::Characters::Player::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
+{
 }
