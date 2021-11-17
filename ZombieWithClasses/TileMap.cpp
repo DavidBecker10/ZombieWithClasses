@@ -30,7 +30,6 @@ TileMap::TileMap(const char* filePath):
     map{ NULL },
     path{filePath}
 {
-    //std::cout << path << std::endl;
     if (path) loadMap();
 }
 
@@ -120,10 +119,8 @@ void TileMap::loadMap()
         }
 
         if (i >= mapDimensions.y) break;
-
+        
         map[i][j++] = s;
     }
-    std::cout << mapDimensions.x << ' ';
-    std::cout << mapDimensions.y << std::endl;
     //printMap();
 }

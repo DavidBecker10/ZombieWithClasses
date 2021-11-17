@@ -1,13 +1,15 @@
 #pragma once
+#include "Ids.h"
+
 class Ent
 {
 protected:
 	
-	int id;
+	Ids::Ids ID;
 
 public:
 
-	Ent(int i = -1);
+	Ent(Ids::Ids id = Ids::empty);
 	~Ent();
 	virtual void update(float t) = 0;
 	void print();

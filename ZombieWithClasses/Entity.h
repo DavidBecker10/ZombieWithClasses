@@ -5,7 +5,8 @@
 #include "Vector2D.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
-#include "CollisionManager.h"
+
+class CollisionManager;
 
 namespace Entities
 {
@@ -24,11 +25,12 @@ namespace Entities
         Entity();
         ~Entity();
         virtual void update(float t) = 0;
-        virtual void initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM);
-        virtual void draw(Managers::GraphicManager& g);
+        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM) = 0;
+        virtual void draw(Managers::GraphicManager* g);
         Vector2F getPosition() { return position; }
         Vector2F getDimensions() { return dimensions; }
         Ids::Ids getID() { return id; }
         const char* getTextPath() { return textPath; }
+        virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
     };
 }

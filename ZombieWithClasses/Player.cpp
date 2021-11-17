@@ -1,9 +1,9 @@
 #include "Player.h"
+#include <iostream>
 
 Entities::Characters::Player::Player(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath) :
 	Character(pos, vel, ID, tPath)
 {
-
 }
 
 Entities::Characters::Player::Player() :
@@ -15,23 +15,24 @@ Entities::Characters::Player::~Player()
 {
 }
 
-void Entities::Characters::Player::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
+void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM)
 {
-	GM.loadTexture(textPath);
-	dimensions = GM.getSize(textPath);
-	listenKey = EM.addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
-	CM.addCollide(this);
+    printf("oi");
+	GM->loadTexture(textPath);
+	dimensions = GM->getSize(textPath);
+	listenKey = EM->addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
+	//CM.addCollide(this);
 }
 
 void Entities::Characters::Player::update(float t)
 {
-	position += 30000 * t;
+	
 }
 
-void Entities::Characters::Player::draw(Managers::GraphicManager& GM)
+void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
 {
-    GM.draw(textPath, position, { 1, 9 }, { 0, 5 });
-	GM.centralize(position);
+    GM->draw(textPath, position, { 1, 9 }, { 0, 5 });
+	GM->centralize(position);
 }
 
 void Entities::Characters::Player::handleEvents(const sf::Event& e)
@@ -80,4 +81,33 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
 
 void Entities::Characters::Player::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
 {
+    std::string imprimir;
+
+    switch (idOutro) {
+    case Ids::Player:
+        imprimir = "ai ui ui";
+        break;
+    case Ids::ground1:
+        imprimir = "fui ludibriado";
+        break;
+    case Ids::ground2:
+        imprimir = "cai";
+        break;
+    case Ids::empty:
+        imprimir = "mano o que ta acontecendo";
+        break;
+    case Ids::ground3:
+        imprimir = "pontudo";
+        break;
+    case Ids::ground4:
+        imprimir = "estou livre";
+        break;
+    case Ids::ground5:
+        imprimir = "bonk";
+        break;
+    default:
+        break;
+    }
+
+    std::cout << imprimir << std::endl;
 }

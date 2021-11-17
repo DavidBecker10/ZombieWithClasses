@@ -1,42 +1,51 @@
 #include "Tile.h"
 #include <iostream>
 
-Tile::Tile(const Ids::Ids i, const char* p, Vector2F s):
+Entities::Tile::Tile(const Ids::Ids i, const char* p, Vector2F s):
+	Entity(),
 	id{ i },
 	path{ p },
-	size{ s }
+	size{ s },
+	gm{},
+	cm{}
 {
-	//std::cout << path << std::endl;
+	
 }
 
-Tile::Tile() :
+Entities::Tile::Tile() :
 	id(),
 	path(),
 	size(),
-	GM()
+	cm(),
+	gm()
 {
 }
 
-Tile::~Tile()
+Entities::Tile::~Tile()
 {
 }
 
-void Tile::initialize(Managers::GraphicManager& g)
+void Entities::Tile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM)
 {
-	//std::cout << '\t' << path << std::endl;
-	g.loadTexture(path);
+	gm = GM;
+	//cm = CM;
+	gm->loadTexture(path);
 }
 
-void Tile::draw(Managers::GraphicManager& g, const Vector2F position) const
+void Entities::Tile::update(float t)
+{
+}
+
+void Entities::Tile::draw(Managers::GraphicManager& g, const Vector2F position) const
 {
 	g.draw(path, position);
 }
 
-const Ids::Ids Tile::getID() const
+const Ids::Ids Entities::Tile::getID() const
 {
 	return id;
 }
 
-void Tile::collide(Ids::Ids idOther, Vector2F posOther, Vector2U pos)
+void Entities::Tile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
 {
 }

@@ -1,7 +1,7 @@
 #include "Ent.h"
 
-Ent::Ent(int i):
-id(i)
+Ent::Ent(Ids::Ids id):
+ID(id)
 {
 }
 

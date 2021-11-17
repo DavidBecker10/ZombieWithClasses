@@ -1,23 +1,27 @@
 #ifndef ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 #define ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
+#include "EntityList.h"
 
-#include<set>
-class Collide;
+class TilesManager;
 
 namespace Managers {
 
     class CollisionManager {
     private:
-        std::set<Collide*> collides;
-        bool isColliding(Collide* c1, Collide* c2);
+        
+        bool isColliding(Entities::Entity* c1, Entities::Entity* c2);
+        TilesManager* TM;
+        Lists::EntityList* EList;
 
     public:
         CollisionManager();
         ~CollisionManager();
-        void addCollide(Collide* c);
-        void removeCollide(Collide* c);
-        void removeAll();
+        //void addCollide(Entities::Entity* c);
+        //void removeCollide(Entities::Entity* c);
+        //void removeAll();
         void verifyCollisions();
+        void setTilesManager(TilesManager* tm);
+        void setList(Lists::EntityList* EL);
     };
 }
 

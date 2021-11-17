@@ -1,12 +1,13 @@
 #pragma once
 #include "GraphicManager.h"
-#include "CollisionManager.h"
 #include "EventManager.h"
 #include "TilesManager.h"
 #include "Character.h"
 #include "EntityList.h"
 #include "Player.h"
 #include "Enemy.h"
+
+class CollisionManager;
 
 class Game
 {

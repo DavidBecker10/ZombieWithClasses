@@ -35,9 +35,9 @@ void Managers::EventManager::manageEvent() {
 }
 
 void Managers::EventManager::setWindow(sf::RenderWindow* w) {
+    
     window = w;
-
-    window->setKeyRepeatEnabled(false);
+    //window->setKeyRepeatEnabled(false);
 }
 
 unsigned int Managers::EventManager::addListenMouse(std::function<void(const sf::Event&)> call) {

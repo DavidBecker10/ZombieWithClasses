@@ -1,15 +1,15 @@
 #pragma once
 #include "Entity.h"
-#include "Collide.h"
 #include "GraphicManager.h"
 #include "Vector2D.h"
+#include "CollisionManager.h"
 
 namespace Entities
 {
     namespace Characters
     {
         class Character :
-            public Collide
+            public Entity
         {
 
         public:
@@ -17,8 +17,9 @@ namespace Entities
             Character();
             ~Character();
             virtual void update(float t);
-            virtual void initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM);
-            virtual void draw(Managers::GraphicManager& g);
+            virtual void initialize(Managers::GraphicManager* GM);
+            virtual void draw(Managers::GraphicManager* g);
+            virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
         };
     }
 }

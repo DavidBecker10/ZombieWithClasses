@@ -1,5 +1,7 @@
 #include "CollisionManager.h"
-#include "Collide.h"
+#include "EntityList.h"
+#include "Entity.h"
+#include "TilesManager.h"
 #include "Vector2D.h"
 #include <math.h>
 #include <iostream>
@@ -13,7 +15,7 @@ Managers::CollisionManager::~CollisionManager() {
 
 }
 
-bool Managers::CollisionManager::isColliding(Collide* c1, Collide* c2) {
+bool Managers::CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2) {
     Vector2F position1 = c1->getPosition();
     Vector2F dimensions1 = c1->getDimensions();
 
@@ -28,29 +30,40 @@ bool Managers::CollisionManager::isColliding(Collide* c1, Collide* c2) {
     return false;
 }
 
-void Managers::CollisionManager::addCollide(Collide* c) {
-    collides.insert(c);
-}
+/*void Managers::CollisionManager::addCollide(Entities::Entity* c) {
+    EList->insert(c);
+}*/
 
-void Managers::CollisionManager::removeCollide(Collide* c) {
-    collides.erase(c);
-}
+/*void Managers::CollisionManager::removeCollide(Entities::Entity* c) {
+    EList->remove(c);
+}*/
 
-void Managers::CollisionManager::removeAll() {
-    collides.clear();
-}
+/*void Managers::CollisionManager::removeAll() {
+    EList->destroyEntities();
+}*/
 
 void Managers::CollisionManager::verifyCollisions() {
-    for (auto first = collides.begin(); first != collides.end(); first++) {
-        auto second = first;
-        second++;
-        for (; second != collides.end(); second++) {
-            Collide* p1 = *first;
-            Collide* p2 = *second;
+    for (int i = 0; i < EList->getSize(); i++) {
+        Entities::Entity* p1 = NULL;
+        p1 = (*EList)[i];
+
+        for (int j = i + 1; j < EList->getSize(); j++) {
+            Entities::Entity* p2 = NULL;
+            p2 = (*EList)[j];
             if (isColliding(p1, p2)) {
                 p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions());
                 p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
             }
         }
     }
+}
+
+void Managers::CollisionManager::setTilesManager(TilesManager* tm)
+{
+    TM = tm;
+}
+
+void Managers::CollisionManager::setList(Lists::EntityList* EL)
+{
+    EList = EL;
 }

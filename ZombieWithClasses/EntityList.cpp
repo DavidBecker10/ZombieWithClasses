@@ -1,4 +1,5 @@
 #include "EntityList.h"
+#include "CollisionManager.h"
 
 Lists::EntityList::EntityList() :
 	list()
@@ -35,13 +36,13 @@ void Lists::EntityList::update(float t)
 		list[i]->update(t);
 }
 
-void Lists::EntityList::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
+void Lists::EntityList::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM)
 {
 	for (int i = 0; i < list.getSize(); i++)
-		list[i]->initialize(GM, EM, CM);
+		list[i]->initialize(GM, EM);
 }
 
-void Lists::EntityList::draw(Managers::GraphicManager& g)
+void Lists::EntityList::draw(Managers::GraphicManager* g)
 {
 	for (int i = 0; i < list.getSize(); i++)
 		list[i]->draw(g);

@@ -23,15 +23,15 @@ private:
 	TileMap tileMap;
 	Vector2F tileDimensions;
 	const char* path;
-	std::vector<Tile*> tiles;
+	std::vector<Entities::Tile*> tiles;
 
 public:
-	TilesManager(std::vector<Tile*> tls, Vector2F tileDim, const char* p);
+	TilesManager(std::vector<Entities::Tile*> tls, Vector2F tileDim, const char* p);
 	~TilesManager();
-	void initialize(Managers::GraphicManager& gm, Managers::EventManager& em);
+	void initialize(Managers::GraphicManager* gm, Managers::EventManager* em);
 	void draw(Managers::GraphicManager& g) const;
 	std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
 	const Vector2F coordinatesForScreen(const Vector2U pos) const;
-	std::vector<Tile*> getTiles() const;
+	std::vector<Entities::Tile*> getTiles() const;
 };
 

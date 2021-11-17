@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "CollisionManager.h"
 
 Entities::Entity::Entity(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tP) :
 	Ent(ID),
@@ -21,12 +22,7 @@ Entities::Entity::~Entity()
 {
 }
 
-void Entities::Entity::initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM)
+void Entities::Entity::draw(Managers::GraphicManager* g)
 {
-	GM.loadTexture(textPath);
-}
-
-void Entities::Entity::draw(Managers::GraphicManager& g)
-{
-	g.draw(textPath, position);
+	g->draw(textPath, position);
 }
