@@ -12,7 +12,7 @@ namespace Entities
 
 
         public:
-            Enemy(Vector2F pos, Vector2F vel, const char* tPath = NULL);
+            Enemy(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath = NULL);
             Enemy();
             ~Enemy();
             void update(float t);

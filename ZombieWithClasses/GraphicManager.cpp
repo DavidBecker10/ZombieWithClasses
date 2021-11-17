@@ -39,7 +39,8 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
     text = textures[path];
 
     sprite.setTexture(*text, true);
-    sprite.setScale(0.25, 0.25);
+    //sprite.setTextureRect(text->getSize();)
+    sprite.setScale(0.4, 0.4);
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(pos.x, pos.y);
 
@@ -54,17 +55,18 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F posi
     }
 
     text = textures[path];
-    sprite.setTexture(*text);
+    sprite.setTexture(*text, true);
 
+    //sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
+    //sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
 
-    sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
-    sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
-
-    sprite.setTextureRect({ positionFrame, size });
-
-    sprite.setOrigin({ size.x * 0.5f, size.y * 0.5f });
-    sprite.setPosition(size.x, size.y);
-
+    //sprite.setTextureRect({ positionFrame, size });
+    sprite.setScale(0.1, 0.1);
+    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    sprite.setPosition(position.x, position.y);
+    //sprite.setOrigin({ size.x * 0.5f, size.y * 0.5f });
+    //sprite.setPosition(size.x, size.y);
+    
     window->draw(sprite);
 }
 

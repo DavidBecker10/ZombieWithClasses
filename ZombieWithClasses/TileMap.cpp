@@ -59,7 +59,7 @@ void TileMap::printMap() const
 
 Vector2U TileMap::getDimensions() const
 {
-    return mapDimensions;
+    return Vector2U(mapDimensions.x, mapDimensions.y);
 }
 
 void TileMap::setTile(Vector2U position, unsigned short newIndex)
@@ -123,6 +123,7 @@ void TileMap::loadMap()
 
         map[i][j++] = s;
     }
-
+    std::cout << mapDimensions.x << ' ';
+    std::cout << mapDimensions.y << std::endl;
     //printMap();
 }

@@ -1,7 +1,7 @@
 #include "Player.h"
 
-Entities::Characters::Player::Player(Vector2F pos, Vector2F vel, const char* tPath, int h) :
-	Character(pos, vel, tPath)
+Entities::Characters::Player::Player(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath) :
+	Character(pos, vel, ID, tPath)
 {
 
 }
@@ -20,42 +20,37 @@ void Entities::Characters::Player::initialize(Managers::GraphicManager& GM, Mana
 	GM.loadTexture(textPath);
 	dimensions = GM.getSize(textPath);
 	listenKey = EM.addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
-	//CM.addCollide(this);
+	CM.addCollide(this);
 }
 
 void Entities::Characters::Player::update(float t)
 {
-    //printf("oi");
 	position += 30000 * t;
-    /*sf::Event e;
-    handleEvents(e);*/
 }
 
 void Entities::Characters::Player::draw(Managers::GraphicManager& GM)
 {
-    //printf("%s\n", textPath);
-	GM.draw(textPath, position);
+    GM.draw(textPath, position, { 1, 9 }, { 0, 5 });
 	GM.centralize(position);
 }
 
 void Entities::Characters::Player::handleEvents(const sf::Event& e)
 {
     if (e.type == sf::Event::KeyPressed) {
-        //printf("%f\n", position.x);
         switch (e.key.code) {
-        case sf::Keyboard::Key::Right:
+        case sf::Keyboard::Key::D:
             position.x += 30;
             /* code */
             break;
-        case sf::Keyboard::Key::Left:
+        case sf::Keyboard::Key::A:
             position.x -= 30;
             /* code */
             break;
-        case sf::Keyboard::Key::Up:
+        case sf::Keyboard::Key::W:
             position.y -= 30;
             /* code */
             break;
-        case sf::Keyboard::Key::Down:
+        case sf::Keyboard::Key::S:
             position.y += 30;
             /* code */
             break;
@@ -65,16 +60,16 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     }
     else if (e.type == sf::Event::KeyReleased) {
         switch (e.key.code) {
-        case sf::Keyboard::Key::Right:
+        case sf::Keyboard::Key::D:
             position.x += 30;
             break;
-        case sf::Keyboard::Key::Left:
+        case sf::Keyboard::Key::A:
             position.x -= 30;
             break;
-        case sf::Keyboard::Key::Up:
+        case sf::Keyboard::Key::W:
             position.y -= 30;
             break;
-        case sf::Keyboard::Key::Down:
+        case sf::Keyboard::Key::S:
             position.y += 30;
             break;
         default:

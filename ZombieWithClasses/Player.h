@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include "Collide.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
 #include "CollisionManager.h"
@@ -17,7 +18,7 @@ namespace Entities
 			unsigned int listenKey;
 
 		public:
-			Player(Vector2F pos, Vector2F vel, const char* tPath = NULL, int h = 100);
+			Player(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath = NULL);
 			Player();
 			~Player();
 			void initialize(Managers::GraphicManager& GM, Managers::EventManager& EM, Managers::CollisionManager& CM);

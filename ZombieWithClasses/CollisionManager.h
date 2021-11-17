@@ -2,10 +2,9 @@
 #define ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 
 #include<set>
+class Collide;
 
 namespace Managers {
-
-    class Collide;
 
     class CollisionManager {
     private:

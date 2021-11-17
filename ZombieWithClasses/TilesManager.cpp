@@ -29,7 +29,7 @@ void TilesManager::draw(Managers::GraphicManager& g) const
 		{
 			short index = tileMap[i][j] - 1;
 			if (index >= 0 && index < (long)tiles.size()) {
-				tiles[index]->draw(g, coordinatesForScreen(Vector2U{ j, i }));
+				tiles[index]->draw(g, coordinatesForScreen( Vector2U{ j, i} ));
 			}
 		}
 	}

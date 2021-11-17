@@ -22,14 +22,14 @@ Game::Game() :
             new Tile(Ids::ground12, "../Sprites/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
             new Tile(Ids::ground13, "../Sprites/Tiles/Platformer/Ground_13.png", {32.0f, 32.0f}),
         },
-        { 32.0f, 32.0f }, "map.json"
+        { 50.0f, 50.0f }, "map.json"
     },
     close(false),
     clock(),
     EntityL(),
     IDwindowclosed{ EM.addListenOthers([this](const sf::Event& e) {isWindowClosed(e); }) }
 {
-    EntityL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"));
+    EntityL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"));
     //EntityL.insert(new Entities::Characters::Enemy(Vector2F(100.f, 50.f), Vector2F(0.f, 0.f), "../Sprites/Zombies/ZombieWoman/animation/Attack1.png"));
     
     EntityL.initialize(GM, EM, CM);
@@ -54,10 +54,9 @@ void Game::execute()
         float t = clock.getElapsedTime().asSeconds();
         clock.restart();
 
-        //EntityL.initialize(GM, EM, CM);
         GM.clear();
         EntityL.update(t);
-        //CM.checkCollision(EntityL);
+        CM.verifyCollisions();
         TM.draw(GM);
         EntityL.draw(GM);
         EM.manageEvent();

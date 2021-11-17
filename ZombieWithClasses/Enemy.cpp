@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
-Entities::Characters::Enemy::Enemy(Vector2F pos, Vector2F vel, const char* tPath) :
-	Character(pos, vel, tPath)
+Entities::Characters::Enemy::Enemy(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath) :
+	Character(pos, vel, ID, tPath)
 {
 }
 

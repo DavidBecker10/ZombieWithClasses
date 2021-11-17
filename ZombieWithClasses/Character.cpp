@@ -2,13 +2,13 @@
 #include "GraphicManager.h"
 #include "Vector2D.h"
 
-Entities::Characters::Character::Character(Vector2F pos, Vector2F v, const char* tPath):
-Entity(pos, v, tPath)
+Entities::Characters::Character::Character(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tPath):
+	Collide(pos, v, ID, tPath)
 {
 }
 
 Entities::Characters::Character::Character():
-Entity()
+	Collide()
 {
 }
 
