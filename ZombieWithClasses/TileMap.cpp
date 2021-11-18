@@ -83,6 +83,17 @@ const TileMapLine TileMap::operator[](unsigned int i) const
     return { map[i], mapDimensions.x };
 }
 
+float TileMap::getDown()
+{
+    return  0;// posTile.y - tile.getSize() * 0.5;
+}
+
+unsigned short** TileMap::getMap() const
+{
+    return map;
+}
+
+
 void TileMap::loadMap()
 {
     std::ifstream file(path);
@@ -122,5 +133,6 @@ void TileMap::loadMap()
         
         map[i][j++] = s;
     }
+    //printf("%f", getDown());
     //printMap();
 }

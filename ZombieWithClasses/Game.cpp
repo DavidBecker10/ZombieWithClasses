@@ -8,7 +8,7 @@ Game::Game() :
     CM(),   
     TM{
         {
-            new Entities::Tile(Ids::empty, "../Sprites/Tiles/Empty.png", {32.0f, 32.0f}),
+            new Entities::Tile(Ids::empty, "../Sprites/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground1, "../Sprites/Tiles/Platformer/Ground_01.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground2, "../Sprites/Tiles/Platformer/Ground_02.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground3, "../Sprites/Tiles/Platformer/Ground_03.png", {32.0f, 32.0f}),
@@ -31,11 +31,11 @@ Game::Game() :
     IDwindowclosed{ EM.addListenOthers([this](const sf::Event& e) {isWindowClosed(e); }) }
 {
     EntityL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"));
-    EntityL.insert(new Entities::Characters::Enemy(Vector2F(210.f, 210.f), Vector2F(0.f, 0.f), Ids::Enemy, "../Sprites/Zombies/ZombieWoman/animation/Attack1.png"));
+    EntityL.insert(new Entities::Characters::Enemy(Vector2F(210.f, 210.f), Vector2F(30.f, 30.f), Ids::Enemy, "../Sprites/Zombies/ZombieWoman/animation/Attack1.png"));
     
-    EntityL.initialize(&GM, &EM);
+    EntityL.initialize(&GM, &EM, &CM);
 
-    TM.initialize(&GM, &EM);
+    TM.initialize(&GM, &EM, &CM);
     
     EM.setWindow(GM.getWindow());
 

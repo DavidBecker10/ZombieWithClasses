@@ -14,6 +14,7 @@ namespace Entities
         public Ent
     {
     protected:
+
         Vector2F position;
         Vector2F vel;
         Vector2F dimensions;
@@ -25,7 +26,7 @@ namespace Entities
         Entity();
         ~Entity();
         virtual void update(float t) = 0;
-        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM) = 0;
+        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM) = 0;
         virtual void draw(Managers::GraphicManager* g);
         Vector2F getPosition() { return position; }
         Vector2F getDimensions() { return dimensions; }

@@ -14,7 +14,7 @@ class Game
 private:
 	Managers::GraphicManager GM;
 	Managers::EventManager EM;
-	Managers::CollisionManager CM;
+	CollisionManager CM;
 	TilesManager TM;
 	bool close;
 	sf::Clock clock;

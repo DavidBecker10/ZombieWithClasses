@@ -15,13 +15,13 @@ TilesManager::~TilesManager()
 		delete t;
 }
 
-void TilesManager::initialize(Managers::GraphicManager* gm, Managers::EventManager* em)
+void TilesManager::initialize(Managers::GraphicManager* gm, Managers::EventManager* em, CollisionManager* cm)
 {
 	for (Entities::Tile* t : tiles)
-		t->initialize(gm, em);
+		t->initialize(gm, em, cm);
 }
 
-void TilesManager::draw(Managers::GraphicManager& g) const
+void TilesManager::draw(Managers::GraphicManager& g)
 {
 	for (unsigned int i = 0; i < tileDimensions.y; i++)
 	{
@@ -55,7 +55,7 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 			{
 				Entities::Tile* t = tiles[index];
 
-				t->collide(id, pos, { (float)j, (float)i });
+				t->collide(id, pos, {(float)j, (float)i });
 				collisions.push_back({ t->getID(), coordinatesForScreen({(unsigned int)i, (unsigned int)j}), tileDimensions});
 			}
 		}
@@ -63,7 +63,7 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 	return collisions;
 }
 
-const Vector2F TilesManager::coordinatesForScreen(const Vector2U pos) const
+Vector2F TilesManager::coordinatesForScreen(const Vector2U pos) const
 {
 	//return tileDimensions*(0.5f) + Vector2F(tileDimensions.x * pos.x, tileDimensions.y * pos.y);
 	return Vector2F{ tileDimensions.x * 0.5f + tileDimensions.x * pos.x, tileDimensions.y * 0.5f + tileDimensions.y * pos.y };
@@ -73,3 +73,9 @@ std::vector<Entities::Tile*> TilesManager::getTiles() const
 {
 	return tiles;
 }
+
+void TilesManager::setTiles(std::vector<Entities::Tile*> newTile)
+{
+
+}
+

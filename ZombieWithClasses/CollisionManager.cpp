@@ -4,18 +4,23 @@
 #include "TilesManager.h"
 #include "Vector2D.h"
 #include <math.h>
+#include <vector>
 #include <iostream>
 
-
-Managers::CollisionManager::CollisionManager() {
-
-}
-
-Managers::CollisionManager::~CollisionManager() {
+CollisionManager::CollisionManager() :
+    TM(NULL),
+    EntityL()
+{
 
 }
 
-bool Managers::CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2) {
+CollisionManager::~CollisionManager()
+{
+    TM = NULL;
+}
+
+bool CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2)
+{
     Vector2F position1 = c1->getPosition();
     Vector2F dimensions1 = c1->getDimensions();
 
@@ -26,44 +31,61 @@ bool Managers::CollisionManager::isColliding(Entities::Entity* c1, Entities::Ent
 
     if (c1 == c2) return false;
 
-    return (fabs(distance.x) < (dimensions1.x + dimensions2.x) / 2.) && (fabs(distance.y) < (dimensions1.y + dimensions2.y) / 2.);
+    if (position1 == position2)
+        return true;
+    //return (fabs(distance.x) < (dimensions1.x + dimensions2.x) / 2.) && (fabs(distance.y) < (dimensions1.y + dimensions2.y) / 2.);
     return false;
 }
 
-/*void Managers::CollisionManager::addCollide(Entities::Entity* c) {
-    EList->insert(c);
-}*/
+void CollisionManager::addCollide(Entities::Entity* c) {
+    list.insert(c);
+}
 
-/*void Managers::CollisionManager::removeCollide(Entities::Entity* c) {
-    EList->remove(c);
-}*/
+void CollisionManager::removeCollide(Entities::Entity* c) {
+    list.erase(c);
+}
 
-/*void Managers::CollisionManager::removeAll() {
-    EList->destroyEntities();
-}*/
+void CollisionManager::removeAll() {
+    list.clear();
+}
 
-void Managers::CollisionManager::verifyCollisions() {
-    for (int i = 0; i < EList->getSize(); i++) {
-        Entities::Entity* p1 = NULL;
-        p1 = (*EList)[i];
+void CollisionManager::verifyCollisions() {
+    for (auto first = list.begin(); first != list.end(); first++) {
 
-        for (int j = i + 1; j < EList->getSize(); j++) {
-            Entities::Entity* p2 = NULL;
-            p2 = (*EList)[j];
+        Entities::Entity* p1 = *first;
+
+        auto collidingTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
+        std::cout << p1->getDimensions() << std::endl;
+        for (auto collision : collidingTiles)
+            p1->collide(collision.id, collision.position, collision.size);
+
+        auto second = first;
+        second++;
+
+        for (; second != list.end(); second++) {
+            Entities::Entity* p2 = *second;
+
+
+
             if (isColliding(p1, p2)) {
+
                 p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions());
                 p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
+
             }
+
         }
+
+        //std::cout << '\n' << std::endl;
     }
 }
 
-void Managers::CollisionManager::setTilesManager(TilesManager* tm)
+void CollisionManager::setTilesManager(TilesManager* tm)
 {
     TM = tm;
 }
 
-void Managers::CollisionManager::setList(Lists::EntityList* EL)
+void CollisionManager::setList(Lists::EntityList* EL)
 {
-    EList = EL;
+    EntityL = EL;
 }

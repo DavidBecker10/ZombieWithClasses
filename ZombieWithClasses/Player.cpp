@@ -15,18 +15,23 @@ Entities::Characters::Player::~Player()
 {
 }
 
-void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM)
+void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
-    printf("oi");
+    //printf("aaaa");
 	GM->loadTexture(textPath);
 	dimensions = GM->getSize(textPath);
 	listenKey = EM->addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
-	//CM.addCollide(this);
+	CM->addCollide(this);
+}
+
+void Entities::Characters::Player::setTM(TilesManager* t)
+{
+    TM = t;
 }
 
 void Entities::Characters::Player::update(float t)
 {
-	
+ //   printf("(%f, %f)", position.x, position.y);
 }
 
 void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
@@ -79,35 +84,42 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     }
 }
 
-void Entities::Characters::Player::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
+void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
 {
     std::string imprimir;
 
-    switch (idOutro) {
+    TM->checkCollisions(ID, position, { 10, 10 });
+
+    switch (idOther) {
     case Ids::Player:
         imprimir = "ai ui ui";
+        std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:
         imprimir = "fui ludibriado";
+        std::cout << imprimir << std::endl;
         break;
     case Ids::ground2:
         imprimir = "cai";
+        std::cout << imprimir << std::endl;
         break;
     case Ids::empty:
         imprimir = "mano o que ta acontecendo";
+        std::cout << imprimir << std::endl;
         break;
     case Ids::ground3:
         imprimir = "pontudo";
+        std::cout << imprimir << std::endl;
         break;
     case Ids::ground4:
         imprimir = "estou livre";
+        std::cout << imprimir << std::endl;
         break;
     case Ids::ground5:
         imprimir = "bonk";
+        std::cout << imprimir << std::endl;
         break;
     default:
         break;
     }
-
-    std::cout << imprimir << std::endl;
 }

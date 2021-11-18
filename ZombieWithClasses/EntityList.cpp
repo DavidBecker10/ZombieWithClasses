@@ -36,10 +36,10 @@ void Lists::EntityList::update(float t)
 		list[i]->update(t);
 }
 
-void Lists::EntityList::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM)
+void Lists::EntityList::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
 	for (int i = 0; i < list.getSize(); i++)
-		list[i]->initialize(GM, EM);
+		list[i]->initialize(GM, EM, CM);
 }
 
 void Lists::EntityList::draw(Managers::GraphicManager* g)

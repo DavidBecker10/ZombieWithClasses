@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "GraphicManager.h"
 
+class CollisionManager;
 
 namespace Lists
 {
@@ -20,7 +21,7 @@ namespace Lists
 		int getSize();
 
 		void update(float t);
-		void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM);
+		void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
 		void draw(Managers::GraphicManager* g);
 		Entities::Entity* operator[](int x);
 		void destroyEntities();

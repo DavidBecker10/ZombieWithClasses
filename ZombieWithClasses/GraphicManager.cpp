@@ -40,7 +40,7 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
 
     sprite.setTexture(*text, true);
     //sprite.setTextureRect(text->getSize();)
-    sprite.setScale(0.4, 0.4);
+    sprite.setScale(1, 1);
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(pos.x, pos.y);
 

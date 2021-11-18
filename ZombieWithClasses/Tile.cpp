@@ -25,7 +25,7 @@ Entities::Tile::~Tile()
 {
 }
 
-void Entities::Tile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM)
+void Entities::Tile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
 	gm = GM;
 	//cm = CM;
@@ -46,6 +46,35 @@ const Ids::Ids Entities::Tile::getID() const
 	return id;
 }
 
+Vector2F Entities::Tile::getSize() const
+{
+	return size;
+}
+
+void Entities::Tile::setPosition(Vector2F pos)
+{
+	position = pos;
+}
+
+Vector2F Entities::Tile::getPosition() const
+{
+	return position;
+}
+
 void Entities::Tile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
 {
+    std::string imprimir;
+
+    switch (idOther) {
+    case Ids::Enemy:
+        imprimir = "ai ui ui";
+		std::cout << imprimir << std::endl;
+        break;
+    case Ids::Player:
+        imprimir = "jogador bateu";
+		std::cout << imprimir << std::endl;
+        break;
+    default:
+        break;
+    }
 }
