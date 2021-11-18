@@ -68,7 +68,7 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 Vector2F TilesManager::coordinatesForScreen(const Vector2U pos) const
 {
 	//return tileDimensions*(0.5f) + Vector2F(tileDimensions.x * pos.x, tileDimensions.y * pos.y);
-	return Vector2F{ tileDimensions.x * 0.5f + tileDimensions.x * pos.x, tileDimensions.y * 0.5f + tileDimensions.y * pos.y };
+	return Vector2F{ tileDimensions.x * 0.5f + tileDimensions.x * pos.x, tileDimensions.y * 0.4f + tileDimensions.y * pos.y };
 }
 
 std::vector<Entities::Tile*> TilesManager::getTiles() const

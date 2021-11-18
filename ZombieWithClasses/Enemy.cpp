@@ -32,6 +32,7 @@ void Entities::Characters::Enemy::update(float t)
 void Entities::Characters::Enemy::draw(Managers::GraphicManager* GM)
 {
 	GM->draw(textPath, position, { 1, 9 }, { 0, 5 });
+    std::cout << getDimensions() << std::endl;
 }
 
 void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
@@ -39,7 +40,7 @@ void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutr
     std::string imprimir;
 
 
-    switch (idOutro) {
+    /*switch (idOutro) {
     case Ids::Player:
         imprimir = "vai toma no boga";
         std::cout << imprimir << std::endl;
@@ -70,5 +71,5 @@ void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutr
         break;
     default:
         break;
-    }
+    }*/
 }

@@ -31,9 +31,9 @@ bool CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2)
 
     if (c1 == c2) return false;
 
-    if (position1 == position2)
-        return true;
-    //return (fabs(distance.x) < (dimensions1.x + dimensions2.x)*0.5) && (fabs(distance.y) < (dimensions1.y + dimensions2.y)*0.5);
+    /*if (position1 == position2)
+        return true;*/
+    return (fabs(distance.x) < (dimensions1.x + dimensions2.x)*0.5) && (fabs(distance.y) < (dimensions1.y + dimensions2.y)*0.5);
     return false;
 }
 
@@ -59,11 +59,11 @@ void CollisionManager::verifyCollisions() {
         for (auto collision : collisionWithTiles)
             p1->collide(collision.id, collision.position, collision.size);
 
-        auto second = first;
-        second++;
+        auto other = first;
+        other++;
 
-        for (; second != list.end(); second++) {
-            Entities::Entity* p2 = *second;
+        for (; other != list.end(); other++) {
+            Entities::Entity* p2 = *other;
 
             if (isColliding(p1, p2)) {
 

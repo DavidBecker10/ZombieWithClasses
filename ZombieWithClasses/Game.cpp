@@ -30,8 +30,8 @@ Game::Game() :
     EntityL(),
     IDwindowclosed{ EM.addListenOthers([this](const sf::Event& e) {isWindowClosed(e); }) }
 {
-    EntityL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Muslim/Attack1/Attack1_1.png"));
-    EntityL.insert(new Entities::Characters::Enemy(Vector2F(210.f, 210.f), Vector2F(30.f, 30.f), Ids::Enemy, "../Sprites/Zombies/ZombieWoman/animation/Attack1.png"));
+    EntityL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Masked/Attack1/terroristAttack.png"));
+    EntityL.insert(new Entities::Characters::Enemy(Vector2F(210.f, 210.f), Vector2F(30.f, 30.f), Ids::Enemy, "../Sprites/Zombies/ZombieMan/animation/Walk1test.png"));
     
     EntityL.initialize(&GM, &EM, &CM);
 

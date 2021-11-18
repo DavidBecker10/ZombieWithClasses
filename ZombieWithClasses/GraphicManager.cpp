@@ -32,7 +32,7 @@ void Managers::GraphicManager::clear(int r, int g, int b)
 void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
 {
     if (textures.count(path) == 0) {
-        std::cout << "Erro. Imagem em " << path << " nao carregada!" << std::endl;
+        std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
         exit(714);
     }
     
@@ -50,7 +50,7 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
 void Managers::GraphicManager::draw(const std::string& path, const Vector2F position, const Vector2U nFrames, const Vector2U frame)
 {
     if (textures.count(path) == 0) {
-        std::cout << "Atencao! Imagem em " << path << " nao carregada!" << std::endl;
+        std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
         exit(714);
     }
 
@@ -61,7 +61,7 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F posi
     //sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
 
     //sprite.setTextureRect({ positionFrame, size });
-    sprite.setScale(0.1, 0.1);
+    sprite.setScale(1, 1);
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(position.x, position.y);
     //sprite.setOrigin({ size.x * 0.5f, size.y * 0.5f });
@@ -100,7 +100,7 @@ sf::RenderWindow* Managers::GraphicManager::getWindow() const
 const Vector2F Managers::GraphicManager::getSize(const std::string& path) const
 {
     if (textures.count(path) == 0) {
-        std::cout << "Atencao! Imagem em " << path << " nao carregada!" << std::endl;
+        std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
         exit(714);
     }
 

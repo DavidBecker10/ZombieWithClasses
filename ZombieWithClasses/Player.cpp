@@ -31,7 +31,7 @@ void Entities::Characters::Player::setTM(TilesManager* t)
 
 void Entities::Characters::Player::update(float t)
 {
- //   printf("(%f, %f)", position.x, position.y);
+    position = vel * t;
 }
 
 void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
@@ -45,19 +45,19 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     if (e.type == sf::Event::KeyPressed) {
         switch (e.key.code) {
         case sf::Keyboard::Key::D:
-            position.x += 30;
+            vel.x += 30;
             /* code */
             break;
         case sf::Keyboard::Key::A:
-            position.x -= 30;
+            vel.x -= 30;
             /* code */
             break;
         case sf::Keyboard::Key::W:
-            position.y -= 30;
+            vel.y -= 30;
             /* code */
             break;
         case sf::Keyboard::Key::S:
-            position.y += 30;
+            vel.y += 30;
             /* code */
             break;
         default:
@@ -67,16 +67,16 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     else if (e.type == sf::Event::KeyReleased) {
         switch (e.key.code) {
         case sf::Keyboard::Key::D:
-            position.x += 30;
+            vel.x += 30;
             break;
         case sf::Keyboard::Key::A:
-            position.x -= 30;
+            vel.x -= 30;
             break;
         case sf::Keyboard::Key::W:
-            position.y -= 30;
+            vel.y -= 30;
             break;
         case sf::Keyboard::Key::S:
-            position.y += 30;
+            vel.y += 30;
             break;
         default:
             break;
