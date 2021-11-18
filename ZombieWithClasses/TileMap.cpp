@@ -112,6 +112,8 @@ void TileMap::loadMap()
 
     mapDimensions = { json["width"], json["height"] };
 
+    std::cout << mapDimensions << std::endl;
+
     json = json["data"];
 
     map = new unsigned short*[mapDimensions.y];

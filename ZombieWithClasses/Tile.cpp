@@ -67,7 +67,8 @@ void Entities::Tile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F 
 
     switch (idOther) {
     case Ids::Enemy:
-        imprimir = "ai ui ui";
+		//std::cout << positionOther << ' ' << position << std::endl;
+        imprimir = "bobage";
 		std::cout << imprimir << std::endl;
         break;
     case Ids::Player:

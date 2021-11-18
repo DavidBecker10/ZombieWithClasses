@@ -33,7 +33,7 @@ bool CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2)
 
     if (position1 == position2)
         return true;
-    //return (fabs(distance.x) < (dimensions1.x + dimensions2.x) / 2.) && (fabs(distance.y) < (dimensions1.y + dimensions2.y) / 2.);
+    //return (fabs(distance.x) < (dimensions1.x + dimensions2.x)*0.5) && (fabs(distance.y) < (dimensions1.y + dimensions2.y)*0.5);
     return false;
 }
 
@@ -54,9 +54,9 @@ void CollisionManager::verifyCollisions() {
 
         Entities::Entity* p1 = *first;
 
-        auto collidingTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
-        std::cout << p1->getDimensions() << std::endl;
-        for (auto collision : collidingTiles)
+        auto collisionWithTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
+        //std::cout << p1->getDimensions() << std::endl;
+        for (auto collision : collisionWithTiles)
             p1->collide(collision.id, collision.position, collision.size);
 
         auto second = first;
@@ -64,8 +64,6 @@ void CollisionManager::verifyCollisions() {
 
         for (; second != list.end(); second++) {
             Entities::Entity* p2 = *second;
-
-
 
             if (isColliding(p1, p2)) {
 

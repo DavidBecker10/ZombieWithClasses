@@ -23,7 +23,7 @@ Game::Game() :
             new Entities::Tile(Ids::ground12, "../Sprites/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground13, "../Sprites/Tiles/Platformer/Ground_13.png", {32.0f, 32.0f}),
         },
-        { 50.0f, 50.0f }, "map.json"
+        { 32.0f, 32.0f }, "map.json"
     },
     close(false),
     clock(),

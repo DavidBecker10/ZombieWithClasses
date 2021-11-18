@@ -86,13 +86,12 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
 
 void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
 {
+    //std::cout << idOther << '    ' /*<< idOther*/ << std::endl;
     std::string imprimir;
 
-    TM->checkCollisions(ID, position, { 10, 10 });
-
     switch (idOther) {
-    case Ids::Player:
-        imprimir = "ai ui ui";
+    case Ids::Enemy:
+        imprimir = "Zombie pnc";
         std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:

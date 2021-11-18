@@ -40,8 +40,8 @@ void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutr
 
 
     switch (idOutro) {
-    case Ids::Enemy:
-        imprimir = "ai ui ui";
+    case Ids::Player:
+        imprimir = "vai toma no boga";
         std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:

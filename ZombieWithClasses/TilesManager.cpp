@@ -1,5 +1,6 @@
 #include "TilesManager.h"
 #include <iostream>
+#include <cmath>
 
 TilesManager::TilesManager(std::vector<Entities::Tile*> tls, Vector2F tileDim, const char* p):
 	tiles(tls),
@@ -23,9 +24,9 @@ void TilesManager::initialize(Managers::GraphicManager* gm, Managers::EventManag
 
 void TilesManager::draw(Managers::GraphicManager& g)
 {
-	for (unsigned int i = 0; i < tileDimensions.y; i++)
+	for (unsigned int i = 0; i < tileMap.getDimensions().y; i++)
 	{
-		for (unsigned int j = 0; j < tileDimensions.x; j++)
+		for (unsigned int j = 0; j < tileMap.getDimensions().y; j++)
 		{
 			short index = tileMap[i][j] - 1;
 			if (index >= 0 && index < (long)tiles.size()) {
@@ -37,10 +38,10 @@ void TilesManager::draw(Managers::GraphicManager& g)
 
 std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s)
 {
-	int up = (int) floor((pos.y - s.y / 2) / tileDimensions.y);
-	int down = (int) ceil((pos.y + s.y / 2) / tileDimensions.y);
-	int left = (int) floor((pos.x - s.x / 2) / tileDimensions.x);
-	int right = (int) ceil((pos.x + s.x / 2) / tileDimensions.x);
+	int up = (int) std::floor((pos.y - s.y / 2) / tileDimensions.y);
+	int down = (int) std::ceil((pos.y + s.y / 2) / tileDimensions.y);
+	int left = (int) std::floor((pos.x - s.x / 2) / tileDimensions.x);
+	int right = (int) std::ceil((pos.x + s.x / 2) / tileDimensions.x);
 
 	std::vector<IdPositionSize> collisions;
 
@@ -56,6 +57,7 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 				Entities::Tile* t = tiles[index];
 
 				t->collide(id, pos, {(float)j, (float)i });
+				std::cout << coordinatesForScreen({ (unsigned int)i, (unsigned int)j }) << std::endl;
 				collisions.push_back({ t->getID(), coordinatesForScreen({(unsigned int)i, (unsigned int)j}), tileDimensions});
 			}
 		}
