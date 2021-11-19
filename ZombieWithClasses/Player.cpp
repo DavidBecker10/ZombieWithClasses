@@ -1,7 +1,7 @@
 #include "Player.h"
-#include <iostream>
+#include "stdafx.h"
 
-Entities::Characters::Player::Player(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath) :
+Entities::Characters::Player::Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath) :
 	Character(pos, vel, ID, tPath)
 {
 }
@@ -17,7 +17,7 @@ Entities::Characters::Player::~Player()
 
 void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
-    //printf("aaaa");
+    isJumping = false;
 	GM->loadTexture(textPath);
 	dimensions = GM->getSize(textPath);
 	listenKey = EM->addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
@@ -31,12 +31,16 @@ void Entities::Characters::Player::setTM(TilesManager* t)
 
 void Entities::Characters::Player::update(float t)
 {
-    position = vel * t;
+    position.x += vel.x * t;
+    if (position.y < 1455 && !isJumping)
+        position.y += vel.y * t + GRAVITY;
+    else
+        position.y += vel.y * t;
 }
 
 void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
 {
-    GM->draw(textPath, position, { 1, 9 }, { 0, 5 });
+    GM->draw(textPath, position, body, scale, { 1, 9 }, { 0, 5 });
 	GM->centralize(position);
 }
 
@@ -45,19 +49,22 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     if (e.type == sf::Event::KeyPressed) {
         switch (e.key.code) {
         case sf::Keyboard::Key::D:
-            vel.x += 30;
+            vel.x = 300;
+            scale.x = 1;
             /* code */
             break;
         case sf::Keyboard::Key::A:
-            vel.x -= 30;
+            vel.x = -300;
+            scale.x = -1;
             /* code */
             break;
         case sf::Keyboard::Key::W:
-            vel.y -= 30;
+            isJumping = true;
+            vel.y = -900;
             /* code */
             break;
         case sf::Keyboard::Key::S:
-            vel.y += 30;
+            vel.y = 300;
             /* code */
             break;
         default:
@@ -67,16 +74,17 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     else if (e.type == sf::Event::KeyReleased) {
         switch (e.key.code) {
         case sf::Keyboard::Key::D:
-            vel.x += 30;
+            vel.x = 0;
             break;
         case sf::Keyboard::Key::A:
-            vel.x -= 30;
+            vel.x = 0;
             break;
         case sf::Keyboard::Key::W:
-            vel.y -= 30;
+            vel.y = 0;
+            isJumping = false;
             break;
         case sf::Keyboard::Key::S:
-            vel.y += 30;
+            vel.y = 0;
             break;
         default:
             break;
@@ -84,14 +92,14 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     }
 }
 
-void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
+void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther)
 {
     //std::cout << idOther << '    ' /*<< idOther*/ << std::endl;
     std::string imprimir;
 
     switch (idOther) {
     case Ids::Enemy:
-        imprimir = "Zombie pnc";
+        imprimir = "Colidiu Zombie";
         std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:
@@ -99,7 +107,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOt
         std::cout << imprimir << std::endl;
         break;
     case Ids::ground2:
-        imprimir = "cai";
+        imprimir = "chao";
         std::cout << imprimir << std::endl;
         break;
     case Ids::empty:
@@ -121,4 +129,9 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOt
     default:
         break;
     }
+}
+
+void Entities::Characters::Player::died()
+{
+
 }

@@ -12,22 +12,22 @@ namespace Entities
 	private:
 		const Ids::Ids id;
 		const char* path;
-		Vector2F size;
+		sf::Vector2f size;
 		Managers::GraphicManager* gm;
 		CollisionManager* cm;
 
 
 	public:
-		Tile(const Ids::Ids i, const char* p, Vector2F s);
+		Tile(const Ids::Ids i, const char* p, sf::Vector2f s);
 		Tile();
 		~Tile();
 		virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
 		virtual void update(float t);
-		void draw(Managers::GraphicManager& g, const Vector2F position) const;
+		void draw(Managers::GraphicManager& g, const sf::Vector2f position) const;
 		const Ids::Ids getID() const;
-		Vector2F getSize() const;
-		void setPosition(Vector2F pos);
-		Vector2F getPosition() const;
-		virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+		sf::Vector2f getSize() const;
+		void setPosition(sf::Vector2f pos);
+		sf::Vector2f getPosition() const;
+		virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther);
 	};
 }

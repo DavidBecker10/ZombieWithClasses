@@ -17,8 +17,8 @@ public:
 	Vector2D operator*(int i);
 	Vector2D operator*(float f);
 	Vector2D operator*(double d);
-	void operator+=(Vector2D v);
-	void operator-=(Vector2D v);
+	Vector2D operator+=(Vector2D v);
+	Vector2D operator-=(Vector2D v);
 	Vector2D operator*=(int i);
 	Vector2D operator*=(float f);
 	Vector2D operator*=(double d);
@@ -89,15 +89,15 @@ Vector2D<T> Vector2D<T>::operator *(double d)
 }
 
 template<typename T>
-void Vector2D<T>::operator +=(Vector2D<T> v)
+Vector2D<T> Vector2D<T>::operator +=(Vector2D<T> v)
 {
-	(x + v.x, y + v.y);
+	return (x + v.x, y + v.y);
 }
 
 template<typename T>
-void Vector2D<T>::operator -=(Vector2D<T> v)
+Vector2D<T> Vector2D<T>::operator -=(Vector2D<T> v)
 {
-	(x - v.x, y - v.y);
+	return (x - v.x, y - v.y);
 }
 
 template<typename T>

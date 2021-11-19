@@ -3,8 +3,9 @@
 #include "TileMap.h"
 #include "Vector2D.h"
 
-Entities::Characters::Character::Character(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tPath):
-	Entity(pos, v, ID, tPath)
+Entities::Characters::Character::Character(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tPath):
+	Entity(pos, v, ID, tPath),
+	scale(sf::Vector2f(1, 1))
 {
 }
 
@@ -24,8 +25,9 @@ void Entities::Characters::Character::update(float t)
 
 void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
-	printf("dfvv");
 	dimensions = GM->getSize(textPath);
+	scale.x = 1;
+	scale.y = 1;
 }
 
 void Entities::Characters::Character::draw(Managers::GraphicManager* g)

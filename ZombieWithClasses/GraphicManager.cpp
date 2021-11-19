@@ -3,7 +3,7 @@
 #include <iostream>
 
 Managers::GraphicManager::GraphicManager() :
-    window{ new sf::RenderWindow(sf::VideoMode(800, 600), "Zombie With Classes") },
+    window{ new sf::RenderWindow(sf::VideoMode(800, 600), "Zombie With Classes", sf::Style::Close) },
     view{ sf::Vector2f(400, 300), sf::Vector2f(400,300) },
     text{ nullptr }
 {
@@ -29,7 +29,7 @@ void Managers::GraphicManager::clear(int r, int g, int b)
     window->clear(sf::Color(r, g, b));
 }
 
-void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
+void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f pos, sf::Sprite body)
 {
     if (textures.count(path) == 0) {
         std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
@@ -38,16 +38,16 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F pos)
     
     text = textures[path];
 
-    sprite.setTexture(*text, true);
-    //sprite.setTextureRect(text->getSize();)
-    sprite.setScale(1, 1);
-    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
-    sprite.setPosition(pos.x, pos.y);
+    body.setTexture(*text, true);
+    //sprite.setTextureRect(text->getSize());
+    body.setScale(1, 1);
+    body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    body.setPosition(pos.x, pos.y);
 
-    window->draw(sprite);
+    window->draw(body);
 }
 
-void Managers::GraphicManager::draw(const std::string& path, const Vector2F position, const Vector2U nFrames, const Vector2U frame)
+void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f position, sf::Sprite body, sf::Vector2f scale, const sf::Vector2u nFrames, const sf::Vector2u frame)
 {
     if (textures.count(path) == 0) {
         std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
@@ -55,19 +55,19 @@ void Managers::GraphicManager::draw(const std::string& path, const Vector2F posi
     }
 
     text = textures[path];
-    sprite.setTexture(*text, true);
+    body.setTexture(*text, true);
 
     //sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
     //sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
 
-    //sprite.setTextureRect({ positionFrame, size });
-    sprite.setScale(1, 1);
-    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
-    sprite.setPosition(position.x, position.y);
-    //sprite.setOrigin({ size.x * 0.5f, size.y * 0.5f });
-    //sprite.setPosition(size.x, size.y);
+    //body->setTextureRect({ positionFrame, size });
+    body.setScale(scale);
+    body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    body.setPosition(position.x, position.y);
+    //body->setOrigin({ size.x * 0.5f, size.y * 0.5f });
+    //body->setPosition(size.x, size.y);
     
-    window->draw(sprite);
+    window->draw(body);
 }
 
 bool Managers::GraphicManager::loadTexture(const std::string& path)
@@ -86,7 +86,7 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
     }
 }
 
-void Managers::GraphicManager::centralize(const Vector2F centro)
+void Managers::GraphicManager::centralize(const sf::Vector2f centro)
 {
     view.setCenter(sf::Vector2f(centro.x, centro.y));
     window->setView(view); //A RenderWindow faz uma cópia da View ao invés de usar o ponteiro, então é preciso a sobre-escrever sempre que for modificada.
@@ -97,7 +97,7 @@ sf::RenderWindow* Managers::GraphicManager::getWindow() const
     return window;
 }
 
-const Vector2F Managers::GraphicManager::getSize(const std::string& path) const
+const sf::Vector2f Managers::GraphicManager::getSize(const std::string& path) const
 {
     if (textures.count(path) == 0) {
         std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
@@ -106,7 +106,7 @@ const Vector2F Managers::GraphicManager::getSize(const std::string& path) const
 
     sf::Vector2u dimensions = (textures.at(path))->getSize();
 
-    return Vector2F(dimensions.x, dimensions.y);
+    return sf::Vector2f(dimensions.x, dimensions.y);
 }
 
 void Managers::GraphicManager::initializeView()

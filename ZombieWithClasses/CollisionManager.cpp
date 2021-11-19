@@ -21,13 +21,13 @@ CollisionManager::~CollisionManager()
 
 bool CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2)
 {
-    Vector2F position1 = c1->getPosition();
-    Vector2F dimensions1 = c1->getDimensions();
+    sf::Vector2f position1 = c1->getPosition();
+    sf::Vector2f dimensions1 = c1->getDimensions();
 
-    Vector2F position2 = c2->getPosition();
-    Vector2F dimensions2 = c2->getDimensions();
+    sf::Vector2f position2 = c2->getPosition();
+    sf::Vector2f dimensions2 = c2->getDimensions();
 
-    Vector2F distance = position1 - position2;
+    sf::Vector2f distance = position1 - position2;
 
     if (c1 == c2) return false;
 

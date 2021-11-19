@@ -11,15 +11,17 @@ namespace Entities
         class Character :
             public Entity
         {
+        protected:
+            sf::Vector2f scale;
 
         public:
-            Character(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tPath = NULL);
+            Character(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tPath = NULL);
             Character();
             ~Character();
             virtual void update(float t);
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
             virtual void draw(Managers::GraphicManager* g);
-            virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
+            virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther) = 0;
         };
     }
 }

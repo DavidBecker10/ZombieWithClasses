@@ -1,7 +1,7 @@
 #include "Tile.h"
 #include <iostream>
 
-Entities::Tile::Tile(const Ids::Ids i, const char* p, Vector2F s):
+Entities::Tile::Tile(const Ids::Ids i, const char* p, sf::Vector2f s):
 	Entity(),
 	id{ i },
 	path{ p },
@@ -36,9 +36,9 @@ void Entities::Tile::update(float t)
 {
 }
 
-void Entities::Tile::draw(Managers::GraphicManager& g, const Vector2F position) const
+void Entities::Tile::draw(Managers::GraphicManager& g, const sf::Vector2f position) const
 {
-	g.draw(path, position);
+	g.draw(path, position, body);
 }
 
 const Ids::Ids Entities::Tile::getID() const
@@ -46,22 +46,22 @@ const Ids::Ids Entities::Tile::getID() const
 	return id;
 }
 
-Vector2F Entities::Tile::getSize() const
+sf::Vector2f Entities::Tile::getSize() const
 {
 	return size;
 }
 
-void Entities::Tile::setPosition(Vector2F pos)
+void Entities::Tile::setPosition(sf::Vector2f pos)
 {
 	position = pos;
 }
 
-Vector2F Entities::Tile::getPosition() const
+sf::Vector2f Entities::Tile::getPosition() const
 {
 	return position;
 }
 
-void Entities::Tile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
+void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther)
 {
     std::string imprimir;
 
@@ -69,6 +69,7 @@ void Entities::Tile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F 
     case Ids::Enemy:
 		//std::cout << positionOther << ' ' << position << std::endl;
         imprimir = "bobage";
+		//died();
 		std::cout << imprimir << std::endl;
         break;
     case Ids::Player:

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-TilesManager::TilesManager(std::vector<Entities::Tile*> tls, Vector2F tileDim, const char* p):
+TilesManager::TilesManager(std::vector<Entities::Tile*> tls, sf::Vector2f tileDim, const char* p):
 	tiles(tls),
 	tileDimensions(tileDim),
 	path(p),
@@ -30,18 +30,18 @@ void TilesManager::draw(Managers::GraphicManager& g)
 		{
 			short index = tileMap[i][j] - 1;
 			if (index >= 0 && index < (long)tiles.size()) {
-				tiles[index]->draw(g, coordinatesForScreen( Vector2U{ j, i} ));
+				tiles[index]->draw(g, coordinatesForScreen(sf::Vector2u{ j, i} ));
 			}
 		}
 	}
 }
 
-std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s)
+std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2f s)
 {
-	int up = (int) std::floor((pos.y - s.y / 2) / tileDimensions.y);
-	int down = (int) std::ceil((pos.y + s.y / 2) / tileDimensions.y);
-	int left = (int) std::floor((pos.x - s.x / 2) / tileDimensions.x);
-	int right = (int) std::ceil((pos.x + s.x / 2) / tileDimensions.x);
+	int up = (int) std::floor((pos.y - s.y / 2) / tileMap.getDimensions().y);
+	int down = (int) std::ceil((pos.y + s.y / 2) / tileMap.getDimensions().y);
+	int left = (int) std::floor((pos.x - s.x / 2) / tileMap.getDimensions().x);
+	int right = (int) std::ceil((pos.x + s.x / 2) / tileMap.getDimensions().x);
 
 	std::vector<IdPositionSize> collisions;
 
@@ -55,9 +55,8 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 			if (0 <= index && index < (long) tiles.size())
 			{
 				Entities::Tile* t = tiles[index];
-
+				std::cout << index << std::endl;
 				t->collide(id, pos, {(float)j, (float)i });
-				std::cout << coordinatesForScreen({ (unsigned int)i, (unsigned int)j }) << std::endl;
 				collisions.push_back({ t->getID(), coordinatesForScreen({(unsigned int)i, (unsigned int)j}), tileDimensions});
 			}
 		}
@@ -65,10 +64,10 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 	return collisions;
 }
 
-Vector2F TilesManager::coordinatesForScreen(const Vector2U pos) const
+sf::Vector2f TilesManager::coordinatesForScreen(const sf::Vector2u pos) const
 {
 	//return tileDimensions*(0.5f) + Vector2F(tileDimensions.x * pos.x, tileDimensions.y * pos.y);
-	return Vector2F{ tileDimensions.x * 0.5f + tileDimensions.x * pos.x, tileDimensions.y * 0.4f + tileDimensions.y * pos.y };
+	return sf::Vector2f{ tileDimensions.x * 0.5f + tileDimensions.x * pos.x, tileDimensions.y * 0.5f + tileDimensions.y * pos.y };
 }
 
 std::vector<Entities::Tile*> TilesManager::getTiles() const

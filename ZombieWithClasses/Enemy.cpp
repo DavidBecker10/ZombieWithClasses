@@ -1,6 +1,7 @@
 #include "Enemy.h"
+#include "stdafx.h"
 
-Entities::Characters::Enemy::Enemy(Vector2F pos, Vector2F vel, Ids::Ids ID, const char* tPath) :
+Entities::Characters::Enemy::Enemy(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath) :
 	Character(pos, vel, ID, tPath)
 {
 }
@@ -23,26 +24,35 @@ void Entities::Characters::Enemy::initialize(Managers::GraphicManager* GM, Manag
 
 void Entities::Characters::Enemy::update(float t)
 {
-    if(position.x < 1600.f)
-	    position.x += vel.x * t;
-    if(position.y < 1600.f)
-	    position.y += vel.y * t;
+    if (position.x < 1555.f)
+        position.x += vel.x * t;
+    else {
+        vel.x *= -1;
+        scale.x = -1;
+    }
+    if(position.x > 76)
+        position.x += vel.x * t;
+    else {
+        vel.x *= -1;
+        scale.x = 1;
+    }
+    if(position.y < 1444.f)
+	    position.y += vel.y * t + GRAVITY;
 }
 
 void Entities::Characters::Enemy::draw(Managers::GraphicManager* GM)
 {
-	GM->draw(textPath, position, { 1, 9 }, { 0, 5 });
-    std::cout << getDimensions() << std::endl;
+	GM->draw(textPath, position, body, scale, { 1, 9 }, { 0, 5 });
 }
 
-void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
+void Entities::Characters::Enemy::collide(Ids::Ids idOutro, sf::Vector2f posicaoOutro, sf::Vector2f dimensoesOutro)
 {
     std::string imprimir;
 
 
     /*switch (idOutro) {
     case Ids::Player:
-        imprimir = "vai toma no boga";
+        imprimir = "Colidiu Player";
         std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:

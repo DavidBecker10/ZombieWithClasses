@@ -56,12 +56,12 @@ void TileMap::printMap() const
     std::cout.flush();
 }
 
-Vector2U TileMap::getDimensions() const
+sf::Vector2u TileMap::getDimensions() const
 {
-    return Vector2U(mapDimensions.x, mapDimensions.y);
+    return sf::Vector2u(mapDimensions.x, mapDimensions.y);
 }
 
-void TileMap::setTile(Vector2U position, unsigned short newIndex)
+void TileMap::setTile(sf::Vector2u position, unsigned short newIndex)
 {
     if (position.x >= mapDimensions.x || position.y >= mapDimensions.y)
     {
@@ -112,7 +112,7 @@ void TileMap::loadMap()
 
     mapDimensions = { json["width"], json["height"] };
 
-    std::cout << mapDimensions << std::endl;
+    //std::cout << mapDimensions << std::endl;
 
     json = json["data"];
 
