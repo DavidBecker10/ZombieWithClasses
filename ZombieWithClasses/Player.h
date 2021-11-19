@@ -17,6 +17,7 @@ namespace Entities
 		private:
 			unsigned int listenKey;
 			bool isJumping;
+			bool isGround;
 			TilesManager* TM;
 
 		public:
@@ -28,7 +29,7 @@ namespace Entities
 			void update(float t);
 			void draw(Managers::GraphicManager* g);
 			void handleEvents(const sf::Event& e);
-			void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther);
+			void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
 			void died();
 		};
 	}

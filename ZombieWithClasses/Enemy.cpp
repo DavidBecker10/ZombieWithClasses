@@ -16,9 +16,8 @@ Entities::Characters::Enemy::~Enemy()
 
 void Entities::Characters::Enemy::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
-	//printf("oi");
 	GM->loadTexture(textPath);
-	dimensions = GM->getSize(textPath);
+	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
     CM->addCollide(this);
 }
 
@@ -45,7 +44,7 @@ void Entities::Characters::Enemy::draw(Managers::GraphicManager* GM)
 	GM->draw(textPath, position, body, scale, { 1, 9 }, { 0, 5 });
 }
 
-void Entities::Characters::Enemy::collide(Ids::Ids idOutro, sf::Vector2f posicaoOutro, sf::Vector2f dimensoesOutro)
+void Entities::Characters::Enemy::collide(Ids::Ids idOutro, sf::Vector2f posicaoOutro, sf::Vector2u dimensoesOutro)
 {
     std::string imprimir;
 

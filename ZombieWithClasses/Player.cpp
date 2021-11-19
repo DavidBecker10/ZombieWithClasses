@@ -18,8 +18,9 @@ Entities::Characters::Player::~Player()
 void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
     isJumping = false;
+    isGround = false;
 	GM->loadTexture(textPath);
-	dimensions = GM->getSize(textPath);
+	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
 	listenKey = EM->addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
 	CM->addCollide(this);
 }
@@ -32,10 +33,14 @@ void Entities::Characters::Player::setTM(TilesManager* t)
 void Entities::Characters::Player::update(float t)
 {
     position.x += vel.x * t;
-    if (position.y < 1455 && !isJumping)
+    if (!isJumping && !isGround)
         position.y += vel.y * t + GRAVITY;
     else
         position.y += vel.y * t;
+   /* if (position.y < 1455 && !isJumping)
+        position.y += vel.y * t + GRAVITY;
+    else
+        position.y += vel.y * t;*/
 }
 
 void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
@@ -61,6 +66,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
         case sf::Keyboard::Key::W:
             isJumping = true;
             vel.y = -900;
+            isGround = false;
             /* code */
             break;
         case sf::Keyboard::Key::S:
@@ -82,6 +88,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
         case sf::Keyboard::Key::W:
             vel.y = 0;
             isJumping = false;
+            isGround = false;
             break;
         case sf::Keyboard::Key::S:
             vel.y = 0;
@@ -92,10 +99,12 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     }
 }
 
-void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther)
+void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
 {
-    //std::cout << idOther << '    ' /*<< idOther*/ << std::endl;
     std::string imprimir;
+
+    if (idOther != Ids::ground2)
+        isGround = false;
 
     switch (idOther) {
     case Ids::Enemy:
@@ -107,8 +116,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         std::cout << imprimir << std::endl;
         break;
     case Ids::ground2:
-        imprimir = "chao";
-        std::cout << imprimir << std::endl;
+        isGround = true;
         break;
     case Ids::empty:
         imprimir = "mano o que ta acontecendo";

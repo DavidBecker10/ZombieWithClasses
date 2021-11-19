@@ -89,7 +89,7 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
 void Managers::GraphicManager::centralize(const sf::Vector2f centro)
 {
     view.setCenter(sf::Vector2f(centro.x, centro.y));
-    window->setView(view); //A RenderWindow faz uma cópia da View ao invés de usar o ponteiro, então é preciso a sobre-escrever sempre que for modificada.
+    window->setView(view);
 }
 
 sf::RenderWindow* Managers::GraphicManager::getWindow() const

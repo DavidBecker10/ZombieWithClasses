@@ -25,7 +25,7 @@ void Entities::Characters::Character::update(float t)
 
 void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
-	dimensions = GM->getSize(textPath);
+	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
 	scale.x = 1;
 	scale.y = 1;
 }

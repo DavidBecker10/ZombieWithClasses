@@ -17,7 +17,7 @@ namespace Entities
 
         sf::Vector2f position;
         sf::Vector2f vel;
-        sf::Vector2f dimensions;
+        sf::Vector2u dimensions;
         sf::Sprite body;
         const char* textPath;
         Ids::Ids id;
@@ -30,9 +30,9 @@ namespace Entities
         virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM) = 0;
         virtual void draw(Managers::GraphicManager* g);
         sf::Vector2f getPosition() { return position; }
-        sf::Vector2f getDimensions() { return dimensions; }
+        sf::Vector2u getDimensions() { return dimensions; }
         Ids::Ids getID() { return id; }
         const char* getTextPath() { return textPath; }
-        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther) = 0;
+        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
     };
 }

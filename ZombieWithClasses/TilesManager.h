@@ -14,13 +14,13 @@ public:
 	{
 		const Ids::Ids id;
 		const sf::Vector2f position;
-		const sf::Vector2f size;
+		const sf::Vector2u size;
 
 	}IdPositionSize;
 
 private:
 	TileMap tileMap;
-	sf::Vector2f tileDimensions;
+	sf::Vector2u tileDimensions;
 	const char* path;
 	std::vector<Entities::Tile*> tiles;
 
@@ -29,7 +29,7 @@ public:
 	~TilesManager();
 	void initialize(Managers::GraphicManager* gm, Managers::EventManager* em, CollisionManager* cm);
 	void draw(Managers::GraphicManager& g);
-	std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2f s);
+	std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2u s);
 	sf::Vector2f coordinatesForScreen(const sf::Vector2u pos) const;
 	std::vector<Entities::Tile*> getTiles() const;
 	void setTiles(std::vector<Entities::Tile*>);

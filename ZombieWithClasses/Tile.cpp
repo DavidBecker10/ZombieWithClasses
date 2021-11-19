@@ -61,20 +61,14 @@ sf::Vector2f Entities::Tile::getPosition() const
 	return position;
 }
 
-void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther)
+void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
 {
-    std::string imprimir;
-
     switch (idOther) {
     case Ids::Enemy:
-		//std::cout << positionOther << ' ' << position << std::endl;
-        imprimir = "bobage";
-		//died();
-		std::cout << imprimir << std::endl;
+		/*...*/
         break;
     case Ids::Player:
-        imprimir = "jogador bateu";
-		std::cout << imprimir << std::endl;
+		/*...*/
         break;
     default:
         break;

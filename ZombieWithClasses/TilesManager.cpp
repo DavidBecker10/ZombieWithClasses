@@ -36,16 +36,16 @@ void TilesManager::draw(Managers::GraphicManager& g)
 	}
 }
 
-std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2f s)
+std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2u s)
 {
-	int up = (int) std::floor((pos.y - s.y / 2) / tileMap.getDimensions().y);
-	int down = (int) std::ceil((pos.y + s.y / 2) / tileMap.getDimensions().y);
-	int left = (int) std::floor((pos.x - s.x / 2) / tileMap.getDimensions().x);
-	int right = (int) std::ceil((pos.x + s.x / 2) / tileMap.getDimensions().x);
+	int up = (int) std::floor((pos.y - s.y / 2) / tileDimensions.y);
+	int down = (int) std::ceil((pos.y + s.y / 2) / tileDimensions.y);
+	int left = (int) std::floor((pos.x - s.x / 2) / tileDimensions.x);
+	int right = (int) std::ceil((pos.x + s.x / 2) / tileDimensions.x);
 
 	std::vector<IdPositionSize> collisions;
 
-	if (up < 0 || left < 0 || down >= (int) tileMap.getDimensions().y || right >= (int)tileMap.getDimensions().x) return collisions;
+	if (up < 0 || left < 0 || down > tileMap.getDimensions().y || right > tileMap.getDimensions().x) return collisions;
 
 	for (int i = up; i < down; i++)
 	{
@@ -55,8 +55,8 @@ std::vector<TilesManager::IdPositionSize> TilesManager::checkCollisions(const Id
 			if (0 <= index && index < (long) tiles.size())
 			{
 				Entities::Tile* t = tiles[index];
-				std::cout << index << std::endl;
-				t->collide(id, pos, {(float)j, (float)i });
+				//std::cout << index << std::endl;
+				t->collide(id, pos, {(unsigned int)j, (unsigned int)i });
 				collisions.push_back({ t->getID(), coordinatesForScreen({(unsigned int)i, (unsigned int)j}), tileDimensions});
 			}
 		}

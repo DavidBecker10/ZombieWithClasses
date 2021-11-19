@@ -28,6 +28,6 @@ namespace Entities
 		sf::Vector2f getSize() const;
 		void setPosition(sf::Vector2f pos);
 		sf::Vector2f getPosition() const;
-		virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2f dimensionsOther);
+		virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
 	};
 }

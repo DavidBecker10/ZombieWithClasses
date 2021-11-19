@@ -3,9 +3,8 @@
 #include "Entity.h"
 #include "TilesManager.h"
 #include "Vector2D.h"
-#include <math.h>
-#include <vector>
-#include <iostream>
+#include "stdafx.h"
+
 
 CollisionManager::CollisionManager() :
     TM(NULL),
@@ -22,10 +21,10 @@ CollisionManager::~CollisionManager()
 bool CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2)
 {
     sf::Vector2f position1 = c1->getPosition();
-    sf::Vector2f dimensions1 = c1->getDimensions();
+    sf::Vector2u dimensions1 = c1->getDimensions();
 
     sf::Vector2f position2 = c2->getPosition();
-    sf::Vector2f dimensions2 = c2->getDimensions();
+    sf::Vector2u dimensions2 = c2->getDimensions();
 
     sf::Vector2f distance = position1 - position2;
 
@@ -48,7 +47,7 @@ void CollisionManager::removeCollide(Entities::Entity* c) {
 void CollisionManager::removeAll() {
     list.clear();
 }
-
+/*
 void CollisionManager::verifyCollisions() {
     for (auto first = list.begin(); first != list.end(); first++) {
 
@@ -64,6 +63,32 @@ void CollisionManager::verifyCollisions() {
 
         for (; other != list.end(); other++) {
             Entities::Entity* p2 = *other;
+
+            if (isColliding(p1, p2)) {
+
+                p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions());
+                p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
+
+            }
+
+        }
+
+        //std::cout << '\n' << std::endl;
+    }
+}
+*/
+void CollisionManager::verifyCollisions() {
+    for (int i = 0; i < EntityL->getSize(); i++) {
+
+        Entities::Entity* p1 = (*EntityL)[i];
+
+        std::vector<TilesManager::IdPositionSize> collisionWithTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
+
+        for (TilesManager::IdPositionSize collision : collisionWithTiles)
+            p1->collide(collision.id, collision.position, collision.size);
+
+        for (int j = i + 1; j < EntityL->getSize(); j++) {
+            Entities::Entity* p2 = (*EntityL)[j];
 
             if (isColliding(p1, p2)) {
 
