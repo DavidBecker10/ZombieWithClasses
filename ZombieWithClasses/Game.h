@@ -6,6 +6,7 @@
 #include "EntityList.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Homer.h"
 
 class CollisionManager;
 

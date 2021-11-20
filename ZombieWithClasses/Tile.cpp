@@ -28,7 +28,7 @@ Entities::Tile::~Tile()
 void Entities::Tile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
 	gm = GM;
-	//cm = CM;
+	cm = CM;
 	gm->loadTexture(path);
 }
 
@@ -61,13 +61,13 @@ sf::Vector2f Entities::Tile::getPosition() const
 	return position;
 }
 
-void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove)
+void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
 {
     switch (idOther) {
     case Ids::Enemy:
         break;
-    case Ids::Player:
-		
+	case Ids::Player:
+
         break;
     default:
         break;

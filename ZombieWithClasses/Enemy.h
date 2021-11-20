@@ -16,9 +16,9 @@ namespace Entities
             Enemy();
             ~Enemy();
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
-            void update(float t);
+            virtual void update(float t) = 0;
             void draw(Managers::GraphicManager* GM);
-            void collide(Ids::Ids idOutro, sf::Vector2f posicaoOutro, sf::Vector2u dimensoesOutro, bool isAbove);
+            void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
         };
     }
 }

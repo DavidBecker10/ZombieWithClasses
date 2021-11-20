@@ -32,20 +32,23 @@ bool CollisionManager::isColliding(Entities::Entity* c1, Entities::Entity* c2)
 
     /*if (position1 == position2)
         return true;*/
-    return (fabs(distance.x) < (dimensions1.x + dimensions2.x)*0.5) && (fabs(distance.y) < (dimensions1.y + dimensions2.y)*0.5);
+    return (fabs(distance.x) < (dimensions1.x + dimensions2.x)/2 && (fabs(distance.y) < (dimensions1.y + dimensions2.y)/2));
     return false;
 }
 
 void CollisionManager::addCollide(Entities::Entity* c) {
-    list.insert(c);
+    if (c)
+        EntityL->insert(c);
+    else
+        std::cout << "Erro: Ponteiro nulo em CollisionManager::addCollide" << std::endl;
 }
 
 void CollisionManager::removeCollide(Entities::Entity* c) {
-    list.erase(c);
+    EntityL->remove(c);
 }
 
 void CollisionManager::removeAll() {
-    list.clear();
+    EntityL->destroyEntities();
 }
 
 void CollisionManager::verifyCollisions() {
@@ -56,15 +59,15 @@ void CollisionManager::verifyCollisions() {
         std::vector<TilesManager::infoCollision> collisionWithTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
 
         for (TilesManager::infoCollision collision : collisionWithTiles)
-            p1->collide(collision.id, collision.position, collision.size, collision.isAbove);
+            p1->collide(collision.id, collision.position, collision.size);
 
         for (int j = i + 1; j < EntityL->getSize(); j++) {
             Entities::Entity* p2 = (*EntityL)[j];
 
             if (isColliding(p1, p2)) {
 
-                p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions(), false);
-                p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions(), false);
+                p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions());
+                p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
 
             }
 

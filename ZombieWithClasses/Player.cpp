@@ -21,7 +21,7 @@ void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Mana
 	GM->loadTexture(textPath);
 	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
 	listenKey = EM->addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
-	CM->addCollide(this);
+	//CM->addCollide(this);
 }
 
 void Entities::Characters::Player::setTM(TilesManager* t)
@@ -32,14 +32,14 @@ void Entities::Characters::Player::setTM(TilesManager* t)
 void Entities::Characters::Player::update(float t)
 {
     position.x += vel.x * t;
+    if (position.x <= dimensions.x * 0.5)
+        position.x = dimensions.x * 0.5;
+    else if (position.x >= (32.0f * 200) - dimensions.x)
+        position.x = (32.0f * 200) - dimensions.x;
     if (!isJumping && !isGround)
         position.y += vel.y * t + GRAVITY;
     else
         position.y += vel.y * t;
-   /* if (position.y < 1455 && !isJumping)
-        position.y += vel.y * t + GRAVITY;
-    else
-        position.y += vel.y * t;*/
 }
 
 void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
@@ -68,10 +68,6 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             isGround = false;
             /* code */
             break;
-        case sf::Keyboard::Key::S:
-            vel.y = 300;
-            /* code */
-            break;
         default:
             break;
         }
@@ -89,16 +85,13 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             isJumping = false;
             isGround = false;
             break;
-        case sf::Keyboard::Key::S:
-            vel.y = 0;
-            break;
         default:
             break;
         }
     }
 }
 
-void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove)
+void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
 {
     std::string imprimir;
 
@@ -107,28 +100,27 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 
     switch (idOther) {
     case Ids::Enemy:
-        isGround = true;
+        vel.y = 0;
         break;
     case Ids::ground2:
-        if (isAbove)
-            isGround = true;
-        else {
-            isGround = false;
-            vel.y *= -1;
-        }
-        std::cout << isGround << std::endl;
+        isGround = true;
+        if (positionOther.y > position.y)
+            vel.y = 0;
+        //std::cout << isGround << std::endl;
         break;
     case Ids::air:
         isGround = false;
         break;
-    case Ids::ground3:
+    case Ids::wall:
+        isGround = true;
         break;
     case Ids::ground4:
         isGround = true;
         break;
-    case Ids::ground5:
+    case Ids::lava:
+        std::cout << "Faliceu" << std::endl;
         break;
-    case Ids::ground8:
+    case Ids::ground11:
         isGround = true;
         break;
     default:

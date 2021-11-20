@@ -12,7 +12,6 @@ class TilesManager;
     private:
         
         TilesManager* TM;
-        std::set<Entities::Entity*> list;
         Lists::EntityList* EntityL;
 
     public:

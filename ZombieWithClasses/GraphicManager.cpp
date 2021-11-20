@@ -4,7 +4,7 @@
 
 Managers::GraphicManager::GraphicManager() :
     window{ new sf::RenderWindow(sf::VideoMode(1280, 620), "Zombie With Classes", sf::Style::Close) },
-    view{ sf::Vector2f(100, 600), sf::Vector2f(1000,800) },
+    view{ sf::Vector2f(640, 310), sf::Vector2f(1000,800) },
     text{ nullptr }
 {
     initializeView();

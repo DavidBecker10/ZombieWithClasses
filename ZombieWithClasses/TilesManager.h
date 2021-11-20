@@ -15,7 +15,6 @@ public:
 		const Ids::Ids id;
 		const sf::Vector2f position;
 		const sf::Vector2u size;
-		bool isAbove;
 
 	}infoCollision;
 
@@ -34,6 +33,5 @@ public:
 	sf::Vector2f coordinatesForScreen(const sf::Vector2u pos) const;
 	std::vector<Entities::Tile*> getTiles() const;
 	void setTile(Entities::Tile* newTile);
-	//std::vector<IdPositionSize> checkMapCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
 };
 

@@ -31,6 +31,6 @@ namespace Entities
         sf::Vector2u getDimensions() { return dimensions; }
         Ids::Ids getID() { return ID; }
         const char* getTextPath() { return textPath; }
-        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove) = 0;
+        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
     };
 }

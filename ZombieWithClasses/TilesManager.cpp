@@ -39,8 +39,7 @@ void TilesManager::draw(Managers::GraphicManager& g)
 
 std::vector<TilesManager::infoCollision> TilesManager::checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2u s)
 {
-	bool above;
-
+	
 	unsigned int up = (unsigned int) std::floor((pos.y - s.y / 2) / tileDimensions.y);
 	unsigned int down = (unsigned int) std::ceil((pos.y + s.y / 2) / tileDimensions.y);
 	unsigned int left = (unsigned int) std::floor((pos.x - s.x / 2) / tileDimensions.x);
@@ -55,15 +54,11 @@ std::vector<TilesManager::infoCollision> TilesManager::checkCollisions(const Ids
 		for (unsigned int j = left; j < right; j++)
 		{
 			short index = tileMap[i][j] - 1;
-			if (0 <= index && index < (long) tiles.size())
+			if (0 <= index && index < (long)tiles.size())
 			{
 				Entities::Tile* t = tiles[index];
-				if (coordinatesForScreen({ (unsigned int)i, (unsigned int)j }).y <= pos.y)
-					above = true;
-				else
-					above = false;
-				t->collide(id, pos, {(unsigned int)j, (unsigned int)i }, above);
-				collisions.push_back({ t->getID(), coordinatesForScreen(sf::Vector2u(i, j)), tileDimensions, above});
+				t->collide(id, pos, s);
+				collisions.push_back({ t->getID(), coordinatesForScreen(sf::Vector2u(i, j)), tileDimensions });
 			}
 		}
 	}
@@ -72,8 +67,7 @@ std::vector<TilesManager::infoCollision> TilesManager::checkCollisions(const Ids
 
 sf::Vector2f TilesManager::coordinatesForScreen(const sf::Vector2u pos) const
 {
-	//return tileDimensions*(0.5f) + Vector2F(tileDimensions.x * pos.x, tileDimensions.y * pos.y);
-	return sf::Vector2f{ tileDimensions.x * 0.5f + tileDimensions.x * pos.x, tileDimensions.y * 0.5f + tileDimensions.y * pos.y };
+	return sf::Vector2f( tileDimensions.x * 0.5 + tileDimensions.x * pos.x, tileDimensions.y * 1.3f + tileDimensions.y * pos.y );
 }
 
 std::vector<Entities::Tile*> TilesManager::getTiles() const
