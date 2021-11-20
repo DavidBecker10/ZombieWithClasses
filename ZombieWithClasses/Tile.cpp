@@ -3,11 +3,11 @@
 
 Entities::Tile::Tile(const Ids::Ids i, const char* p, sf::Vector2f s):
 	Entity(),
-	id{ i },
-	path{ p },
-	size{ s },
-	gm{},
-	cm{}
+	id(i),
+	path(p),
+	size(s),
+	gm(),
+	cm()
 {
 	
 }
@@ -38,7 +38,7 @@ void Entities::Tile::update(float t)
 
 void Entities::Tile::draw(Managers::GraphicManager& g, const sf::Vector2f position) const
 {
-	g.draw(path, position, body);
+	g.draw(path, position);
 }
 
 const Ids::Ids Entities::Tile::getID() const
@@ -61,14 +61,13 @@ sf::Vector2f Entities::Tile::getPosition() const
 	return position;
 }
 
-void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
+void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove)
 {
     switch (idOther) {
     case Ids::Enemy:
-		/*...*/
         break;
     case Ids::Player:
-		/*...*/
+		
         break;
     default:
         break;

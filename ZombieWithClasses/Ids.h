@@ -4,6 +4,7 @@ namespace Ids
 {
 	enum Ids
 	{
+		air,
 		empty,
 		ground1,
 		ground2,
@@ -18,6 +19,8 @@ namespace Ids
 		ground11,
 		ground12,
 		ground13,
+		wall,
+		lava,
 		Player,
 		Enemy
 	};

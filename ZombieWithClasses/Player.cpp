@@ -18,7 +18,6 @@ Entities::Characters::Player::~Player()
 void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
     isJumping = false;
-    isGround = false;
 	GM->loadTexture(textPath);
 	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
 	listenKey = EM->addListenKeyboard([this](const sf::Event e) {handleEvents(e); });
@@ -45,7 +44,7 @@ void Entities::Characters::Player::update(float t)
 
 void Entities::Characters::Player::draw(Managers::GraphicManager* GM)
 {
-    GM->draw(textPath, position, body, scale, { 1, 9 }, { 0, 5 });
+    GM->draw(textPath, position, scale, { 1, 9 }, { 0, 5 });
 	GM->centralize(position);
 }
 
@@ -99,7 +98,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
     }
 }
 
-void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
+void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove)
 {
     std::string imprimir;
 
@@ -108,31 +107,29 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 
     switch (idOther) {
     case Ids::Enemy:
-        imprimir = "Colidiu Zombie";
-        std::cout << imprimir << std::endl;
-        break;
-    case Ids::ground1:
-        imprimir = "fui ludibriado";
-        std::cout << imprimir << std::endl;
-        break;
-    case Ids::ground2:
         isGround = true;
         break;
-    case Ids::empty:
-        imprimir = "mano o que ta acontecendo";
-        std::cout << imprimir << std::endl;
+    case Ids::ground2:
+        if (isAbove)
+            isGround = true;
+        else {
+            isGround = false;
+            vel.y *= -1;
+        }
+        std::cout << isGround << std::endl;
+        break;
+    case Ids::air:
+        isGround = false;
         break;
     case Ids::ground3:
-        imprimir = "pontudo";
-        std::cout << imprimir << std::endl;
         break;
     case Ids::ground4:
-        imprimir = "estou livre";
-        std::cout << imprimir << std::endl;
+        isGround = true;
         break;
     case Ids::ground5:
-        imprimir = "bonk";
-        std::cout << imprimir << std::endl;
+        break;
+    case Ids::ground8:
+        isGround = true;
         break;
     default:
         break;

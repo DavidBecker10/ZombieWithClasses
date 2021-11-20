@@ -18,9 +18,7 @@ namespace Entities
         sf::Vector2f position;
         sf::Vector2f vel;
         sf::Vector2u dimensions;
-        sf::Sprite body;
         const char* textPath;
-        Ids::Ids id;
 
     public:
         Entity(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tP);
@@ -31,8 +29,8 @@ namespace Entities
         virtual void draw(Managers::GraphicManager* g);
         sf::Vector2f getPosition() { return position; }
         sf::Vector2u getDimensions() { return dimensions; }
-        Ids::Ids getID() { return id; }
+        Ids::Ids getID() { return ID; }
         const char* getTextPath() { return textPath; }
-        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
+        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove) = 0;
     };
 }

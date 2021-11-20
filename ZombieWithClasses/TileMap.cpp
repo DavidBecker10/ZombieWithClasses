@@ -7,8 +7,8 @@
 using TileMapLine = TileMap::TileMapLine;
 
 TileMapLine::TileMapLine(unsigned short* l, unsigned int len):
-    line{ l },
-    length{ len }
+    line(l),
+    length(len)
 {
 }
 

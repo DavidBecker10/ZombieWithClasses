@@ -10,13 +10,14 @@
 class TilesManager
 {
 public:
-	typedef struct IdPosSize
+	typedef struct infoCollision
 	{
 		const Ids::Ids id;
 		const sf::Vector2f position;
 		const sf::Vector2u size;
+		bool isAbove;
 
-	}IdPositionSize;
+	}infoCollision;
 
 private:
 	TileMap tileMap;
@@ -29,10 +30,10 @@ public:
 	~TilesManager();
 	void initialize(Managers::GraphicManager* gm, Managers::EventManager* em, CollisionManager* cm);
 	void draw(Managers::GraphicManager& g);
-	std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2u s);
+	std::vector<infoCollision> checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2u s);
 	sf::Vector2f coordinatesForScreen(const sf::Vector2u pos) const;
 	std::vector<Entities::Tile*> getTiles() const;
-	void setTiles(std::vector<Entities::Tile*>);
+	void setTile(Entities::Tile* newTile);
 	//std::vector<IdPositionSize> checkMapCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
 };
 

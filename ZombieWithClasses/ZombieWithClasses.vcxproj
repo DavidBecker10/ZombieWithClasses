@@ -154,7 +154,8 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Stage.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TilesManager.cpp" />
     <ClCompile Include="GraphicManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -164,6 +165,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TilesManager.h" />
     <ClInclude Include="Ids.h" />

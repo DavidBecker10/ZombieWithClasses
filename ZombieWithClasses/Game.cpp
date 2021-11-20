@@ -9,6 +9,7 @@ Game::Game() :
     TM{
         {
             new Entities::Tile(Ids::empty, "../Sprites/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
+            new Entities::Tile(Ids::air, "../Sprites/Tiles/Platformer/air.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground1, "../Sprites/Tiles/Platformer/Ground_01.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground2, "../Sprites/Tiles/Platformer/Ground_02.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground3, "../Sprites/Tiles/Platformer/Ground_03.png", {32.0f, 32.0f}),
@@ -22,16 +23,18 @@ Game::Game() :
             new Entities::Tile(Ids::ground11, "../Sprites/Tiles/Platformer/Ground_11.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground12, "../Sprites/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground13, "../Sprites/Tiles/Platformer/Ground_13.png", {32.0f, 32.0f}),
+            new Entities::Tile(Ids::wall, "../Sprites/Tiles/Platformer/wall.png", {32.0f, 32.0f}),
+            new Entities::Tile(Ids::lava, "../Sprites/Tiles/PNG//Tiles_lava/lava_tile6.png", {32.0f, 32.0f}),
         },
-        { 32.0f, 32.0f }, "map.json"
+        {32.0f, 32.0f }, "../Sprites/Maps/mapStage1.json"
     },
     close(false),
     clock(),
     EntityL(),
     IDwindowclosed{ EM.addListenOthers([this](const sf::Event& e) {isWindowClosed(e); }) }
 {
-    EntityL.insert(new Entities::Characters::Player(sf::Vector2f(200.f, 200.f), sf::Vector2f(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Masked/Attack1/terroristAttack.png"));
-    EntityL.insert(new Entities::Characters::Enemy(sf::Vector2f(210.f, 210.f), sf::Vector2f(60.f, 30.f), Ids::Enemy, "../Sprites/Zombies/ZombieMan/animation/Walk1test.png"));
+    EntityL.insert(new Entities::Characters::Player(sf::Vector2f(300.f, 10.f), sf::Vector2f(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Masked/Attack1/terroristAttack.png"));
+    EntityL.insert(new Entities::Characters::Enemy(sf::Vector2f(300.f, 10.f), sf::Vector2f(60.f, 30.f), Ids::Enemy, "../Sprites/Zombies/ZombieMan/animation/Walk1test.png"));
     
     EntityL.initialize(&GM, &EM, &CM);
 

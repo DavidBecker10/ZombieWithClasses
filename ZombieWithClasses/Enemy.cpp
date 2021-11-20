@@ -16,6 +16,7 @@ Entities::Characters::Enemy::~Enemy()
 
 void Entities::Characters::Enemy::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
+    isGround = false;
 	GM->loadTexture(textPath);
 	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
     CM->addCollide(this);
@@ -35,50 +36,36 @@ void Entities::Characters::Enemy::update(float t)
         vel.x *= -1;
         scale.x = 1;
     }
-    if(position.y < 1444.f)
+    if(!isGround)
 	    position.y += vel.y * t + GRAVITY;
 }
 
 void Entities::Characters::Enemy::draw(Managers::GraphicManager* GM)
 {
-	GM->draw(textPath, position, body, scale, { 1, 9 }, { 0, 5 });
+	GM->draw(textPath, position, scale, { 1, 9 }, { 0, 5 });
 }
 
-void Entities::Characters::Enemy::collide(Ids::Ids idOutro, sf::Vector2f posicaoOutro, sf::Vector2u dimensoesOutro)
+void Entities::Characters::Enemy::collide(Ids::Ids idOutro, sf::Vector2f posicaoOutro, sf::Vector2u dimensoesOutro, bool isAbove)
 {
     std::string imprimir;
 
-
-    /*switch (idOutro) {
+    switch (idOutro) {
     case Ids::Player:
-        imprimir = "Colidiu Player";
-        std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:
-        imprimir = "fui ludibriado";
-        std::cout << imprimir << std::endl;
         break;
     case Ids::ground2:
-        imprimir = "cai";
-        std::cout << imprimir << std::endl;
+        isGround = true;
         break;
     case Ids::empty:
-        imprimir = "mano o que ta acontecendo";
-        std::cout << imprimir << std::endl;
         break;
     case Ids::ground3:
-        imprimir = "pontudo";
-        std::cout << imprimir << std::endl;
         break;
     case Ids::ground4:
-        imprimir = "estou livre";
-        std::cout << imprimir << std::endl;
         break;
     case Ids::ground5:
-        imprimir = "bonk";
-        std::cout << imprimir << std::endl;
         break;
     default:
         break;
-    }*/
+    }
 }

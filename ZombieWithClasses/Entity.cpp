@@ -5,9 +5,9 @@ Entities::Entity::Entity(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const ch
 	Ent(ID),
 	position(pos),
 	vel(v),
-	id(ID),
 	textPath(tP)
 {
+	this->ID = ID;
 }
 
 Entities::Entity::Entity():
@@ -24,5 +24,5 @@ Entities::Entity::~Entity()
 
 void Entities::Entity::draw(Managers::GraphicManager* g)
 {
-	g->draw(textPath, position, body);
+	g->draw(textPath, position);
 }

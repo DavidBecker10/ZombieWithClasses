@@ -13,6 +13,7 @@ namespace Entities
         {
         protected:
             sf::Vector2f scale;
+            bool isGround;
 
         public:
             Character(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tPath = NULL);
@@ -21,7 +22,7 @@ namespace Entities
             virtual void update(float t);
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
             virtual void draw(Managers::GraphicManager* g);
-            virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
+            virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther, bool isAbove) = 0;
         };
     }
 }

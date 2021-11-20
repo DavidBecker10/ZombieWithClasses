@@ -21,8 +21,8 @@ namespace Managers
         ~GraphicManager();
         void show() const;
         void clear(int r = 0, int g = 0, int b = 0);
-        void draw(const std::string& path, const sf::Vector2f pos, sf::Sprite body);
-        void draw(const std::string& path, const sf::Vector2f position, sf::Sprite body, sf::Vector2f scale, const sf::Vector2u nFrames, const sf::Vector2u frame);
+        void draw(const std::string& path, const sf::Vector2f pos);
+        void draw(const std::string& path, const sf::Vector2f position, sf::Vector2f scale, const sf::Vector2u nFrames, const sf::Vector2u frame);
         bool loadTexture(const std::string& path);
         void centralize(const sf::Vector2f centro);
         sf::RenderWindow* getWindow() const;

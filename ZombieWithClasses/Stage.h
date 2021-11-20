@@ -1,9 +1,21 @@
 #pragma once
-class Stage
-{
-protected:
+#include "EntityList.h"
+#include "TilesManager.h"
+#include "Tile.h"
 
-private:
 
-};
+namespace Stages{
+	class Stage :
+		public Ent
+	{
+	protected:
+		Lists::EntityList* Elist;
+		TilesManager* TM;
 
+	private:
+		Stage();
+		~Stage();
+		virtual void makeMap() = 0;
+		void update(float t);
+	};
+}
