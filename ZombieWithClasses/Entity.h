@@ -18,6 +18,7 @@ namespace Entities
         sf::Vector2f position;
         sf::Vector2f vel;
         sf::Vector2u dimensions;
+        sf::Vector2f scale;
         const char* textPath;
 
     public:

@@ -38,7 +38,6 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positio
 
     switch (idOther) {
     case Ids::lava:
-        std::cout << "Faliceu" << std::endl;
         vel.y *= -1;
         break;
     case Ids::ground2:
@@ -56,8 +55,7 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positio
     case Ids::ground4:
         isGround = true;
         break;
-    case Ids::ground11:
-        isGround = true;
+    case Ids::Player:
         break;
     default:
         break;

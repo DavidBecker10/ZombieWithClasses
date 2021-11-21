@@ -156,6 +156,7 @@
     <ClCompile Include="Ghoul.cpp" />
     <ClCompile Include="Homer.cpp" />
     <ClCompile Include="Nemesis.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Ghoul.h" />
     <ClInclude Include="Homer.h" />
     <ClInclude Include="Nemesis.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />

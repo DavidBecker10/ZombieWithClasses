@@ -13,6 +13,7 @@ class CollisionManager;
 class Game
 {
 private:
+	Entities::Characters::Player* Player1;
 	Managers::GraphicManager GM;
 	Managers::EventManager EM;
 	CollisionManager CM;

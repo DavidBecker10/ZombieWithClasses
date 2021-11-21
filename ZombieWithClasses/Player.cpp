@@ -2,12 +2,14 @@
 #include "stdafx.h"
 
 Entities::Characters::Player::Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath) :
-	Character(pos, vel, ID, tPath)
+    Character(pos, vel, ID, tPath),
+    bullet()
 {
 }
 
 Entities::Characters::Player::Player() :
-	Character()
+    Character(),
+    bullet()
 {
 }
 
@@ -16,7 +18,7 @@ Entities::Characters::Player::~Player()
 }
 
 void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
-{
+{    
     isJumping = false;
 	GM->loadTexture(textPath);
 	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
@@ -26,14 +28,20 @@ void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Mana
 
 void Entities::Characters::Player::setTM(TilesManager* t)
 {
-    TM = t;
+    tm = t;
+}
+
+void Entities::Characters::Player::setEL(Lists::EntityList* Elist)
+{
+    EL = Elist;
 }
 
 void Entities::Characters::Player::update(float t)
 {
+
     position.x += vel.x * t;
     if (position.x <= dimensions.x * 0.5)
-        position.x = dimensions.x * 0.5;
+        position.x = (float)(dimensions.x * 0.5);
     else if (position.x >= (32.0f * 200) - dimensions.x)
         position.x = (32.0f * 200) - dimensions.x;
     if (!isJumping && !isGround)
@@ -63,16 +71,19 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             /* code */
             break;
         case sf::Keyboard::Key::W:
-            isJumping = true;
-            vel.y = -900;
-            isGround = false;
+            while (!isJumping && isGround)
+            {
+                vel.y = -900;
+                isJumping = true;
+                isGround = false;
+            }
             /* code */
             break;
         default:
             break;
         }
     }
-    else if (e.type == sf::Event::KeyReleased) {
+    if (e.type == sf::Event::KeyReleased) {
         switch (e.key.code) {
         case sf::Keyboard::Key::D:
             vel.x = 0;
@@ -95,12 +106,12 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 {
     std::string imprimir;
 
-    if (idOther != Ids::ground2)
+    if (idOther != Ids::ground2 && idOther != Ids::Enemy)
         isGround = false;
 
     switch (idOther) {
     case Ids::Enemy:
-        vel.y = 0;
+        EL->remove(this);
         break;
     case Ids::ground2:
         isGround = true;
@@ -109,7 +120,9 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         //std::cout << isGround << std::endl;
         break;
     case Ids::air:
+        vel.y = 0;
         isGround = false;
+        isJumping = true;
         break;
     case Ids::wall:
         isGround = true;
@@ -118,7 +131,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         isGround = true;
         break;
     case Ids::lava:
-        std::cout << "Faliceu" << std::endl;
+        EL->remove(this);
         break;
     case Ids::ground11:
         isGround = true;
@@ -126,9 +139,4 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
     default:
         break;
     }
-}
-
-void Entities::Characters::Player::died()
-{
-
 }

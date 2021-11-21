@@ -11,7 +11,7 @@ namespace Entities
         private:
 
         public:
-            Homer(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = NULL);
+            Homer(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = "../Sprites/Zombies/ZombieMan/animation/Walk1test.png");
             ~Homer();
             void update(float t);
             void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);

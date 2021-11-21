@@ -5,14 +5,12 @@
 
 Entities::Characters::Character::Character(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tPath):
 	Entity(pos, v, ID, tPath),
-	scale(sf::Vector2f(1, 1)),
 	isGround(false)
 {
 }
 
 Entities::Characters::Character::Character():
 	Entity(),
-	scale(sf::Vector2f(1, 1)),
 	isGround(false)
 {
 }

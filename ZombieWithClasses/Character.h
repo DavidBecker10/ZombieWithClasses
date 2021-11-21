@@ -12,7 +12,6 @@ namespace Entities
             public Entity
         {
         protected:
-            sf::Vector2f scale;
             bool isGround;
 
         public:
