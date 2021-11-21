@@ -16,6 +16,5 @@ namespace Entities
         virtual void update(float t);
         void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
         void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
-
     };
 }

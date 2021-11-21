@@ -16,7 +16,7 @@ Entities::Projectile::~Projectile()
 
 void Entities::Projectile::update(float t)
 {
-	position += vel * t;
+	position.x += vel.x * t;
 }
 
 void Entities::Projectile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)

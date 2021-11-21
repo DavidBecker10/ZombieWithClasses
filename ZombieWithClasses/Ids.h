@@ -22,6 +22,7 @@ namespace Ids
 		wall,
 		lava,
 		Player,
-		Enemy
+		Enemy,
+		Projectile
 	};
 }

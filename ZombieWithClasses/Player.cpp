@@ -79,6 +79,8 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             }
             /* code */
             break;
+        case sf::Keyboard::Key::Space:
+            EL->insert(createProjectile(ID, position, scale, "../Sprites/bullet.png"));
         default:
             break;
         }
@@ -139,4 +141,13 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
     default:
         break;
     }
+}
+
+void Entities::Characters::Player::createProjectile(Ids::Ids id, sf::Vector2f pos, sf::Vector2f scl, const char* path)
+{
+    float v;
+
+    scl.x == 1 ? v = 900.0f : v = -900.0f;
+
+    return (new Projectile(pos, sf::Vector2f(v, 0.0f), Ids::Ids::Projectile, path));
 }

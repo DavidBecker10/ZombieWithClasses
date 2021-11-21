@@ -20,7 +20,7 @@ namespace Entities
 			bool isJumping;
 			TilesManager* tm;
 			Lists::EntityList* EL;
-			Entities::Projectile bullet;
+			Entities::Projectile* bullet;
 
 		public:
 			Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = NULL);
@@ -33,6 +33,7 @@ namespace Entities
 			void draw(Managers::GraphicManager* g);
 			void handleEvents(const sf::Event& e);
 			void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
+			void createProjectile(Ids::Ids id, sf::Vector2f pos, sf::Vector2f scl, const char* path);
 		};
 	}
 }
