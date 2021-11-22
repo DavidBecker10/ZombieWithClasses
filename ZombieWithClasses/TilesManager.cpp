@@ -30,9 +30,15 @@ void TilesManager::draw(Managers::GraphicManager& g)
 		for (unsigned int j = 0; j < tileMap.getDimensions().x; j++)
 		{
 			short index = tileMap[i][j] - 1;
-				if (index >= 0 && index < (long)tiles.size()) {
-					tiles[index]->draw(g, coordinatesForScreen(sf::Vector2u(j, i) ));
+			if (index >= 0 && index < (long)tiles.size()) {
+				if (((g.getCenterView().y - g.getSizeView().y / 2) - tileDimensions.y < (coordinatesForScreen(sf::Vector2u(j, i))).y) &&
+					((g.getCenterView().y + g.getSizeView().y / 2) + tileDimensions.y > (coordinatesForScreen(sf::Vector2u(j, i))).y) &&
+					((g.getCenterView().x - g.getSizeView().x / 2) - tileDimensions.x < (coordinatesForScreen(sf::Vector2u(j, i))).x) &&  //Desenha apenas quando estiver dentro da view
+					((g.getCenterView().x + g.getSizeView().x / 2) + tileDimensions.x > (coordinatesForScreen(sf::Vector2u(j, i))).x))
+				{
+					tiles[index]->draw(g, coordinatesForScreen(sf::Vector2u(j, i)));
 				}
+			}
 		}
 	}
 }

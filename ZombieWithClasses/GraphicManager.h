@@ -15,6 +15,7 @@ namespace Managers
         std::map<const std::string, sf::Texture*> textures;
         sf::Texture* text;
         sf::Sprite sprite;
+        sf::Font font;
 
     public:
         GraphicManager();
@@ -28,5 +29,10 @@ namespace Managers
         sf::RenderWindow* getWindow() const;
         const sf::Vector2f getSize(const std::string& path) const;
         void initializeView();
+        const sf::Vector2f getSizeView() const;
+        const sf::Vector2f getCenterView() const;
+        void drawSolidRectangle(sf::Vector2f center, sf::Vector2f dimensions, const sf::Color color);
+        void drawText(const std::string text, sf::Vector2f position, unsigned int size, const bool centralize = true) const;
+        sf::Vector2f getMousePosition() const;
     };
 }

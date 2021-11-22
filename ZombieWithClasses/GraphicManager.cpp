@@ -113,3 +113,48 @@ void Managers::GraphicManager::initializeView()
 {
     window->setView(view);
 }
+
+const sf::Vector2f Managers::GraphicManager::getSizeView() const
+{
+    return view.getSize();
+}
+
+const sf::Vector2f Managers::GraphicManager::getCenterView() const
+{
+    return view.getCenter();
+}
+
+void Managers::GraphicManager::drawSolidRectangle(sf::Vector2f center, sf::Vector2f dimensions, const sf::Color color)
+{
+    sf::RectangleShape rect = sf::RectangleShape({ dimensions.x, dimensions.y });
+    /*rect.setFillColor({ 128, 128, 128, 255});*/
+    rect.setFillColor(color);
+    rect.setOrigin(dimensions.x / 2, dimensions.y / 2);
+    rect.setPosition(center.x, center.y);
+    window->draw(rect);
+}
+
+void Managers::GraphicManager::drawText(const std::string text, sf::Vector2f position, unsigned int size, const bool centralize) const
+{
+    sf::Text txt = sf::Text(text, font, size);
+    txt.setFillColor(sf::Color::White);
+    if (centralize) {
+        sf::FloatRect siz = txt.getGlobalBounds();
+        txt.setOrigin(siz.width / 2, siz.height / 2);
+    }
+    txt.setPosition(position.x, position.y);
+    window->draw(txt);
+}
+
+sf::Vector2f Managers::GraphicManager::getMousePosition() const
+{
+    sf::Vector2i relativePos = sf::Mouse::getPosition(*window);
+    sf::Vector2u windowSize = window->getSize();
+    sf::Vector2f viewSize = view.getSize();
+    sf::Vector2f viewPos = view.getCenter() - viewSize / 2.0f;
+
+    return {
+            (relativePos.x / (float)windowSize.x) * viewSize.x + viewPos.x,
+            (relativePos.y / (float)windowSize.y) * viewSize.y + viewPos.y
+    };
+}
