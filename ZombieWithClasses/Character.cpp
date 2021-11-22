@@ -24,6 +24,16 @@ void Entities::Characters::Character::update(float t)
 	//position += vel * t;
 }
 
+void Entities::Characters::Character::setEL(Lists::EntityList* El)
+{
+	EList = El;
+}
+
+Lists::EntityList* Entities::Characters::Character::getEL()
+{
+	return EList;
+}
+
 void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
 {
 	dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));

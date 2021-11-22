@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <SFML/Graphics.hpp>
 #include "CollisionManager.h"
+#include "Character.h"
 
 Game::Game() :
     GM(),
@@ -33,7 +34,7 @@ Game::Game() :
     EntityL(),
     IDwindowclosed{ EM.addListenOthers([this](const sf::Event& e) {isWindowClosed(e); }) }
 {
-    Player1 = (new Entities::Characters::Player(sf::Vector2f(150.f, 3000.f), sf::Vector2f(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Masked/Attack1/terroristAttack.png"));
+    Player1 = (new Entities::Characters::Player(sf::Vector2f(150.f, 3000.f), sf::Vector2f(0.f, 0.f), Ids::Player, "../Sprites/Terrorists/Masked/Attack1/Attack1_2.png"));
     EntityL.insert(Player1);
     Player1->setEL(&EntityL);
 

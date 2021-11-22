@@ -10,7 +10,7 @@ namespace Lists
 	class EntityList
 	{
 	private:
-		List<Entities::Entity> list;
+		Lists::List<Entities::Entity> list;
 
 	public:
 		EntityList();

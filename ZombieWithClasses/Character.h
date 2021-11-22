@@ -12,6 +12,7 @@ namespace Entities
             public Entity
         {
         protected:
+            Lists::EntityList* EList;
             bool isGround;
 
         public:
@@ -19,9 +20,12 @@ namespace Entities
             Character();
             ~Character();
             virtual void update(float t);
+            void setEL(Lists::EntityList* El);
+            Lists::EntityList* getEL();
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
             virtual void draw(Managers::GraphicManager* g);
             virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
         };
+
     }
 }

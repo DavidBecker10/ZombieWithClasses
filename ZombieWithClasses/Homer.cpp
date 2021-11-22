@@ -51,9 +51,11 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positio
         vel.x *= -1;
         if (positionOther.x > position.x)
             scale.x = -1;
+        else
+            scale.x = 1;
         break;
-    case Ids::ground4:
-        isGround = true;
+    case Ids::Projectile:
+        //EList->remove(this);
         break;
     case Ids::Player:
         break;

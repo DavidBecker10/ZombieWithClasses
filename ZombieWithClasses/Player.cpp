@@ -31,11 +31,6 @@ void Entities::Characters::Player::setTM(TilesManager* t)
     tm = t;
 }
 
-void Entities::Characters::Player::setEL(Lists::EntityList* Elist)
-{
-    EL = Elist;
-}
-
 void Entities::Characters::Player::update(float t)
 {
 
@@ -80,7 +75,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             /* code */
             break;
         case sf::Keyboard::Key::Space:
-            EL->insert(createProjectile(ID, position, scale, "../Sprites/bullet.png"));
+            createProjectile(ID, position,  "../Sprites/bullet.png");
         default:
             break;
         }
@@ -113,7 +108,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 
     switch (idOther) {
     case Ids::Enemy:
-        EL->remove(this);
+        EList->remove(this);
         break;
     case Ids::ground2:
         isGround = true;
@@ -129,11 +124,11 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
     case Ids::wall:
         isGround = true;
         break;
-    case Ids::ground4:
+    case Ids::Projectile:
         isGround = true;
         break;
     case Ids::lava:
-        EL->remove(this);
+        EList->remove(this);
         break;
     case Ids::ground11:
         isGround = true;
@@ -143,11 +138,15 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
     }
 }
 
-void Entities::Characters::Player::createProjectile(Ids::Ids id, sf::Vector2f pos, sf::Vector2f scl, const char* path)
+void Entities::Characters::Player::createProjectile(Ids::Ids id, sf::Vector2f pos, const char* path)
 {
-    float v;
+    float v, px;
 
-    scl.x == 1 ? v = 900.0f : v = -900.0f;
+    scale.x == 1 ? v = 900.0f : v = -900.0f;
 
-    return (new Projectile(pos, sf::Vector2f(v, 0.0f), Ids::Ids::Projectile, path));
+    scale.x == 1 ? px = 35.0f : px = -35.0f;
+
+    bullet = new Projectile(sf::Vector2f(pos.x + px, pos.y + 20.0f), sf::Vector2f(v, 0.0f), Ids::Ids::Projectile, path);
+
+    EList->insert(bullet);
 }

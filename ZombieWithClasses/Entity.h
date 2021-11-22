@@ -1,8 +1,6 @@
 #pragma once
-#include "SFML/Graphics.hpp"
 #include "Ent.h"
 #include "Ids.h"
-#include "Vector2D.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
 

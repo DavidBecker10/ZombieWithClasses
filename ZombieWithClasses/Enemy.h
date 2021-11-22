@@ -10,7 +10,6 @@ namespace Entities
         {
         private:
 
-
         public:
             Enemy(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = NULL);
             Enemy();
