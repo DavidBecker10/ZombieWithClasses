@@ -39,7 +39,7 @@ void Entities::Characters::Player::update(float t)
         position.x = (float)(dimensions.x * 0.5);
     else if (position.x >= (32.0f * 200) - dimensions.x)
         position.x = (32.0f * 200) - dimensions.x;
-    if (!isJumping && !isGround)
+    if (!isGround && !isJumping)
         position.y += vel.y * t + GRAVITY;
     else
         position.y += vel.y * t;
@@ -66,7 +66,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             /* code */
             break;
         case sf::Keyboard::Key::W:
-            while (!isJumping && isGround)
+            if (!isJumping && isGround)
             {
                 vel.y = -900;
                 isJumping = true;
@@ -121,7 +121,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         isGround = false;
         isJumping = true;
         break;
-    case Ids::wall:
+    case Ids::wallR:
         isGround = true;
         break;
     case Ids::Projectile:
@@ -133,6 +133,9 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
     case Ids::ground11:
         isGround = true;
         break;
+    case Ids::wallL:
+        isGround = false;
+        break;
     default:
         break;
     }
@@ -141,12 +144,15 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 void Entities::Characters::Player::createProjectile(Ids::Ids id, sf::Vector2f pos, const char* path)
 {
     float v, px;
+    bool dir;
+
+    scale.x == 1 ? dir = true : dir = false;
 
     scale.x == 1 ? v = 900.0f : v = -900.0f;
 
     scale.x == 1 ? px = 35.0f : px = -35.0f;
 
-    bullet = new Projectile(sf::Vector2f(pos.x + px, pos.y + 20.0f), sf::Vector2f(v, 0.0f), Ids::Ids::Projectile, path);
+    bullet = new Projectile(sf::Vector2f(pos.x + px, pos.y + 20.0f), sf::Vector2f(v, 0.0f), Ids::Ids::Projectile, path, dir);
 
     EList->insert(bullet);
 }

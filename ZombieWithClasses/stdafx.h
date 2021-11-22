@@ -8,4 +8,4 @@
 using std::cout;
 using std::endl;
 
-#define GRAVITY 5
+#define GRAVITY 8 

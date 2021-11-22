@@ -23,8 +23,8 @@ Game::Game() :
             new Entities::Tile(Ids::ground10, "../Sprites/Tiles/Platformer/Ground_10.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground11, "../Sprites/Tiles/Platformer/Ground_11.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::ground12, "../Sprites/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
-            new Entities::Tile(Ids::ground13, "../Sprites/Tiles/Platformer/Ground_13.png", {32.0f, 32.0f}),
-            new Entities::Tile(Ids::wall, "../Sprites/Tiles/Platformer/wall.png", {32.0f, 32.0f}),
+            new Entities::Tile(Ids::wallL, "../Sprites/Tiles/Platformer/wallL.png", {32.0f, 32.0f}),
+            new Entities::Tile(Ids::wallR, "../Sprites/Tiles/Platformer/wallR.png", {32.0f, 32.0f}),
             new Entities::Tile(Ids::lava, "../Sprites/Tiles/PNG//Tiles_lava/lava_tile6.png", {32.0f, 32.0f}),
         },
         {32.0f, 32.0f }, "../Sprites/Maps/mapStage1.json"

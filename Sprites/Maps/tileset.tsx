@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.7.2" name="tileset" tilewidth="32" tileheight="32" tilecount="17" columns="0">
+<tileset version="1.5" tiledversion="1.7.2" name="tileset" tilewidth="32" tileheight="32" tilecount="18" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="32" height="32" source="../Tiles/Platformer/Air.png"/>
@@ -46,10 +46,13 @@
  <tile id="14">
   <image width="32" height="32" source="../Tiles/Platformer/Ground_13.png"/>
  </tile>
- <tile id="15">
-  <image width="32" height="32" source="../Tiles/Platformer/Wall.png"/>
- </tile>
  <tile id="16">
   <image width="32" height="32" source="../Tiles/PNG/Tiles_lava/lava_tile6.png"/>
+ </tile>
+ <tile id="17">
+  <image width="32" height="32" source="../Tiles/Platformer/WallL.png"/>
+ </tile>
+ <tile id="18">
+  <image width="32" height="32" source="../Tiles/Platformer/WallR.png"/>
  </tile>
 </tileset>

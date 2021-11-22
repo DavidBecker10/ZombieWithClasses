@@ -19,8 +19,9 @@ namespace Ids
 		ground11,
 		ground12,
 		ground13,
-		wall,
 		lava,
+		wallL,
+		wallR,
 		Player,
 		Enemy,
 		Projectile

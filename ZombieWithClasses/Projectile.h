@@ -10,7 +10,7 @@ namespace Entities
     private:
 
     public:
-        Projectile(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tP);
+        Projectile(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tP, bool dir);
         Projectile();
         ~Projectile();
         virtual void update(float t);
