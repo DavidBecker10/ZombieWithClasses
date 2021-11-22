@@ -69,7 +69,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             /* code */
             break;
         case sf::Keyboard::Key::Space:
-            createProjectile(ID, position,  "../Sprites/bullet.png");
+            createProjectile(ID, position, "../Sprites/bullet.png");
         default:
             break;
         }
@@ -83,7 +83,9 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             vel.x = 0;
             break;
         case sf::Keyboard::Key::W:
-            vel.y = 900.0f;
+            vel.y = 0;
+            isGround = false;
+            isJumping = false;
             break;
         default:
             break;
@@ -115,7 +117,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         isJumping = true;
         break;
     case Ids::wallR:
-        isGround = true;
+        //isGround = true;
         break;
     case Ids::Projectile:
         isGround = true;
@@ -127,7 +129,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         isGround = true;
         break;
     case Ids::wallL:
-        isGround = false;
+        //isGround = false;
         break;
     default:
         break;
