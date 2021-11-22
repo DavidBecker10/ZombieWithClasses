@@ -7,6 +7,7 @@
 #include "Ids.h"
 #include "TilesManager.h"
 #include "Projectile.h"
+#include "stdafx.h"
 
 namespace Entities
 {
@@ -22,7 +23,7 @@ namespace Entities
 			Entities::Projectile* bullet;
 
 		public:
-			Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = NULL);
+			Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = PLAYER1_PATH);
 			Player();
 			~Player();
 			void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);

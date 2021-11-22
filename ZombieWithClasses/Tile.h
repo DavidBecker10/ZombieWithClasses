@@ -23,7 +23,7 @@ namespace Entities
 		~Tile();
 		virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
 		virtual void update(float t);
-		void draw(Managers::GraphicManager& g, const sf::Vector2f position) const;
+		void draw(Managers::GraphicManager* g, const sf::Vector2f position) const;
 		const Ids::Ids getID() const;
 		sf::Vector2f getSize() const;
 		void setPosition(sf::Vector2f pos);

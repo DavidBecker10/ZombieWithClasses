@@ -36,9 +36,9 @@ void Entities::Tile::update(float t)
 {
 }
 
-void Entities::Tile::draw(Managers::GraphicManager& g, const sf::Vector2f position) const
+void Entities::Tile::draw(Managers::GraphicManager* g, const sf::Vector2f position) const
 {
-	g.draw(path, position);
+	g->draw(path, position);
 }
 
 const Ids::Ids Entities::Tile::getID() const
@@ -67,7 +67,6 @@ void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::V
     case Ids::Enemy:
         break;
 	case Ids::Player:
-
         break;
     default:
         break;

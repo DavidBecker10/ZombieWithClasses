@@ -26,6 +26,8 @@ void Managers::EventManager::manageEvent() {
                 it.second(event);
             }
         }
+        else if (event.type == sf::Event::Closed)
+            window->close();
         else {
             for (auto it : listenOthers) {
                 it.second(event);
@@ -43,7 +45,7 @@ void Managers::EventManager::setWindow(sf::RenderWindow* w) {
 unsigned int Managers::EventManager::addListenMouse(std::function<void(const sf::Event&)> call) {
     listenMouse.emplace(proxID, call);
 
-    return proxID++;
+    return proxID++;    
 }
 
 void Managers::EventManager::removeListenMouse(int id) {

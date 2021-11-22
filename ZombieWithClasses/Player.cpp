@@ -33,7 +33,6 @@ void Entities::Characters::Player::setTM(TilesManager* t)
 
 void Entities::Characters::Player::update(float t)
 {
-
     position.x += vel.x * t;
     if (position.x <= dimensions.x * 0.5)
         position.x = (float)(dimensions.x * 0.5);
@@ -66,12 +65,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             /* code */
             break;
         case sf::Keyboard::Key::W:
-            if (!isJumping && isGround)
-            {
-                vel.y = -900;
-                isJumping = true;
-                isGround = false;
-            }
+            vel.y = -900.0f;
             /* code */
             break;
         case sf::Keyboard::Key::Space:
@@ -89,9 +83,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             vel.x = 0;
             break;
         case sf::Keyboard::Key::W:
-            vel.y = 0;
-            isJumping = false;
-            isGround = false;
+            vel.y = 900.0f;
             break;
         default:
             break;
@@ -108,12 +100,13 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 
     switch (idOther) {
     case Ids::Enemy:
-        EList->remove(this);
+        EL->remove(this);
         break;
     case Ids::ground2:
+        if (position.y > positionOther.y - dimensionsOther.y / 2)
+            position.y -= 1.0f;
         isGround = true;
-        if (positionOther.y > position.y)
-            vel.y = 0;
+        vel.y = 0;
         //std::cout << isGround << std::endl;
         break;
     case Ids::air:
@@ -128,7 +121,7 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         isGround = true;
         break;
     case Ids::lava:
-        EList->remove(this);
+        EL->remove(this);
         break;
     case Ids::ground11:
         isGround = true;
@@ -154,5 +147,5 @@ void Entities::Characters::Player::createProjectile(Ids::Ids id, sf::Vector2f po
 
     bullet = new Projectile(sf::Vector2f(pos.x + px, pos.y + 20.0f), sf::Vector2f(v, 0.0f), Ids::Ids::Projectile, path, dir);
 
-    EList->insert(bullet);
+    EL->insert(bullet);
 }

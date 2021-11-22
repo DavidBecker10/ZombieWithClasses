@@ -21,7 +21,7 @@ public:
 
     virtual ~Button();
 
-    virtual void draw(Managers::GraphicManager& GM) const;
+    virtual void draw(Managers::GraphicManager* GM) const;
 
     sf::Vector2f getPosition() const { return position; }
 

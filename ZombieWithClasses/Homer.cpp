@@ -57,7 +57,7 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positio
         scale.x = -1;
         break;
     case Ids::Projectile:
-        //EList->remove(this);
+        EL->remove(this);
         break;
     case Ids::Player:
         break;

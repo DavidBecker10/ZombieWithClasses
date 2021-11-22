@@ -4,7 +4,6 @@
 class Ent
 {
 protected:
-	
 	Ids::Ids ID;
 
 public:

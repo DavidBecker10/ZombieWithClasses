@@ -1,31 +1,18 @@
 #pragma once
-#include "GraphicManager.h"
-#include "EventManager.h"
-#include "TilesManager.h"
-#include "Character.h"
-#include "EntityList.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Homer.h"
-
-class CollisionManager;
+#include "Stage.h"
+#include "ScreenManager.h"
 
 class Game
 {
 private:
-	Entities::Characters::Player* Player1;
-	Managers::GraphicManager GM;
-	Managers::EventManager EM;
-	CollisionManager CM;
-	TilesManager TM;
-	bool close;
-	sf::Clock clock;
-	Lists::EntityList EntityL;
-	unsigned int IDwindowclosed;
+    Managers::GraphicManager GM;
+    Entities::Characters::Player player1;
+    Managers::ScreenManager SM;
+    bool end;
+    States::Stage* fase;
 
 public:
-	Game();
-	~Game();
-	void execute();
-	void isWindowClosed(const sf::Event& e);
+    Game();
+    ~Game();
+    void execute();
 };

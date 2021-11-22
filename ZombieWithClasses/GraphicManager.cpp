@@ -8,6 +8,7 @@ Managers::GraphicManager::GraphicManager() :
     text{ nullptr }
 {
     initializeView();
+    font.loadFromFile("../Font/SIXTY.TTF");
 }
 
 Managers::GraphicManager::~GraphicManager()

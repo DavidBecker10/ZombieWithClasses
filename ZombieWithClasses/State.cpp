@@ -1,5 +1,7 @@
 #include "State.h"
 
-State::~State()
-{
+using namespace States;
+
+State::~State() {
+
 }

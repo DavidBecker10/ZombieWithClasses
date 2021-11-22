@@ -23,7 +23,7 @@ void TilesManager::initialize(Managers::GraphicManager* gm, Managers::EventManag
 		t->initialize(gm, em, cm);
 }
 
-void TilesManager::draw(Managers::GraphicManager& g)
+void TilesManager::draw(Managers::GraphicManager* g)
 {
 	for (unsigned int i = 0; i < tileMap.getDimensions().y; i++)
 	{
@@ -31,10 +31,10 @@ void TilesManager::draw(Managers::GraphicManager& g)
 		{
 			short index = tileMap[i][j] - 1;
 			if (index >= 0 && index < (long)tiles.size()) {
-				if (((g.getCenterView().y - g.getSizeView().y / 2) - tileDimensions.y < (coordinatesForScreen(sf::Vector2u(j, i))).y) &&
-					((g.getCenterView().y + g.getSizeView().y / 2) + tileDimensions.y > (coordinatesForScreen(sf::Vector2u(j, i))).y) &&
-					((g.getCenterView().x - g.getSizeView().x / 2) - tileDimensions.x < (coordinatesForScreen(sf::Vector2u(j, i))).x) &&  //Desenha apenas quando estiver dentro da view
-					((g.getCenterView().x + g.getSizeView().x / 2) + tileDimensions.x > (coordinatesForScreen(sf::Vector2u(j, i))).x))
+				if (((g->getCenterView().y - g->getSizeView().y / 2) - tileDimensions.y < (coordinatesForScreen(sf::Vector2u(j, i))).y) &&
+					((g->getCenterView().y + g->getSizeView().y / 2) + tileDimensions.y > (coordinatesForScreen(sf::Vector2u(j, i))).y) &&
+					((g->getCenterView().x - g->getSizeView().x / 2) - tileDimensions.x < (coordinatesForScreen(sf::Vector2u(j, i))).x) &&  //Desenha apenas quando estiver dentro da view
+					((g->getCenterView().x + g->getSizeView().x / 2) + tileDimensions.x > (coordinatesForScreen(sf::Vector2u(j, i))).x))
 				{
 					tiles[index]->draw(g, coordinatesForScreen(sf::Vector2u(j, i)));
 				}
@@ -73,7 +73,7 @@ std::vector<TilesManager::infoCollision> TilesManager::checkCollisions(const Ids
 
 sf::Vector2f TilesManager::coordinatesForScreen(const sf::Vector2u pos) const
 {
-	return sf::Vector2f( tileDimensions.x * 0.5 + tileDimensions.x * pos.x, tileDimensions.y * 1.3f + tileDimensions.y * pos.y );
+	return sf::Vector2f( tileDimensions.x * 0.5 + tileDimensions.x * pos.x, tileDimensions.y * 1.5f + tileDimensions.y * pos.y );
 }
 
 std::vector<Entities::Tile*> TilesManager::getTiles() const

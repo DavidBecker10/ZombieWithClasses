@@ -1,9 +1,17 @@
 #pragma once
+#include "EventManager.h"
+#include "GraphicManager.h"
+#include "stdafx.h"
 
-class State
-{
-public:
-	virtual ~State();
-	virtual int execute() = 0;
-};
+namespace States {
 
+    class StateMachine;
+
+    class State {
+    protected:
+
+    public:
+        virtual ~State();
+        virtual int execute() = 0;
+    };
+}

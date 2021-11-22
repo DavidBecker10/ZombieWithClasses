@@ -9,9 +9,9 @@ Button::~Button() {
 
 }
 
-void Button::draw(Managers::GraphicManager& GM) const {
-    GM.drawSolidRectangle(position, size, color);
-    GM.drawText(text, position, textSize);
+void Button::draw(Managers::GraphicManager* GM) const {
+    GM->drawSolidRectangle(position, size, color);
+    GM->drawText(text, position, textSize);
 }
 
 void Button::press() const {

@@ -28,7 +28,7 @@ public:
 	TilesManager(std::vector<Entities::Tile*> tls, sf::Vector2f tileDim, const char* p);
 	~TilesManager();
 	void initialize(Managers::GraphicManager* gm, Managers::EventManager* em, CollisionManager* cm);
-	void draw(Managers::GraphicManager& g);
+	void draw(Managers::GraphicManager* g);
 	std::vector<infoCollision> checkCollisions(const Ids::Ids id, sf::Vector2f pos, sf::Vector2u s);
 	sf::Vector2f coordinatesForScreen(const sf::Vector2u pos) const;
 	std::vector<Entities::Tile*> getTiles() const;

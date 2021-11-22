@@ -24,14 +24,14 @@ void Entities::Characters::Character::update(float t)
 	//position += vel * t;
 }
 
-void Entities::Characters::Character::setEL(Lists::EntityList* El)
+/*void Entities::Characters::Character::setEL(Lists::EntityList* El)
 {
 	EList = El;
-}
+}*/
 
 Lists::EntityList* Entities::Characters::Character::getEL()
 {
-	return EList;
+	return EL;
 }
 
 void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
@@ -44,3 +44,5 @@ void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, M
 void Entities::Characters::Character::draw(Managers::GraphicManager* g)
 {
 }
+
+Lists::EntityList* Entities::Characters::Character::EL = NULL;
