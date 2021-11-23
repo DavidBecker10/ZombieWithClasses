@@ -114,10 +114,10 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
     case Ids::air:
         vel.y = 0;
         isGround = false;
-        isJumping = true;
+        isJumping = false;
         break;
     case Ids::wallR:
-        //isGround = true;
+        isGround = true;
         break;
     case Ids::Projectile:
         isGround = true;

@@ -8,7 +8,6 @@ Entities::Projectile::Projectile(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, 
 
 Entities::Projectile::Projectile()
 {
-
 }
 
 Entities::Projectile::~Projectile()

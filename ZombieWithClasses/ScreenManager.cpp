@@ -12,8 +12,7 @@ ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::Player* p
 bool ScreenManager::processCode(int returnCode) {
     switch (returnCode) {
     case end:
-        push(new States::Stage(GM, player1));
-        return false;
+        return true;
         break;
     case goRacoonCity:
         push(new States::Stage(GM, player1));

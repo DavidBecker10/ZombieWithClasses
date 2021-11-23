@@ -38,7 +38,7 @@ IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e
 
     player1->setEL(&EL);
 
-    EL.insert(new Entities::Characters::Homer(sf::Vector2f(400.f, 3000.f), sf::Vector2f(60.f, 30.f), Ids::Ids::Enemy));
+    EL.insert(new Entities::Characters::Homer(sf::Vector2f(400.f, 1400.f), sf::Vector2f(60.f, 30.f), Ids::Ids::Enemy));
 
     EL.initialize(GM, &EM, &CM);
 
