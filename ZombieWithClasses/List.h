@@ -162,7 +162,7 @@ namespace Lists
 	template<class TL>
 	TL* List<TL>::operator[](int x)
 	{
-		if(x < 0 || x >= getSize())
+		if (x < 0 || x >= getSize())
 		{
 			std::cerr << "Erro. Segmentation fault em List<TL>::operator[]." << std::endl;
 			exit(555);

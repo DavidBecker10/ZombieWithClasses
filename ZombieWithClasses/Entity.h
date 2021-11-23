@@ -1,35 +1,48 @@
 #pragma once
+
 #include "Ent.h"
-#include "Ids.h"
+//#include "Vector2D.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
 
-class CollisionManager;
-
+namespace Managers {
+    class CollisionManager;
+}
 namespace Entities
 {
     class Entity :
         public Ent
     {
+    private:
+        bool showing;
+        bool faceLeft;
     protected:
-
-        sf::Vector2f position;
-        sf::Vector2f vel;
-        sf::Vector2f scale;
-        sf::Vector2u dimensions;
-        const char* textPath;
+        Vector2F position;
+        Vector2F dimensions;
+        Vector2F vel;
+        Vector2F scale;
 
     public:
-        Entity(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tP);
-        Entity();
+        Entity(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tP = nullptr);
         ~Entity();
         virtual void update(float t) = 0;
-        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM) = 0;
+        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM) = 0;
         virtual void draw(Managers::GraphicManager* g);
-        sf::Vector2f getPosition() { return position; }
-        sf::Vector2u getDimensions() { return dimensions; }
-        Ids::Ids getID() { return ID; }
-        const char* getTextPath() { return textPath; }
-        virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
+        virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
+
+        void setPosition(const Vector2F pos) { position = pos; }
+        Vector2F getPosition() { return position; }
+
+        void setVelocity(const Vector2F v) { vel = v; }
+        Vector2F getVelocity() const { return vel; }
+
+        Vector2F getDimensions() { return dimensions; }
+
+        void setShowing(const bool val = true) { showing = val; }
+        bool getShowing() { return showing; }
+
+        void setFacingLeft(bool facingLeft) { faceLeft = facingLeft; }
+        bool facingLeft() const { return faceLeft; }
+
     };
 }

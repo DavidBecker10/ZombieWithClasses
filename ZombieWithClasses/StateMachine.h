@@ -1,12 +1,12 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_STATEMACHINE_H
+#define ZOMBIEWITHCLASSES_STATEMACHINE_H
+
 #include <stack>
 #include "State.h"
 #include "Ids.h"
 
-namespace States
-{
-	class StateMachine
-	{
+namespace States {
+    class StateMachine {
     protected:
         std::stack<State*> states;
 
@@ -20,6 +20,7 @@ namespace States
         State* top();
         void emptyStack();
         virtual bool processCode(int returnCode) = 0;
-	};
+    };
 }
 
+#endif //ZOMBIEWITHCLASSES_STATEMACHINE_H

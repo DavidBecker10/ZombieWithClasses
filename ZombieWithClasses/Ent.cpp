@@ -1,15 +1,13 @@
 #include "Ent.h"
 
-Ent::Ent(Ids::Ids id):
-ID(id)
+Ent::Ent(Ids::Ids id, const char* txtPath) :
+    ID(id),
+    textPath(txtPath)
 {
 }
 
-Ent::~Ent()
-{
+Ent::~Ent() {
 }
 
-void Ent::print()
-{
+void Ent::print() {
 }
- 

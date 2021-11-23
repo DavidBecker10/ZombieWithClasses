@@ -1,9 +1,9 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_TEXT_H
+#define ZOMBIEWITHCLASSES_TEXT_H
+
 #include <string>
 #include"EventManager.h"
-
-class Text
-{
+class Text {
 private:
     std::string text;
     unsigned int idListenKeyboard;
@@ -21,3 +21,7 @@ public:
     void get(const sf::Event& e);
 };
 
+
+
+
+#endif //ZOMBIEWITHCLASSES_TEXT_H

@@ -1,5 +1,7 @@
-#pragma once
-#include "StateMachine.h"
+#ifndef ZOMBIEWITHCLASSES_SCREENMANAGER_H
+#define ZOMBIEWITHCLASSES_SCREENMANAGER_H
+
+#include"StateMachine.h"
 #include "Player.h"
 
 namespace Managers {
@@ -11,14 +13,11 @@ namespace Managers {
         end,
         goRacoonCity,
         goSecondStage,
-        mainMenu
     };
 
-    class ScreenManager :
-        public States::StateMachine
-    {
+    class ScreenManager : public States::StateMachine {
     private:
-        GraphicManager* GM;
+        GraphicManager GM;
         Entities::Characters::Player* player1;
 
     public:
@@ -28,3 +27,5 @@ namespace Managers {
         bool processCode(int returnCode) override;
     };
 }
+
+#endif //ZOMBIEWITHCLASSES_SCREENMANAGER_H

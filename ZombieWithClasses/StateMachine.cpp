@@ -3,6 +3,7 @@
 
 using namespace States;
 
+
 StateMachine::~StateMachine() {
     emptyStack();
 }

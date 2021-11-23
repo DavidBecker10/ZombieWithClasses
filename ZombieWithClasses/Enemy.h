@@ -10,14 +10,14 @@ namespace Entities
         {
         private:
 
+
         public:
-            Enemy(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = NULL);
-            Enemy();
+            Enemy(Vector2F pos = { 0.0f, 0.0f }, Vector2F vel = { 0.0f, 0.0f }, const char* tPath = nullptr);
             ~Enemy();
-            virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
+            virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
             virtual void update(float t) = 0;
             void draw(Managers::GraphicManager* GM);
-            void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
+            void collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro);
         };
     }
 }

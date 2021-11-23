@@ -1,74 +1,42 @@
 #include "Tile.h"
 #include <iostream>
 
-Entities::Tile::Tile(const Ids::Ids i, const char* p, sf::Vector2f s):
-	Entity(),
-	id(i),
-	path(p),
-	size(s),
-	gm(),
-	cm()
-{
-	
-}
+namespace Entities {
 
-Entities::Tile::Tile() :
-	id(),
-	path(),
-	size(),
-	cm(),
-	gm()
-{
-}
+    Tile::Tile(const Ids::Ids i, const char* p, Vector2F s) :
+        Entity(Vector2F{ 0.0f,0.0f }, Vector2F{ 0.0f,0.0f }, i, p),
+        size{ s }, gm(), cm() {
 
-Entities::Tile::~Tile()
-{
-}
-
-void Entities::Tile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM)
-{
-	gm = GM;
-	cm = CM;
-	gm->loadTexture(path);
-}
-
-void Entities::Tile::update(float t)
-{
-}
-
-void Entities::Tile::draw(Managers::GraphicManager* g, const sf::Vector2f position) const
-{
-	g->draw(path, position);
-}
-
-const Ids::Ids Entities::Tile::getID() const
-{
-	return id;
-}
-
-sf::Vector2f Entities::Tile::getSize() const
-{
-	return size;
-}
-
-void Entities::Tile::setPosition(sf::Vector2f pos)
-{
-	position = pos;
-}
-
-sf::Vector2f Entities::Tile::getPosition() const
-{
-	return position;
-}
-
-void Entities::Tile::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
-{
-    switch (idOther) {
-    case Ids::Enemy:
-        break;
-	case Ids::Player:
-        break;
-    default:
-        break;
     }
+
+    Tile::~Tile() {
+    }
+
+    void Tile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM) {
+        gm = GM;
+        cm = CM;
+        gm->loadTexture(textPath);
+    }
+
+    /*void Tile::update(float t) {
+    }*/
+
+    void Tile::draw(Managers::GraphicManager* g, const Vector2F position) const {
+        //std::cout<<textPath<<std::endl;
+        g->draw(textPath, position);
+    }
+
+    void Tile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
+        switch (idOther) {
+        case Ids::Enemy:
+            /*...*/
+            break;
+        case Ids::Player:
+            /*...*/
+            break;
+        default:
+            break;
+        }
+    }
+
 }

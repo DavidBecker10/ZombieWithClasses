@@ -1,8 +1,7 @@
 #ifndef ZOMBIEWITHCLASSES_EVENTMANAGER_H
 #define ZOMBIEWITHCLASSES_EVENTMANAGER_H
 
-#include "SFML/Graphics.hpp"
-
+#include "GraphicManager.h"
 #include <map>
 #include <functional>
 namespace Managers {
@@ -18,12 +17,14 @@ namespace Managers {
         std::map<unsigned int, std::function<void(const sf::Event&)>> listenOthers;
 
         sf::Event event;
+        GraphicManager* GM;
 
     public:
 
         EventManager();
         ~EventManager();
         void manageEvent();
+        /*void setGraphicManager(GraphicManager* gm);*/
         void setWindow(sf::RenderWindow* w);
 
         unsigned int addListenMouse(std::function<void(const sf::Event&)> call);

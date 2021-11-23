@@ -40,3 +40,4 @@ void Text::get(const sf::Event& e) {
         }
     }
 }
+

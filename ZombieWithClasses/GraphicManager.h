@@ -22,17 +22,19 @@ namespace Managers
         ~GraphicManager();
         void show() const;
         void clear(int r = 0, int g = 0, int b = 0);
-        void draw(const std::string& path, const sf::Vector2f pos);
-        void draw(const std::string& path, const sf::Vector2f position, sf::Vector2f scale, const sf::Vector2u nFrames, const sf::Vector2u frame);
+        void draw(const std::string& path, Vector2F pos);
+        void draw(const std::string& path, Vector2F pos, Vector2F scale);
+        void draw(const std::string& path, Vector2F position, Vector2U nFrames, Vector2U frame);
         bool loadTexture(const std::string& path);
-        void centralize(const sf::Vector2f centro);
+        void centralize(Vector2F centro);
         sf::RenderWindow* getWindow() const;
-        const sf::Vector2f getSize(const std::string& path) const;
+        const Vector2F getSize(const std::string& path) const;
         void initializeView();
-        const sf::Vector2f getSizeView() const;
-        const sf::Vector2f getCenterView() const;
-        void drawSolidRectangle(sf::Vector2f center, sf::Vector2f dimensions, const sf::Color color);
-        void drawText(const std::string text, sf::Vector2f position, unsigned int size, const bool centralize = true) const;
-        sf::Vector2f getMousePosition() const;
+        void drawSolidRectangle(Vector2F center, Vector2F dimensions, const sf::Color color);
+        void drawText(const std::string text, Vector2F position, unsigned int size, const bool centralize = true) const;
+        Vector2F getMousePosition() const;
+        Vector2F getWindowSize() const { return{ view.getSize().x, view.getSize().y }; }
+        const Vector2F getSizeView() const { return Vector2F(view.getSize().x, view.getSize().y); }
+        const Vector2F getCenterView() const { return Vector2F(view.getCenter().x, view.getCenter().y); }
     };
 }

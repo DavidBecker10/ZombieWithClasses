@@ -1,31 +1,29 @@
 #pragma once
 #include "Entity.h"
-#include "GraphicManager.h"
-#include "Vector2D.h"
-#include "CollisionManager.h"
+//#include "GraphicManager.h"
+//#include "Vector2D.h"
+//#include "CollisionManager.h"
+#include "EntityList.h"
 
 namespace Entities
 {
     namespace Characters
     {
-        class Character :
-            public Entity
+        class Character :public Entity
         {
         protected:
-            static Lists::EntityList* EL;
             bool isGround;
+            Lists::EntityList* EL;
 
         public:
-            Character(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tPath = NULL);
-            Character();
+            Character(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tPath = nullptr);
             ~Character();
             virtual void update(float t);
-            virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
+            void setEL(Lists::EntityList* El);
+            Lists::EntityList* getEL();
+            virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
             virtual void draw(Managers::GraphicManager* g);
-            virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;
-            static void setEL(Lists::EntityList* el) { EL = el; }
-            static Lists::EntityList* getEL();
+            virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
         };
-
     }
 }

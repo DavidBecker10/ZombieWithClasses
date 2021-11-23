@@ -6,9 +6,9 @@
 
 using TileMapLine = TileMap::TileMapLine;
 
-TileMapLine::TileMapLine(unsigned short* l, unsigned int len):
-    line(l),
-    length(len)
+TileMapLine::TileMapLine(const unsigned short* l, unsigned int len) :
+    line{ l },
+    length{ len }
 {
 }
 
@@ -26,9 +26,11 @@ unsigned short TileMapLine::operator[](unsigned int i) const
     return line[i];
 }
 
-TileMap::TileMap(const char* filePath):
-    map{ NULL },
-    path{filePath}
+TileMap::TileMap(const char* filePath) :
+    map{ nullptr },
+    path{ filePath }
+    //mapDimensions{ 0, 0},
+    //tile()
 {
     if (path) loadMap();
 }
@@ -44,6 +46,11 @@ TileMap::~TileMap()
     }
 }
 
+Vector2U TileMap::getDimensions() const
+{
+    return Vector2U(mapDimensions.x, mapDimensions.y);
+}
+
 void TileMap::printMap() const
 {
     for (unsigned int i = 0; i < mapDimensions.y; i++)
@@ -56,23 +63,19 @@ void TileMap::printMap() const
     std::cout.flush();
 }
 
-sf::Vector2u TileMap::getDimensions() const
-{
-    return sf::Vector2u(mapDimensions.x, mapDimensions.y);
-}
 
-void TileMap::setTile(sf::Vector2u position, unsigned short newIndex)
+void TileMap::setTile(Vector2U position, unsigned short newIndex)
 {
     if (position.x >= mapDimensions.x || position.y >= mapDimensions.y)
     {
-        std::cout << "Erro. Segmentation fault em TileMap::setTile." << std::endl;
+        std::cout << "Erro. Segmentation fault in TileMap::setTile." << std::endl;
         exit(1235);
     }
 
     map[position.y][position.x] = newIndex;
 }
 
-const TileMapLine TileMap::operator[](unsigned int i) const
+TileMapLine TileMap::operator[](unsigned int i) const
 {
     if (i > mapDimensions.y)
     {
@@ -116,7 +119,7 @@ void TileMap::loadMap()
 
     json = json["data"];
 
-    map = new unsigned short*[mapDimensions.y];
+    map = new unsigned short* [mapDimensions.y];
 
     for (int i = 0; i < mapDimensions.y; i++) map[i] = new unsigned short[mapDimensions.x];
 
@@ -132,7 +135,7 @@ void TileMap::loadMap()
         }
 
         if (i >= mapDimensions.y) break;
-        
+
         map[i][j++] = s;
     }
     //printf("%f", getDown());

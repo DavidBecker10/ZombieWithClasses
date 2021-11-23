@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector2D.h"
+//#include "Vector2D.h"
 #include "Tile.h"
 
 class TileMap
@@ -13,24 +13,25 @@ public:
 		unsigned int length;
 
 	public:
-		TileMapLine(unsigned short* l, unsigned int len);
+		TileMapLine(const unsigned short* l = nullptr, unsigned int len = 0);
 		~TileMapLine();
 		unsigned short operator[](unsigned int i) const;
 	};
-	 
+
 private:
-	Entities::Tile tile;
-	sf::Vector2u mapDimensions;
+	//Entities::Tile tile;
+	Vector2U mapDimensions;
 	unsigned short** map;
 	const char* path;
 
 public:
-	TileMap(const char* filePath = NULL);
+	TileMap(const char* filePath = nullptr);
 	~TileMap();
 	void printMap() const;
-	sf::Vector2u getDimensions() const;
-	void setTile(sf::Vector2u position, unsigned short newIndex);
-	const TileMapLine operator[](unsigned int i) const;
+	Vector2U getDimensions() const;
+	void setTile(Vector2U position, unsigned short newIndex);
+	TileMapLine operator[](unsigned int i) const;
+
 	float getDown();
 	unsigned short** getMap() const;
 

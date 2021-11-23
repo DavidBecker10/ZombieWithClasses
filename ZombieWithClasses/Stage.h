@@ -1,19 +1,19 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_STAGE_H
+#define ZOMBIEWITHCLASSES_STAGE_H
+
 #include "State.h"
 #include "Player.h"
 #include "CollisionManager.h"
 
-namespace States{
-	class Stage :
-		public State
-	{
+namespace States {
+    class Stage :public State {
     private:
         Managers::GraphicManager* GM;
         Entities::Characters::Player* player1;
 
         Managers::EventManager EM;
-        CollisionManager CM;
-        TilesManager TM;
+        Managers::CollisionManager CM;
+        Managers::TilesManager TM;
         sf::Clock clock;
         Lists::EntityList EL;
 
@@ -34,5 +34,7 @@ namespace States{
         virtual void draw(Managers::GraphicManager *GM) { }
 
         int returnID() const;*/
-	};
+    };
 }
+
+#endif //ZOMBIEWITHCLASSES_STAGE_H

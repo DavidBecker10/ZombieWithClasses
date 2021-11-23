@@ -1,11 +1,10 @@
 #include "ScreenManager.h"
 #include "Stage.h"
 #include "MainMenuState.h"
-
 using namespace Managers;
 
 ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::Player* p1) :
-    GM{ gm }, player1{ p1 } {
+    GM{ *gm }, player1{ p1 } {
     push(new States::MainMenuState(GM));
 }
 
@@ -14,14 +13,9 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity:
-        push(new States::Stage(GM, player1));
+        push(new States::Stage(&GM, player1));
         return false;
         break;
-    case mainMenu:
-        pop();
-        return false;
-        break;
-
         /*case goFirstStage:
         {
             RacoonCity* fase = new FaseExemplo(gerenciadorGrafico, jogador1);

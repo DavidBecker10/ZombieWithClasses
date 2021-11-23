@@ -1,21 +1,22 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_PROJECTILE_H
+#define ZOMBIEWITHCLASSES_PROJECTILE_H
+
+
 #include "Entity.h"
-#include "EntityList.h"
 
-namespace Entities
-{
-    class Projectile :
-        public Entity
-    {
-    private:
-
+namespace Entities {
+    class Projectile : public Entity {
     public:
-        Projectile(sf::Vector2f pos, sf::Vector2f v, Ids::Ids ID, const char* tP, bool dir);
-        Projectile();
+        Projectile(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, const char* tP = nullptr, bool dir = false);
         ~Projectile();
+
         virtual void update(float t);
         void draw(Managers::GraphicManager* g);
-        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
-        void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
+        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
     };
 }
+
+#endif //ZOMBIEWITHCLASSES_PROJECTILE_H
+
+

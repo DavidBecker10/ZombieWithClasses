@@ -1,6 +1,6 @@
 #include "TextField.h"
 
-TextField::TextField(Managers::EventManager& em, unsigned short maxL, sf::Vector2f pos, sf::Vector2f siz, unsigned int sText,
+TextField::TextField(Managers::EventManager& em, unsigned short maxL, Vector2F pos, Vector2F siz, unsigned int sText,
     sf::Color clr) :
     Button{ pos, siz, "", [this]() {startCapture(); }, sText, clr }, txt{ em, maxL }
 {
@@ -20,9 +20,9 @@ bool TextField::getTextDone() const {
     return txt.getTextDone();
 }
 
-void TextField::draw(Managers::GraphicManager* GM) const {
-    GM->drawSolidRectangle(position, size, color);
-    GM->drawText(txt.getText(), position, textSize, false);
+void TextField::draw(Managers::GraphicManager& GM) const {
+    GM.drawSolidRectangle(position, size, color);
+    GM.drawText(txt.getText(), position, textSize, false);
 }
 
 void TextField::startCapture() {

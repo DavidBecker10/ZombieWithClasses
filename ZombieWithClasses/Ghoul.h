@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "stdafx.h"
 
 namespace Entities
 {
@@ -11,10 +12,10 @@ namespace Entities
         private:
 
         public:
-            Ghoul(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = "../Sprites/Zombies/ZombieWoman/animation/Attack1.png");
+            Ghoul(Vector2F pos, Vector2F vel, const char* tPath = GHOUL_PATH);
             ~Ghoul();
             void update(float t);
-            void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
+            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2U dimensionsOther);
         };
     }
 }

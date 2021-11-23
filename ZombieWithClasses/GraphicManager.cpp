@@ -1,14 +1,14 @@
 #include "GraphicManager.h"
-
 #include <iostream>
+#include "stdafx.h"
 
 Managers::GraphicManager::GraphicManager() :
     window{ new sf::RenderWindow(sf::VideoMode(1280, 720), "Zombie With Classes", sf::Style::Close) },
-    view{ sf::Vector2f(640, 310), sf::Vector2f(1000,800) },
+    view{ sf::Vector2f(640, 360), sf::Vector2f(1000,500) },
     text{ nullptr }
 {
     initializeView();
-    font.loadFromFile("../Font/SIXTY.TTF");
+    font.loadFromFile(FONT_PATH);
 }
 
 Managers::GraphicManager::~GraphicManager()
@@ -30,31 +30,32 @@ void Managers::GraphicManager::clear(int r, int g, int b)
     window->clear(sf::Color(r, g, b));
 }
 
-void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f pos)
+void Managers::GraphicManager::draw(const std::string& path, Vector2F pos)
 {
     if (textures.count(path) == 0) {
         std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
         exit(714);
     }
-    
+
     text = textures[path];
 
+    /*body.setTexture(*text, true);
+    body.setScale(1, 1);
+    body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    body.setPosition(pos.x, pos.y);
+
+    window->draw(body);*/
+
     sprite.setTexture(*text, true);
-    //sprite.setTextureRect(text->getSize());
+    //sprite.setTextureRect(text->getSize();)
     sprite.setScale(1, 1);
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(pos.x, pos.y);
 
-    if ((view.getCenter().y - view.getSize().y / 2) - 32.0f < (pos.y) &&
-        (view.getCenter().y + view.getSize().y / 2) + 32.0f > (pos.y) &&
-        (view.getCenter().x - view.getSize().x / 2) - 32.0f < (pos.x) &&  //Desenha apenas quando estiver dentro da view
-        (view.getCenter().x + view.getSize().x / 2) + 32.0f > (pos.x))
-    {
-        window->draw(sprite);
-    }
+    window->draw(sprite);
 }
 
-void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f position, sf::Vector2f scale, const sf::Vector2u nFrames, const sf::Vector2u frame)
+void Managers::GraphicManager::draw(const std::string& path, Vector2F pos, Vector2F scale)
 {
     if (textures.count(path) == 0) {
         std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
@@ -62,25 +63,43 @@ void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f 
     }
 
     text = textures[path];
+
+    sprite.setTexture(*text, true);
+    sprite.setScale(scale.x, scale.y);
+    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    sprite.setPosition(pos.x, pos.y);
+
+    window->draw(sprite);
+}
+
+void Managers::GraphicManager::draw(const std::string& path, Vector2F position, Vector2U nFrames, Vector2U frame)
+{
+    if (textures.count(path) == 0) {
+        std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
+        exit(714);
+    }
+
+    text = textures[path];
+    //body.setTexture(*text, true);
     sprite.setTexture(*text, true);
 
-    //sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
-    //sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
+    sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
+    sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
 
     //body->setTextureRect({ positionFrame, size });
-    sprite.setScale(scale);
-    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
-    sprite.setPosition(position.x, position.y);
+    //body.setScale(scale);
+    //body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    //body.setPosition(position.x, position.y);
     //body->setOrigin({ size.x * 0.5f, size.y * 0.5f });
     //body->setPosition(size.x, size.y);
-    
-    if ((view.getCenter().y - view.getSize().y / 2) < (position.y) &&
-        (view.getCenter().y + view.getSize().y / 2) > (position.y) &&
-        (view.getCenter().x - view.getSize().x / 2) < (position.x) &&  //Desenha apenas quando estiver dentro da view
-        (view.getCenter().x + view.getSize().x / 2) > (position.x))
-    {
-        window->draw(sprite);
-    }
+    //window->draw(body);
+
+    sprite.setTextureRect({ positionFrame, size });
+
+    sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    sprite.setPosition(position.x, position.y);
+    window->draw(sprite);
+
 }
 
 bool Managers::GraphicManager::loadTexture(const std::string& path)
@@ -89,7 +108,7 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
     else {
         sf::Texture* text = new sf::Texture();
         if (!text->loadFromFile(path)) {
-            std::cout << "Atencao! imagem em " << path << "nao encontrada!" << std::endl;
+            std::cout << "Error: Image in: " << path << " not found!" << std::endl;
             exit(715);
         }
 
@@ -99,7 +118,7 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
     }
 }
 
-void Managers::GraphicManager::centralize(const sf::Vector2f centro)
+void Managers::GraphicManager::centralize(Vector2F centro)
 {
     view.setCenter(sf::Vector2f(centro.x, centro.y));
     window->setView(view);
@@ -110,16 +129,16 @@ sf::RenderWindow* Managers::GraphicManager::getWindow() const
     return window;
 }
 
-const sf::Vector2f Managers::GraphicManager::getSize(const std::string& path) const
+const Vector2F Managers::GraphicManager::getSize(const std::string& path) const
 {
     if (textures.count(path) == 0) {
-        std::cout << "Erro: Imagem em " << path << " nao carregada!" << std::endl;
+        std::cout << "Error: Image in: " << path << " not loaded!" << std::endl;
         exit(714);
     }
 
     sf::Vector2u dimensions = (textures.at(path))->getSize();
 
-    return sf::Vector2f(dimensions.x, dimensions.y);
+    return Vector2F(dimensions.x, dimensions.y);
 }
 
 void Managers::GraphicManager::initializeView()
@@ -127,18 +146,7 @@ void Managers::GraphicManager::initializeView()
     window->setView(view);
 }
 
-const sf::Vector2f Managers::GraphicManager::getSizeView() const
-{
-    return view.getSize();
-}
-
-const sf::Vector2f Managers::GraphicManager::getCenterView() const
-{
-    return view.getCenter();
-}
-
-void Managers::GraphicManager::drawSolidRectangle(sf::Vector2f center, sf::Vector2f dimensions, const sf::Color color)
-{
+void Managers::GraphicManager::drawSolidRectangle(Vector2F center, Vector2F dimensions, const sf::Color color) {
     sf::RectangleShape rect = sf::RectangleShape({ dimensions.x, dimensions.y });
     /*rect.setFillColor({ 128, 128, 128, 255});*/
     rect.setFillColor(color);
@@ -147,8 +155,8 @@ void Managers::GraphicManager::drawSolidRectangle(sf::Vector2f center, sf::Vecto
     window->draw(rect);
 }
 
-void Managers::GraphicManager::drawText(const std::string text, sf::Vector2f position, unsigned int size, const bool centralize) const
-{
+void Managers::GraphicManager::drawText(const std::string text, Vector2F position, unsigned int size,
+    const bool centralize) const {
     sf::Text txt = sf::Text(text, font, size);
     txt.setFillColor(sf::Color::White);
     if (centralize) {
@@ -157,10 +165,10 @@ void Managers::GraphicManager::drawText(const std::string text, sf::Vector2f pos
     }
     txt.setPosition(position.x, position.y);
     window->draw(txt);
+
 }
 
-sf::Vector2f Managers::GraphicManager::getMousePosition() const
-{
+Vector2F Managers::GraphicManager::getMousePosition() const {
     sf::Vector2i relativePos = sf::Mouse::getPosition(*window);
     sf::Vector2u windowSize = window->getSize();
     sf::Vector2f viewSize = view.getSize();

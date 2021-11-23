@@ -1,8 +1,8 @@
 #include "Ghoul.h"
 #include "stdafx.h"
 
-Entities::Characters::Ghoul::Ghoul(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath):
-	Enemy(pos, vel, ID, tPath)
+Entities::Characters::Ghoul::Ghoul(Vector2F pos, Vector2F vel, const char* tPath):
+	Enemy(pos, vel, tPath)
 {
 }
 
@@ -28,7 +28,7 @@ void Entities::Characters::Ghoul::update(float t)
         position.y += vel.y * t + GRAVITY;
 }
 
-void Entities::Characters::Ghoul::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
+void Entities::Characters::Ghoul::collide(Ids::Ids idOther, Vector2F positionOther, Vector2U dimensionsOther)
 {
     if (idOther != Ids::ground2)
         isGround = false;

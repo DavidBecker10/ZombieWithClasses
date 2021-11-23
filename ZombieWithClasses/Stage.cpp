@@ -1,14 +1,14 @@
+#include "stdafx.h"
 #include "ScreenManager.h"
 #include "Stage.h"
 #include "Enemy.h"
 #include "Homer.h"
-#include "Ghoul.h"
 
 using namespace States;
 
 Stage::Stage(Managers::GraphicManager* gm, Entities::Characters::Player* p1) :
     GM(gm),
-    player1(p1),
+    player1{ p1 },
     TM{
             {
                 new Entities::Tile(Ids::empty, "../Sprites/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
@@ -28,28 +28,30 @@ Stage::Stage(Managers::GraphicManager* gm, Entities::Characters::Player* p1) :
                 new Entities::Tile(Ids::wallL, "../Sprites/Tiles/Platformer/wallL.png", {32.0f, 32.0f}),
                 new Entities::Tile(Ids::wallR, "../Sprites/Tiles/Platformer/wallR.png", {32.0f, 32.0f}),
                 new Entities::Tile(Ids::lava, "../Sprites/Tiles/PNG/Tiles_lava/lava_tile6.png", {32.0f, 32.0f}),
-        },
-        {32.0f, 32.0f }, "../Sprites/Maps/mapStage1.json"
+            },
+            {32.0f, 32.0f}, RACOON_PATH
 },
 end{ false },
 clock(),
 EL(),
 IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e); }) } {
-    if (player1) EL.insert(player1);
 
+    if (player1) EL.insert(player1);
     player1->setEL(&EL);
 
-    EL.insert(new Entities::Characters::Homer(sf::Vector2f(400.f, 1400.f), sf::Vector2f(60.f, 30.f), Ids::Ids::Enemy));
-    EL.insert(new Entities::Characters::Ghoul(sf::Vector2f(200.f, 1400.f), sf::Vector2f(60.f, 30.f), Ids::Ids::Enemy));
 
+    /*EL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../assets/Terrorists/Masked/walk/terroristtest.png"));*/
+
+    EL.insert(new Entities::Characters::Homer(Vector2F(200.f, 3000.f), Vector2F(60.0f, 30.0f)));
     EL.initialize(GM, &EM, &CM);
-
+    //std::cout<<"jorge"<<std::endl;
+    //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
     TM.initialize(GM, &EM, &CM);
-
+    //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
     EM.setWindow(GM->getWindow());
-
+    //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
     CM.setTilesManager(&TM);
-
+    //gerenciadorColisoes.setGerenciadorTiles(&gerenciadorTiles);
     CM.setList(&EL);
 }
 
@@ -61,7 +63,7 @@ Stage::~Stage() {
 int Stage::execute() {
     sf::Time t = clock.getElapsedTime();
     float dt = t.asSeconds();
-    if (dt > 0.0167) dt = 0.0167;
+    if (dt > 0.0167)dt = 0.0167;
     clock.restart();
 
     EL.update(dt);
@@ -69,9 +71,6 @@ int Stage::execute() {
     TM.draw(GM);
     EL.draw(GM);
     EM.manageEvent();
-
-    if (!player1->getisLive())
-        return Managers::mainMenu;
 
     if (end) return Managers::end;
     else return Managers::proceed;

@@ -1,15 +1,15 @@
 #ifndef ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 #define ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
+
 #include "EntityList.h"
 #include "Entity.h"
+#include <set>
+#include "TilesManager.h"
 
-class TilesManager;
-
-//namespace Managers {
+namespace Managers {
 
     class CollisionManager {
     private:
-        
         TilesManager* TM;
         Lists::EntityList* EntityL;
 
@@ -26,6 +26,6 @@ class TilesManager;
     private:
         bool isColliding(Entities::Entity* c1, Entities::Entity* c2);
     };
-//}
+}
 
 #endif //ZOMBIEWITHCLASSES_COLLISIONMANAGER_H

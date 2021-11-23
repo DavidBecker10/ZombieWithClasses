@@ -1,7 +1,7 @@
 #pragma once
+
 #include "Stage.h"
 #include "ScreenManager.h"
-
 class Game
 {
 private:
@@ -9,7 +9,6 @@ private:
     Entities::Characters::Player player1;
     Managers::ScreenManager SM;
     bool end;
-    States::Stage* fase;
 
 public:
     Game();
