@@ -21,8 +21,8 @@ namespace Entities
             virtual void update(float t);
             void setEL(Lists::EntityList* El);
             Lists::EntityList* getEL();
-            virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
-            virtual void draw(Managers::GraphicManager* g);
+            virtual void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
+            virtual void draw();
             virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
         };
     }

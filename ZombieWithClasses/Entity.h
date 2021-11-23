@@ -26,8 +26,8 @@ namespace Entities
         Entity(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tP = nullptr);
         ~Entity();
         virtual void update(float t) = 0;
-        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM) = 0;
-        virtual void draw(Managers::GraphicManager* g);
+        virtual void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM) = 0;
+        virtual void draw();
         virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
 
         void setPosition(const Vector2F pos) { position = pos; }

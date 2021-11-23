@@ -13,13 +13,13 @@ void Entities::Projectile::update(float t) {
     position.x += vel.x * t;
 }
 
-void Entities::Projectile::draw(Managers::GraphicManager* g) {
-    g->loadTexture(textPath);
-    dimensions = g->getSize(textPath);
-    g->draw(textPath, position, scale);
+void Entities::Projectile::draw() {
+    GM->loadTexture(textPath);
+    dimensions = GM->getSize(textPath);
+    GM->draw(textPath, position, scale);
 }
 
-void Entities::Projectile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,
+void Entities::Projectile::initialize(Managers::EventManager* EM,
     Managers::CollisionManager* CM) {
     GM->loadTexture(textPath);
     dimensions = GM->getSize(textPath);

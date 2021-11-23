@@ -12,7 +12,6 @@ namespace Entities {
         //        const Ids::Ids id;
         //        const char* path;
         Vector2F size;
-        Managers::GraphicManager* gm;
         Managers::CollisionManager* cm;
 
     public:
@@ -20,9 +19,9 @@ namespace Entities {
 
         ~Tile();
 
-        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
 
-        void draw(Managers::GraphicManager* g, const Vector2F position) const;
+        void draw(const Vector2F position) const;
 
         void update(float t) {}
         void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);

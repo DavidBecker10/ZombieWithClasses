@@ -13,9 +13,9 @@ Entities::Entity::~Entity()
 {
 }
 
-void Entities::Entity::draw(Managers::GraphicManager* g)
+void Entities::Entity::draw()
 {
-    g->draw(textPath, position);
+    GM->draw(textPath, position);
 }
 
 /*void Entities::Entity::update(float t) {

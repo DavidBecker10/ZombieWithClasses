@@ -38,15 +38,16 @@ IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e
 
     if (player1) EL.insert(player1);
     player1->setEL(&EL);
+    player1->setGM(GM);
 
 
     /*EL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../assets/Terrorists/Masked/walk/terroristtest.png"));*/
 
     EL.insert(new Entities::Characters::Homer(Vector2F(200.f, 3000.f), Vector2F(60.0f, 30.0f)));
-    EL.initialize(GM, &EM, &CM);
+    EL.initialize(&EM, &CM);
     //std::cout<<"jorge"<<std::endl;
     //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
-    TM.initialize(GM, &EM, &CM);
+    TM.initialize(&EM, &CM);
     //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
     EM.setWindow(GM->getWindow());
     //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
@@ -69,7 +70,7 @@ int Stage::execute() {
     EL.update(dt);
     CM.verifyCollisions();
     TM.draw(GM);
-    EL.draw(GM);
+    EL.draw();
     EM.manageEvent();
 
     if (end) return Managers::end;

@@ -10,7 +10,7 @@ Entities::Characters::Player::Player(Vector2F pos) :
 Entities::Characters::Player::~Player() {
 }
 
-void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,
+void Entities::Characters::Player::initialize(Managers::EventManager* EM,
     Managers::CollisionManager* CM) {
     isJumping = false;
     //isGround = false;
@@ -38,7 +38,7 @@ void Entities::Characters::Player::update(float t) {
         position.y += vel.y * t;
 }
 
-void Entities::Characters::Player::draw(Managers::GraphicManager* GM) {
+void Entities::Characters::Player::draw() {
     //GM->draw(textPath, position, body, { 1, 9 }, { 0, 5 });
     GM->draw(textPath, position, scale);
     GM->centralize(position);

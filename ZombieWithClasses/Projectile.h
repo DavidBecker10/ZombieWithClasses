@@ -11,8 +11,8 @@ namespace Entities {
         ~Projectile();
 
         virtual void update(float t);
-        void draw(Managers::GraphicManager* g);
-        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void draw();
+        void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
         void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
     };
 }

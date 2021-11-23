@@ -17,14 +17,14 @@ void Entities::Characters::Character::update(float t)
     //position += vel * t;
 }
 
-void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM)
+void Entities::Characters::Character::initialize(Managers::EventManager* EM, Managers::CollisionManager* CM)
 {
     dimensions = GM->getSize(textPath);
     scale.x = 1;
     scale.y = 1;
 }
 
-void Entities::Characters::Character::draw(Managers::GraphicManager* g)
+void Entities::Characters::Character::draw()
 {
 }
 

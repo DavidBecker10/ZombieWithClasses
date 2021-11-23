@@ -12,7 +12,7 @@ Entities::Characters::Enemy::~Enemy()
 {
 }
 
-void Entities::Characters::Enemy::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM)
+void Entities::Characters::Enemy::initialize(Managers::EventManager* EM, Managers::CollisionManager* CM)
 {
     isGround = false;
     GM->loadTexture(textPath);
@@ -36,7 +36,7 @@ void Entities::Characters::Enemy::initialize(Managers::GraphicManager* GM, Manag
 //	    position.y += vel.y * t + GRAVITY;
 //}
 
-void Entities::Characters::Enemy::draw(Managers::GraphicManager* GM)
+void Entities::Characters::Enemy::draw()
 {
     //GM->draw(textPath, position, { 1, 9 }, { 0, 5 });
     GM->draw(textPath, position, scale);

@@ -22,9 +22,9 @@ namespace Lists {
 
         void update(float t);
 
-        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
 
-        void draw(Managers::GraphicManager* g);
+        void draw();
 
         Entities::Entity* operator[](int x);
 

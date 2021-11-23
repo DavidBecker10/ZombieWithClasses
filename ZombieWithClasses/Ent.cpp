@@ -11,3 +11,5 @@ Ent::~Ent() {
 
 void Ent::print() {
 }
+
+Managers::GraphicManager* Ent::GM = NULL;

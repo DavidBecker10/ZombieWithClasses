@@ -17,9 +17,9 @@ namespace Managers {
             delete t;
     }
 
-    void TilesManager::initialize(Managers::GraphicManager* gm, Managers::EventManager* em, CollisionManager* cm) {
+    void TilesManager::initialize(Managers::EventManager* em, CollisionManager* cm) {
         for (Entities::Tile* t : tiles)
-            t->initialize(gm, em, cm);
+            t->initialize(em, cm);
     }
 
     void TilesManager::draw(Managers::GraphicManager* g) const {
@@ -36,7 +36,7 @@ namespace Managers {
                         ((g->getCenterView().x + g->getSizeView().x / 2) + tileDimensions.x >
                             (coordinatesForScreen(Vector2U(j, i))).x)) {
                         //std::cout<<"Eu sou macaco velho professor"<<std::endl;
-                        tiles[index]->draw(g, coordinatesForScreen(Vector2U(j, i)));
+                        tiles[index]->draw(coordinatesForScreen(Vector2U(j, i)));
                     }
                 }
             }
