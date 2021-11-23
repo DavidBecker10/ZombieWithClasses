@@ -53,7 +53,7 @@ std::vector<TilesManager::infoCollision> TilesManager::checkCollisions(const Ids
 
 	std::vector<infoCollision> collisions;
 
-	if (up < 0 || left < 0 || down > tileMap.getDimensions().y || right > tileMap.getDimensions().x) return collisions;
+	if (up < 0 || left < 0 || down > tileMap.getDimensions().y || right >= tileMap.getDimensions().x) return collisions;
 
 	for (unsigned int i = up; i < down; i++)
 	{

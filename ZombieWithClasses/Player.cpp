@@ -96,12 +96,10 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
 
 void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
 {
-    std::string imprimir;
-
-    if (idOther == Ids::ground2 || idOther == Ids::Enemy || idOther == Ids::ground11)
-        isGround = true;
-    else
+    if (idOther != Ids::ground2 && idOther != Ids::Enemy && idOther != Ids::ground11)
         isGround = false;
+    else
+        isGround = true;
 
     switch (idOther) {
     case Ids::Enemy:
@@ -114,7 +112,10 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
         vel.y = 0;
         break;
     case Ids::Projectile:
-        //isGround = true;
+        isGround = true;
+        break;
+    case Ids::air:
+        isGround = false;
         break;
     case Ids::lava:
         isLive = false;

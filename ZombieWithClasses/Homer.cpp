@@ -51,7 +51,7 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positio
     case Ids::wallL:
         isGround = true;
         vel.x *= -1;
-        scale.x = 1;
+        scale.x = -1;
         break;
     case Ids::wallR:
         isGround = true;
