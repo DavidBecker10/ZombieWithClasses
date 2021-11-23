@@ -20,7 +20,6 @@ namespace Entities
             Character();
             ~Character();
             virtual void update(float t);
-            //void setEL(Lists::EntityList* El);
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, CollisionManager* CM);
             virtual void draw(Managers::GraphicManager* g);
             virtual void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther) = 0;

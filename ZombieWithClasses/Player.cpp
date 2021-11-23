@@ -3,7 +3,8 @@
 
 Entities::Characters::Player::Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath) :
     Character(pos, vel, ID, tPath),
-    bullet()
+    bullet(),
+    isLive(true)
 {
 }
 
@@ -38,7 +39,8 @@ void Entities::Characters::Player::update(float t)
         position.x = (float)(dimensions.x * 0.5);
     else if (position.x >= (32.0f * 200) - dimensions.x)
         position.x = (32.0f * 200) - dimensions.x;
-    if (!isGround && !isJumping)
+    
+    if (!isGround)
         position.y += vel.y * t + GRAVITY;
     else
         position.y += vel.y * t;
@@ -74,7 +76,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
             break;
         }
     }
-    if (e.type == sf::Event::KeyReleased) {
+    else if (e.type == sf::Event::KeyReleased) {
         switch (e.key.code) {
         case sf::Keyboard::Key::D:
             vel.x = 0;
@@ -85,7 +87,6 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e)
         case sf::Keyboard::Key::W:
             vel.y = 0;
             isGround = false;
-            isJumping = false;
             break;
         default:
             break;
@@ -97,41 +98,27 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, sf::Vector2f positi
 {
     std::string imprimir;
 
-    if (idOther != Ids::ground2 && idOther != Ids::Enemy)
+    if (idOther == Ids::ground2 || idOther == Ids::Enemy || idOther == Ids::ground11)
+        isGround = true;
+    else
         isGround = false;
 
     switch (idOther) {
     case Ids::Enemy:
+        isLive = false;
         EL->remove(this);
         break;
     case Ids::ground2:
         if (position.y > positionOther.y - dimensionsOther.y / 2)
-            position.y -= 1.0f;
-        isGround = true;
+            position.y -= 3.0f;
         vel.y = 0;
-        //std::cout << isGround << std::endl;
-        break;
-    case Ids::air:
-        vel.y = 0;
-        isGround = false;
-        isJumping = false;
-        break;
-    case Ids::wallR:
-        isGround = true;
         break;
     case Ids::Projectile:
-        isGround = true;
+        //isGround = true;
         break;
     case Ids::lava:
+        isLive = false;
         EL->remove(this);
-        break;
-    case Ids::ground11:
-        isGround = true;
-        break;
-    case Ids::wallL:
-        //isGround = false;
-        break;
-    default:
         break;
     }
 }

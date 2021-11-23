@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "Enemy.h"
 #include "Homer.h"
+#include "Ghoul.h"
 
 using namespace States;
 
@@ -39,6 +40,7 @@ IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e
     player1->setEL(&EL);
 
     EL.insert(new Entities::Characters::Homer(sf::Vector2f(400.f, 1400.f), sf::Vector2f(60.f, 30.f), Ids::Ids::Enemy));
+    EL.insert(new Entities::Characters::Ghoul(sf::Vector2f(200.f, 1400.f), sf::Vector2f(60.f, 30.f), Ids::Ids::Enemy));
 
     EL.initialize(GM, &EM, &CM);
 
@@ -58,13 +60,18 @@ Stage::~Stage() {
 
 int Stage::execute() {
     sf::Time t = clock.getElapsedTime();
+    float dt = t.asSeconds();
+    if (dt > 0.0167) dt = 0.0167;
     clock.restart();
 
-    EL.update(t.asSeconds());
+    EL.update(dt);
     CM.verifyCollisions();
     TM.draw(GM);
     EL.draw(GM);
     EM.manageEvent();
+
+    if (!player1->getisLive())
+        return Managers::mainMenu;
 
     if (end) return Managers::end;
     else return Managers::proceed;

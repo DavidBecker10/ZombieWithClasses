@@ -21,6 +21,7 @@ namespace Entities
 			bool isJumping;
 			TilesManager* tm;
 			Entities::Projectile* bullet;
+			bool isLive;
 
 		public:
 			Player(sf::Vector2f pos, sf::Vector2f vel, Ids::Ids ID, const char* tPath = PLAYER1_PATH);
@@ -33,6 +34,7 @@ namespace Entities
 			void handleEvents(const sf::Event& e);
 			void collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther);
 			void createProjectile(Ids::Ids id, sf::Vector2f pos, const char* path);
+			bool getisLive() { return isLive; }
 		};
 	}
 }

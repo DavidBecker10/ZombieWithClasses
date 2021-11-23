@@ -31,20 +31,22 @@ void Entities::Characters::Homer::update(float t)
 
 void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positionOther, sf::Vector2u dimensionsOther)
 {
-    std::string imprimir;
-
-    if (idOther != Ids::ground2)
-        isGround = false;
+    /*if (idOther != Ids::ground2)
+        isGround = false;*/
 
     switch (idOther) {
     case Ids::lava:
-        vel.y *= -1;
+        std::cout << "lava" << std::endl;
+        vel.x *= -1;
         break;
     case Ids::ground2:
         isGround = true;
+        //std::cout << "chao" << std::endl;
         break;
-    case Ids::air:
-        isGround = false;
+    case Ids::empty:
+        isGround = true;
+        std::cout << "empty" << std::endl;
+        vel.x *= -1;
         break;
     case Ids::wallL:
         isGround = true;
@@ -57,6 +59,7 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, sf::Vector2f positio
         scale.x = -1;
         break;
     case Ids::Projectile:
+        std::cout << "Falici" << std::endl;
         EL->remove(this);
         break;
     case Ids::Player:

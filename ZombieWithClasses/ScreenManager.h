@@ -11,6 +11,7 @@ namespace Managers {
         end,
         goRacoonCity,
         goSecondStage,
+        mainMenu
     };
 
     class ScreenManager :

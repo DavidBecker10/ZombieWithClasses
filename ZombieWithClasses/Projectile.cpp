@@ -36,6 +36,7 @@ void Entities::Projectile::collide(Ids::Ids idOther, sf::Vector2f positionOther,
 {
 	switch (idOther) {
 	case Ids::Enemy:
+		
 		break;
 	default:
 		break;

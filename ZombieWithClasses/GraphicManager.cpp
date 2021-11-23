@@ -45,7 +45,13 @@ void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f 
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(pos.x, pos.y);
 
-    window->draw(sprite);
+    if ((view.getCenter().y - view.getSize().y / 2) - 32.0f < (pos.y) &&
+        (view.getCenter().y + view.getSize().y / 2) + 32.0f > (pos.y) &&
+        (view.getCenter().x - view.getSize().x / 2) - 32.0f < (pos.x) &&  //Desenha apenas quando estiver dentro da view
+        (view.getCenter().x + view.getSize().x / 2) + 32.0f > (pos.x))
+    {
+        window->draw(sprite);
+    }
 }
 
 void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f position, sf::Vector2f scale, const sf::Vector2u nFrames, const sf::Vector2u frame)
@@ -68,7 +74,13 @@ void Managers::GraphicManager::draw(const std::string& path, const sf::Vector2f 
     //body->setOrigin({ size.x * 0.5f, size.y * 0.5f });
     //body->setPosition(size.x, size.y);
     
-    window->draw(sprite);
+    if ((view.getCenter().y - view.getSize().y / 2) < (position.y) &&
+        (view.getCenter().y + view.getSize().y / 2) > (position.y) &&
+        (view.getCenter().x - view.getSize().x / 2) < (position.x) &&  //Desenha apenas quando estiver dentro da view
+        (view.getCenter().x + view.getSize().x / 2) > (position.x))
+    {
+        window->draw(sprite);
+    }
 }
 
 bool Managers::GraphicManager::loadTexture(const std::string& path)

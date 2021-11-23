@@ -24,11 +24,6 @@ void Entities::Characters::Character::update(float t)
 	//position += vel * t;
 }
 
-/*void Entities::Characters::Character::setEL(Lists::EntityList* El)
-{
-	EList = El;
-}*/
-
 Lists::EntityList* Entities::Characters::Character::getEL()
 {
 	return EL;

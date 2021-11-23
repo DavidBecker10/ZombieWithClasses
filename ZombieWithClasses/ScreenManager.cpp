@@ -13,11 +13,15 @@ bool ScreenManager::processCode(int returnCode) {
     switch (returnCode) {
     case end:
         return true;
-        break;
     case goRacoonCity:
         push(new States::Stage(GM, player1));
         return false;
         break;
+    case mainMenu:
+        pop();
+        return false;
+        break;
+
         /*case goFirstStage:
         {
             RacoonCity* fase = new FaseExemplo(gerenciadorGrafico, jogador1);
