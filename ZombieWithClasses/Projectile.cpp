@@ -29,7 +29,9 @@ void Entities::Projectile::initialize(Managers::EventManager* EM,
 void Entities::Projectile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
     switch (idOther) {
     case Ids::Enemy:
-        EL->remove(this);
+        //std::cout << EL->getSize() << std::endl;
+        //EL->remove(this);
+        //std::cout << EL->getSize() << std::endl;
         break;
     default:
         break;

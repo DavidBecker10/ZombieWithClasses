@@ -18,7 +18,6 @@ namespace Entities
 			unsigned int listenKey;
 			bool isJumping;
 			Managers::TilesManager* TM;
-			Projectile* bullet;
 
 		public:
 			Player(Vector2F pos = { 0.0f, 0.0f });

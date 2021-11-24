@@ -120,8 +120,11 @@ namespace Lists
 			if (pAux->getInfo() == pTL) {
 				if (pAux == pFirst)
 					pFirst = pAux->getNext();
-				else
+				else {
 					pPrev->setNext(pAux->getNext());
+					if(pAux->getNext())
+						(pAux->getNext())->setPrev(pPrev);
+				}
 
 				//delete (pTL);
 				delete (pAux);

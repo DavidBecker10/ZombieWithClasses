@@ -4,7 +4,7 @@
 #include "Ids.h"
 
 Entities::Characters::Player::Player(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, PLAYER_PATH), bullet() {
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, PLAYER_PATH) {
 }
 
 Entities::Characters::Player::~Player() {
@@ -87,11 +87,8 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e) {
             vel.y = 0;
             isJumping = false;
             isGround = false;
-
             /* code */
             break;
-            //            case sf::Keyboard::Key::Space:
-            //                createProjectile(ID, position, BULLET_PATH);
         default:
             break;
         }
@@ -148,9 +145,7 @@ void Entities::Characters::Player::createProjectile(Ids::Ids id, Vector2F pos, c
 
     scale.x == 1 ? px = 35.0f : px = -35.0f;
 
-    bullet = new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir);
-
-    EL->insert(bullet);
+    EL->insert(new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir));
 }
 
 void Entities::Characters::Player::neutralized() {

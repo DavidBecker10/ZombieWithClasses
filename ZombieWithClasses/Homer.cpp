@@ -61,7 +61,9 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
         break;*/
     case Ids::Projectile:
         std::cout << "Falici" << std::endl;
+        std::cout << EL->getSize() << std::endl;
         EL->remove(this);
+        std::cout << EL->getSize() << std::endl;
         break;
     case Ids::Player:
         break;

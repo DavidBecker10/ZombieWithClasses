@@ -11,11 +11,15 @@ Lists::EntityList::~EntityList() {
 }
 
 void Lists::EntityList::insert(Entities::Entity* pE) {
-    list.insert(pE);
+    if (pE)
+        list.insert(pE);
+    else
+        std::cout << "Erro: pE nulo em EntityList::insert" << std::endl;
 }
 
 void Lists::EntityList::remove(Entities::Entity* pE) {
-    list.remove(pE);
+    if (!list.remove(pE))
+        std::cout << "Erro ao remover" << std::endl;
 }
 
 int Lists::EntityList::getSize() {
