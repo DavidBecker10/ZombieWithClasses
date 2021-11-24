@@ -3,8 +3,8 @@
 #include "MainMenuState.h"
 using namespace Managers;
 
-ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::Player* p1) :
-    GM{ *gm }, player1{ p1 } {
+ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1, Entities::Characters::PlayerTwo* p2) :
+    GM{ *gm }, player1{ p1 }, player2{ p2 } {
     push(new States::MainMenuState(GM));
 }
 
@@ -13,7 +13,7 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity:
-        push(new States::Stage(&GM, player1));
+        push(new States::Stage(&GM, player1, player2));
         return false;
         break;
         /*case goFirstStage:

@@ -2,11 +2,14 @@
 
 #include "Stage.h"
 #include "ScreenManager.h"
+#include "PlayerOne.h"
+
 class Game
 {
 private:
     Managers::GraphicManager GM;
-    Entities::Characters::Player player1;
+    Entities::Characters::PlayerOne player1;
+    Entities::Characters::PlayerTwo player2;
     Managers::ScreenManager SM;
     bool end;
 

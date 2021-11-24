@@ -2,14 +2,16 @@
 #define ZOMBIEWITHCLASSES_STAGE_H
 
 #include "State.h"
-#include "Player.h"
+#include "PlayerTwo.h"
+#include "PlayerOne.h"
 #include "CollisionManager.h"
 
 namespace States {
     class Stage :public State {
     private:
         Managers::GraphicManager* GM;
-        Entities::Characters::Player* player1;
+        Entities::Characters::PlayerOne* player1;
+        Entities::Characters::PlayerTwo* player2;
 
         Managers::EventManager EM;
         Managers::CollisionManager CM;
@@ -23,7 +25,7 @@ namespace States {
         void pushCloseWindow(const sf::Event e);
 
     public:
-        Stage(Managers::GraphicManager* gm, Entities::Characters::Player* p1);
+        Stage(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1, Entities::Characters::PlayerTwo* p2);
 
         ~Stage();
 

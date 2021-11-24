@@ -3,7 +3,6 @@
 #include "CollisionManager.h"
 
 Entities::Characters::Enemy::Enemy(Vector2F pos, Vector2F vel, const char* tPath) :
-    //Character(pos, vel, Ids::Ids::Enemy, "../assets/Zombies/ZombieMan/animation/Walk1test.png")
     Character(pos, vel, Ids::Ids::Enemy, tPath)
 {
 }

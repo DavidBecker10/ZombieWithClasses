@@ -160,6 +160,8 @@
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Nemesis.cpp" />
+    <ClCompile Include="PlayerOne.cpp" />
+    <ClCompile Include="PlayerTwo.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RacoonCity.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
@@ -183,6 +185,8 @@
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Nemesis.h" />
+    <ClInclude Include="PlayerOne.h" />
+    <ClInclude Include="PlayerTwo.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="RacoonCity.h" />
     <ClInclude Include="ScreenManager.h" />

@@ -180,7 +180,6 @@ namespace Lists
 
 			if (!pAux)
 			{
-				std::cout << x << std::endl;
 				std::cerr << "Erro. Ponteiro pAux nulo em List<TL>::operator[]." << std::endl;
 				exit(1235);
 			}

@@ -6,9 +6,10 @@
 
 using namespace States;
 
-Stage::Stage(Managers::GraphicManager* gm, Entities::Characters::Player* p1) :
+Stage::Stage(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1, Entities::Characters::PlayerTwo* p2) :
     GM(gm),
     player1{ p1 },
+    player2{ p2 },
     TM{
             {
                 new Entities::Tile(Ids::empty, "../Assets/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
@@ -37,9 +38,12 @@ EL(),
 IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e); }) } {
 
     if (player1) EL.insert(player1);
-    player1->setEL(&EL);
+    //if (player2) EL.insert(player2);
+    player2->setEL(&EL);
     player1->setGM(GM);
 
+
+    //EL.insert(new Entities::Characters::PlayerOne(Vector2F(200.f, 3000.f)));
     EL.insert(new Entities::Characters::Homer(Vector2F(200.f, 3000.f), Vector2F(60.0f, 30.0f)));
     EL.insert(new Entities::Characters::Homer(Vector2F(300.f, 3000.f), Vector2F(60.0f, 30.0f)));
     EL.initialize(&EM, &CM);
@@ -50,7 +54,8 @@ IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e
 }
 
 Stage::~Stage() {
-    EL.remove(player1);
+    if(player1)
+        EL.remove(player1);
     EL.destroyEntities();
 }
 
@@ -64,6 +69,7 @@ int Stage::execute() {
     CM.verifyCollisions();
     TM.draw(GM);
     EL.draw();
+    //player2->draw();
     EM.manageEvent();
 
     if (end) return Managers::end;
@@ -81,8 +87,6 @@ TM.draw(GM);
 EL.draw(&GM);
 
 }*/
-
-
 
 void Stage::pushCloseWindow(const sf::Event e) {
     if (e.type == sf::Event::Closed) end = true;
