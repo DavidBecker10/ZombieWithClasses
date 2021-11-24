@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include "EntityList.h"
 
 Entities::Projectile::Projectile(Vector2F pos, Vector2F v, const char* tP, bool dir) :
     Entity(pos, v, Ids::Ids::Projectile, tP) {
@@ -28,6 +29,7 @@ void Entities::Projectile::initialize(Managers::EventManager* EM,
 void Entities::Projectile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
     switch (idOther) {
     case Ids::Enemy:
+        EL->remove(this);
         break;
     default:
         break;

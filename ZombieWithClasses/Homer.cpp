@@ -29,7 +29,7 @@ void Entities::Characters::Homer::update(float t)
         position.y += vel.y * t + GRAVITY;
 }
 
-void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOther, Vector2U dimensionsOther)
+void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
 {
     /*if (idOther != Ids::ground2)
         isGround = false;*/
@@ -44,8 +44,9 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
         //std::cout << "chao" << std::endl;
         break;
     case Ids::empty:
+        scale.x = -1;
         isGround = true;
-        std::cout << "empty" << std::endl;
+        //std::cout << "empty" << std::endl;
         vel.x *= -1;
         break;
     case Ids::wallL:
@@ -53,11 +54,11 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
         vel.x *= -1;
         scale.x = -1;
         break;
-    case Ids::wallR:
+    /*case Ids::wallR:
         isGround = true;
         vel.x *= -1;
         scale.x = -1;
-        break;
+        break;*/
     case Ids::Projectile:
         std::cout << "Falici" << std::endl;
         EL->remove(this);

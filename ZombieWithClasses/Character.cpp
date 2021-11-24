@@ -27,11 +27,3 @@ void Entities::Characters::Character::initialize(Managers::EventManager* EM, Man
 void Entities::Characters::Character::draw()
 {
 }
-
-void Entities::Characters::Character::setEL(Lists::EntityList* El) {
-    EL = El;
-}
-
-Lists::EntityList* Entities::Characters::Character::getEL() {
-    return EL;
-}

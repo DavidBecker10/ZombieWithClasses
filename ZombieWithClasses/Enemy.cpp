@@ -42,55 +42,44 @@ void Entities::Characters::Enemy::draw()
     GM->draw(textPath, position, scale);
 }
 
+/*
 void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
 {
-    if (idOutro == Ids::Ids::Player) {
-        // std::cout << "nhac nhac nham nham heroi gostoso" << std::endl;
-    }
-    else if (idOutro == Ids::Ids::Enemy) {
 
-        Vector2F distance = position - posicaoOutro;
-        Vector2F sergio(0.5f, 0.5f);
-        position += distance * sergio;
-
-        std::cout << "Enemy to enemy collision" << std::endl;
-        vel.x *= -1;
-        vel.y *= -1;
-    }
-
-    /**std::string imprimir;
+    std::string imprimir;
 
 
     switch (idOutro) {
     case Ids::Player:
-        imprimir = "Colidiu Player";
-        std::cout << imprimir << std::endl;
+        //imprimir = "Colidiu Player";
+        //std::cout << imprimir << std::endl;
         break;
     case Ids::ground1:
-        imprimir = "fui ludibriado";
-        std::cout << imprimir << std::endl;
+        //imprimir = "fui ludibriado";
+        //std::cout << imprimir << std::endl;
         break;
     case Ids::ground2:
-        imprimir = "cai";
-        std::cout << imprimir << std::endl;
+        isGround = true;
+        vel.y = 0;
         break;
-    case Ids::empty:
-        imprimir = "mano o que ta acontecendo";
-        std::cout << imprimir << std::endl;
+    case Ids::air:
+        vel.x *= -1;
         break;
-    case Ids::ground3:
-        imprimir = "pontudo";
-        std::cout << imprimir << std::endl;
-        break;
-    case Ids::ground4:
+    case Ids::wallR:
+        vel.x *= -1;
         imprimir = "estou livre";
         std::cout << imprimir << std::endl;
         break;
+    case Ids::ground4:
+        //imprimir = "estou livre";
+        //std::cout << imprimir << std::endl;
+        break;
     case Ids::ground5:
-        imprimir = "bonk";
-        std::cout << imprimir << std::endl;
+        //imprimir = "bonk";
+        //std::cout << imprimir << std::endl;
         break;
     default:
         break;
-    }*/
+    }
 }
+*/

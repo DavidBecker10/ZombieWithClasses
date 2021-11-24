@@ -1,13 +1,17 @@
 #pragma once
 
 #include "Ent.h"
-//#include "Vector2D.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
 
 namespace Managers {
     class CollisionManager;
 }
+
+namespace Lists {
+    class EntityList;
+}
+
 namespace Entities
 {
     class Entity :
@@ -17,6 +21,7 @@ namespace Entities
         bool showing;
         bool faceLeft;
     protected:
+        static Lists::EntityList* EL;
         Vector2F position;
         Vector2F dimensions;
         Vector2F vel;
@@ -29,6 +34,8 @@ namespace Entities
         virtual void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM) = 0;
         virtual void draw();
         virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
+
+        static void setEL(Lists::EntityList* El) { EL = El; }
 
         void setPosition(const Vector2F pos) { position = pos; }
         Vector2F getPosition() { return position; }

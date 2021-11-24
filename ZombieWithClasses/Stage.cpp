@@ -45,14 +45,9 @@ IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e
 
     EL.insert(new Entities::Characters::Homer(Vector2F(200.f, 3000.f), Vector2F(60.0f, 30.0f)));
     EL.initialize(&EM, &CM);
-    //std::cout<<"jorge"<<std::endl;
-    //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
     TM.initialize(&EM, &CM);
-    //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
     EM.setWindow(GM->getWindow());
-    //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
     CM.setTilesManager(&TM);
-    //gerenciadorColisoes.setGerenciadorTiles(&gerenciadorTiles);
     CM.setList(&EL);
 }
 

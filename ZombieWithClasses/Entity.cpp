@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "EntityList.h"
 #include "CollisionManager.h"
 
 Entities::Entity::Entity(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tP) :
@@ -22,3 +23,4 @@ void Entities::Entity::draw()
     position += (vel*t);
 }*/
 
+Lists::EntityList* Entities::Entity::EL = NULL;

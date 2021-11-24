@@ -15,7 +15,7 @@ namespace Entities
             Homer(Vector2F pos, Vector2F vel, const char* tPath = HOMER_PATH);
             ~Homer();
             void update(float t);
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2U dimensionsOther);
+            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
         };
     }
 }
