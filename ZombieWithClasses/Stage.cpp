@@ -40,10 +40,8 @@ IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e
     player1->setEL(&EL);
     player1->setGM(GM);
 
-
-    /*EL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../assets/Terrorists/Masked/walk/terroristtest.png"));*/
-
     EL.insert(new Entities::Characters::Homer(Vector2F(200.f, 3000.f), Vector2F(60.0f, 30.0f)));
+    EL.insert(new Entities::Characters::Homer(Vector2F(300.f, 3000.f), Vector2F(60.0f, 30.0f)));
     EL.initialize(&EM, &CM);
     TM.initialize(&EM, &CM);
     EM.setWindow(GM->getWindow());
@@ -59,7 +57,7 @@ Stage::~Stage() {
 int Stage::execute() {
     sf::Time t = clock.getElapsedTime();
     float dt = t.asSeconds();
-    if (dt > 0.0167)dt = 0.0167;
+    if (dt > 0.0167) dt = 0.0167f;
     clock.restart();
 
     EL.update(dt);

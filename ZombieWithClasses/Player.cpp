@@ -145,7 +145,9 @@ void Entities::Characters::Player::createProjectile(Ids::Ids id, Vector2F pos, c
 
     scale.x == 1 ? px = 35.0f : px = -35.0f;
 
+    std::cout << EL->getSize() << std::endl;
     EL->insert(new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir));
+    std::cout << EL->getSize() << std::endl;
 }
 
 void Entities::Characters::Player::neutralized() {

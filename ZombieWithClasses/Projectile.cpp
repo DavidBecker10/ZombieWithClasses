@@ -11,6 +11,7 @@ Entities::Projectile::~Projectile() {
 }
 
 void Entities::Projectile::update(float t) {
+
     position.x += vel.x * t;
 }
 

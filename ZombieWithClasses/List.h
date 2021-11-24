@@ -91,7 +91,6 @@ namespace Lists
 			aux = pFirst;
 			size--;
 		}
-
 		pFirst = NULL;
 	}
 
@@ -126,9 +125,9 @@ namespace Lists
 						(pAux->getNext())->setPrev(pPrev);
 				}
 
+				size--;
 				//delete (pTL);
 				delete (pAux);
-				size--;
 				return true;
 			}
 			pPrev = pAux;
@@ -181,6 +180,7 @@ namespace Lists
 
 			if (!pAux)
 			{
+				std::cout << x << std::endl;
 				std::cerr << "Erro. Ponteiro pAux nulo em List<TL>::operator[]." << std::endl;
 				exit(1235);
 			}
@@ -188,5 +188,4 @@ namespace Lists
 			return pAux->getInfo();
 		}
 	}
-
 }
