@@ -43,7 +43,7 @@ void Entities::Characters::Enemy::draw()
 
 void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
 {
-    if (idOutro == Ids::Ids::Player) {
+    if (idOutro == Ids::Ids::Player1 || idOutro == Ids::Ids::Player2) {
         // std::cout << "nhac nhac nham nham heroi gostoso" << std::endl;
     }
     else if (idOutro == Ids::Ids::Enemy) {

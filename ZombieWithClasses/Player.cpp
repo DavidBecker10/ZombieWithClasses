@@ -4,7 +4,7 @@
 #include "Ids.h"
 
 Entities::Characters::Player::Player(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, PLAYER_PATH), bullet() {
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::empty, PLAYER_PATH), bullet() {
 }
 
 Entities::Characters::Player::~Player() {

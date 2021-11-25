@@ -9,7 +9,7 @@ void Lava::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensions
     case Ids::Enemy:
         /*...*/
         break;
-    case Ids::Player:
+    case Ids::Player1:
         /*...*/
         break;
     default:

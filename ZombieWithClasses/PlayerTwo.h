@@ -26,7 +26,7 @@ namespace Entities
 			void handleEvents(const sf::Event& e);
 			void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
 			void createProjectile(Ids::Ids id, Vector2F pos, const char* path);
-			void neutralized();
+			void centralizeInView();
 			void initializeJSON(nlohmann::json j);
 		};
 	}

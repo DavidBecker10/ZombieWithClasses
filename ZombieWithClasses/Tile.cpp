@@ -37,7 +37,7 @@ namespace Entities {
         case Ids::Ghoul:
             /*...*/
             break;
-        case Ids::Player:
+        case Ids::Player1:
             /*...*/
             break;
         default:

@@ -2,10 +2,12 @@
 #include "Homer.h"
 #include "Ghoul.h"
 #include "Lava.h"
-using namespace States;
 #include "Tile.h"
 #include <fstream>
 #include "Ids.h"
+
+using namespace States;
+
 RacoonCity::RacoonCity(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
     Stage{ gm,
           new Managers::TilesManager{
@@ -51,10 +53,17 @@ void RacoonCity::load(const std::string& path) {
 
     for (nlohmann::json e : j["Entity"]) {
         switch (static_cast<int>(e["ID"])) {
-        case Ids::Ids::Player: {
+        case Ids::Ids::Player1: {
             if (player1) {
                 player1->initializeJSON(e);
                 EL.insert(player1);
+            }
+            break;
+        }
+        case Ids::Ids::Player2: {
+            if (player2) {
+                player2->initializeJSON(e);
+                EL.insert(player2);
             }
             break;
         }

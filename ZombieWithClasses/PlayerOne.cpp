@@ -4,7 +4,7 @@
 #include "Ids.h"
 
 Entities::Characters::PlayerOne::PlayerOne(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, PLAYER_PATH), bullet() {
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player1, PLAYER_PATH), bullet() {
 }
 
 Entities::Characters::PlayerOne::~PlayerOne() {
@@ -33,18 +33,6 @@ void Entities::Characters::PlayerOne::update(float t) {
     
     else if (position.x >= (32.0f * 200) - dimensions.x)
         position.x = (32.0f * 200) - dimensions.x;
-
-    if (position.x <= (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2)
-        position.x = (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2;
-
-    else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
-        position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
-
-    if (position.y <= (GM->getCenterView().y) - (GM->getSizeView().y / 2) - dimensions.y / 2)
-        position.y = (GM->getCenterView().y) - (GM->getSizeView().y / 2 - dimensions.y / 2);
-
-    else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
-        position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
     
     if (!isGround && !isJumping)
         position.y += vel.y * t + GRAVITY;
@@ -155,7 +143,7 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
     case Ids::wallL:
         isGround = false;
         break;
-    case Ids::Player:
+    case Ids::Player2:
         if (!isJumping)
             isGround = true;
         break;
@@ -180,8 +168,19 @@ void Entities::Characters::PlayerOne::createProjectile(Ids::Ids id, Vector2F pos
     EL->insert(bullet);
 }
 
-void Entities::Characters::PlayerOne::neutralized() {
+void Entities::Characters::PlayerOne::centralizeInView()
+{
+    if (position.x <= (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2)
+        position.x = (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2;
 
+    else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
+        position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
+
+    if (position.y <= (GM->getCenterView().y) - (GM->getSizeView().y / 2) - dimensions.y / 2)
+        position.y = (GM->getCenterView().y) - (GM->getSizeView().y / 2 - dimensions.y / 2);
+
+    else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
+        position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
 }
 
 void Entities::Characters::PlayerOne::initializeJSON(nlohmann::json j) {

@@ -1,6 +1,3 @@
-//
-// Created by Gabriel on 18/11/2021.
-//
 #include "stdafx.h"
 #include "ScreenManager.h"
 #include "Stage.h"
@@ -53,6 +50,8 @@ int Stage::execute() {
         GM->centralize(player1->getPosition());
     else
     {
+        player1->centralizeInView();
+        player2->centralizeInView();
         Vector2F aux;
         aux.x = (player1->getPosition().x < player2->getPosition().x) ? (player1->getPosition().x) : (player2->getPosition().x);
         aux.y = (player1->getPosition().y < player2->getPosition().y) ? (player1->getPosition().y) : (player2->getPosition().y);
@@ -63,20 +62,6 @@ int Stage::execute() {
     }
     return returnCode;
 }
-
-/**sf::Time t = clock.getElapsedTime();
-clock.restart();
-
-EM.manageEvent();
-EL.update(t.asSeconds());
-CM.verifyCollisions();
-
-TM.draw(GM);
-EL.draw(&GM);
-
-}*/
-
-
 
 void Stage::pushCloseWindow(const sf::Event e) {
     if (e.type == sf::Event::Closed) setReturnCode(Managers::end);

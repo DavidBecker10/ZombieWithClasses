@@ -4,7 +4,7 @@
 #include "Ids.h"
 
 Entities::Characters::PlayerTwo::PlayerTwo(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, PLAYER2_PATH), bullet() {
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player2, PLAYER2_PATH), bullet() {
 }
 
 Entities::Characters::PlayerTwo::~PlayerTwo() {
@@ -154,7 +154,7 @@ void Entities::Characters::PlayerTwo::collide(Ids::Ids idOther, Vector2F positio
     case Ids::wallL:
         isGround = false;
         break;
-    case Ids::Player:
+    case Ids::Player1:
         if(!isJumping)
             isGround = true;
         break;
@@ -179,8 +179,19 @@ void Entities::Characters::PlayerTwo::createProjectile(Ids::Ids id, Vector2F pos
     EL->insert(bullet);
 }
 
-void Entities::Characters::PlayerTwo::neutralized() {
+void Entities::Characters::PlayerTwo::centralizeInView()
+{
+    if (position.x <= (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2)
+        position.x = (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2;
 
+    else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
+        position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
+
+    if (position.y <= (GM->getCenterView().y) - (GM->getSizeView().y / 2) - dimensions.y / 2)
+        position.y = (GM->getCenterView().y) - (GM->getSizeView().y / 2 - dimensions.y / 2);
+
+    else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
+        position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
 }
 
 void Entities::Characters::PlayerTwo::initializeJSON(nlohmann::json j) {
