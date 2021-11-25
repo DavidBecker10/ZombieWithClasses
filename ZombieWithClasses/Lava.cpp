@@ -1,29 +1,18 @@
 #include "Lava.h"
 
-Entities::Obstacles::Lava::Lava() :
-	Obstacle()
-{
+Lava::Lava() : Obstacle(Ids::lava, "../assets/Tiles/Platformer/Lava.png", { 32.0f, 32.0f }) {
+
 }
 
-Entities::Obstacles::Lava::~Lava()
-{
+void Lava::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
+    switch (idOther) {
+    case Ids::Enemy:
+        /*...*/
+        break;
+    case Ids::Player:
+        /*...*/
+        break;
+    default:
+        break;
+    }
 }
-
-void Entities::Obstacles::Lava::update(float t)
-{
-}
-
-void Entities::Obstacles::Lava::initialize(Managers::EventManager* EM, Managers::CollisionManager* CM)
-{
-}
-
-void Entities::Obstacles::Lava::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
-{
-}
-
-/*
-void Entities::Obstacles::Lava::collidePlayer(Entities::Characters::Player* pP)
-{
-	EL->remove(pP);
-}
-*/

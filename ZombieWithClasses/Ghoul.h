@@ -1,21 +1,25 @@
-#pragma once
+//
+// Created by Gabriel on 20/11/2021.
+//
+
+#ifndef ZOMBIEWITHCLASSES_GHOUL_H
+#define ZOMBIEWITHCLASSES_GHOUL_H
+
 #include "Enemy.h"
-#include "stdafx.h"
 
-namespace Entities
-{
-    namespace Characters
-    {
-        class Ghoul :
-            public Enemy
-        {
+namespace Entities {
+    namespace Characters {
+        class Ghoul : public Enemy {
         private:
-
+            static const float attackTime;
         public:
-            Ghoul(Vector2F pos, Vector2F vel, const char* tPath = GHOUL_PATH);
+            Ghoul(Vector2F pos = { 0.0f,0.0f }, Vector2F vel = { 0.0f,0.0f });
+            Ghoul(nlohmann::json j);
             ~Ghoul();
-            void update(float t);
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2U dimensionsOther);
+            void update(float t) override;
+            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
         };
     }
 }
+
+#endif //ZOMBIEWITHCLASSES_GHOUL_H

@@ -11,15 +11,11 @@ Lists::EntityList::~EntityList() {
 }
 
 void Lists::EntityList::insert(Entities::Entity* pE) {
-    if (pE)
-        list.insert(pE);
-    else
-        std::cout << "Erro: pE nulo em EntityList::insert" << std::endl;
+    list.insert(pE);
 }
 
 void Lists::EntityList::remove(Entities::Entity* pE) {
-    if (!list.remove(pE))
-        std::cout << "Erro ao remover" << std::endl;
+    list.remove(pE);
 }
 
 int Lists::EntityList::getSize() {
@@ -31,10 +27,10 @@ void Lists::EntityList::update(float t) {
         list[i]->update(t);
 }
 
-void Lists::EntityList::initialize(Managers::EventManager* EM,
+void Lists::EntityList::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,
     Managers::CollisionManager* CM) {
     for (int i = 0; i < list.getSize(); i++)
-        list[i]->initialize(EM, CM);
+        list[i]->initialize(GM, EM, CM);
 }
 
 void Lists::EntityList::draw() {
@@ -53,4 +49,15 @@ Entities::Entity* Lists::EntityList::operator[](int x) {
 
 void Lists::EntityList::destroyEntities() {
     list.destroy();
+}
+
+nlohmann::json Lists::EntityList::convertJSON() {
+    nlohmann::json js = nlohmann::json::array();
+    int pos = 0;
+    Entities::Entity* e = list.backStart();
+    while (e) {
+        js[pos++] = e->convertJSON();
+        e = list.goNext();
+    }
+    return js;
 }

@@ -1,24 +1,14 @@
+//
+// Created by Gabriel on 24/11/2021.
+//
+
 #include "Obstacle.h"
-#include "Player.h"
 
-Entities::Obstacles::Obstacle::Obstacle() :
-	Entity()
-{
+
+Obstacle::Obstacle(const Ids::Ids i, const char* p, Vector2F s) : Tile(i, p, s) {
+
 }
 
-Entities::Obstacles::Obstacle::~Obstacle()
-{
+void Obstacle::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
+    Tile::collide(idOther, positionOther, dimensionsOther);
 }
-
-void Entities::Obstacles::Obstacle::update(float t)
-{
-}
-
-void Entities::Obstacles::Obstacle::initialize(Managers::EventManager* EM, Managers::CollisionManager* CM)
-{
-}
-
-void Entities::Obstacles::Obstacle::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
-{
-}
-

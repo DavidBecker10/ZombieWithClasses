@@ -1,7 +1,7 @@
 #include "Entity.h"
 #include "EntityList.h"
 #include "CollisionManager.h"
-
+#include "json.hpp"
 Entities::Entity::Entity(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tP) :
     Ent(ID, tP),
     vel{ v },
@@ -19,8 +19,18 @@ void Entities::Entity::draw()
     GM->draw(textPath, position);
 }
 
+nlohmann::json Entities::Entity::convertJSON() {
+    return {
+            {"ID", ID},
+            {"position", position.convertJSON()},
+            {"vel", vel.convertJSON()},
+            {"textPath", textPath},
+            {"dimensions", dimensions.convertJSON()}
+    };
+}
+
+
 /*void Entities::Entity::update(float t) {
     position += (vel*t);
 }*/
-
 Lists::EntityList* Entities::Entity::EL = NULL;

@@ -1,7 +1,7 @@
 #include "GraphicManager.h"
+
 #include <iostream>
 #include "stdafx.h"
-
 Managers::GraphicManager::GraphicManager() :
     window{ new sf::RenderWindow(sf::VideoMode(1280, 720), "Zombie With Classes", sf::Style::Close) },
     view{ sf::Vector2f(640, 360), sf::Vector2f(1000,500) },

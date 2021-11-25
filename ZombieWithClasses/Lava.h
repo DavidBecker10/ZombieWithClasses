@@ -1,21 +1,18 @@
-#pragma once
+//
+// Created by Gabriel on 24/11/2021.
+//
+
+#ifndef ZOMBIEWITHCLASSES_LAVA_H
+#define ZOMBIEWITHCLASSES_LAVA_H
+
 #include "Obstacle.h"
 
-namespace Entities
-{
-    namespace Obstacles
-    {
-        class Lava :
-            public Obstacle
-        {
-        public:
-            Lava();
-            ~Lava();
-            virtual void update(float t);
-            void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
-            virtual void collidePlayer(Entities::Characters::Player* pP);
-        };
-    }
-}
+class Lava : public Obstacle {
+public:
+    Lava();
 
+    void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+};
+
+
+#endif //ZOMBIEWITHCLASSES_LAVA_H

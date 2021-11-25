@@ -1,21 +1,21 @@
 #pragma once
 
 #include "Ent.h"
+//#include "Vector2D.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
+#include "Serialize.h"
 
 namespace Managers {
     class CollisionManager;
 }
-
 namespace Lists {
     class EntityList;
 }
-
 namespace Entities
 {
     class Entity :
-        public Ent
+        public Ent, public Serialize
     {
     private:
         bool showing;
@@ -31,11 +31,11 @@ namespace Entities
         Entity(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tP = nullptr);
         ~Entity();
         virtual void update(float t) = 0;
-        virtual void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM) = 0;
+        virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM) = 0;
         virtual void draw();
         virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
 
-        static void setEL(Lists::EntityList* El) { EL = El; }
+        nlohmann::json convertJSON() override;
 
         void setPosition(const Vector2F pos) { position = pos; }
         Vector2F getPosition() { return position; }
@@ -51,5 +51,6 @@ namespace Entities
         void setFacingLeft(bool facingLeft) { faceLeft = facingLeft; }
         bool facingLeft() const { return faceLeft; }
 
+        static void setEL(Lists::EntityList* El) { EL = El; }
     };
 }

@@ -1,10 +1,12 @@
 #include "ScreenManager.h"
 #include "Stage.h"
+#include "RacoonCity.h"
 #include "MainMenuState.h"
+#include "PauseMenuState.h"
 using namespace Managers;
 
-ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1, Entities::Characters::PlayerTwo* p2) :
-    GM{ *gm }, player1{ p1 }, player2{ p2 } {
+ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::Player* p1) :
+    GM{ *gm }, player1{ p1 } {
     push(new States::MainMenuState(GM));
 }
 
@@ -12,54 +14,47 @@ bool ScreenManager::processCode(int returnCode) {
     switch (returnCode) {
     case end:
         return true;
-    case goRacoonCity:
-        push(new States::Stage(&GM, player1, player2));
+    case goRacoonCity: {
+        auto* racoon = new States::RacoonCity(&GM, player1);
+        racoon->initialize();
+        push(racoon);
         return false;
-        break;
-        /*case goFirstStage:
-        {
-            RacoonCity* fase = new FaseExemplo(gerenciadorGrafico, jogador1);
-            fase->inicializar();
-            push(fase);
-            return false;
+    }
+    case saveGame: {
+        pop();
+        States::Stage* s = dynamic_cast<States::Stage*>(top());
+        if (!s)
+            std::cout << "No stage to save" << std::endl;
+        else if (!s->save("../saves/saves.json")) std::cout << "Error. Game can't be saved" << std::endl;
+        return false;
+    }
+    case loadGame: {
+        States::RacoonCity* rc = new States::RacoonCity(&GM, player1);
+        try {
+            rc->load("../saves/saves.json");
+            push(rc);
         }
-        case salvarJogo:
-        {
-            pop();
-            Fase* fase = dynamic_cast<Fase*>(top());
-            if (!fase)
-                std::cout << "Erro! Não há fase a ser salva." << std::endl;
-            else if (!fase->salvar("../jogos-salvos/jogo_salvo.json"))
-                std::cout << "Erro! O jogo não pôde ser salvo." << std::endl;
-            return false;
+        catch (char const* s) {
+            std::cout << s << std::endl;
+            delete rc;
         }
-        case carregarJogo:
-        {
-            std::cout << "como";
-            FaseExemplo* fase = new FaseExemplo(gerenciadorGrafico, jogador1);
-            std::cout << " onde" << std::endl;
-            try {
-                fase->carregar("../jogos-salvos/jogo_salvo.json");
-                push(fase);
-            } catch (char const* s) {
-                std::cout << s << std::endl;
-                delete fase;
-            }
-            return false;
-        }
-        case irMenuPausa:
-            push(new MenuPausa(gerenciadorGrafico));
-            return false;
+        return false;
+    }
+    case goPauseMenu: {
+        push(new States::PauseMenuState(GM));
+        return false;
+    }
+    case resume: {
+        pop();
+        return false;
+    }
+    case goMainMenu: {
+        emptyStack();
+        push(new States::MainMenuState(GM));
+        return false;
+    }
 
-        case sairMenuPausa:
-            pop();
-            return false;
-
-        case irMenuPrincipal:
-            esvaziarPilha();
-            push(new MenuPrincipal(gerenciadorGrafico));
-
-        case continuar:*/
+    case proceed:
     default:
         return false;
     }

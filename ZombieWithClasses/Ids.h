@@ -24,6 +24,9 @@ namespace Ids
         wallR,
         Player,
         Enemy,
-        Projectile
+        Projectile,
+        Homer,
+        Ghoul,
+        Nemesis
     };
 }

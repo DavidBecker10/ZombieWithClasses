@@ -8,10 +8,11 @@
 
 namespace Entities {
     class Tile : public Entity {
-    private:
+    protected:
         //        const Ids::Ids id;
         //        const char* path;
         Vector2F size;
+        Managers::GraphicManager* gm;
         Managers::CollisionManager* cm;
 
     public:
@@ -19,12 +20,12 @@ namespace Entities {
 
         ~Tile();
 
-        void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
 
         void draw(const Vector2F position) const;
 
         void update(float t) {}
-        void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+        virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
         Vector2F getSize() const { return size; }
 
     };

@@ -3,19 +3,23 @@
 #include "CollisionManager.h"
 #include "Ids.h"
 
-Entities::Characters::Player::Player(Vector2F pos, const char* path) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, path) {
+Entities::Characters::Player::Player(Vector2F pos) :
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player, PLAYER_PATH), bullet() {
 }
 
 Entities::Characters::Player::~Player() {
 }
 
-void Entities::Characters::Player::initialize(Managers::EventManager* EM,
+void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,
     Managers::CollisionManager* CM) {
     isJumping = false;
+    //isGround = false;
     GM->loadTexture(textPath);
+    //dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
     dimensions = GM->getSize(textPath);
     listenKey = EM->addListenKeyboard([this](const sf::Event e) { handleEvents(e); });
+    //CM->addCollide(this);
+
 }
 
 void Entities::Characters::Player::setTM(Managers::TilesManager* t) {
@@ -35,8 +39,63 @@ void Entities::Characters::Player::update(float t) {
 }
 
 void Entities::Characters::Player::draw() {
+    //GM->draw(textPath, position, body, { 1, 9 }, { 0, 5 });
     GM->draw(textPath, position, scale);
     GM->centralize(position);
+}
+
+void Entities::Characters::Player::handleEvents(const sf::Event& e) {
+    if (e.type == sf::Event::KeyPressed) {
+        switch (e.key.code) {
+        case sf::Keyboard::Key::D:
+            vel.x = 300;
+            scale.x = 1;
+            /* code */
+            break;
+        case sf::Keyboard::Key::A:
+            vel.x = -300;
+            scale.x = -1;
+            /* code */
+            break;
+        case sf::Keyboard::Key::W:
+            if (!isJumping && isGround) {
+                vel.y = -900.0f;
+                isJumping = true;
+                isGround = false;
+            }
+            /* code */
+            break;
+        case sf::Keyboard::Key::Space:
+            createProjectile(ID, position, BULLET_PATH);
+        default:
+            break;
+        }
+    }
+    if (e.type == sf::Event::KeyReleased) {
+        switch (e.key.code) {
+        case sf::Keyboard::Key::D:
+            vel.x = 0;
+            scale.x = 1;
+            /* code */
+            break;
+        case sf::Keyboard::Key::A:
+            vel.x = 0;
+            scale.x = -1;
+            /* code */
+            break;
+        case sf::Keyboard::Key::W:
+            vel.y = 0;
+            isJumping = false;
+            isGround = false;
+
+            /* code */
+            break;
+            //            case sf::Keyboard::Key::Space:
+            //                createProjectile(ID, position, BULLET_PATH);
+        default:
+            break;
+        }
+    }
 }
 
 void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
@@ -45,6 +104,15 @@ void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOt
 
     switch (idOther) {
     case Ids::Enemy:
+        EL->remove(this);
+        break;
+    case Ids::Ghoul:
+        EL->remove(this);
+        break;
+    case Ids::Homer:
+        EL->remove(this);
+        break;
+    case Ids::Nemesis:
         EL->remove(this);
         break;
     case Ids::ground2:
@@ -89,9 +157,16 @@ void Entities::Characters::Player::createProjectile(Ids::Ids id, Vector2F pos, c
 
     scale.x == 1 ? px = 35.0f : px = -35.0f;
 
-    EL->insert(new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir));
+    bullet = new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir);
+
+    EL->insert(bullet);
 }
 
 void Entities::Characters::Player::neutralized() {
+
+}
+
+void Entities::Characters::Player::initializeJSON(nlohmann::json j) {
+    position = { j["position"] };
 
 }

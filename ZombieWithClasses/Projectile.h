@@ -1,3 +1,8 @@
+//
+// Created by Gabriel on 20/11/2021.
+//
+
+
 #ifndef ZOMBIEWITHCLASSES_PROJECTILE_H
 #define ZOMBIEWITHCLASSES_PROJECTILE_H
 
@@ -12,7 +17,7 @@ namespace Entities {
 
         virtual void update(float t);
         void draw();
-        void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
         void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
     };
 }

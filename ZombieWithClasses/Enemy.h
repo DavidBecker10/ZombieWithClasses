@@ -12,12 +12,12 @@ namespace Entities
 
 
         public:
-            Enemy(Vector2F pos = { 0.0f, 0.0f }, Vector2F vel = { 0.0f, 0.0f }, const char* tPath = nullptr);
+            Enemy(Vector2F pos = { 0.0f, 0.0f }, Vector2F vel = { 0.0f, 0.0f }, Ids::Ids id = Ids::Ids::empty, const char* tPath = nullptr);
             ~Enemy();
-            virtual void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
+            virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
             virtual void update(float t) = 0;
             void draw();
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
+            void collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro);
         };
     }
 }

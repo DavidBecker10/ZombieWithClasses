@@ -1,18 +1,21 @@
 #include "Homer.h"
-#include "stdafx.h"
+#include "EntityList.h"
 
-Entities::Characters::Homer::Homer(Vector2F pos, Vector2F vel, const char* tPath):
-	Enemy(pos, vel, tPath)
-{
-}
-
-Entities::Characters::Homer::~Homer()
-{
+Entities::Characters::Homer::Homer(Vector2F pos, Vector2F vel) :
+    Enemy(pos, vel, Ids::Ids::Homer, HOMER_PATH) {
 
 }
 
-void Entities::Characters::Homer::update(float t)
+Entities::Characters::Homer::Homer(nlohmann::json j) :
+    Enemy({ j["position"] }, { j["vel"] }, Ids::Ids::Homer, HOMER_PATH)
 {
+
+}
+Entities::Characters::Homer::~Homer() {
+
+}
+
+void Entities::Characters::Homer::update(float t) {
     if (position.x < 1555.f)
         position.x += vel.x * t;
     else {
@@ -29,45 +32,41 @@ void Entities::Characters::Homer::update(float t)
         position.y += vel.y * t + GRAVITY;
 }
 
-void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
-{
-    /*if (idOther != Ids::ground2)
-        isGround = false;*/
+void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
+    if (idOther != Ids::ground2)
+        isGround = false;
 
     switch (idOther) {
     case Ids::lava:
-        std::cout << "lava" << std::endl;
         vel.x *= -1;
         break;
     case Ids::ground2:
         isGround = true;
-        //std::cout << "chao" << std::endl;
         break;
     case Ids::empty:
-        scale.x = -1;
         isGround = true;
-        //std::cout << "empty" << std::endl;
         vel.x *= -1;
+        scale.x = -1;
         break;
     case Ids::wallL:
         isGround = true;
         vel.x *= -1;
         scale.x = -1;
         break;
-    /*case Ids::wallR:
+    case Ids::wallR:
         isGround = true;
         vel.x *= -1;
         scale.x = -1;
-        break;*/
-    case Ids::Projectile:
-        //std::cout << "Falici" << std::endl;
-        //std::cout << EL->getSize() << std::endl;
-        EL->remove(this);
-        //std::cout << EL->getSize() << std::endl;
         break;
-    case Ids::Player:
+    case Ids::Projectile:
+        EL->remove(this);
+        break;
+    case Ids::Ghoul:
+        isGround = true;
         break;
     default:
         break;
     }
 }
+
+

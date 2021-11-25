@@ -1,25 +1,18 @@
-#pragma once
-#include "Entity.h"
+//
+// Created by Gabriel on 24/11/2021.
+//
 
-namespace Entities
-{
-    namespace Characters
-    {
-        class Player;
-    }
+#ifndef ZOMBIEWITHCLASSES_OBSTACLE_H
+#define ZOMBIEWITHCLASSES_OBSTACLE_H
 
-    namespace Obstacles
-    {
-        class Obstacle :
-            public Entity
-        {
-        public:
-            Obstacle();
-            ~Obstacle();
-            virtual void update(float t);
-            void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
-            virtual void collidePlayer(Entities::Characters::Player* pP) = 0;
-        };
-    }
-}
+#include "Tile.h"
+
+class Obstacle :
+    public Entities::Tile {
+public:
+    Obstacle(const Ids::Ids i = Ids::Ids::empty, const char* p = nullptr, Vector2F s = { 32.0f, 32.0f });
+    virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+};
+
+
+#endif //ZOMBIEWITHCLASSES_OBSTACLE_H

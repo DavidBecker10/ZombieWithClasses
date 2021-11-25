@@ -11,7 +11,6 @@ Entities::Projectile::~Projectile() {
 }
 
 void Entities::Projectile::update(float t) {
-
     position.x += vel.x * t;
 }
 
@@ -21,7 +20,7 @@ void Entities::Projectile::draw() {
     GM->draw(textPath, position, scale);
 }
 
-void Entities::Projectile::initialize(Managers::EventManager* EM,
+void Entities::Projectile::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,
     Managers::CollisionManager* CM) {
     GM->loadTexture(textPath);
     dimensions = GM->getSize(textPath);
@@ -29,10 +28,11 @@ void Entities::Projectile::initialize(Managers::EventManager* EM,
 
 void Entities::Projectile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
     switch (idOther) {
-    case Ids::Enemy:
-        //std::cout << EL->getSize() << std::endl;
+    case Ids::Ghoul:
         //EL->remove(this);
-        //std::cout << EL->getSize() << std::endl;
+        break;
+    case Ids::Homer:
+        //EL->remove(this);
         break;
     default:
         break;

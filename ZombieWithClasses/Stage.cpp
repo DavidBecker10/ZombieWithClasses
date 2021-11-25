@@ -1,79 +1,59 @@
+//
+// Created by Gabriel on 18/11/2021.
+//
 #include "stdafx.h"
 #include "ScreenManager.h"
 #include "Stage.h"
 #include "Enemy.h"
 #include "Homer.h"
-
 using namespace States;
 
-Stage::Stage(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1, Entities::Characters::PlayerTwo* p2) :
+Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::Player* p1) :
     GM(gm),
     player1{ p1 },
-    player2{ p2 },
-    TM{
-            {
-                new Entities::Tile(Ids::empty, "../Assets/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::air, "../Assets/Tiles/Platformer/air.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground1, "../Assets/Tiles/Platformer/Ground_01.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground2, "../Assets/Tiles/Platformer/Ground_02.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground3, "../Assets/Tiles/Platformer/Ground_03.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground4, "../Assets/Tiles/Platformer/Ground_04.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground5, "../Assets/Tiles/Platformer/Ground_05.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground6, "../Assets/Tiles/Platformer/Ground_06.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground7, "../Assets/Tiles/Platformer/Ground_07.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground8, "../Assets/Tiles/Platformer/Ground_08.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground9, "../Assets/Tiles/Platformer/Ground_09.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground10, "../Assets/Tiles/Platformer/Ground_10.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground11, "../Assets/Tiles/Platformer/Ground_11.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::ground12, "../Assets/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::wallL, "../Assets/Tiles/Platformer/wallL.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::wallR, "../Assets/Tiles/Platformer/wallR.png", {32.0f, 32.0f}),
-                new Entities::Tile(Ids::lava, "../Assets/Tiles/PNG/Tiles_lava/lava_tile6.png", {32.0f, 32.0f}),
-            },
-            {32.0f, 32.0f}, RACOON_PATH
-},
-end{ false },
-clock(),
-EL(),
-IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e); }) } {
-
-    if (player1) EL.insert(player1);
-    //if (player2) EL.insert(player2);
-    player2->setEL(&EL);
-    player1->setGM(GM);
-
-
-    //EL.insert(new Entities::Characters::PlayerOne(Vector2F(200.f, 3000.f)));
-    EL.insert(new Entities::Characters::Homer(Vector2F(200.f, 3000.f), Vector2F(60.0f, 30.0f)));
-    EL.insert(new Entities::Characters::Homer(Vector2F(300.f, 3000.f), Vector2F(60.0f, 30.0f)));
-    EL.initialize(&EM, &CM);
-    TM.initialize(&EM, &CM);
+    TM{ tm },
+    IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e); }) },
+    IDPushPause{ EM.addListenKeyboard([this](const sf::Event& e) { pushPause(e); }) },
+    returnCode(Managers::proceed)
+{
+    //std::cout<<"jorge"<<std::endl;
+    //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
+    TM->initialize(GM, &EM, &CM);
+    //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
     EM.setWindow(GM->getWindow());
-    CM.setTilesManager(&TM);
+    //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
+    CM.setTilesManager(TM);
+    //gerenciadorColisoes.setGerenciadorTiles(&gerenciadorTiles);
     CM.setList(&EL);
+    player1->setEL(&EL);
+    player1->setGM(GM);
 }
 
 Stage::~Stage() {
-    if(player1)
-        EL.remove(player1);
+    EL.remove(player1);
     EL.destroyEntities();
+    delete TM;
 }
 
 int Stage::execute() {
-    sf::Time t = clock.getElapsedTime();
-    float dt = t.asSeconds();
-    if (dt > 0.0167) dt = 0.0167f;
-    clock.restart();
+    returnCode = Managers::proceed;
+    //sf::Time t = clock.getElapsedTime();
+    double t = clock.getTime();
+    //float dt = t.asSeconds();
+    //if(dt>0.0167)dt=0.0167;
+    //clock.restart();
+    if (t > 0.0167)t = 0.0167;
+    clock.resetClock();
 
-    EL.update(dt);
-    CM.verifyCollisions();
-    TM.draw(GM);
-    EL.draw();
-    //player2->draw();
+
     EM.manageEvent();
+    //EL.update(dt);
+    EL.update(t);
+    CM.verifyCollisions();
+    TM->draw(GM);
+    EL.draw();
 
-    if (end) return Managers::end;
-    else return Managers::proceed;
+    return returnCode;
 }
 
 /**sf::Time t = clock.getElapsedTime();
@@ -88,8 +68,17 @@ EL.draw(&GM);
 
 }*/
 
+
+
 void Stage::pushCloseWindow(const sf::Event e) {
-    if (e.type == sf::Event::Closed) end = true;
+    if (e.type == sf::Event::Closed) setReturnCode(Managers::end);
+}
+
+void Stage::pushPause(const sf::Event e) {
+    if (e.type == sf::Event::KeyReleased && e.key.code == sf::Keyboard::Key::Escape) {
+        setReturnCode(Managers::goPauseMenu);
+        clock.pauseClock();
+    }
 }
 /*
 

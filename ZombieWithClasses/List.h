@@ -59,6 +59,8 @@ namespace Lists
 		Element<TL>* getpFirst() { return pFirst; }
 		Element<TL>* getpLast() { return pLast; }
 		Element<TL>* getpCurrent() { return pCurrent; }
+		TL* backStart();
+		TL* goNext();
 		TL* operator[](int x);
 
 	};
@@ -91,6 +93,7 @@ namespace Lists
 			aux = pFirst;
 			size--;
 		}
+
 		pFirst = NULL;
 	}
 
@@ -119,15 +122,12 @@ namespace Lists
 			if (pAux->getInfo() == pTL) {
 				if (pAux == pFirst)
 					pFirst = pAux->getNext();
-				else {
+				else
 					pPrev->setNext(pAux->getNext());
-					if(pAux->getNext())
-						(pAux->getNext())->setPrev(pPrev);
-				}
 
-				size--;
 				//delete (pTL);
 				delete (pAux);
+				size--;
 				return true;
 			}
 			pPrev = pAux;
@@ -187,4 +187,18 @@ namespace Lists
 			return pAux->getInfo();
 		}
 	}
+
+	template<class TL>
+	TL* List<TL>::backStart() {
+		pCurrent = pFirst;
+		if (pCurrent) return pCurrent->getInfo();
+		else return nullptr;
+	}
+
+	template<class TL>
+	TL* List<TL>::goNext() {
+		pCurrent = pCurrent->getNext();
+		return (pCurrent) ? pCurrent->getInfo() : nullptr;
+	}
+
 }

@@ -1,7 +1,6 @@
 #pragma once
 #include "Ids.h"
 #include "GraphicManager.h"
-
 class Ent
 {
 protected:

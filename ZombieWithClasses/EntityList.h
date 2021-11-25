@@ -3,9 +3,11 @@
 #include "List.h"
 #include "Entity.h"
 #include "GraphicManager.h"
+#include "Serialize.h"
+#include "json.hpp"
 
 namespace Lists {
-    class EntityList {
+    class EntityList : public Serialize {
     private:
         Lists::List<Entities::Entity> list;
 
@@ -22,13 +24,15 @@ namespace Lists {
 
         void update(float t);
 
-        void initialize(Managers::EventManager* EM, Managers::CollisionManager* CM);
+        void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
 
         void draw();
 
         Entities::Entity* operator[](int x);
 
         void destroyEntities();
+
+        nlohmann::json convertJSON();
     };
 
 }

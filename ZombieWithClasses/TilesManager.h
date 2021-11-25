@@ -30,7 +30,7 @@ namespace Managers {
 
         ~TilesManager();
 
-        void initialize(EventManager* em, CollisionManager* cm);
+        void initialize(GraphicManager* gm, EventManager* em, CollisionManager* cm);
 
         void draw(GraphicManager* g) const;
 

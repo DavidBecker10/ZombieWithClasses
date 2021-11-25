@@ -1,6 +1,7 @@
 #ifndef ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 #define ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 
+
 #include "EntityList.h"
 #include "Entity.h"
 #include <set>
@@ -11,6 +12,7 @@ namespace Managers {
     class CollisionManager {
     private:
         TilesManager* TM;
+        //std::set<Entities::Entity*> list;
         Lists::EntityList* EntityL;
 
     public:

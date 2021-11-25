@@ -1,3 +1,7 @@
+//
+// Created by Gabriel on 21/11/2021.
+//
+
 #include "Text.h"
 
 Text::Text(Managers::EventManager& em, unsigned short maxL) :

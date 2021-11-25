@@ -1,5 +1,10 @@
+//
+// Created by Gabriel on 20/11/2021.
+//
+
 #ifndef ZOMBIEWITHCLASSES_STATE_H
 #define ZOMBIEWITHCLASSES_STATE_H
+
 
 #include "EventManager.h"
 #include "GraphicManager.h"

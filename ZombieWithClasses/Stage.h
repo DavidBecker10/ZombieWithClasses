@@ -1,36 +1,48 @@
+//
+// Created by Gabriel on 18/11/2021.
+//
+
 #ifndef ZOMBIEWITHCLASSES_STAGE_H
 #define ZOMBIEWITHCLASSES_STAGE_H
 
 #include "State.h"
-#include "PlayerTwo.h"
-#include "PlayerOne.h"
+#include "Player.h"
 #include "CollisionManager.h"
+#include "Save.h"
+#include "Clock.h"
 
 namespace States {
-    class Stage :public State {
-    private:
+    class Stage :public State, public Save {
+    protected:
         Managers::GraphicManager* GM;
-        Entities::Characters::PlayerOne* player1;
-        Entities::Characters::PlayerTwo* player2;
+        Entities::Characters::Player* player1;
 
         Managers::EventManager EM;
         Managers::CollisionManager CM;
-        Managers::TilesManager TM;
-        sf::Clock clock;
+        Managers::TilesManager* TM;
+        //sf::Clock clock;
+        Clock clock;
         Lists::EntityList EL;
 
-        bool end;
+        void setReturnCode(int rc) { returnCode = rc; }
+        int returnCode;
+
+    private:
+
         unsigned int IDCloseScreen;
+        unsigned int IDPushPause;
 
         void pushCloseWindow(const sf::Event e);
+        void pushPause(const sf::Event e);
 
     public:
-        Stage(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1, Entities::Characters::PlayerTwo* p2);
+        Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::Player* p1 = nullptr);
 
         ~Stage();
 
         int execute() override;
 
+        virtual void initialize() = 0;
         /*void exit(){ }
         void refresh(float t, Managers::EventManager *EM) { }
         virtual void draw(Managers::GraphicManager *GM) { }

@@ -1,3 +1,7 @@
+//
+// Created by Gabriel on 20/11/2021.
+//
+
 #ifndef ZOMBIEWITHCLASSES_BUTTONMANAGER_H
 #define ZOMBIEWITHCLASSES_BUTTONMANAGER_H
 
