@@ -1,7 +1,4 @@
 //
-// Created by Gabriel on 20/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_RACOONCITY_H
 #define ZOMBIEWITHCLASSES_RACOONCITY_H
 
@@ -11,7 +8,7 @@
 namespace States {
     class RacoonCity : public Stage {
     public:
-        RacoonCity(Managers::GraphicManager* gm, Entities::Characters::Player* p1 = nullptr);
+        RacoonCity(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1 = nullptr);
         nlohmann::json convertJSON() override;
         void load(const std::string& path) override;
         void initialize() override;

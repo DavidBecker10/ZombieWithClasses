@@ -8,7 +8,7 @@
 #include "Homer.h"
 using namespace States;
 
-Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::Player* p1) :
+Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::PlayerOne* p1) :
     GM(gm),
     player1{ p1 },
     TM{ tm },
@@ -16,14 +16,12 @@ Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities:
     IDPushPause{ EM.addListenKeyboard([this](const sf::Event& e) { pushPause(e); }) },
     returnCode(Managers::proceed)
 {
-    //std::cout<<"jorge"<<std::endl;
-    //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
     TM->initialize(GM, &EM, &CM);
-    //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
+
     EM.setWindow(GM->getWindow());
-    //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
+
     CM.setTilesManager(TM);
-    //gerenciadorColisoes.setGerenciadorTiles(&gerenciadorTiles);
+
     CM.setList(&EL);
     player1->setEL(&EL);
     player1->setGM(GM);
@@ -47,7 +45,6 @@ int Stage::execute() {
 
 
     EM.manageEvent();
-    //EL.update(dt);
     EL.update(t);
     CM.verifyCollisions();
     TM->draw(GM);

@@ -1,12 +1,9 @@
-//
-// Created by Gabriel on 18/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_STAGE_H
 #define ZOMBIEWITHCLASSES_STAGE_H
 
 #include "State.h"
-#include "Player.h"
+#include "PlayerOne.h"
+#include "PlayerTwo.h"
 #include "CollisionManager.h"
 #include "Save.h"
 #include "Clock.h"
@@ -15,7 +12,7 @@ namespace States {
     class Stage :public State, public Save {
     protected:
         Managers::GraphicManager* GM;
-        Entities::Characters::Player* player1;
+        Entities::Characters::PlayerOne* player1;
 
         Managers::EventManager EM;
         Managers::CollisionManager CM;
@@ -36,7 +33,7 @@ namespace States {
         void pushPause(const sf::Event e);
 
     public:
-        Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::Player* p1 = nullptr);
+        Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::PlayerOne* p1 = nullptr);
 
         ~Stage();
 

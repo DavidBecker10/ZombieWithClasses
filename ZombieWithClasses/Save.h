@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 23/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_SAVE_H
 #define ZOMBIEWITHCLASSES_SAVE_H
 

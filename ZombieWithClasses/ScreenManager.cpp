@@ -5,7 +5,7 @@
 #include "PauseMenuState.h"
 using namespace Managers;
 
-ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::Player* p1) :
+ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
     GM{ *gm }, player1{ p1 } {
     push(new States::MainMenuState(GM));
 }
