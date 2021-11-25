@@ -32,6 +32,19 @@ void Entities::Characters::PlayerTwo::update(float t) {
         position.x = (float)(dimensions.x * 0.5);
     else if (position.x >= (32.0f * 200) - dimensions.x)
         position.x = (32.0f * 200) - dimensions.x;
+
+    if (position.x <= (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2)
+        position.x = (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2;
+
+    else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
+        position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
+
+    if (position.y <= (GM->getCenterView().y) - (GM->getSizeView().y / 2) - dimensions.y / 2)
+        position.y = (GM->getCenterView().y) - (GM->getSizeView().y / 2 - dimensions.y / 2);
+
+    else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
+        position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
+
     if (!isGround && !isJumping)
         position.y += vel.y * t + GRAVITY;
     else
@@ -142,7 +155,8 @@ void Entities::Characters::PlayerTwo::collide(Ids::Ids idOther, Vector2F positio
         isGround = false;
         break;
     case Ids::Player:
-        isGround = true;
+        if(!isJumping)
+            isGround = true;
         break;
     default:
         break;
@@ -158,9 +172,9 @@ void Entities::Characters::PlayerTwo::createProjectile(Ids::Ids id, Vector2F pos
 
     scale.x == 1 ? v = 900.0f : v = -900.0f;
 
-    scale.x == 1 ? px = 35.0f : px = -35.0f;
+    scale.x == 1 ? px = 20.0f : px = -20.0f;
 
-    bullet = new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir);
+    bullet = new Projectile(Vector2F(pos.x + px, pos.y + 30.0f), Vector2F(v, 0.0f), path, dir);
 
     EL->insert(bullet);
 }

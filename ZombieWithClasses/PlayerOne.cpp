@@ -30,8 +30,22 @@ void Entities::Characters::PlayerOne::update(float t) {
     position.x += vel.x * t;
     if (position.x <= dimensions.x * 0.5)
         position.x = (float)(dimensions.x * 0.5);
+    
     else if (position.x >= (32.0f * 200) - dimensions.x)
         position.x = (32.0f * 200) - dimensions.x;
+
+    if (position.x <= (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2)
+        position.x = (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2;
+
+    else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
+        position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
+
+    if (position.y <= (GM->getCenterView().y) - (GM->getSizeView().y / 2) - dimensions.y / 2)
+        position.y = (GM->getCenterView().y) - (GM->getSizeView().y / 2 - dimensions.y / 2);
+
+    else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
+        position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
+    
     if (!isGround && !isJumping)
         position.y += vel.y * t + GRAVITY;
     else
@@ -41,7 +55,7 @@ void Entities::Characters::PlayerOne::update(float t) {
 void Entities::Characters::PlayerOne::draw() {
     //GM->draw(textPath, position, body, { 1, 9 }, { 0, 5 });
     GM->draw(textPath, position, scale);
-    GM->centralize(position);
+    //GM->centralize(position);
 }
 
 void Entities::Characters::PlayerOne::handleEvents(const sf::Event& e) {
@@ -142,7 +156,8 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
         isGround = false;
         break;
     case Ids::Player:
-        isGround = true;
+        if (!isJumping)
+            isGround = true;
         break;
     default:
         break;
@@ -158,7 +173,7 @@ void Entities::Characters::PlayerOne::createProjectile(Ids::Ids id, Vector2F pos
 
     scale.x == 1 ? v = 900.0f : v = -900.0f;
 
-    scale.x == 1 ? px = 35.0f : px = -35.0f;
+    scale.x == 1 ? px = 40.0f : px = -40.0f;
 
     bullet = new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir);
 

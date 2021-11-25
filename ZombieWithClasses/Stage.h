@@ -13,6 +13,7 @@ namespace States {
     protected:
         Managers::GraphicManager* GM;
         Entities::Characters::PlayerOne* player1;
+        Entities::Characters::PlayerTwo* player2;
 
         Managers::EventManager EM;
         Managers::CollisionManager CM;

@@ -49,7 +49,18 @@ int Stage::execute() {
     CM.verifyCollisions();
     TM->draw(GM);
     EL.draw();
-
+    if(!player2)
+        GM->centralize(player1->getPosition());
+    else
+    {
+        Vector2F aux;
+        aux.x = (player1->getPosition().x < player2->getPosition().x) ? (player1->getPosition().x) : (player2->getPosition().x);
+        aux.y = (player1->getPosition().y < player2->getPosition().y) ? (player1->getPosition().y) : (player2->getPosition().y);
+        Vector2F center;
+        center.x = fabs(player1->getPosition().x - player2->getPosition().x) / 2 + aux.x;
+        center.y = fabs(player1->getPosition().y - player2->getPosition().y) / 2 + aux.y;
+        GM->centralize(center);
+    }
     return returnCode;
 }
 

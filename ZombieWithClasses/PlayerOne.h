@@ -1,10 +1,5 @@
 #pragma once
 #include "Character.h"
-//#include "GraphicManager.h"
-//#include "EventManager.h"
-//#include "CollisionManager.h"
-//#include "Vector2D.h"
-//#include "Ids.h"
 #include "TilesManager.h"
 #include "Projectile.h"
 #include "json.hpp"
