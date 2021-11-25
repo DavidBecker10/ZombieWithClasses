@@ -91,12 +91,12 @@ void RacoonCity::initialize() {
     if (player1) EL.insert(player1);
     player1->setEL(&EL);
 
-    //player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3000));
-    //EL.insert(player2);
+    player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3000));
+    EL.insert(player2);
     /*EL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../assets/Terrorists/Masked/walk/terroristtest.png"));*/
 
     //EL.insert(new Entities::Characters::Homer(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
     //EL.insert(new Entities::Characters::Ghoul(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
-   //EL.insert(new Entities::Characters::Ghoul(Vector2F(1650.f, 3000.f), Vector2F(50.0f, 0.0f)));
+    //EL.insert(new Entities::Characters::Ghoul(Vector2F(1650.f, 3000.f), Vector2F(50.0f, 0.0f)));
     EL.initialize(GM, &EM, &CM);
 }

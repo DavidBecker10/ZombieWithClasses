@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 21/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_MAINMENUSTATE_H
 #define ZOMBIEWITHCLASSES_MAINMENUSTATE_H
 
