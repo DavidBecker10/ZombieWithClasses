@@ -3,8 +3,8 @@
 #include "CollisionManager.h"
 #include "Ids.h"
 
-Entities::Characters::PlayerOne::PlayerOne(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player1, PLAYER_PATH), bullet(), isLive(true), isEnd(false) {
+Entities::Characters::PlayerOne::PlayerOne(Vector2F pos, const char* path, Ids::Ids id) :
+    Character(pos, Vector2F(0.0f, 0.0f), id, path), bullet(), isLive(true), isEnd(false) {
 }
 
 Entities::Characters::PlayerOne::~PlayerOne() {

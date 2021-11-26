@@ -1,14 +1,7 @@
 #pragma once
-//#include "Vector2D.h"
 #include "TileMap.h"
-//#include "Tile.h"
-//#include "Ids.h"
 
 namespace Managers {
-
-    //class GraphicManager;
-    //class EventManager;
-    //class CollisionManager;
 
     class TilesManager {
     public:
@@ -39,7 +32,6 @@ namespace Managers {
         std::vector<Entities::Tile*> getTiles() const;
 
         void setTiles(Entities::Tile* newTile);
-        //std::vector<IdPositionSize> checkMapCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
     private:
         const Vector2F coordinatesForScreen(const Vector2U pos) const;
     };

@@ -2,7 +2,7 @@
 #include "EntityList.h"
 
 Entities::Projectile::Projectile(Vector2F pos, Vector2F v, const char* tP, bool dir) :
-    Entity(pos, v, Ids::Ids::Projectile, tP) {
+    Entity(pos, v, Ids::Ids::Projectile, tP), colided(false) {
     dir == true ? scale = Vector2F(1, 1) : scale = Vector2F(-1, 1);
 }
 

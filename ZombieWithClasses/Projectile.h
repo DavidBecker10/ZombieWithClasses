@@ -1,8 +1,3 @@
-//
-// Created by Gabriel on 20/11/2021.
-//
-
-
 #ifndef ZOMBIEWITHCLASSES_PROJECTILE_H
 #define ZOMBIEWITHCLASSES_PROJECTILE_H
 
@@ -11,6 +6,9 @@
 
 namespace Entities {
     class Projectile : public Entity {
+
+    private:
+        bool colided;
     public:
         Projectile(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, const char* tP = nullptr, bool dir = false);
         ~Projectile();

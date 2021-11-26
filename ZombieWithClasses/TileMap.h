@@ -1,5 +1,4 @@
 #pragma once
-//#include "Vector2D.h"
 #include "Tile.h"
 
 class TileMap
@@ -19,7 +18,6 @@ public:
 	};
 
 private:
-	//Entities::Tile tile;
 	Vector2U mapDimensions;
 	unsigned short** map;
 	const char* path;

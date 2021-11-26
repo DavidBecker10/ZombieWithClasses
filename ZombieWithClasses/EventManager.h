@@ -24,7 +24,6 @@ namespace Managers {
         EventManager();
         ~EventManager();
         void manageEvent();
-        /*void setGraphicManager(GraphicManager* gm);*/
         void setWindow(sf::RenderWindow* w);
 
         unsigned int addListenMouse(std::function<void(const sf::Event&)> call);
