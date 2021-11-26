@@ -1,13 +1,9 @@
-//
-// Created by Gabriel on 20/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_MENU_H
 #define ZOMBIEWITHCLASSES_MENU_H
 
 #include "State.h"
-
 #include "ButtonManager.h"
+
 namespace States {
     class Menu : public State {
     private:

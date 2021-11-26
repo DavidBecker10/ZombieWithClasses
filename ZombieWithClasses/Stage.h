@@ -20,12 +20,11 @@ namespace States {
         Managers::CollisionManager CM;
         Managers::TilesManager* TM;
         Managers::ScreenManager* SM;
-        //sf::Clock clock;
         Clock clock;
         Lists::EntityList EL;
+        int returnCode;
 
         void setReturnCode(int rc) { returnCode = rc; }
-        int returnCode;
 
     private:
 
@@ -43,11 +42,6 @@ namespace States {
         int execute() override;
 
         virtual void initialize(bool numPlayers) = 0;
-        /*void exit(){ }
-        void refresh(float t, Managers::EventManager *EM) { }
-        virtual void draw(Managers::GraphicManager *GM) { }
-
-        int returnID() const;*/
     };
 }
 

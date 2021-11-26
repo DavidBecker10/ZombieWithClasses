@@ -29,8 +29,4 @@ nlohmann::json Entities::Entity::convertJSON() {
     };
 }
 
-
-/*void Entities::Entity::update(float t) {
-    position += (vel*t);
-}*/
 Lists::EntityList* Entities::Entity::EL = NULL;

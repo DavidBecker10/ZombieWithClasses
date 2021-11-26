@@ -14,5 +14,4 @@ public:
     virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
 };
 
-
 #endif //ZOMBIEWITHCLASSES_OBSTACLE_H

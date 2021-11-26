@@ -1,12 +1,9 @@
-//
-// Created by Gabriel on 22/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_HOMER_H
 #define ZOMBIEWITHCLASSES_HOMER_H
 
 #include "Enemy.h"
 #include "stdafx.h"
+
 namespace Entities {
     namespace Characters {
         class Homer : public Enemy {

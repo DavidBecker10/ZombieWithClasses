@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 20/11/2021.
-//
-
 #include"Ids.h"
 #include "Menu.h"
 #include"ScreenManager.h"

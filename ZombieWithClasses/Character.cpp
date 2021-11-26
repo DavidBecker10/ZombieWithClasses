@@ -2,6 +2,7 @@
 #include "GraphicManager.h"
 #include "TileMap.h"
 #include "Vector2D.h"
+#include "EntityList.h"
 
 Entities::Characters::Character::Character(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tPath) :
 	Entity(pos, v, ID, tPath), isGround(false)

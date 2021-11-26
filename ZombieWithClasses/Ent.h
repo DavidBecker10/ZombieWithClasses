@@ -13,7 +13,6 @@ public:
 	Ent(Ids::Ids id = Ids::empty, const char* txtPath = nullptr);
 	~Ent();
 	virtual void update(float t) = 0;
-	void print();
 	static void setGM(Managers::GraphicManager* gm) { GM = gm; }
 	Ids::Ids getID() { return ID; }
 	const char* getTextPath() { return textPath; }

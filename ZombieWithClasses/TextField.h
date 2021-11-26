@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 21/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_TEXTFIELD_H
 #define ZOMBIEWITHCLASSES_TEXTFIELD_H
 

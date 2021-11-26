@@ -1,16 +1,10 @@
-#pragma once
-
-//#include "Vector2D.h"
-//#include "Ids.h"
-//#include "GraphicManager.h"
+#ifndef ZOMBIEWITHCLASSES_TILE_H
+#define ZOMBIEWITHCLASSES_TILE_H
 #include "Entity.h"
-//#include "CollisionManager.h"
 
 namespace Entities {
     class Tile : public Entity {
     protected:
-        //        const Ids::Ids id;
-        //        const char* path;
         Vector2F size;
         Managers::GraphicManager* gm;
         Managers::CollisionManager* cm;
@@ -30,3 +24,5 @@ namespace Entities {
 
     };
 }
+
+#endif //ZOMBIEWITHCLASSES_TILE_H
