@@ -17,13 +17,16 @@ namespace Managers {
         goMainMenu,
         goPauseMenu,
         resume,
-        saveGame
+        saveGame,
+        onePlayer,
+        twoPlayers
     };
 
     class ScreenManager : public States::StateMachine {
     private:
         GraphicManager GM;
         Entities::Characters::PlayerOne* player1;
+        bool numPlayers;
 
     public:
         ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1 = nullptr);

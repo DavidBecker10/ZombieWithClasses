@@ -7,7 +7,8 @@ using namespace Managers;
 
 ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
     GM{ *gm },
-    player1{ p1 }
+    player1{ p1 },
+    numPlayers{false}
 {
     push(new States::MainMenuState(GM));
 }
@@ -18,10 +19,11 @@ bool ScreenManager::processCode(int returnCode) {
         return true;
     case goRacoonCity: {
         auto* racoon = new States::RacoonCity(&GM, player1);
-        racoon->initialize();
+        racoon->initialize(numPlayers);
         push(racoon);
         return false;
     }
+    
     case saveGame: {
         pop();
         States::Stage* s = dynamic_cast<States::Stage*>(top());
@@ -55,7 +57,14 @@ bool ScreenManager::processCode(int returnCode) {
         push(new States::MainMenuState(GM));
         return false;
     }
-
+    case onePlayer: {
+        numPlayers = false;
+        return false;
+    }
+    case twoPlayers: {
+        numPlayers = true;
+        return false;
+    }
     case proceed:
     default:
         return false;

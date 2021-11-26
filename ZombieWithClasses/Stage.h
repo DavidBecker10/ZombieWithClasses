@@ -40,7 +40,7 @@ namespace States {
 
         int execute() override;
 
-        virtual void initialize() = 0;
+        virtual void initialize(bool numPlayers) = 0;
         /*void exit(){ }
         void refresh(float t, Managers::EventManager *EM) { }
         virtual void draw(Managers::GraphicManager *GM) { }

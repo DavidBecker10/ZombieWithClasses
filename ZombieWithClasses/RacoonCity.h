@@ -11,7 +11,7 @@ namespace States {
         RacoonCity(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1 = nullptr);
         nlohmann::json convertJSON() override;
         void load(const std::string& path) override;
-        void initialize() override;
+        void initialize(bool numPlayers) override;
     };
 }
 
