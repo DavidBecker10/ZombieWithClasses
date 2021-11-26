@@ -35,7 +35,9 @@ public:
 
     void press() const;
 
-};
+    void setColor(sf::Color clr) { color = clr; }
+ 
+    };
 
 
 #endif //ZOMBIEWITHCLASSES_BUTTON_H

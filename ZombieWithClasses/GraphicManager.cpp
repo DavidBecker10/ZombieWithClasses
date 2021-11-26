@@ -4,7 +4,7 @@
 #include "stdafx.h"
 Managers::GraphicManager::GraphicManager() :
     window{ new sf::RenderWindow(sf::VideoMode(900, 720), "Zombie With Classes", sf::Style::Close) },
-    view{ sf::Vector2f(640, 360), sf::Vector2f(1000,500) },
+    view{ sf::Vector2f(640, 360), sf::Vector2f(1500,800) },
     text{ nullptr }
 {
     initializeView();
@@ -94,7 +94,7 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
             std::cout << "Error: Image in: " << path << " not found!" << std::endl;
             exit(715);
         }
-        textures.emplace(path, text); //c++11
+        textures.emplace(path, text);
         return true;
     }
 }

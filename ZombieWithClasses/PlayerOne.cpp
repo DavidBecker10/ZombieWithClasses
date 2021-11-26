@@ -4,7 +4,7 @@
 #include "Ids.h"
 
 Entities::Characters::PlayerOne::PlayerOne(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player1, PLAYER_PATH), bullet() {
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player1, PLAYER_PATH), bullet(), isLive(true), isEnd(false) {
 }
 
 Entities::Characters::PlayerOne::~PlayerOne() {
@@ -31,8 +31,10 @@ void Entities::Characters::PlayerOne::update(float t) {
     if (position.x <= dimensions.x * 0.5)
         position.x = (float)(dimensions.x * 0.5);
     
-    else if (position.x >= (32.0f * 200) - dimensions.x)
+    else if (position.x >= (32.0f * 200) - dimensions.x) {
         position.x = (32.0f * 200) - dimensions.x;
+        isEnd = true;
+    }
     
     if (!isGround && !isJumping)
         position.y += vel.y * t + GRAVITY;
@@ -107,15 +109,19 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
     switch (idOther) {
     case Ids::Enemy:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::Ghoul:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::Homer:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::Nemesis:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::ground2:
         isGround = true;
@@ -136,6 +142,7 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
         break;
     case Ids::lava:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::ground11:
         isGround = true;
@@ -163,7 +170,7 @@ void Entities::Characters::PlayerOne::createProjectile(Ids::Ids id, Vector2F pos
 
     scale.x == 1 ? px = 40.0f : px = -40.0f;
 
-    bullet = new Projectile(Vector2F(pos.x + px, pos.y + 20.0f), Vector2F(v, 0.0f), path, dir);
+    bullet = new Projectile(Vector2F(pos.x + px, pos.y + 18.0f), Vector2F(v, 0.0f), path, dir);
 
     EL->insert(bullet);
 }

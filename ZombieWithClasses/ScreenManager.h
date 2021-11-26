@@ -30,8 +30,6 @@ namespace Managers {
 
     public:
         ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1 = nullptr);
-
-    protected:
         bool processCode(int returnCode) override;
     };
 }

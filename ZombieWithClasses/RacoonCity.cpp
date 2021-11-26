@@ -5,10 +5,11 @@
 #include "Tile.h"
 #include <fstream>
 #include "Ids.h"
+#include "stdafx.h"
 
 using namespace States;
 
-RacoonCity::RacoonCity(Managers::GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
+RacoonCity::RacoonCity(Managers::GraphicManager* gm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1) :
     Stage{ gm,
           new Managers::TilesManager{
                   {
@@ -31,8 +32,9 @@ RacoonCity::RacoonCity(Managers::GraphicManager* gm, Entities::Characters::Playe
                           new Lava,
                   },
                   {32.0f, 32.0f}, "../assets/Maps/mapStage1.json"
-          },
-          p1 } {
+          }, sm,
+          p1 }
+{
 
 }
 
@@ -89,6 +91,7 @@ void RacoonCity::load(const std::string& path) {
 
 void RacoonCity::initialize(bool numPlayers) {
 
+    srand(time(NULL));
     if (player1) EL.insert(player1);
     player1->setEL(&EL);
 
@@ -97,10 +100,17 @@ void RacoonCity::initialize(bool numPlayers) {
         player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3000));
         EL.insert(player2);
     }
-    /*EL.insert(new Entities::Characters::Player(Vector2F(200.f, 200.f), Vector2F(0.f, 0.f), Ids::Player, "../assets/Terrorists/Masked/walk/terroristtest.png"));*/
 
-    //EL.insert(new Entities::Characters::Homer(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
-    //EL.insert(new Entities::Characters::Ghoul(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
-    //EL.insert(new Entities::Characters::Ghoul(Vector2F(1650.f, 3000.f), Vector2F(50.0f, 0.0f)));
-    EL.initialize(GM, &EM, &CM);
+    Vector2F pos = { 500.0f, 3000.0f };
+    Vector2F vel = { 50.0f, 0.0f };
+
+    for (int i = 0; i < rand() % 7 + 3; i++)
+    {
+        EL.insert(new Entities::Characters::Homer(Vector2F(pos), Vector2F(-50.0f, 0.0f)));
+        //EL.insert(new Entities::Characters::Ghoul(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
+        //EL.insert(new Entities::Characters::Ghoul(Vector2F(1650.f, 3000.f), Vector2F(50.0f, 0.0f)));
+        pos.x += 1000.0f;
+        //}
+        EL.initialize(GM, &EM, &CM);
+    }
 }

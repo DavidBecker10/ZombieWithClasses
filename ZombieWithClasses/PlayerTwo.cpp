@@ -4,7 +4,7 @@
 #include "Ids.h"
 
 Entities::Characters::PlayerTwo::PlayerTwo(Vector2F pos) :
-    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player2, PLAYER2_PATH), bullet() {
+    Character(pos, Vector2F(0.0f, 0.0f), Ids::Ids::Player2, PLAYER2_PATH), bullet(), isLive(true), isEnd(false) {
 }
 
 Entities::Characters::PlayerTwo::~PlayerTwo() {
@@ -118,15 +118,19 @@ void Entities::Characters::PlayerTwo::collide(Ids::Ids idOther, Vector2F positio
     switch (idOther) {
     case Ids::Enemy:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::Ghoul:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::Homer:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::Nemesis:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::ground2:
         isGround = true;
@@ -147,6 +151,7 @@ void Entities::Characters::PlayerTwo::collide(Ids::Ids idOther, Vector2F positio
         break;
     case Ids::lava:
         EL->remove(this);
+        isLive = false;
         break;
     case Ids::ground11:
         isGround = true;

@@ -15,6 +15,7 @@ void Entities::Projectile::update(float t) {
 }
 
 void Entities::Projectile::draw() {
+    GM->getCenterView()
     GM->loadTexture(textPath);
     dimensions = GM->getSize(textPath);
     GM->draw(textPath, position, scale);

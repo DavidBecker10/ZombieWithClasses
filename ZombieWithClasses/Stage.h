@@ -5,19 +5,21 @@
 #include "PlayerOne.h"
 #include "PlayerTwo.h"
 #include "CollisionManager.h"
+#include "ScreenManager.h"
 #include "Save.h"
 #include "Clock.h"
 
 namespace States {
     class Stage :public State, public Save {
     protected:
-        Managers::GraphicManager* GM;
         Entities::Characters::PlayerOne* player1;
         Entities::Characters::PlayerTwo* player2;
 
+        Managers::GraphicManager* GM;
         Managers::EventManager EM;
         Managers::CollisionManager CM;
         Managers::TilesManager* TM;
+        Managers::ScreenManager* SM;
         //sf::Clock clock;
         Clock clock;
         Lists::EntityList EL;
@@ -34,7 +36,7 @@ namespace States {
         void pushPause(const sf::Event e);
 
     public:
-        Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::PlayerOne* p1 = nullptr);
+        Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1 = nullptr);
 
         ~Stage();
 

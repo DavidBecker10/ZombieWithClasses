@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 #define GRAVITY 5
 
 using std::cout;

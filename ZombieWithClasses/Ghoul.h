@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 20/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_GHOUL_H
 #define ZOMBIEWITHCLASSES_GHOUL_H
 
@@ -11,7 +7,7 @@ namespace Entities {
     namespace Characters {
         class Ghoul : public Enemy {
         private:
-            static const float attackTime;
+            sf::Clock c;
         public:
             Ghoul(Vector2F pos = { 0.0f,0.0f }, Vector2F vel = { 0.0f,0.0f });
             Ghoul(nlohmann::json j);

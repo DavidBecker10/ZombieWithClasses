@@ -18,12 +18,11 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity: {
-        auto* racoon = new States::RacoonCity(&GM, player1);
+        auto* racoon = new States::RacoonCity(&GM, this, player1);
         racoon->initialize(numPlayers);
         push(racoon);
         return false;
     }
-    
     case saveGame: {
         pop();
         States::Stage* s = dynamic_cast<States::Stage*>(top());
@@ -33,7 +32,7 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case loadGame: {
-        States::RacoonCity* rc = new States::RacoonCity(&GM, player1);
+        States::RacoonCity* rc = new States::RacoonCity(&GM, this, player1);
         try {
             rc->load("../saves/saves.json");
             push(rc);

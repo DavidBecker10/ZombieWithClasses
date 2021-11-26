@@ -3,8 +3,9 @@
 #include "stdafx.h"
 
 Entities::Characters::Ghoul::Ghoul(Vector2F pos, Vector2F vel) :
-    Enemy(pos, vel, Ids::Ids::Ghoul, GHOUL_PATH) {
-
+    Enemy(pos, vel, Ids::Ids::Ghoul, GHOUL_PATH)
+{
+    isGround = false;
 }
 Entities::Characters::Ghoul::Ghoul(nlohmann::json j) :
     Enemy({ j["position"] }, { j["vel"] }, Ids::Ids::Ghoul, GHOUL_PATH)
@@ -28,7 +29,7 @@ void Entities::Characters::Ghoul::update(float t) {
         vel.x *= -1;
         scale.x = 1;
     }
-    if (!isGround)
+    if (!isGround || c.getElapsedTime().asSeconds() > 3.0)
         position.y += vel.y * t + GRAVITY;
 }
 
@@ -45,11 +46,12 @@ void Entities::Characters::Ghoul::collide(Ids::Ids idOther, Vector2F positionOth
     case Ids::ground2:
         vel.y = -900;
         isGround = true;
+        c.restart();
         break;
     case Ids::empty:
         isGround = true;
         vel.x *= -1;
-        scale.x = -1;
+        scale.x = 1;
         break;
     case Ids::wallL:
         isGround = true;

@@ -12,6 +12,8 @@ namespace Entities
 		private:
 			unsigned int listenKey;
 			bool isJumping;
+			bool isLive;
+			bool isEnd;
 			Managers::TilesManager* TM;
 			Projectile* bullet;
 
@@ -27,6 +29,8 @@ namespace Entities
 			void createProjectile(Ids::Ids id, Vector2F pos, const char* path);
 			void centralizeInView();
 			void initializeJSON(nlohmann::json j);
+			bool getIsLive() { return isLive; }
+			bool getIsEnd() { return isEnd; }
 		};
 	}
 }

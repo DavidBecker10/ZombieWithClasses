@@ -5,10 +5,12 @@
 #include "Homer.h"
 using namespace States;
 
-Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::PlayerOne* p1) :
+Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1) :
     GM(gm),
     player1{ p1 },
+    player2{ NULL },
     TM{ tm },
+    SM{ sm },
     IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e); }) },
     IDPushPause{ EM.addListenKeyboard([this](const sf::Event& e) { pushPause(e); }) },
     returnCode(Managers::proceed)
@@ -32,24 +34,26 @@ Stage::~Stage() {
 
 int Stage::execute() {
     returnCode = Managers::proceed;
-    //sf::Time t = clock.getElapsedTime();
     double t = clock.getTime();
-    //float dt = t.asSeconds();
-    //if(dt>0.0167)dt=0.0167;
-    //clock.restart();
     if (t > 0.0167)t = 0.0167;
     clock.resetClock();
-
 
     EM.manageEvent();
     EL.update(t);
     CM.verifyCollisions();
     TM->draw(GM);
     EL.draw();
-    if(!player2)
+    if (!player2) {
+        if (!player1->getIsLive())
+            returnCode = Managers::goMainMenu;
+        if (player1->getIsEnd())
+            returnCode = Managers::goMainMenu;
         GM->centralize(player1->getPosition());
+    }
     else
     {
+        if (!player1->getIsLive() || !player2->getIsLive())
+            returnCode = Managers::goMainMenu;
         player1->centralizeInView();
         player2->centralizeInView();
         Vector2F aux;
