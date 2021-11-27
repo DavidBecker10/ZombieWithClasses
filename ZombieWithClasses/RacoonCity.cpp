@@ -106,9 +106,9 @@ void RacoonCity::initialize(bool numPlayers) {
     {
         player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3000));
         EL.insert(player2);
-        player1->setPlayer2(player2);
     }
-
+    //player1->setPlayer2(player2);
+    
     Vector2F pos = { 500.0f, 3000.0f };
     Vector2F vel = { 50.0f, 0.0f };
 
@@ -122,40 +122,3 @@ void RacoonCity::initialize(bool numPlayers) {
         EL.initialize(GM, &EM, &CM);
     }
 }
-/*
-int States::RacoonCity::execute()
-{
-    returnCode = Managers::proceed;
-    double t = clock.getTime();
-    if (t > 0.0167)t = 0.0167;
-    clock.resetClock();
-
-    EM.manageEvent();
-    EL.update(t);
-    CM.verifyCollisions();
-    TM->draw(GM);
-    EL.draw();
-    if (!player2) {
-        if (!player1->getIsActive())
-            returnCode = Managers::goMainMenu;
-        if (player1->getIsEnd())
-            returnCode = Managers::goSubway;
-        GM->centralize(player1->getPosition());
-    }
-    else
-    {
-        if (!player1->getIsLive() || !player2->getIsLive())
-            returnCode = Managers::goMainMenu;
-        player1->centralizeInView();
-        player2->centralizeInView();
-        Vector2F aux;
-        aux.x = (player1->getPosition().x < player2->getPosition().x) ? (player1->getPosition().x) : (player2->getPosition().x);
-        aux.y = (player1->getPosition().y < player2->getPosition().y) ? (player1->getPosition().y) : (player2->getPosition().y);
-        Vector2F center;
-        center.x = fabs(player1->getPosition().x - player2->getPosition().x) / 2 + aux.x;
-        center.y = fabs(player1->getPosition().y - player2->getPosition().y) / 2 + aux.y;
-        GM->centralize(center);
-    }
-    return returnCode;
-}
-*/
