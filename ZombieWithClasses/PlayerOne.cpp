@@ -182,5 +182,4 @@ void Entities::Characters::PlayerOne::centralizeInView()
 
 void Entities::Characters::PlayerOne::initializeJSON(nlohmann::json j) {
     position = { j["position"] };
-
 }

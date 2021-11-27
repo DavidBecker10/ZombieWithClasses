@@ -31,3 +31,4 @@ nlohmann::json Entities::Entity::convertJSON() {
 }
 
 Lists::EntityList* Entities::Entity::EL = NULL;
+int Entities::Entity::currentStage = -1;

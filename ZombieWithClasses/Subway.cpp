@@ -93,6 +93,7 @@ void States::Subway::initialize(bool numPlayers)
     srand(time(NULL));
     if (player1) EL.insert(player1);
     player1->setEL(&EL);
+    player1->setStage(2);
 
     if (numPlayers)
     {

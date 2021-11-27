@@ -26,6 +26,7 @@ namespace Entities
         Vector2F vel;
         Vector2F scale;
         bool isActive;
+        static int currentStage;
 
     public:
         Entity(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tP = nullptr);
@@ -52,6 +53,7 @@ namespace Entities
         bool facingLeft() const { return faceLeft; }
 
         static void setEL(Lists::EntityList* El) { EL = El; }
+        static void setStage(int stage) { currentStage = stage; }
         bool getIsActive() { return isActive; }
     };
 }
