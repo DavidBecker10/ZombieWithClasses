@@ -2,8 +2,8 @@
 #include "EntityList.h"
 
 Entities::Characters::Homer::Homer(Vector2F pos, Vector2F vel) :
-    Enemy(pos, vel, Ids::Ids::Homer, HOMER_PATH) {
-
+    Enemy(pos, vel, Ids::Ids::Homer, HOMER_PATH) 
+{
 }
 
 Entities::Characters::Homer::Homer(nlohmann::json j) :
@@ -59,7 +59,7 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
         scale.x = -1;
         break;
     case Ids::Projectile:
-        EL->remove(this);
+        isActive = false;
         break;
     case Ids::Ghoul:
         isGround = true;

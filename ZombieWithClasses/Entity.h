@@ -1,7 +1,6 @@
-#pragma once
-
+#ifndef ZOMBIEWITHCLASSES_ENTITY_H
+#define ZOMBIEWITHCLASSES_ENTITY_H
 #include "Ent.h"
-//#include "Vector2D.h"
 #include "GraphicManager.h"
 #include "EventManager.h"
 #include "Serialize.h"
@@ -26,6 +25,7 @@ namespace Entities
         Vector2F dimensions;
         Vector2F vel;
         Vector2F scale;
+        bool isActive;
 
     public:
         Entity(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tP = nullptr);
@@ -52,5 +52,8 @@ namespace Entities
         bool facingLeft() const { return faceLeft; }
 
         static void setEL(Lists::EntityList* El) { EL = El; }
+        bool getIsActive() { return isActive; }
     };
 }
+
+#endif //ZOMBIEWITHCLASSES_ENTITY_H

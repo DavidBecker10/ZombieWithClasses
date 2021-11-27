@@ -1,4 +1,5 @@
 #include "ScreenManager.h"
+#include "PlayerOne.h"
 #include "Stage.h"
 #include "RacoonCity.h"
 #include "Subway.h"
@@ -19,13 +20,13 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity: {
-        auto* racoon = new States::RacoonCity(GM, this, player1);
+        auto* racoon = new States::RacoonCity(GM, this, new Entities::Characters::PlayerOne(Vector2F(100.0f, 3000.0f)));
         racoon->initialize(numPlayers);
         push(racoon);
         return false;
     }
     case goSubway: {
-        auto* subway = new States::Subway(GM, this, player1);
+        auto* subway = new States::Subway(GM, this, new Entities::Characters::PlayerOne(Vector2F(100.0f, 3000.0f)));
         subway->initialize(numPlayers);
         push(subway);
         return false;
@@ -39,7 +40,7 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case loadGame: {
-        States::RacoonCity* rc = new States::RacoonCity(GM, this, player1);
+        States::RacoonCity* rc = new States::RacoonCity(GM, this, new Entities::Characters::PlayerOne());
         try {
             rc->load("../saves/saves.json");
             push(rc);
@@ -61,7 +62,6 @@ bool ScreenManager::processCode(int returnCode) {
     case goMainMenu: {
         emptyStack();
         push(new States::MainMenuState(*GM));
-        return false;
     }
     case onePlayer: {
         numPlayers = false;

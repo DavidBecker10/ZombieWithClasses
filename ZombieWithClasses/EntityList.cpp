@@ -22,9 +22,15 @@ int Lists::EntityList::getSize() {
     return list.getSize();
 }
 
-void Lists::EntityList::update(float t) {
+void Lists::EntityList::update(float t)
+{    
     for (int i = 0; i < list.getSize(); i++)
+    {
         list[i]->update(t);
+        if (!list[i]->getIsActive()) {
+            remove(list[i]);
+        }
+    }
 }
 
 void Lists::EntityList::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,

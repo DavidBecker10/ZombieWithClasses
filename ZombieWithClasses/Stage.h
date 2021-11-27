@@ -33,13 +33,14 @@ namespace States {
 
         void pushCloseWindow(const sf::Event e);
         void pushPause(const sf::Event e);
+        void playerNeutralized();
 
     public:
         Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1 = nullptr);
 
         ~Stage();
 
-        int execute() override;
+        virtual int execute() override;
 
         virtual void initialize(bool numPlayers) = 0;
     };

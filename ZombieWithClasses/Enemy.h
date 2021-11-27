@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_ENEMY_H
+#define ZOMBIEWITHCLASSES_ENEMY_H
 #include "Character.h"
 
 namespace Entities
@@ -21,3 +22,5 @@ namespace Entities
         };
     }
 }
+
+#endif //ZOMBIEWITHCLASSES_ENEMY_H

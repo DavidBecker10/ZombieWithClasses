@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_IDS_H
+#define ZOMBIEWITHCLASSES_IDS_H
 
 namespace Ids
 {
@@ -32,3 +33,5 @@ namespace Ids
         Nemesis
     };
 }
+
+#endif //ZOMBIEWITHCLASSES_IDS_H

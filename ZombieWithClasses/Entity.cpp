@@ -6,7 +6,8 @@ Entities::Entity::Entity(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tP) 
     Ent(ID, tP),
     vel{ v },
     position(pos),
-    scale(Vector2F(1.f, 1.f))
+    scale(Vector2F(1.f, 1.f)),
+    isActive(true)
 {
 }
 

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_ENT_H
+#define ZOMBIEWITHCLASSES_ENT_H
+
 #include "Ids.h"
 #include "GraphicManager.h"
 class Ent
@@ -17,3 +19,5 @@ public:
 	Ids::Ids getID() { return ID; }
 	const char* getTextPath() { return textPath; }
 };
+
+#endif //ZOMBIEWITHCLASSES_ENT_H

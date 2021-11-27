@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_LIST_H
+#define ZOMBIEWITHCLASSES_LIST_H
 #include <iostream>
 
 namespace Lists
@@ -202,3 +203,5 @@ namespace Lists
 	}
 
 }
+
+#endif //ZOMBIEWITHCLASSES_LIST_H

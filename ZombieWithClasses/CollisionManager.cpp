@@ -1,5 +1,4 @@
 #include "CollisionManager.h"
-//#include "TilesManager.h"
 #include "stdafx.h"
 
 namespace Managers {
@@ -48,36 +47,6 @@ namespace Managers {
         EntityL->destroyEntities();
     }
 
-    /*
-    void CollisionManager::verifyCollisions() {
-        for (auto first = list.begin(); first != list.end(); first++) {
-
-            Entities::Entity* p1 = *first;
-
-            auto collisionWithTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
-            //std::cout << p1->getDimensions() << std::endl;
-            for (auto collision : collisionWithTiles)
-                p1->collide(collision.id, collision.position, collision.size);
-
-            auto other = first;
-            other++;
-
-            for (; other != list.end(); other++) {
-                Entities::Entity* p2 = *other;
-
-                if (isColliding(p1, p2)) {
-
-                    p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions());
-                    p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
-
-                }
-
-            }
-
-            //std::cout << '\n' << std::endl;
-        }
-    }
-    */
     void CollisionManager::verifyCollisions() {
         for (int i = 0; i < EntityL->getSize(); i++) {
 

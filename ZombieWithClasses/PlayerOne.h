@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_PLAYERONE_H
+#define ZOMBIEWITHCLASSES_PLAYERONE_H
 #include "Character.h"
 #include "TilesManager.h"
 #include "Projectile.h"
@@ -36,3 +37,5 @@ namespace Entities
 		};
 	}
 }
+
+#endif //ZOMBIEWITHCLASSES_PLAYERONE_H

@@ -6,7 +6,6 @@ namespace Entities {
     class Tile : public Entity {
     protected:
         Vector2F size;
-        Managers::GraphicManager* gm;
         Managers::CollisionManager* cm;
 
     public:

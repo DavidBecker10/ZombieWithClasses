@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 24/11/2021.
-//
-
 #include "Clock.h"
 #include <iostream>
 Clock::Clock() :last(clock()), current(0.0), dt(0.0), pause(false) {

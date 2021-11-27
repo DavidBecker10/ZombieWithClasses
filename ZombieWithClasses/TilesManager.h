@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_TILESMANAGER_H
+#define ZOMBIEWITHCLASSES_TILESMANAGER_H
+
 #include "TileMap.h"
 
 namespace Managers {
@@ -38,3 +40,5 @@ namespace Managers {
 
     using IdPositionSize = TilesManager::IdPositionSize;
 }
+
+#endif //ZOMBIEWITHCLASSES_TILESMANAGER_H

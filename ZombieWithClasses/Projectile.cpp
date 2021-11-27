@@ -2,12 +2,14 @@
 #include "EntityList.h"
 
 Entities::Projectile::Projectile(Vector2F pos, Vector2F v, const char* tP, bool dir) :
-    Entity(pos, v, Ids::Ids::Projectile, tP), colided(false) {
+    Entity(pos, v, Ids::Ids::Projectile, tP), colided(false)
+{
     dir == true ? scale = Vector2F(1, 1) : scale = Vector2F(-1, 1);
+    isActive = true;
 }
 
-
-Entities::Projectile::~Projectile() {
+Entities::Projectile::~Projectile()
+{
 }
 
 void Entities::Projectile::update(float t) {
@@ -30,10 +32,10 @@ void Entities::Projectile::initialize(Managers::GraphicManager* GM, Managers::Ev
 void Entities::Projectile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
     switch (idOther) {
     case Ids::Ghoul:
-        //EL->remove(this);
+        isActive = false;
         break;
     case Ids::Homer:
-        //EL->remove(this);
+        isActive = false;
         break;
     default:
         break;

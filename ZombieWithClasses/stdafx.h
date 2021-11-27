@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_STDAFX_H
+#define ZOMBIEWITHCLASSES_STDAFX_H
 
 #include <iostream>
 #include <cmath>
@@ -21,3 +22,5 @@ using std::endl;
 #define RACOON_PATH "../Assets/Maps/mapStage1.json"
 #define PLAYER_PATH "../Assets/Terrorists/Masked/Attack1_2.png"
 #define PLAYER2_PATH "../Assets/Terrorists/Muslim/Attack1_1.png"
+
+#endif //ZOMBIEWITHCLASSES_STDAFX_H

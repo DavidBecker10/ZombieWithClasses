@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_GRAPHICMANAGER_H
+#define ZOMBIEWITHCLASSES_GRAPHICMANAGER_H
+
 #include <map>
 #include <string>
 
@@ -38,3 +40,5 @@ namespace Managers
         const Vector2F getCenterView() const { return Vector2F(view.getCenter().x, view.getCenter().y); }
     };
 }
+
+#endif //ZOMBIEWITHCLASSES_GRAPHICMANAGER_H

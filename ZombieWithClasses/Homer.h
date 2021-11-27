@@ -16,4 +16,5 @@ namespace Entities {
         };
     }
 }
+
 #endif //ZOMBIEWITHCLASSES_HOMER_H

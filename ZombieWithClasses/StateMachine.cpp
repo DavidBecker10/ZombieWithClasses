@@ -1,12 +1,7 @@
-//
-// Created by Gabriel on 17/11/2021.
-//
-
 #include "StateMachine.h"
 #include <iostream>
 
 using namespace States;
-
 
 StateMachine::~StateMachine() {
     emptyStack();

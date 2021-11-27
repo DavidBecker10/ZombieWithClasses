@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 23/11/2021.
-//
-
 #include <fstream>
 #include "Save.h"
 

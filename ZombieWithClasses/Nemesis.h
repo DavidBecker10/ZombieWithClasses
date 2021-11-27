@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_NEMESIS_H
+#define ZOMBIEWITHCLASSES_NEMESIS_H
 #include "Enemy.h"
 
 namespace Entities
@@ -12,3 +13,5 @@ namespace Entities
         };
     }
 }
+
+#endif //ZOMBIEWITHCLASSES_NEMESIS_H

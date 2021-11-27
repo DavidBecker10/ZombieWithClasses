@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 24/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_CLOCK_H
 #define ZOMBIEWITHCLASSES_CLOCK_H
 

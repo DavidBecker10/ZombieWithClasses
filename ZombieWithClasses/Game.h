@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_GAME_H
+#define ZOMBIEWITHCLASSES_GAME_H
+
 #include "Stage.h"
 #include "ScreenManager.h"
 
@@ -6,7 +8,6 @@ class Game
 {
 private:
     Managers::GraphicManager GM;
-    Entities::Characters::PlayerOne player1;
     Managers::ScreenManager SM;
     bool end;
 
@@ -15,3 +16,5 @@ public:
     ~Game();
     void execute();
 };
+
+#endif //ZOMBIEWITHCLASSES_GAME_H

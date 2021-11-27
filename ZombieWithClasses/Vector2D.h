@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_VECTOR2D_H
+#define ZOMBIEWITHCLASSES_VECTOR2D_H
+
 #include "Serialize.h"
 template <typename T>
 class Vector2D : public Serialize {
@@ -38,3 +40,5 @@ template <typename T>
 std::ostream& operator <<(std::ostream& out, const Vector2D<T>& v);
 
 #include "Vector2DImplement.h"
+
+#endif //ZOMBIEWITHCLASSES_VECTOR2D_H

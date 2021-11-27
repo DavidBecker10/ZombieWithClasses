@@ -4,7 +4,8 @@
 #include "Ids.h"
 
 Entities::Characters::PlayerOne::PlayerOne(Vector2F pos, const char* path, Ids::Ids id) :
-    Character(pos, Vector2F(0.0f, 0.0f), id, path), bullet(), isLive(true), isEnd(false) {
+    Character(pos, Vector2F(0.0f, 0.0f), id, path), bullet(), isLive(true), isEnd(false)
+{
 }
 
 Entities::Characters::PlayerOne::~PlayerOne() {
@@ -98,20 +99,16 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
 
     switch (idOther) {
     case Ids::Enemy:
-        EL->remove(this);
-        isLive = false;
+        isActive = false;
         break;
     case Ids::Ghoul:
-        EL->remove(this);
-        isLive = false;
+        isActive = false;
         break;
     case Ids::Homer:
-        EL->remove(this);
-        isLive = false;
+        isActive = false;
         break;
     case Ids::Nemesis:
-        EL->remove(this);
-        isLive = false;
+        isActive = false;
         break;
     case Ids::ground2:
         isGround = true;
@@ -130,8 +127,7 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
         isGround = true;
         break;
     case Ids::lava:
-        EL->remove(this);
-        isLive = false;
+        isActive = false;
         break;
     case Ids::ground11:
         isGround = true;
@@ -145,7 +141,7 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
         break;
     case Ids::spiderweb:
         vel.x *= 0.9;
-        isGround = true;
+        isGround = true;    
         break;
     case Ids::ground6:
     default:

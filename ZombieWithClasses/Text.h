@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 21/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_TEXT_H
 #define ZOMBIEWITHCLASSES_TEXT_H
 
@@ -24,8 +20,5 @@ public:
     const std::string& getText() const { return text; }
     void get(const sf::Event& e);
 };
-
-
-
 
 #endif //ZOMBIEWITHCLASSES_TEXT_H

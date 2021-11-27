@@ -6,7 +6,8 @@
 #include "Ids.h"
 
 Entities::Characters::PlayerTwo::PlayerTwo(Vector2F pos) :
-    PlayerOne(pos, PLAYER2_PATH, Ids::Ids::Player2){
+    PlayerOne(pos, PLAYER2_PATH, Ids::Ids::Player2)
+{
 }
 
 Entities::Characters::PlayerTwo::~PlayerTwo() {

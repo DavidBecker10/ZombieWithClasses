@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ZOMBIEWITHCLASSES_PLAYERTWO_H
+#define ZOMBIEWITHCLASSES_PLAYERTWO_H
 #include "Character.h"
 #include "Projectile.h"
 #include "PlayerOne.h"
@@ -19,3 +20,5 @@ namespace Entities
 		};
 	}
 }
+
+#endif //ZOMBIEWITHCLASSES_PLAYERTWO_H

@@ -1,7 +1,6 @@
 #ifndef ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 #define ZOMBIEWITHCLASSES_COLLISIONMANAGER_H
 
-
 #include "EntityList.h"
 #include "Entity.h"
 #include <set>

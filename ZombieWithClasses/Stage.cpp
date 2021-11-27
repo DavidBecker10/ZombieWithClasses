@@ -44,8 +44,7 @@ int Stage::execute() {
     TM->draw(GM);
     EL.draw();
     if (!player2) {
-        if (!player1->getIsLive())
-            returnCode = Managers::goMainMenu;
+        playerNeutralized();
         if (player1->getIsEnd())
             returnCode = Managers::goMainMenu;
         GM->centralize(player1->getPosition());
@@ -77,8 +76,13 @@ void Stage::pushPause(const sf::Event e) {
         clock.pauseClock();
     }
 }
-/*
+void States::Stage::playerNeutralized()
+{
+    if (!player1->getIsActive())
+       setReturnCode(Managers::goMainMenu);
+}
 
+/*
 int Stage::returnID() const{
     if (end) return Ids::Ids::endGame;
     else return Ids::Ids::proceed;

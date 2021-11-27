@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 21/11/2021.
-//
-
 #include "TextField.h"
 
 TextField::TextField(Managers::EventManager& em, unsigned short maxL, Vector2F pos, Vector2F siz, unsigned int sText,
