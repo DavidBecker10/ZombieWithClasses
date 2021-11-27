@@ -26,7 +26,8 @@ nlohmann::json Entities::Entity::convertJSON() {
             {"position", position.convertJSON()},
             {"vel", vel.convertJSON()},
             {"textPath", textPath},
-            {"dimensions", dimensions.convertJSON()}
+            {"dimensions", dimensions.convertJSON()},
+            {"Stage", currentStage}
     };
 }
 

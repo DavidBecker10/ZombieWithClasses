@@ -5,6 +5,7 @@
 #include "Subway.h"
 #include "MainMenuState.h"
 #include "PauseMenuState.h"
+#include <fstream>
 using namespace Managers;
 
 ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
@@ -40,15 +41,39 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case loadGame: {
-        States::RacoonCity* rc = new States::RacoonCity(GM, this, new Entities::Characters::PlayerOne());
-        try {
-            rc->load("../saves/saves.json");
-            push(rc);
+        std::ifstream file("../saves/saves.json");
+        if (file.fail()) throw "path not found!";
+        nlohmann::json j;
+        file >> j;
+
+        int a;
+
+        j = j["Entity"][0];
+        a = static_cast<int>(j["Stage"]);
+    
+        if (a == 1) {
+            States::RacoonCity* stage = new States::RacoonCity(GM, this, new Entities::Characters::PlayerOne());
+            try {
+                stage->load("../saves/saves.json");
+                push(stage);
+            }
+            catch (char const* s) {
+                std::cout << s << std::endl;
+                delete stage;
+            }
         }
-        catch (char const* s) {
-            std::cout << s << std::endl;
-            delete rc;
+        else {
+            States::Subway* stage = new States::Subway(GM, this, new Entities::Characters::PlayerOne());
+            try {
+                stage->load("../saves/saves.json");
+                push(stage);
+            }
+            catch (char const* s) {
+                std::cout << s << std::endl;
+                delete stage;
+            }
         }
+
         return false;
     }
     case goPauseMenu: {

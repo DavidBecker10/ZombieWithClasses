@@ -56,7 +56,7 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
         break;
     case Ids::wallR:
         isGround = true;
-        scale.x = -1;
+        vel.x *= -1;
         break;
     case Ids::Projectile:
         isActive = false;
@@ -68,5 +68,3 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
         break;
     }
 }
-
-
