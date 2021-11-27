@@ -1,7 +1,6 @@
 #ifndef ZOMBIEWITHCLASSES_PROJECTILE_H
 #define ZOMBIEWITHCLASSES_PROJECTILE_H
 
-
 #include "Entity.h"
 
 namespace Entities {

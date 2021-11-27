@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 24/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_OBSTACLE_H
 #define ZOMBIEWITHCLASSES_OBSTACLE_H
 

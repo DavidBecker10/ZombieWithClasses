@@ -19,7 +19,6 @@ void Entities::Characters::PlayerOne::initialize(Managers::GraphicManager* GM, M
     dimensions = GM->getSize(textPath);
     listenKey = EM->addListenKeyboard([this](const sf::Event e) { handleEvents(e); });
     //CM->addCollide(this);
-
 }
 
 void Entities::Characters::PlayerOne::setTM(Managers::TilesManager* t) {
@@ -54,12 +53,10 @@ void Entities::Characters::PlayerOne::handleEvents(const sf::Event& e) {
         case sf::Keyboard::Key::D:
             vel.x = 300;
             scale.x = 1;
-            /* code */
             break;
         case sf::Keyboard::Key::A:
             vel.x = -300;
             scale.x = -1;
-            /* code */
             break;
         case sf::Keyboard::Key::W:
             if (!isJumping && isGround) {
@@ -67,7 +64,6 @@ void Entities::Characters::PlayerOne::handleEvents(const sf::Event& e) {
                 isJumping = true;
                 isGround = false;
             }
-            /* code */
             break;
         case sf::Keyboard::Key::Space:
             createProjectile(ID, position, BULLET_PATH);
@@ -80,22 +76,16 @@ void Entities::Characters::PlayerOne::handleEvents(const sf::Event& e) {
         case sf::Keyboard::Key::D:
             vel.x = 0;
             scale.x = 1;
-            /* code */
             break;
         case sf::Keyboard::Key::A:
             vel.x = 0;
             scale.x = -1;
-            /* code */
             break;
         case sf::Keyboard::Key::W:
             vel.y = 0;
             isJumping = false;
             isGround = false;
-
-            /* code */
             break;
-            //            case sf::Keyboard::Key::Space:
-            //                createProjectile(ID, position, BULLET_PATH);
         default:
             break;
         }
@@ -127,7 +117,6 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
         isGround = true;
         if (positionOther.y > position.y)
             vel.y = 0;
-        //std::cout << isGround << std::endl;
         break;
     case Ids::air:
         vel.y = 0;
@@ -154,6 +143,11 @@ void Entities::Characters::PlayerOne::collide(Ids::Ids idOther, Vector2F positio
         if (!isJumping)
             isGround = true;
         break;
+    case Ids::spiderweb:
+        vel.x *= 0.9;
+        isGround = true;
+        break;
+    case Ids::ground6:
     default:
         break;
     }

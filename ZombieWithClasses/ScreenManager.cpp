@@ -1,16 +1,17 @@
 #include "ScreenManager.h"
 #include "Stage.h"
 #include "RacoonCity.h"
+#include "Subway.h"
 #include "MainMenuState.h"
 #include "PauseMenuState.h"
 using namespace Managers;
 
 ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
-    GM{ *gm },
+    GM{ gm },
     player1{ p1 },
     numPlayers{false}
 {
-    push(new States::MainMenuState(GM));
+    push(new States::MainMenuState(*GM));
 }
 
 bool ScreenManager::processCode(int returnCode) {
@@ -18,9 +19,15 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity: {
-        auto* racoon = new States::RacoonCity(&GM, this, player1);
+        auto* racoon = new States::RacoonCity(GM, this, player1);
         racoon->initialize(numPlayers);
         push(racoon);
+        return false;
+    }
+    case goSubway: {
+        auto* subway = new States::Subway(GM, this, player1);
+        subway->initialize(numPlayers);
+        push(subway);
         return false;
     }
     case saveGame: {
@@ -32,7 +39,7 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case loadGame: {
-        States::RacoonCity* rc = new States::RacoonCity(&GM, this, player1);
+        States::RacoonCity* rc = new States::RacoonCity(GM, this, player1);
         try {
             rc->load("../saves/saves.json");
             push(rc);
@@ -44,7 +51,7 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case goPauseMenu: {
-        push(new States::PauseMenuState(GM));
+        push(new States::PauseMenuState(*GM));
         return false;
     }
     case resume: {
@@ -53,7 +60,7 @@ bool ScreenManager::processCode(int returnCode) {
     }
     case goMainMenu: {
         emptyStack();
-        push(new States::MainMenuState(GM));
+        push(new States::MainMenuState(*GM));
         return false;
     }
     case onePlayer: {

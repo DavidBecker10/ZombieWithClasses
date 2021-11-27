@@ -94,4 +94,4 @@ void Entities::Characters::PlayerTwo::centralizeInView()
 
     else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
         position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
-}
+}   

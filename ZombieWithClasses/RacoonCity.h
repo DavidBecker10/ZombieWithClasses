@@ -4,8 +4,11 @@
 #include "Stage.h"
 #include "json.hpp"
 
-namespace States {
-    class RacoonCity : public Stage {
+namespace States
+{
+    class RacoonCity :
+        public Stage
+    {
     public:
         RacoonCity(Managers::GraphicManager* gm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1 = nullptr);
         nlohmann::json convertJSON() override;

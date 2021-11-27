@@ -8,5 +8,4 @@ public:
     virtual nlohmann::json convertJSON() = 0;
 };
 
-
 #endif //ZOMBIEWITHCLASSES_SERIALIZE_H

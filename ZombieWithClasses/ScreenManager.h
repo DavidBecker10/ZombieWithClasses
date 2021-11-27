@@ -13,7 +13,7 @@ namespace Managers {
         end,
         goRacoonCity,
         loadGame,
-        goSecondStage,
+        goSubway,
         goMainMenu,
         goPauseMenu,
         resume,
@@ -24,7 +24,7 @@ namespace Managers {
 
     class ScreenManager : public States::StateMachine {
     private:
-        GraphicManager GM;
+        GraphicManager *GM;
         Entities::Characters::PlayerOne* player1;
         bool numPlayers;
 

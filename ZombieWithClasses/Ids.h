@@ -20,6 +20,7 @@ namespace Ids
         ground12,
         ground13,
         lava,
+        spiderweb,
         wallL,
         wallR,
         Player1,
