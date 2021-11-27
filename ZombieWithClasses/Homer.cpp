@@ -64,6 +64,9 @@ void Entities::Characters::Homer::collide(Ids::Ids idOther, Vector2F positionOth
     case Ids::Ghoul:
         isGround = true;
         break;
+    case Ids::spiderweb:
+        isGround = true;
+        break;
     default:
         break;
     }

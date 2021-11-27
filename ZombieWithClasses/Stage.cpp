@@ -51,8 +51,9 @@ int Stage::execute() {
     }
     else
     {
-        if (!player1->getIsLive() || !player2->getIsLive())
+        if (!player1->getIsActive() || !player2->getIsActive())
             returnCode = Managers::goMainMenu;
+
         Vector2F aux;
         aux.x = (player1->getPosition().x < player2->getPosition().x) ? (player1->getPosition().x) : (player2->getPosition().x);
         aux.y = (player1->getPosition().y < player2->getPosition().y) ? (player1->getPosition().y) : (player2->getPosition().y);

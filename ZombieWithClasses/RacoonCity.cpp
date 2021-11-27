@@ -67,6 +67,12 @@ void RacoonCity::load(const std::string& path) {
                 player2->initializeJSON(e);
                 EL.insert(player2);
             }
+            else
+            {
+                player2 = new Entities::Characters::PlayerTwo();
+                player2->initializeJSON(e);
+                EL.insert(player2);
+            }
             break;
         }
         case Ids::Ids::Enemy: {
@@ -108,7 +114,7 @@ void RacoonCity::initialize(bool numPlayers) {
 
     for (int i = 0; i < rand() % 7 + 3; i++)
     {
-        //EL.insert(new Entities::Characters::Homer(Vector2F(pos), Vector2F(-50.0f, 0.0f)));
+        EL.insert(new Entities::Characters::Homer(Vector2F(pos), Vector2F(-50.0f, 0.0f)));
         //EL.insert(new Entities::Characters::Ghoul(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
         //EL.insert(new Entities::Characters::Ghoul(Vector2F(1650.f, 3000.f), Vector2F(50.0f, 0.0f)));
         pos.x += 800.0f;
