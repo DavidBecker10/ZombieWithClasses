@@ -10,8 +10,12 @@ namespace Entities
 {
 	namespace Characters
 	{
+		class PlayerTwo;
+
 		class PlayerOne :public Character
 		{
+		private:
+			PlayerTwo* p2;
 		protected:
 			unsigned int listenKey;
 			bool isJumping;
@@ -35,6 +39,7 @@ namespace Entities
 			void initializeJSON(nlohmann::json j);
 			bool getIsLive() { return isLive; }
 			bool getIsEnd() { return isEnd; }
+			void setPlayer2(PlayerTwo* pl2) { p2 = pl2; }
 		};
 	}
 }

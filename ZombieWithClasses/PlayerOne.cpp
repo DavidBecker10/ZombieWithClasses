@@ -1,14 +1,19 @@
 #include "PlayerOne.h"
+#include "PlayerTwo.h"
 #include "stdafx.h"
 #include "CollisionManager.h"
 #include "Ids.h"
 
 Entities::Characters::PlayerOne::PlayerOne(Vector2F pos, const char* path, Ids::Ids id) :
-    Character(pos, Vector2F(0.0f, 0.0f), id, path), bullet(), isLive(true), isEnd(false)
+    Character(pos, Vector2F(0.0f, 0.0f), id, path), p2(NULL), bullet(), isLive(true), isEnd(false)
 {
 }
 
-Entities::Characters::PlayerOne::~PlayerOne() {
+Entities::Characters::PlayerOne::~PlayerOne()
+{
+    p2 = NULL;
+    bullet = NULL;
+    TM = NULL;
 }
 
 void Entities::Characters::PlayerOne::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM,
@@ -22,11 +27,16 @@ void Entities::Characters::PlayerOne::initialize(Managers::GraphicManager* GM, M
     //CM->addCollide(this);
 }
 
-void Entities::Characters::PlayerOne::setTM(Managers::TilesManager* t) {
+void Entities::Characters::PlayerOne::setTM(Managers::TilesManager* t)
+{
     TM = t;
 }
 
 void Entities::Characters::PlayerOne::update(float t) {
+    if (p2)
+    {
+        centralizeInView();
+    }
     position.x += vel.x * t;
     if (position.x <= dimensions.x * 0.5)
         position.x = (float)(dimensions.x * 0.5);
@@ -172,12 +182,6 @@ void Entities::Characters::PlayerOne::centralizeInView()
 
     else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
         position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
-
-    if (position.y <= (GM->getCenterView().y) - (GM->getSizeView().y / 2) - dimensions.y / 2)
-        position.y = (GM->getCenterView().y) - (GM->getSizeView().y / 2 - dimensions.y / 2);
-
-    else if (position.y >= (GM->getCenterView().y) + (GM->getSizeView().y / 2) + dimensions.y / 2)
-        position.y = (GM->getCenterView().y) + (GM->getSizeView().y / 2 + dimensions.y / 2);
 }
 
 void Entities::Characters::PlayerOne::initializeJSON(nlohmann::json j) {
