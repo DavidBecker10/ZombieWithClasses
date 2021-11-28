@@ -27,7 +27,7 @@ namespace Managers {
     private:
         GraphicManager* GM;
         bool twoPlayers;
-        //Entities::Characters::Player *player1;
+        Entities::Characters::Player *player1;
 
     public:
         ScreenManager(GraphicManager* gm/*, Entities::Characters::Player *p1 = nullptr*/);

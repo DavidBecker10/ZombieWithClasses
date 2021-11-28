@@ -19,14 +19,16 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity: {
-        auto* player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
+        player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
         auto* racoon = new States::RacoonCity(GM, player1);
         racoon->initialize(twoPlayers);
         push(racoon);
         return false;
     }
     case goSubway: {
-        auto* player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
+        //if(!player1)
+            player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
+        
         auto* subway = new States::Subway(GM, player1);
         subway->initialize(twoPlayers);
         push(subway);

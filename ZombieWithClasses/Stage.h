@@ -22,6 +22,7 @@ namespace States {
         Lists::EntityList EL;
 
         int returnCode;
+        static int playerScore;
         void setReturnCode(int rc) { returnCode = rc; }
 
 
@@ -42,7 +43,6 @@ namespace States {
 
         virtual void initialize(bool twoPlayers) = 0;
 
-        void playerNeutralized();
         /*void exit(){ }
         void refresh(float t, Managers::EventManager *EM) { }
         virtual void draw(Managers::GraphicManager *GM) { }

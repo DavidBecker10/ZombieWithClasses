@@ -45,6 +45,5 @@ nlohmann::json Entities::Projectile::convertJSON() {
             {"ID", ID},
             {"position", position.convertJSON()},
             {"vel", vel.convertJSON()},
-            // {"textPath", textPath},
     };
 }

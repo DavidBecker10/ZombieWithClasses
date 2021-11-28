@@ -3,7 +3,8 @@
 #include "Ids.h"
 
 Entities::Characters::Player::Player(Vector2F pos, const char* path, Ids::Ids id) :
-    Character(pos, id, path, 7), p2(NULL), bullet(), frameSHOT(0), isEnd(false) {
+    Character(pos, id, path, 7), p2(NULL), bullet(), frameSHOT(0), isEnd(false)
+{
 
 }
 
@@ -112,7 +113,7 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e) {
 }
 
 void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
-    std::cout << idOther << std::endl;
+    //std::cout << idOther << std::endl;
     if (idOther != Ids::ground2 && idOther != Ids::Enemy)
         isGround = false;
 
@@ -207,6 +208,7 @@ void Entities::Characters::Player::createProjectile(Vector2F pos) {
 void Entities::Characters::Player::initializeJSON(nlohmann::json j) {
     position = { j["position"] };
     life = { j["life"] };
+    score = { j["Score"] };
 }
 
 void Entities::Characters::Player::centralizeInView()
@@ -216,4 +218,15 @@ void Entities::Characters::Player::centralizeInView()
 
     else if (position.x >= (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2)
         position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
+}
+
+nlohmann::json Entities::Characters::Player::convertJSON()
+{
+    return {
+            { "ID", ID},
+            {"position", position.convertJSON()},
+            {"Score", score},
+            {"life", life},
+            {"Stage", currentStage}
+    };
 }

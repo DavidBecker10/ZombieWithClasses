@@ -1,11 +1,6 @@
 #pragma once
 #include "Character.h"
 #include "stdafx.h"
-//#include "GraphicManager.h"
-//#include "EventManager.h"
-//#include "CollisionManager.h"
-//#include "Vector2D.h"
-//#include "Ids.h"
 #include "TilesManager.h"
 #include "Bullet.h"
 #include "json.hpp"
@@ -20,6 +15,7 @@ namespace Entities
 		private:
 			PlayerTwo* p2;
 		protected:
+			int score;
 			unsigned int listenKey;
 			bool isJumping;
 			bool isEnd;
@@ -40,7 +36,11 @@ namespace Entities
 			void initializeJSON(nlohmann::json j);
 			void centralizeInView();
 			bool getIsEnd() { return isEnd; }
+			int getScore() { return score; }
+			void setScore(int scr) { score = scr; }
+			void incrementScore(int scr) { score += scr; }
 			void setPlayer2(PlayerTwo* pl2) { p2 = pl2; }
+			nlohmann::json convertJSON() override;
 		};
 	}
 }

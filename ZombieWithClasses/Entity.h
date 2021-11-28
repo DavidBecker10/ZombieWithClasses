@@ -37,7 +37,7 @@ namespace Entities
         virtual void draw();
         virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
 
-        nlohmann::json convertJSON() override;
+        virtual nlohmann::json convertJSON() override;
 
         //void setPosition(const Vector2F pos){position=pos;}
         Vector2F getPosition() { return position; }
@@ -53,6 +53,7 @@ namespace Entities
         //void setFacingLeft(bool facingLeft) { faceLeft = facingLeft; }
         static void setEL(Lists::EntityList* El) { EL = El; }
         static void setStage(int stage) { currentStage = stage; }
+        static int getStage() { return currentStage; }
         int getLife() { return life; }
     };
 }

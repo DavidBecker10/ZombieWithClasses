@@ -20,6 +20,7 @@ namespace Entities
             virtual void draw();
             virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
             bool facingLeft() const { return faceLeft; }
+            virtual nlohmann::json convertJSON() = 0;
         };
     }
 }

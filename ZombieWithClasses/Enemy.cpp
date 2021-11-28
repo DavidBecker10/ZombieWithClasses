@@ -85,6 +85,10 @@ void Entities::Characters::Enemy::collide(Ids::Ids idOther, Vector2F positionOth
             life--;
             frame = 0;
         }
+        if (life <= 0) {
+            player1->incrementScore(10);
+            std::cout << player1->getScore() << std::endl;
+        }
         isGround = true;
         break;
     case Ids::Bone:
@@ -113,30 +117,26 @@ void Entities::Characters::Enemy::collide(Ids::Ids idOther, Vector2F positionOth
     }
 }
 
-//nlohmann::json Entities::Characters::Enemy::convertJSON() {
-//    return {
-//            { "ID", ID},
-//            {"position", position.convertJSON()},
-//            //{"vel", vel.convertJSON()},
-//           // {"textPath", textPath},
-//            {"life", life},
-//            {"Stage", currentStage}
-//    };
-//}
+nlohmann::json Entities::Characters::Enemy::convertJSON() {
+    return {
+            { "ID", ID},
+            {"position", position.convertJSON()},
+            //{"vel", vel.convertJSON()},
+           // {"textPath", textPath},
+            {"life", life},
+            {"Stage", currentStage}
+    };
+}
 
 float Entities::Characters::Enemy::distancePlayer() {
     if (position.x > player1->getPosition().x) {
-        scale.x = 1;
+        scale.x = -1;
         faceLeft = true;
         return position.x - player1->getPosition().x;
     }
     else {
-        scale.x = -1;
+        scale.x = 1;
         faceLeft = false;
         return player1->getPosition().x - position.x;
     }
-}
-
-void Entities::Characters::Enemy::update(float t) {
-
 }

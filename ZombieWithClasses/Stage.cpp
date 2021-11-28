@@ -14,14 +14,12 @@ Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities:
     IDPushPause{ EM.addListenKeyboard([this](const sf::Event& e) { pushPause(e); }) },
     returnCode(Managers::proceed)
 {
-    //std::cout<<"jorge"<<std::endl;
-    //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
     TM->initialize(GM, &EM, &CM);
-    //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
+    
     EM.setWindow(GM->getWindow());
-    //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
+    
     CM.setTilesManager(TM);
-    //gerenciadorColisoes.setGerenciadorTiles(&gerenciadorTiles);
+    
     CM.setList(&EL);
     player1->setEL(&EL);
     player1->setGM(GM);
@@ -53,13 +51,30 @@ int Stage::execute() {
     EL.draw();
 
     if (!player2) {
-        playerNeutralized();
-        if (player1->getIsEnd())
+        if (player1->getIsEnd() && player1->getStage() == 1)
+        {
+            returnCode = Managers::goSubway;
+            playerScore = player1->getScore();
+        }
+        else if (player1->getIsEnd())
+        {
+            returnCode = Managers::goMainMenu;
+            playerScore = player1->getScore();
+        }
+        if (player1->getLife() <= 0)
             returnCode = Managers::goMainMenu;
         GM->centralize(player1->getPosition());
     }
     else
     {
+        if ((player1->getIsEnd() || player2->getIsEnd()) && player1->getStage() == 1)
+        {
+            playerScore = player1->getScore();
+            returnCode = Managers::goSubway;
+        }
+        else if (player1->getIsEnd() || player2->getIsEnd())
+            returnCode = Managers::goMainMenu;
+
         if (player1->getLife() <= 0 || player2->getLife() <= 0)
             returnCode = Managers::goMainMenu;
 
@@ -74,20 +89,6 @@ int Stage::execute() {
     return returnCode;
 }
 
-/**sf::Time t = clock.getElapsedTime();
-clock.restart();
-
-EM.manageEvent();
-EL.update(t.asSeconds());
-CM.verifyCollisions();
-
-TM.draw(GM);
-EL.draw(&GM);
-
-}*/
-
-
-
 void Stage::pushCloseWindow(const sf::Event e) {
     if (e.type == sf::Event::Closed) setReturnCode(Managers::end);
 }
@@ -98,16 +99,5 @@ void Stage::pushPause(const sf::Event e) {
         clock.pauseClock();
     }
 }
-void States::Stage::playerNeutralized()
-{
-    if (player1->getLife() <= 0)
-        setReturnCode(Managers::goMainMenu);
-}
 
-/*
-
-int Stage::returnID() const{
-    if (end) return Ids::Ids::endGame;
-    else return Ids::Ids::proceed;
-}
-*/
+int States::Stage::playerScore = 0;

@@ -20,11 +20,11 @@ void Entities::Characters::Nemesis::createProjectile(Vector2F pos) {
     float v, px;
     bool dir;
 
-    scale.x == 1 ? dir = false : dir = true;
+    scale.x == 1 ? dir = true : dir = false;
 
-    scale.x == 1 ? v = -800.0f : v = 800.0f;
+    scale.x == 1 ? v = 800.0f : v = -800.0f;
 
-    scale.x == 1 ? px = -35.0f : px = 35.0f;
+    scale.x == 1 ? px = 35.0f : px = -35.0f;
 
     bone = new Bone(Vector2F(pos.x + px, pos.y + 30.0f), Vector2F(v, 0.0f), dir);
 
@@ -50,7 +50,7 @@ void Entities::Characters::Nemesis::update(float t) {
         attackFrame = 0;
     }
 }
-
+/*
 void Entities::Characters::Nemesis::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
     if (idOther != Ids::ground2)
         isGround = false;
@@ -90,4 +90,4 @@ void Entities::Characters::Nemesis::collide(Ids::Ids idOther, Vector2F positionO
     default:
         break;
     }
-}
+}*/

@@ -18,7 +18,7 @@ namespace Entities {
             ~Nemesis();
             void createProjectile(Vector2F pos);
             void update(float t) override;
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+            //void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
         };
     }
 }
