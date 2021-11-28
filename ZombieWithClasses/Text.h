@@ -21,7 +21,4 @@ public:
     void get(const sf::Event& e);
 };
 
-
-
-
 #endif //ZOMBIEWITHCLASSES_TEXT_H

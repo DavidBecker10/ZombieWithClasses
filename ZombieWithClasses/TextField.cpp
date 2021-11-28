@@ -22,7 +22,7 @@ bool TextField::getTextDone() const {
 
 void TextField::draw(Managers::GraphicManager& GM) const {
     GM.drawSolidRectangle(position, size, color);
-    GM.drawText(txt.getText(), position, textSize, false);
+    GM.drawText(txt.getText(), position, textSize, true);
 }
 
 void TextField::startCapture() {

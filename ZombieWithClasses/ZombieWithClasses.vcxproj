@@ -152,6 +152,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="EndGameState.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Ent.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="EndGameState.h" />
     <ClInclude Include="Ghoul.h" />
     <ClInclude Include="Homer.h" />
     <ClInclude Include="Lava.h" />

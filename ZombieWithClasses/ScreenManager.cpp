@@ -4,6 +4,7 @@
 #include "MainMenuState.h"
 #include "PauseMenuState.h"
 #include "LeaderboardState.h"
+#include "EndGameState.h"
 #include <fstream>
 #include "Subway.h"
 #include "stdafx.h"
@@ -87,6 +88,10 @@ bool ScreenManager::processCode(int returnCode) {
     }
     case goLeaderboard: {
         push(new States::LeaderboardState(*GM));
+        return false;
+    }
+    case goEndGame: {
+        push(new States::EndGameState(*GM));
         return false;
     }
     case resume: {

@@ -16,6 +16,7 @@ namespace Managers {
         goMainMenu,
         goPauseMenu,
         goLeaderboard,
+        goEndGame,
         resume,
         saveGame,
         onePlayer,

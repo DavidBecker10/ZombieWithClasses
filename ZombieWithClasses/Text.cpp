@@ -1,7 +1,7 @@
 #include "Text.h"
 
 Text::Text(Managers::EventManager& em, unsigned short maxL) :
-    idListenKeyboard(0), startCapture(false), textDone(false), EM{ em }, maxLenght(maxL) {
+    idListenKeyboard{ 0 }, startCapture(false), textDone(false), EM{ em }, maxLenght(maxL) {
 
 }
 
@@ -15,7 +15,7 @@ void Text::inicialize() {
 
     text.clear();
 
-    idListenKeyboard = EM.addListenKeyboard([this](const sf::Event& e) {get(e); });
+    idListenKeyboard = EM.addListenKeyboard([this](const sf::Event& e) {get(e);});
 }
 
 void Text::get(const sf::Event& e) {

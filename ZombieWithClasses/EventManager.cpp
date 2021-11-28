@@ -1,6 +1,6 @@
 #include "EventManager.h"
 
-unsigned int Managers::EventManager::proxID{  };
+unsigned int Managers::EventManager::proxID{1};
 
 Managers::EventManager::EventManager() {
 

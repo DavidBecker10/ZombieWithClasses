@@ -58,7 +58,7 @@ int Stage::execute() {
         }
         else if (player1->getIsEnd())
         {
-            returnCode = Managers::goMainMenu;
+            returnCode = Managers::goEndGame;
             playerScore = player1->getScore();
         }
         if (player1->getLife() <= 0)
@@ -73,7 +73,7 @@ int Stage::execute() {
             returnCode = Managers::goSubway;
         }
         else if (player1->getIsEnd() || player2->getIsEnd())
-            returnCode = Managers::goMainMenu;
+            returnCode = Managers::goEndGame;
 
         if (player1->getLife() <= 0 || player2->getLife() <= 0)
             returnCode = Managers::goMainMenu;
