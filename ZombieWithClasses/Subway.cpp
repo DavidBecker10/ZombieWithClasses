@@ -119,6 +119,7 @@ void States::Subway::initialize(bool twoPlayers)
     Vector2F pos = { 500.0f, 3000.0f };
 
     EL.insert(new Entities::Characters::Homer(Vector2F(pos), player1));
+    EL.insert(new Entities::Characters::Nemesis(Vector2F(700, 3000), player1));
 
     pos.x += 1000.0f;
 

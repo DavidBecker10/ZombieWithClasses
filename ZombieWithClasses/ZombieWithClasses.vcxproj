@@ -161,6 +161,8 @@
     <ClCompile Include="Ghoul.cpp" />
     <ClCompile Include="Homer.cpp" />
     <ClCompile Include="Lava.cpp" />
+    <ClCompile Include="Leaderboard.cpp" />
+    <ClCompile Include="LeaderboardState.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Nemesis.cpp" />
@@ -193,6 +195,8 @@
     <ClInclude Include="Ghoul.h" />
     <ClInclude Include="Homer.h" />
     <ClInclude Include="Lava.h" />
+    <ClInclude Include="Leaderboard.h" />
+    <ClInclude Include="LeaderboardState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Nemesis.h" />

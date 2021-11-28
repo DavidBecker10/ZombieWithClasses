@@ -82,16 +82,9 @@ void RacoonCity::load(const std::string& path) {
             EL.insert(Enemy);
             break;
         }
-                            //            case Ids::Ids::Nemesis: {
-                            //                EL.insert(new Entities::Characters::Nemesis(e, player1));
-                            //                break;
-                            //            }
         case Ids::Ids::Bullet: {
             EL.insert(new Entities::Bullet(e));
         }
-                             //            case Ids::Ids::Bone: {
-                             //                EL.insert(new Entities::Bone(e));
-                             //            }
         default:
             break;
         }

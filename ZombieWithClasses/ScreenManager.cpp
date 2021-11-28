@@ -3,6 +3,7 @@
 #include "RacoonCity.h"
 #include "MainMenuState.h"
 #include "PauseMenuState.h"
+#include "LeaderboardState.h"
 #include <fstream>
 #include "Subway.h"
 #include "stdafx.h"
@@ -80,6 +81,10 @@ bool ScreenManager::processCode(int returnCode) {
     }
     case goPauseMenu: {
         push(new States::PauseMenuState(*GM));
+        return false;
+    }
+    case goLeaderboard: {
+        push(new States::LeaderboardState(*GM));
         return false;
     }
     case resume: {
