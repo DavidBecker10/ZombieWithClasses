@@ -2,15 +2,15 @@
 #define ZOMBIEWITHCLASSES_MENU_H
 
 #include "State.h"
-#include "ButtonManager.h"
 
+#include "ButtonManager.h"
 namespace States {
     class Menu : public State {
     private:
         int returnCode;
 
     protected:
-        Managers::GraphicManager& GM;
+        Managers::GraphicManager* GM;
         Managers::EventManager EM;
         Managers::ButtonManager BM;
 

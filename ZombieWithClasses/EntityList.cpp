@@ -3,11 +3,12 @@
 
 Lists::EntityList::EntityList() :
     list() {
-
+    //std::cout << "Estou criando lista" <<std::endl;
 }
 
 Lists::EntityList::~EntityList() {
-    list.destroy();
+    //std::cout<< "Estou destruindo Lista" << std::endl;
+    destroyEntities();
 }
 
 void Lists::EntityList::insert(Entities::Entity* pE) {
@@ -22,14 +23,14 @@ int Lists::EntityList::getSize() {
     return list.getSize();
 }
 
-void Lists::EntityList::update(float t)
-{    
-    for (int i = 0; i < list.getSize(); i++)
-    {
-        list[i]->update(t);
-        if (!list[i]->getIsActive()) {
+void Lists::EntityList::update(float t) {
+    for (int i = 0; i < list.getSize(); i++) {
+        if (list[i]->getLife() <= 0) {
             remove(list[i]);
+            i--;
+            if (i < 0)i = 0;
         }
+        list[i]->update(t);
     }
 }
 

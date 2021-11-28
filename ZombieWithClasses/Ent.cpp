@@ -9,4 +9,5 @@ Ent::Ent(Ids::Ids id, const char* txtPath) :
 Ent::~Ent() {
 }
 
+
 Managers::GraphicManager* Ent::GM = NULL;

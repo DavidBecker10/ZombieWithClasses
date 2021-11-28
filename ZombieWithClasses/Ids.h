@@ -1,5 +1,4 @@
-#ifndef ZOMBIEWITHCLASSES_IDS_H
-#define ZOMBIEWITHCLASSES_IDS_H
+#pragma once
 
 namespace Ids
 {
@@ -21,17 +20,17 @@ namespace Ids
         ground12,
         ground13,
         lava,
-        spiderweb,
         wallL,
         wallR,
-        Player1,
-        Player2,
+        Player,
         Enemy,
         Projectile,
         Homer,
         Ghoul,
-        Nemesis
+        Nemesis,
+        Bullet,
+        Bone,
+        spiderweb,
+        Player2
     };
 }
-
-#endif //ZOMBIEWITHCLASSES_IDS_H

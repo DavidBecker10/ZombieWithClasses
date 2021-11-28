@@ -1,7 +1,6 @@
-#ifndef ZOMBIEWITHCLASSES_ENEMY_H
-#define ZOMBIEWITHCLASSES_ENEMY_H
+#pragma once
 #include "Character.h"
-
+#include "Player.h"
 namespace Entities
 {
     namespace Characters
@@ -9,18 +8,18 @@ namespace Entities
         class Enemy :
             public Character
         {
-        private:
-
+        protected:
+            Player* player1;
 
         public:
-            Enemy(Vector2F pos = { 0.0f, 0.0f }, Vector2F vel = { 0.0f, 0.0f }, Ids::Ids id = Ids::Ids::empty, const char* tPath = nullptr);
+            Enemy(Vector2F pos = { 0.0f, 0.0f }, Ids::Ids id = Ids::Ids::empty, const char* tPath = nullptr, int lf = 0, Player* p1 = nullptr);
             ~Enemy();
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
-            virtual void update(float t) = 0;
+            virtual void update(float t);
             void draw();
-            void collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro);
+            virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+            float distancePlayer();
+            //nlohmann::json convertJSON() override;
         };
     }
 }
-
-#endif //ZOMBIEWITHCLASSES_ENEMY_H

@@ -1,5 +1,4 @@
-#ifndef ZOMBIEWITHCLASSES_ENTITYLIST_H
-#define ZOMBIEWITHCLASSES_ENTITYLIST_H
+#pragma once
 
 #include "List.h"
 #include "Entity.h"
@@ -37,5 +36,3 @@ namespace Lists {
     };
 
 }
-
-#endif //ZOMBIEWITHCLASSES_ENTITYLIST_H

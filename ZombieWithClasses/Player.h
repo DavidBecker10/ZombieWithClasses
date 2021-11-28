@@ -1,47 +1,46 @@
-#ifndef ZOMBIEWITHCLASSES_PLAYERONE_H
-#define ZOMBIEWITHCLASSES_PLAYERONE_H
+#pragma once
 #include "Character.h"
-#include "TilesManager.h"
-#include "Projectile.h"
-#include "json.hpp"
 #include "stdafx.h"
+//#include "GraphicManager.h"
+//#include "EventManager.h"
+//#include "CollisionManager.h"
+//#include "Vector2D.h"
+//#include "Ids.h"
+#include "TilesManager.h"
+#include "Bullet.h"
+#include "json.hpp"
 
 namespace Entities
 {
 	namespace Characters
 	{
 		class PlayerTwo;
-
-		class PlayerOne :public Character
+		class Player :public Character
 		{
 		private:
 			PlayerTwo* p2;
 		protected:
 			unsigned int listenKey;
 			bool isJumping;
-			bool isLive;
 			bool isEnd;
-			Managers::TilesManager* TM;
-			Projectile* bullet;
+			Bullet* bullet;
+			float frameSHOT;
 
-
+			//Managers::TilesManager* TM;
 		public:
-			PlayerOne(Vector2F pos = { 0.0f, 0.0f }, const char* path = PLAYER_PATH, Ids::Ids id = Ids::Player1);
-			~PlayerOne();
+			Player(Vector2F pos = { 0.0f, 0.0f }, const char* path = PLAYER_PATH, Ids::Ids id = Ids::Ids::Player);
+			~Player();
 			void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
-			void setTM(Managers::TilesManager* TM);
+			//void setTM(Managers::TilesManager* TM);
 			void update(float t);
 			void draw();
 			virtual void handleEvents(const sf::Event& e);
 			void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
-			virtual void createProjectile(Ids::Ids id, Vector2F pos, const char* path);
-			void centralizeInView();
+			void createProjectile(Vector2F pos);
 			void initializeJSON(nlohmann::json j);
-			bool getIsLive() { return isLive; }
+			void centralizeInView();
 			bool getIsEnd() { return isEnd; }
 			void setPlayer2(PlayerTwo* pl2) { p2 = pl2; }
 		};
 	}
 }
-
-#endif //ZOMBIEWITHCLASSES_PLAYERONE_H

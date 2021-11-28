@@ -12,4 +12,5 @@ public:
     virtual void load(const std::string& path) = 0;
 };
 
+
 #endif //ZOMBIEWITHCLASSES_SAVE_H

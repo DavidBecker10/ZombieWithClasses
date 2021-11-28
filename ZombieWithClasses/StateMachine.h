@@ -10,6 +10,7 @@ namespace States {
     protected:
         std::stack<State*> states;
 
+
     public:
         virtual ~StateMachine();
         bool execute();

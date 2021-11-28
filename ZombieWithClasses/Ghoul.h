@@ -7,13 +7,15 @@ namespace Entities {
     namespace Characters {
         class Ghoul : public Enemy {
         private:
-            sf::Clock c;
+            //float jumpTime;
+            //bool isJumping;
+            //static const float attackTime;
         public:
-            Ghoul(Vector2F pos = { 0.0f,0.0f }, Vector2F vel = { 0.0f,0.0f });
-            Ghoul(nlohmann::json j);
+            Ghoul(Vector2F pos = { 0.0f,0.0f }, Player* p1 = nullptr);
+            Ghoul(Vector2F pos, int lf, Player* p1);
             ~Ghoul();
             void update(float t) override;
-            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+            //            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
         };
     }
 }

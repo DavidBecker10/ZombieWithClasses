@@ -9,6 +9,7 @@ namespace Managers {
         tileDimensions{ tileDim },
         path{ p },
         tileMap(p) {
+        //std::cout << tiles.size() << std::endl;
     }
 
     TilesManager::~TilesManager() {
@@ -31,9 +32,10 @@ namespace Managers {
                         ((g->getCenterView().y + g->getSizeView().y / 2) + tileDimensions.y >
                             (coordinatesForScreen(Vector2U(j, i))).y) &&
                         ((g->getCenterView().x - g->getSizeView().x / 2) - tileDimensions.x <
-                            (coordinatesForScreen(Vector2U(j, i))).x) &&            //Desenha apenas quando estiver dentro da view
+                            (coordinatesForScreen(Vector2U(j, i))).x) &&//Desenha apenas quando estiver dentro da view
                         ((g->getCenterView().x + g->getSizeView().x / 2) + tileDimensions.x >
                             (coordinatesForScreen(Vector2U(j, i))).x)) {
+                        //std::cout<<"Eu sou macaco velho professor"<<std::endl;
                         tiles[index]->draw(coordinatesForScreen(Vector2U(j, i)));
                     }
                 }

@@ -1,7 +1,3 @@
-//
-// Created by Gabriel on 20/11/2021.
-//
-
 #ifndef ZOMBIEWITHCLASSES_BUTTON_H
 #define ZOMBIEWITHCLASSES_BUTTON_H
 
@@ -36,7 +32,8 @@ public:
     void press() const;
 
     void setColor(sf::Color clr) { color = clr; }
- 
-    };
+
+};
+
 
 #endif //ZOMBIEWITHCLASSES_BUTTON_H

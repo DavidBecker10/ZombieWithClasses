@@ -1,26 +1,24 @@
-#ifndef ZOMBIEWITHCLASSES_STDAFX_H
-#define ZOMBIEWITHCLASSES_STDAFX_H
+#pragma once
 
 #include <iostream>
 #include <cmath>
 #include <vector>
-#include <cstdlib>
-#include <ctime>
 #define GRAVITY 5
 
 using std::cout;
 using std::endl;
 
-#define FONT_PATH "../Assets/Font/SIXTY.TTF"
-#define HOMER_PATH "../Assets/Zombies/Homer/Attack1.png"
-#define GHOUL_PATH "../Assets/Zombies/Ghoul/Attack1.png"
-#define NEMESIS_PATH "../Assets/Zombies/Nemesis/Attack1.png"
+#define FONT_PATH "../assets/Font/SIXTY.TTF"
+#define HOMER_PATH "../assets/Zombies/Homer.png"
+#define GHOUL_PATH "../assets/Zombies/Ghoul.png"
+#define NEMESIS_PATH "../assets/Zombies/Nemesis.png"
 /**--------------------------------------------------------------------------------------------------------------------*/
-#define BULLET_PATH "../Assets/Projectiles/bullet.png"
-#define BONE_PATH "../Assets/Projectiles/bone.png"
+#define BULLET_PATH "../assets/projectiles/bullet.png"
+#define BONE_PATH "../assets/projectiles/bone.png"
+#define ROCK_PATH "../assets/projectiles/Rock.png"
 
-#define RACOON_PATH "../Assets/Maps/mapStage1.json"
-#define PLAYER_PATH "../Assets/Terrorists/Masked/Attack1_2.png"
-#define PLAYER2_PATH "../Assets/Terrorists/Muslim/Attack1_1.png"
+#define RACOON_PATH "../assets/Maps/mapStage1.json"
+#define SUBWAY_PATH "../assets/Maps/mapStage2.json"
 
-#endif //ZOMBIEWITHCLASSES_STDAFX_H
+#define PLAYER_PATH "../assets/Terrorists/Leoncio.png"
+#define PLAYER2_PATH  "../assets/Terrorists/Barreth.png"

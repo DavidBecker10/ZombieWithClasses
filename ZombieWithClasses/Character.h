@@ -10,14 +10,16 @@ namespace Entities
         {
         protected:
             bool isGround;
+            bool faceLeft;
 
         public:
-            Character(Vector2F pos = { 0.0f, 0.0f }, Vector2F v = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tPath = nullptr);
+            Character(Vector2F pos = { 0.0f, 0.0f }, Ids::Ids ID = Ids::Ids::empty, const char* tPath = nullptr, int lf = 0);
             ~Character();
             virtual void update(float t);
             virtual void initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM);
             virtual void draw();
             virtual void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) = 0;
+            bool facingLeft() const { return faceLeft; }
         };
     }
 }

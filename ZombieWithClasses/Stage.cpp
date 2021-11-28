@@ -5,22 +5,23 @@
 #include "Homer.h"
 using namespace States;
 
-Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1) :
+Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Entities::Characters::Player* p1) :
     GM(gm),
     player1{ p1 },
-    player2{ NULL },
+    player2{ nullptr },
     TM{ tm },
-    SM{ sm },
     IDCloseScreen{ EM.addListenOthers([this](const sf::Event& e) { pushCloseWindow(e); }) },
     IDPushPause{ EM.addListenKeyboard([this](const sf::Event& e) { pushPause(e); }) },
     returnCode(Managers::proceed)
 {
+    //std::cout<<"jorge"<<std::endl;
+    //EL.inicializarDesenhaveis(gerenciadorGrafico, gerenciadorEventos, gerenciadorColisoes);
     TM->initialize(GM, &EM, &CM);
-
+    //gerenciadorTiles.inicializar(gerenciadorGrafico, gerenciadorEventos);
     EM.setWindow(GM->getWindow());
-
+    //gerenciadorEventos.setJanela(gerenciadorGrafico.getJanela());
     CM.setTilesManager(TM);
-
+    //gerenciadorColisoes.setGerenciadorTiles(&gerenciadorTiles);
     CM.setList(&EL);
     player1->setEL(&EL);
     player1->setGM(GM);
@@ -28,21 +29,29 @@ Stage::Stage(Managers::GraphicManager* gm, Managers::TilesManager* tm, Managers:
 
 Stage::~Stage() {
     EL.remove(player1);
+    //if(player2)EL.remove(player2);
     EL.destroyEntities();
     delete TM;
 }
 
 int Stage::execute() {
     returnCode = Managers::proceed;
+    //sf::Time t = clock.getElapsedTime();
     double t = clock.getTime();
+    //float dt = t.asSeconds();
+    //if(dt>0.0167)dt=0.0167;
+    //clock.restart();
     if (t > 0.0167)t = 0.0167;
     clock.resetClock();
 
+
     EM.manageEvent();
+    //EL.update(dt);
     EL.update(t);
     CM.verifyCollisions();
     TM->draw(GM);
     EL.draw();
+
     if (!player2) {
         playerNeutralized();
         if (player1->getIsEnd())
@@ -51,7 +60,7 @@ int Stage::execute() {
     }
     else
     {
-        if (!player1->getIsActive() || !player2->getIsActive())
+        if (player1->getLife() <= 0 || player2->getLife() <= 0)
             returnCode = Managers::goMainMenu;
 
         Vector2F aux;
@@ -65,6 +74,20 @@ int Stage::execute() {
     return returnCode;
 }
 
+/**sf::Time t = clock.getElapsedTime();
+clock.restart();
+
+EM.manageEvent();
+EL.update(t.asSeconds());
+CM.verifyCollisions();
+
+TM.draw(GM);
+EL.draw(&GM);
+
+}*/
+
+
+
 void Stage::pushCloseWindow(const sf::Event e) {
     if (e.type == sf::Event::Closed) setReturnCode(Managers::end);
 }
@@ -77,11 +100,12 @@ void Stage::pushPause(const sf::Event e) {
 }
 void States::Stage::playerNeutralized()
 {
-    if (!player1->getIsActive())
-       setReturnCode(Managers::goMainMenu);
+    if (player1->getLife() <= 0)
+        setReturnCode(Managers::goMainMenu);
 }
 
 /*
+
 int Stage::returnID() const{
     if (end) return Ids::Ids::endGame;
     else return Ids::Ids::proceed;

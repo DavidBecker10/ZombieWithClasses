@@ -2,7 +2,7 @@
 #define ZOMBIEWITHCLASSES_SCREENMANAGER_H
 
 #include"StateMachine.h"
-#include "PlayerOne.h"
+#include "Player.h"
 
 namespace Managers {
 
@@ -13,23 +13,25 @@ namespace Managers {
         end,
         goRacoonCity,
         loadGame,
-        goSubway,
         goMainMenu,
         goPauseMenu,
         resume,
         saveGame,
         onePlayer,
-        twoPlayers
+        twoPlayer,
+        goSubway
     };
 
     class ScreenManager : public States::StateMachine {
     private:
-        GraphicManager *GM;
-        Entities::Characters::PlayerOne* player1;
-        bool numPlayers;
+        GraphicManager* GM;
+        bool twoPlayers;
+        //Entities::Characters::Player *player1;
 
     public:
-        ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1 = nullptr);
+        ScreenManager(GraphicManager* gm/*, Entities::Characters::Player *p1 = nullptr*/);
+
+    protected:
         bool processCode(int returnCode) override;
     };
 }

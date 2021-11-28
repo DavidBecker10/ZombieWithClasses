@@ -1,13 +1,18 @@
 #include "Enemy.h"
 #include "stdafx.h"
 #include "CollisionManager.h"
-Entities::Characters::Enemy::Enemy(Vector2F pos, Vector2F vel, Ids::Ids id, const char* tPath) :
-    Character(pos, vel, id, tPath)
+
+Entities::Characters::Enemy::Enemy(Vector2F pos, Ids::Ids id, const char* tPath, int lf, Player* p1) :
+    //Character(pos, vel, Ids::Ids::Enemy, "../assets/Zombies/ZombieMan/animation/Walk1test.png")
+    Character(pos, id, tPath, lf), player1(p1)
 {
+    frame = 1;
+    faceLeft = true;
 }
 
 Entities::Characters::Enemy::~Enemy()
 {
+    player1 = NULL;
 }
 
 void Entities::Characters::Enemy::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM)
@@ -40,55 +45,98 @@ void Entities::Characters::Enemy::draw()
     GM->draw(textPath, position, scale);
 }
 
-void Entities::Characters::Enemy::collide(Ids::Ids idOutro, Vector2F posicaoOutro, Vector2F dimensoesOutro)
+void Entities::Characters::Enemy::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther)
 {
-    if (idOutro == Ids::Ids::Player1 || idOutro == Ids::Ids::Player2) {
-        // std::cout << "nhac nhac nham nham heroi gostoso" << std::endl;
-    }
-    else if (idOutro == Ids::Ids::Enemy) {
-
-        Vector2F distance = position - posicaoOutro;
-        Vector2F sergio(0.5f, 0.5f);
-        position += distance * sergio;
-
-        std::cout << "Enemy to enemy collision" << std::endl;
-        vel.x *= -1;
-        vel.y *= -1;
-    }
-
-    /**std::string imprimir;
-
-
-    switch (idOutro) {
-    case Ids::Player:
-        imprimir = "Colidiu Player";
-        std::cout << imprimir << std::endl;
-        break;
-    case Ids::ground1:
-        imprimir = "fui ludibriado";
-        std::cout << imprimir << std::endl;
+    if (idOther != Ids::ground2)
+        isGround = false;
+    //    if (idOther == Ids::Ids::Ghoul || idOther == Ids::Ids::Homer) {
+    //        Vector2F distance = position - positionOther;
+    //        Vector2F ajust = (0.5f, 0.5f);
+    //        position += distance * ajust;
+    //
+    //        //std::cout << "Enemy to enemy collision" << std::endl;
+    //        vel.x *= -1;
+    //        //vel.y *= -1;
+    //        isGround = true;
+    //    }
+    switch (idOther) {
+    case Ids::lava:
+        vel.x = 0;
+        isGround = true;
+        //position = -200;
         break;
     case Ids::ground2:
-        imprimir = "cai";
-        std::cout << imprimir << std::endl;
+        isGround = true;
         break;
     case Ids::empty:
-        imprimir = "mano o que ta acontecendo";
-        std::cout << imprimir << std::endl;
+        isGround = true;
+        vel.x *= -1;
         break;
-    case Ids::ground3:
-        imprimir = "pontudo";
-        std::cout << imprimir << std::endl;
+    case Ids::wallL:
+        isGround = true;
+        vel.x *= -1;
         break;
-    case Ids::ground4:
-        imprimir = "estou livre";
-        std::cout << imprimir << std::endl;
+    case Ids::wallR:
+        isGround = true;
+        vel.x *= -1;
         break;
-    case Ids::ground5:
-        imprimir = "bonk";
-        std::cout << imprimir << std::endl;
+    case Ids::Bullet:
+        if (frame > 0.4) {
+            life--;
+            frame = 0;
+        }
+        isGround = true;
+        break;
+    case Ids::Bone:
+        isGround = true;
+        break;
+    case Ids::Homer:
+        isGround = true;
+        break;
+    case Ids::Ghoul:
+        isGround = true;
+        break;
+    case Ids::Nemesis:
+        isGround = true;
+        break;
+    case Ids::Player:
+        isGround = true;
+        break;
+    case Ids::Player2:
+        isGround = true;
+        break;
+    case Ids::spiderweb:
+        isGround = true;
         break;
     default:
         break;
-    }*/
+    }
+}
+
+//nlohmann::json Entities::Characters::Enemy::convertJSON() {
+//    return {
+//            { "ID", ID},
+//            {"position", position.convertJSON()},
+//            //{"vel", vel.convertJSON()},
+//           // {"textPath", textPath},
+//            {"life", life},
+//            {"Stage", currentStage}
+//    };
+//}
+
+float Entities::Characters::Enemy::distancePlayer() {
+    if (position.x > player1->getPosition().x) {
+        scale.x = 1;
+        faceLeft = true;
+        return position.x - player1->getPosition().x;
+    }
+    else {
+        scale.x = -1;
+        faceLeft = false;
+        return player1->getPosition().x - position.x;
+    }
+}
+
+void Entities::Characters::Enemy::update(float t) {
+
 }

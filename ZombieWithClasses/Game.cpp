@@ -2,6 +2,8 @@
 #include "Tile.h"
 
 Game::Game() :
+    //player1(Entities::Characters::Player(Vector2F(100.0f,3000.0f))),
+    //SM(&GM, &player1),
     SM(&GM),
     end{ false }
 {

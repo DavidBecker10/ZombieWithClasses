@@ -12,8 +12,8 @@ namespace States {
 
     class StateMachine;
 
-    class State 
-    {
+    class State {
+    protected:
 
     public:
         virtual ~State();

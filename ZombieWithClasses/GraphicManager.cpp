@@ -1,10 +1,10 @@
 #include "GraphicManager.h"
-
 #include <iostream>
 #include "stdafx.h"
+
 Managers::GraphicManager::GraphicManager() :
-    window{ new sf::RenderWindow(sf::VideoMode(900, 720), "Zombie With Classes", sf::Style::Close) },
-    view{ sf::Vector2f(200, 3000), sf::Vector2f(1500,800),  },
+    window{ new sf::RenderWindow(sf::VideoMode(1280, 720), "Zombie With Classes", sf::Style::Close) },
+    view{ sf::Vector2f(640, 360), sf::Vector2f(1280,720) },
     text{ nullptr }
 {
     initializeView();
@@ -39,7 +39,15 @@ void Managers::GraphicManager::draw(const std::string& path, Vector2F pos)
 
     text = textures[path];
 
+    /*body.setTexture(*text, true);
+    body.setScale(1, 1);
+    body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    body.setPosition(pos.x, pos.y);
+
+    window->draw(body);*/
+
     sprite.setTexture(*text, true);
+    //sprite.setTextureRect(text->getSize();)
     sprite.setScale(1, 1);
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(pos.x, pos.y);
@@ -72,10 +80,19 @@ void Managers::GraphicManager::draw(const std::string& path, Vector2F position, 
     }
 
     text = textures[path];
+    //body.setTexture(*text, true);
     sprite.setTexture(*text, true);
 
     sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
     sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
+
+    //body->setTextureRect({ positionFrame, size });
+    //body.setScale(scale);
+    //body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
+    //body.setPosition(position.x, position.y);
+    //body->setOrigin({ size.x * 0.5f, size.y * 0.5f });
+    //body->setPosition(size.x, size.y);
+    //window->draw(body);
 
     sprite.setTextureRect({ positionFrame, size });
 
@@ -94,7 +111,9 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
             std::cout << "Error: Image in: " << path << " not found!" << std::endl;
             exit(715);
         }
-        textures.emplace(path, text);
+
+        //texturas.insert(std::pair<const std::string, sf::Texture*>(caminho, text));
+        textures.emplace(path, text); //c++11
         return true;
     }
 }
@@ -137,16 +156,15 @@ void Managers::GraphicManager::drawSolidRectangle(Vector2F center, Vector2F dime
 }
 
 void Managers::GraphicManager::drawText(const std::string text, Vector2F position, unsigned int size,
-    const bool centralize) const {
+    const bool centralize, sf::Color color) const {
     sf::Text txt = sf::Text(text, font, size);
-    txt.setFillColor(sf::Color::White);
+    txt.setFillColor(color);
     if (centralize) {
         sf::FloatRect siz = txt.getGlobalBounds();
         txt.setOrigin(siz.width / 2, siz.height / 2);
     }
     txt.setPosition(position.x, position.y);
     window->draw(txt);
-
 }
 
 Vector2F Managers::GraphicManager::getMousePosition() const {

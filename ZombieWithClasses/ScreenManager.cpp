@@ -1,18 +1,15 @@
 #include "ScreenManager.h"
-#include "PlayerOne.h"
 #include "Stage.h"
 #include "RacoonCity.h"
-#include "Subway.h"
 #include "MainMenuState.h"
 #include "PauseMenuState.h"
 #include <fstream>
+#include "Subway.h"
+#include "stdafx.h"
 using namespace Managers;
 
-ScreenManager::ScreenManager(GraphicManager* gm, Entities::Characters::PlayerOne* p1) :
-    GM{ gm },
-    player1{ p1 },
-    numPlayers{false}
-{
+ScreenManager::ScreenManager(GraphicManager* gm/*, Entities::Characters::Player *p1*/) :
+    GM{ gm }, twoPlayers(false)/*, player1{p1}*/ {
     push(new States::MainMenuState(*GM));
 }
 
@@ -21,20 +18,22 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity: {
-        auto* racoon = new States::RacoonCity(GM, this, new Entities::Characters::PlayerOne(Vector2F(100.0f, 3000.0f)));
-        racoon->initialize(numPlayers);
+        auto* player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
+        auto* racoon = new States::RacoonCity(GM, player1);
+        racoon->initialize(twoPlayers);
         push(racoon);
         return false;
     }
     case goSubway: {
-        auto* subway = new States::Subway(GM, this, new Entities::Characters::PlayerOne(Vector2F(100.0f, 3000.0f)));
-        subway->initialize(numPlayers);
+        auto* player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
+        auto* subway = new States::Subway(GM, player1);
+        subway->initialize(twoPlayers);
         push(subway);
         return false;
     }
     case saveGame: {
         pop();
-        States::Stage* s = dynamic_cast<States::Stage*>(top());
+        auto* s = dynamic_cast<States::Stage*>(top());
         if (!s)
             std::cout << "No stage to save" << std::endl;
         else if (!s->save("../saves/saves.json")) std::cout << "Error. Game can't be saved" << std::endl;
@@ -45,32 +44,35 @@ bool ScreenManager::processCode(int returnCode) {
         if (file.fail()) throw "path not found!";
         nlohmann::json j;
         file >> j;
-
         int a;
 
         j = j["Entity"][0];
         a = static_cast<int>(j["Stage"]);
-    
+
         if (a == 1) {
-            States::RacoonCity* stage = new States::RacoonCity(GM, this, new Entities::Characters::PlayerOne());
+            auto* player1 = new Entities::Characters::Player();
+            auto* rc = new States::RacoonCity(GM, player1);
+            //States::RacoonCity* stage = new States::RacoonCity(GM, new Entities::Characters::Player());
             try {
-                stage->load("../saves/saves.json");
-                push(stage);
+                rc->load("../saves/saves.json");
+                push(rc);
             }
             catch (char const* s) {
                 std::cout << s << std::endl;
-                delete stage;
+                delete rc;
             }
         }
         else {
-            States::Subway* stage = new States::Subway(GM, this, new Entities::Characters::PlayerOne());
+            auto* player1 = new Entities::Characters::Player();
+            auto* sw = new States::Subway(GM, player1);
+            //States::Subway* stage = new States::Subway(GM, this, new Entities::Characters::PlayerOne());
             try {
-                stage->load("../saves/saves.json");
-                push(stage);
+                sw->load("../saves/saves.json");
+                push(sw);
             }
             catch (char const* s) {
                 std::cout << s << std::endl;
-                delete stage;
+                delete sw;
             }
         }
 
@@ -87,13 +89,14 @@ bool ScreenManager::processCode(int returnCode) {
     case goMainMenu: {
         emptyStack();
         push(new States::MainMenuState(*GM));
-    }
-    case onePlayer: {
-        numPlayers = false;
         return false;
     }
-    case twoPlayers: {
-        numPlayers = true;
+    case onePlayer: {
+        twoPlayers = false;
+        return false;
+    }
+    case twoPlayer: {
+        twoPlayers = true;
         return false;
     }
     case proceed:

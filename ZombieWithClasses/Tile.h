@@ -1,9 +1,14 @@
-#ifndef ZOMBIEWITHCLASSES_TILE_H
-#define ZOMBIEWITHCLASSES_TILE_H
+#pragma once
+
+//#include "Vector2D.h"
+//#include "Ids.h"
+//#include "GraphicManager.h"
 #include "Entity.h"
+#include "Ent.h"
+//#include "CollisionManager.h"
 
 namespace Entities {
-    class Tile : public Entity {
+    class Tile : public Ent {
     protected:
         Vector2F size;
         Managers::CollisionManager* cm;
@@ -23,5 +28,3 @@ namespace Entities {
 
     };
 }
-
-#endif //ZOMBIEWITHCLASSES_TILE_H

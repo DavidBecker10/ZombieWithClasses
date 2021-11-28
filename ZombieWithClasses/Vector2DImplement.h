@@ -1,5 +1,6 @@
 #ifndef ZOMBIEWITHCLASSES_VECTOR2DIMPLEMENT_H
 #define ZOMBIEWITHCLASSES_VECTOR2DIMPLEMENT_H
+
 #include<cmath>
 
 template <typename T>
@@ -104,5 +105,4 @@ std::ostream& operator <<(std::ostream& out, const Vector2D<T>& v) {
     out << '(' << v.x << " , " << v.y << ')';
     return out;
 }
-
 #endif //ZOMBIEWITHCLASSES_VECTOR2DIMPLEMENT_H

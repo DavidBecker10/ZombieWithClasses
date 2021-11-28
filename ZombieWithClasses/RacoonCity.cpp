@@ -2,14 +2,12 @@
 #include "Homer.h"
 #include "Ghoul.h"
 #include "Lava.h"
+using namespace States;
 #include "Tile.h"
 #include <fstream>
 #include "Ids.h"
-#include "stdafx.h"
-
-using namespace States;
-
-RacoonCity::RacoonCity(Managers::GraphicManager* gm, Managers::ScreenManager* sm, Entities::Characters::PlayerOne* p1) :
+#include "Nemesis.h"
+RacoonCity::RacoonCity(Managers::GraphicManager* gm, Entities::Characters::Player* p1) :
     Stage{ gm,
           new Managers::TilesManager{
                   {
@@ -31,10 +29,9 @@ RacoonCity::RacoonCity(Managers::GraphicManager* gm, Managers::ScreenManager* sm
                           new Entities::Tile(Ids::wallR, "../assets/Tiles/Platformer/WallR.png", {32.0f, 32.0f}),
                           new Lava,
                   },
-                  {32.0f, 32.0f}, "../assets/Maps/mapStage1.json"
-          }, sm,
-          p1 }
-{
+                  {32.0f, 32.0f}, RACOON_PATH
+          },
+          p1 } {
 
 }
 
@@ -55,7 +52,7 @@ void RacoonCity::load(const std::string& path) {
 
     for (nlohmann::json e : j["Entity"]) {
         switch (static_cast<int>(e["ID"])) {
-        case Ids::Ids::Player1: {
+        case Ids::Ids::Player: {
             if (player1) {
                 player1->initializeJSON(e);
                 EL.insert(player1);
@@ -75,18 +72,26 @@ void RacoonCity::load(const std::string& path) {
             }
             break;
         }
-        case Ids::Ids::Enemy: {
-            EL.insert(new Entities::Characters::Homer(e));
-            break;
-        }
         case Ids::Ids::Homer: {
-            EL.insert(new Entities::Characters::Homer(e));
+            auto* Enemy = new Entities::Characters::Homer(e["position"], e["life"], player1);
+            EL.insert(Enemy);
             break;
         }
         case Ids::Ids::Ghoul: {
-            EL.insert(new Entities::Characters::Ghoul(e));
+            auto* Enemy = new Entities::Characters::Ghoul(e["position"], e["life"], player1);
+            EL.insert(Enemy);
             break;
         }
+                            //            case Ids::Ids::Nemesis: {
+                            //                EL.insert(new Entities::Characters::Nemesis(e, player1));
+                            //                break;
+                            //            }
+        case Ids::Ids::Bullet: {
+            EL.insert(new Entities::Bullet(e));
+        }
+                             //            case Ids::Ids::Bone: {
+                             //                EL.insert(new Entities::Bone(e));
+                             //            }
         default:
             break;
         }
@@ -95,30 +100,26 @@ void RacoonCity::load(const std::string& path) {
     EL.initialize(GM, &EM, &CM);
 }
 
-void RacoonCity::initialize(bool numPlayers) {
-
+void RacoonCity::initialize(bool twoPlayers) {
     srand(time(NULL));
     if (player1) EL.insert(player1);
     player1->setEL(&EL);
     player1->setStage(1);
 
-    if (numPlayers)
+    if (twoPlayers)
     {
-        player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3000));
+        player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3040));
         EL.insert(player2);
     }
-    //player1->setPlayer2(player2);
-    
-    Vector2F pos = { 500.0f, 3000.0f };
-    Vector2F vel = { 50.0f, 0.0f };
-
-    for (int i = 0; i < rand() % 7 + 3; i++)
-    {
-        EL.insert(new Entities::Characters::Homer(Vector2F(pos), Vector2F(-50.0f, 0.0f)));
-        //EL.insert(new Entities::Characters::Ghoul(Vector2F(500.f, 3000.f), Vector2F(50.0f, 0.0f)));
-        //EL.insert(new Entities::Characters::Ghoul(Vector2F(1650.f, 3000.f), Vector2F(50.0f, 0.0f)));
-        pos.x += 800.0f;
-        pos.y -= 300.0f;
-        EL.initialize(GM, &EM, &CM);
+    int i = (rand() % 2) + 3;
+    //EL.insert(new Entities::Characters::Nemesis(Vector2F(1000.f, 3080.f), player1));
+    EL.insert(new Entities::Characters::Homer(Vector2F(850.f, 2780.f), player1));
+    while (i > 0) {
+        EL.insert(new Entities::Characters::Homer(Vector2F(((rand() % 530 + 100) * 10.0f), 3040.f), player1));
+        EL.insert(new Entities::Characters::Ghoul(Vector2F(((rand() % 530 + 100) * 10.0f), 3040.f), player1));
+        i--;
     }
+
+    EL.initialize(GM, &EM, &CM);
+
 }

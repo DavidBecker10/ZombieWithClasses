@@ -2,10 +2,12 @@
 #include "GraphicManager.h"
 #include "TileMap.h"
 #include "Vector2D.h"
-#include "EntityList.h"
+#include "Ent.h"
 
-Entities::Characters::Character::Character(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tPath) :
-	Entity(pos, v, ID, tPath), isGround(false)
+//Lists::EntityList* Entities::Characters::Character::EL = NULL;
+
+Entities::Characters::Character::Character(Vector2F pos, Ids::Ids ID, const char* tPath, int lf) :
+	Entity(pos, { 0.0f,0.0f }, ID, tPath, lf), isGround(false)
 {
 }
 
@@ -28,6 +30,7 @@ void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, M
 void Entities::Characters::Character::draw()
 {
 }
+
 
 //void Entities::Characters::Character::setEL(Lists::EntityList *El) {
 //    EL = El;

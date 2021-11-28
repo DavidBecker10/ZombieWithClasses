@@ -1,6 +1,4 @@
-#ifndef ZOMBIEWITHCLASSES_GRAPHICMANAGER_H
-#define ZOMBIEWITHCLASSES_GRAPHICMANAGER_H
-
+#pragma once
 #include <map>
 #include <string>
 
@@ -33,12 +31,10 @@ namespace Managers
         const Vector2F getSize(const std::string& path) const;
         void initializeView();
         void drawSolidRectangle(Vector2F center, Vector2F dimensions, const sf::Color color);
-        void drawText(const std::string text, Vector2F position, unsigned int size, const bool centralize = true) const;
+        void drawText(const std::string text, Vector2F position, unsigned int size, const bool centralize = true, sf::Color color = sf::Color::White) const;
         Vector2F getMousePosition() const;
         Vector2F getWindowSize() const { return{ view.getSize().x, view.getSize().y }; }
         const Vector2F getSizeView() const { return Vector2F(view.getSize().x, view.getSize().y); }
         const Vector2F getCenterView() const { return Vector2F(view.getCenter().x, view.getCenter().y); }
     };
 }
-
-#endif //ZOMBIEWITHCLASSES_GRAPHICMANAGER_H

@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bone.cpp" />
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonManager.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -164,7 +166,7 @@
     <ClCompile Include="Nemesis.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PauseMenuState.cpp" />
-    <ClCompile Include="PlayerOne.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerTwo.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="RacoonCity.cpp" />
@@ -183,6 +185,8 @@
     <ClCompile Include="ZombieWithClasses.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bone.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonManager.h" />
     <ClInclude Include="Clock.h" />
@@ -194,7 +198,7 @@
     <ClInclude Include="Nemesis.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PauseMenuState.h" />
-    <ClInclude Include="PlayerOne.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerTwo.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="RacoonCity.h" />
