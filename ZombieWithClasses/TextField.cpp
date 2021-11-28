@@ -1,6 +1,6 @@
 #include "TextField.h"
 
-TextField::TextField(Managers::EventManager& em, unsigned short maxL, Vector2F pos, Vector2F siz, unsigned int sText,
+TextField::TextField(Managers::EventManager* em, unsigned short maxL, Vector2F pos, Vector2F siz, unsigned int sText,
     sf::Color clr) :
     Button{ pos, siz, "", [this]() {startCapture(); }, sText, clr }, txt{ em, maxL }
 {

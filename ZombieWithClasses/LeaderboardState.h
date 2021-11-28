@@ -4,6 +4,7 @@
 #include "Menu.h"
 #include "Ent.h"
 #include "TextField.h"
+#include "Leaderboard.h"
 
 namespace States
 {
@@ -12,7 +13,7 @@ namespace States
     {
     private:
         bool print;
-        TextField tField;
+        LeaderBoard LB;
 
     public:
         LeaderboardState(Managers::GraphicManager& gm);

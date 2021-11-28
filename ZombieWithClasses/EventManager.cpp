@@ -1,7 +1,5 @@
 #include "EventManager.h"
 
-unsigned int Managers::EventManager::proxID{1};
-
 Managers::EventManager::EventManager() {
 
 }
@@ -80,4 +78,4 @@ void Managers::EventManager::removeListenOthers(int id) {
     listenOthers.erase(id);
 }
 
-
+unsigned int Managers::EventManager::proxID{ 1 };

@@ -9,11 +9,11 @@ private:
     unsigned int idListenKeyboard;
     bool startCapture;
     bool textDone;
-    Managers::EventManager& EM;
+    Managers::EventManager* EM;
     unsigned short maxLenght;
 
 public:
-    Text(Managers::EventManager& em, unsigned short maxL);
+    Text(Managers::EventManager* em, unsigned short maxL);
     ~Text();
     void inicialize();
     bool getTextDone() const { return textDone; }

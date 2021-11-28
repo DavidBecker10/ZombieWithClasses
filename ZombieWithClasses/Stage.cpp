@@ -34,17 +34,12 @@ Stage::~Stage() {
 
 int Stage::execute() {
     returnCode = Managers::proceed;
-    //sf::Time t = clock.getElapsedTime();
     double t = clock.getTime();
-    //float dt = t.asSeconds();
-    //if(dt>0.0167)dt=0.0167;
-    //clock.restart();
     if (t > 0.0167)t = 0.0167;
     clock.resetClock();
 
 
     EM.manageEvent();
-    //EL.update(dt);
     EL.update(t);
     CM.verifyCollisions();
     TM->draw(GM);
@@ -64,6 +59,7 @@ int Stage::execute() {
         if (player1->getLife() <= 0)
             returnCode = Managers::goMainMenu;
         GM->centralize(player1->getPosition());
+        std::cout << player1->getScore() << std::endl;
     }
     else
     {

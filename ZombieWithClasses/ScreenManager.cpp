@@ -91,7 +91,7 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case goEndGame: {
-        push(new States::EndGameState(*GM));
+        push(new States::EndGameState(*GM, player1->getScore()));
         return false;
     }
     case resume: {
@@ -99,6 +99,7 @@ bool ScreenManager::processCode(int returnCode) {
         return false;
     }
     case goMainMenu: {
+        player1->setScore(0);
         emptyStack();
         push(new States::MainMenuState(*GM));
         return false;

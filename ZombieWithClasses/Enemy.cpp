@@ -87,7 +87,6 @@ void Entities::Characters::Enemy::collide(Ids::Ids idOther, Vector2F positionOth
         }
         if (life <= 0) {
             player1->incrementScore(10);
-            std::cout << player1->getScore() << std::endl;
         }
         isGround = true;
         break;

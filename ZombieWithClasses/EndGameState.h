@@ -3,6 +3,7 @@
 
 #include "Menu.h"
 #include "TextField.h"
+#include "Leaderboard.h"
 
 namespace States
 {
@@ -12,8 +13,11 @@ namespace States
 	private:
 		bool print;
 		TextField tField;
+		LeaderBoard LB;
+		int score;
+
 	public:
-		EndGameState(Managers::GraphicManager& gm);
+		EndGameState(Managers::GraphicManager& gm, int scr);
 		int execute() override;
 	};
 }
