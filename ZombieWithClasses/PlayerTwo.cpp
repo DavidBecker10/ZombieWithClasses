@@ -16,12 +16,10 @@ void Entities::Characters::PlayerTwo::handleEvents(const sf::Event& e) {
         case sf::Keyboard::Key::Right:
             vel.x = 400;
             scale.x = 1;
-            /* code */
             break;
         case sf::Keyboard::Key::Left:
             vel.x = -400;
             scale.x = -1;
-            /* code */
             break;
         case sf::Keyboard::Key::Up:
             if (!isJumping && isGround) {
@@ -44,22 +42,17 @@ void Entities::Characters::PlayerTwo::handleEvents(const sf::Event& e) {
         case sf::Keyboard::Key::Right:
             vel.x = 0;
             scale.x = 1;
-            /* code */
             break;
         case sf::Keyboard::Key::Left:
             vel.x = 0;
             scale.x = -1;
-            /* code */
             break;
         case sf::Keyboard::Key::Up:
             vel.y = 0;
             isJumping = false;
             isGround = false;
 
-            /* code */
             break;
-            //            case sf::Keyboard::Key::Space:
-            //                createProjectile(ID, position, BULLET_PATH);
         default:
             break;
         }

@@ -1,9 +1,10 @@
 #include "Projectile.h"
 
-Entities::Projectile::Projectile(Vector2F pos, Vector2F v, Ids::Ids i, const char* tP, int dmg) :
-    Entity(pos, v, i, tP), damage(dmg) {
-    life = 1;
+Entities::Projectile::Projectile(Vector2F pos, Vector2F v, Ids::Ids i, const char* tP, bool dir) :
+    Entity(pos, v, i, tP) {
+    energy = 1;
     frame = 0;
+    dir == true ? scale = Vector2F(1, 1) : scale = Vector2F(-1, 1);
 }
 
 
@@ -13,8 +14,8 @@ Entities::Projectile::~Projectile() {
 void Entities::Projectile::update(float t) {
     frame += t;
     position.x += vel.x * t;
-    if (frame > 0.8) {
-        life--;
+    if (frame > 1) {
+        energy--;
         frame = 0;
     }
 }
@@ -32,12 +33,6 @@ void Entities::Projectile::initialize(Managers::GraphicManager* GM, Managers::Ev
 }
 
 void Entities::Projectile::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
-    switch (idOther) {
-    case Ids::Enemy:
-        break;
-    default:
-        break;
-    }
 }
 
 nlohmann::json Entities::Projectile::convertJSON() {
@@ -45,5 +40,6 @@ nlohmann::json Entities::Projectile::convertJSON() {
             {"ID", ID},
             {"position", position.convertJSON()},
             {"vel", vel.convertJSON()},
+            {"dir", dir}
     };
 }

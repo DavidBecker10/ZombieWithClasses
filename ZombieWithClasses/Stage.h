@@ -17,7 +17,7 @@ namespace States {
         Managers::EventManager EM;
         Managers::CollisionManager CM;
         Managers::TilesManager* TM;
-        //sf::Clock clock;
+
         Clock clock;
         Lists::EntityList EL;
 
@@ -43,11 +43,6 @@ namespace States {
 
         virtual void initialize(bool twoPlayers) = 0;
 
-        /*void exit(){ }
-        void refresh(float t, Managers::EventManager *EM) { }
-        virtual void draw(Managers::GraphicManager *GM) { }
-
-        int returnID() const;*/
     };
 }
 

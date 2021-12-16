@@ -1,7 +1,7 @@
 #include "Tile.h"
 #include <iostream>
 
-namespace Entities {
+namespace Tiles {
 
     Tile::Tile(const Ids::Ids i, const char* p, Vector2F s) :
         Ent(i, p),
@@ -17,11 +17,9 @@ namespace Entities {
         GM->loadTexture(textPath);
     }
 
-    /*void Tile::update(float t) {
-    }*/
 
     void Tile::draw(const Vector2F position) const {
-        //std::cout<<textPath<<std::endl;
+
         GM->draw(textPath, position);
     }
 

@@ -3,8 +3,7 @@
 #include "Ids.h"
 
 Entities::Characters::Player::Player(Vector2F pos, const char* path, Ids::Ids id) :
-    Character(pos, id, path, 7), p2(NULL), bullet(), frameSHOT(0), isEnd(false)
-{
+    Character(pos, id, path, 7), p2(NULL), bullet(), frameSHOT(0), isEnd(false), score(0) {
 
 }
 
@@ -17,18 +16,11 @@ void Entities::Characters::Player::initialize(Managers::GraphicManager* GM, Mana
     Managers::CollisionManager* CM) {
     frame = 0;
     isJumping = false;
-    //isGround = false;
     GM->loadTexture(textPath);
-    //dimensions = static_cast<sf::Vector2u>(GM->getSize(textPath));
     dimensions = GM->getSize(textPath);
     listenKey = EM->addListenKeyboard([this](const sf::Event e) { handleEvents(e); });
-    //CM->addCollide(this);
 
 }
-
-//void Entities::Characters::Player::setTM(Managers::TilesManager *t) {
-//    TM = t;
-//}
 
 void Entities::Characters::Player::update(float t) {
     frameSHOT += t;
@@ -47,13 +39,10 @@ void Entities::Characters::Player::update(float t) {
         position.y += vel.y * t + GRAVITY;
     else
         position.y += vel.y * t;
-    //std::cout<< position.y << std::endl;
 }
 
 void Entities::Characters::Player::draw() {
-    //GM->draw(textPath, position, body, { 1, 9 }, { 0, 5 });
     GM->draw(textPath, position, scale);
-    //GM->centralize(position);
 }
 
 void Entities::Characters::Player::handleEvents(const sf::Event& e) {
@@ -90,22 +79,16 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e) {
         case sf::Keyboard::Key::D:
             vel.x = 0;
             scale.x = 1;
-            /* code */
             break;
         case sf::Keyboard::Key::A:
             vel.x = 0;
             scale.x = -1;
-            /* code */
             break;
         case sf::Keyboard::Key::W:
             vel.y = 0;
             isJumping = false;
             isGround = false;
-
-            /* code */
             break;
-            //            case sf::Keyboard::Key::Space:
-            //                createProjectile(ID, position, BULLET_PATH);
         default:
             break;
         }
@@ -113,81 +96,72 @@ void Entities::Characters::Player::handleEvents(const sf::Event& e) {
 }
 
 void Entities::Characters::Player::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
-    //std::cout << idOther << std::endl;
-    if (idOther != Ids::ground2 && idOther != Ids::Enemy)
-        isGround = false;
-
-    switch (idOther) {
-    case Ids::Ghoul:
-        if (frame > 0.4) {
-            life--;
-            frame = 0;
-        }
-        isGround = true;
-        break;
-    case Ids::Homer:
-        if (frame > 0.4) {
-            life--;
-            frame = 0;
-        }
-        isGround = true;
-        break;
-    case Ids::Nemesis:
-        if (frame > 0.4) {
-            life--;
-            frame = 0;
-        }
-        isGround = true;
-        break;
-    case Ids::ground2:
-        isGround = true;
-        if (positionOther.y > position.y)
-            vel.y = 0;
-        break;
-    case Ids::air:
-        vel.y = 0;
-        isGround = false;
-        isJumping = true;
-        break;
-    case Ids::Bullet:
-        isGround = true;
-        break;
-    case Ids::Bone:
-        if (frame > 0.4) {
-            life -= 2;
-            frame = 0;
-        }
-        isGround = true;
-        break;
-    case Ids::lava:
-        if (frame > 0.4) {
-            life--;
-            frame = 0;
-        }
-        //position.y += -10.0;
-        isGround = true;
-        break;
-    case Ids::ground11:
-        isGround = true;
-        break;
-    case Ids::wallR:
-        isGround = true;
-        break;
-    case Ids::wallL:
-        isGround = false;
-        break;
-    case Ids::Player2:
+    if (idOther == Ids::Player2) {
         if (!isJumping)
             isGround = true;
-    case Ids::spiderweb:
-        vel.x *= 0.8;
+    }
+    else if (idOther == Ids::Homer || idOther == Ids::Ghoul || idOther == Ids::Rock || idOther == Ids::fire) {
+        if (frame > 0.4) {
+            energy--;
+            frame = 0;
+        }
         isGround = true;
-        break;
-    default:
-        break;
+    }
+    else if (idOther == Ids::Nemesis || idOther == Ids::Bone) {
+        if (frame > 0.4) {
+            energy -= 2;
+            frame = 0;
+        }
+        isGround = true;
+
+    }
+    else if (idOther == Ids::ground || idOther == Ids::dirt || idOther == Ids::platform || idOther == Ids::lava) {
+        isGround = true;
+        float dist_x = (dimensions.x + dimensionsOther.x / 2) -
+            std::abs(position.x + dimensions.x / 2 - positionOther.x - dimensionsOther.x / 2);
+        float dist_y = (dimensions.y + dimensionsOther.y / 2) -
+            std::abs(position.y + dimensions.y / 2 - positionOther.y - dimensionsOther.y / 2);
+
+        if (dist_x * dist_y > .001 * dimensions.x * dimensions.y) {
+            if (dist_x < dist_y) {
+                if (dist_x > std::abs(adjusts.x)) {
+                    if (position.x + dimensions.x / 2 > positionOther.x + dimensionsOther.x / 2) {
+                        adjusts.x = dist_x * 1;
+                    }
+                    else {
+                        adjusts.x = dist_x * -1;
+                    }
+                }
+            }
+            else {
+                if (dist_y > std::abs(adjusts.y)) {
+                    if (position.y + dimensions.y / 2 > positionOther.y + dimensionsOther.y / 2) {
+                        adjusts.y = dist_y * 1;
+                    }
+                    else {
+                        adjusts.y = dist_y * -1;
+                    }
+                }
+            }
+        }
+        if (idOther == Ids::lava) {
+            if (frame > 0.8) {
+                energy -= 2;
+                frame = 0;
+            }
+        }
+    }
+    else if (idOther == Ids::spiderweb) {
+        if (vel.x > 0) vel.x = 100;
+        else if (vel.x < 0) vel.x = -100;
+    }
+    else if (idOther == Ids::empty) {
+        isGround = false;
+    }
+    else {
+        isGround = true;
     }
 }
-
 
 void Entities::Characters::Player::createProjectile(Vector2F pos) {
     float v, px;
@@ -207,12 +181,11 @@ void Entities::Characters::Player::createProjectile(Vector2F pos) {
 
 void Entities::Characters::Player::initializeJSON(nlohmann::json j) {
     position = { j["position"] };
-    life = { j["life"] };
+    energy = { j["life"] };
     score = { j["Score"] };
 }
 
-void Entities::Characters::Player::centralizeInView()
-{
+void Entities::Characters::Player::centralizeInView() {
     if (position.x <= (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2)
         position.x = (GM->getCenterView().x) - (GM->getSizeView().x / 2) + dimensions.x / 2;
 
@@ -220,13 +193,27 @@ void Entities::Characters::Player::centralizeInView()
         position.x = (GM->getCenterView().x) + (GM->getSizeView().x / 2) - dimensions.x / 2;
 }
 
-nlohmann::json Entities::Characters::Player::convertJSON()
-{
+void Entities::Characters::Player::adjust() {
+
+    if (adjusts.y < 0) {
+        isJumping = false;
+
+        vel.y = 0;
+    }
+    else if (adjusts.y > 0) {
+        vel.y = 0;
+    }
+    Entity::adjust();
+}
+
+nlohmann::json Entities::Characters::Player::convertJSON() {
     return {
-            { "ID", ID},
+            { "ID",      ID},
             {"position", position.convertJSON()},
-            {"Score", score},
-            {"life", life},
-            {"Stage", currentStage}
+            {"Score",    score},
+            {"life",     energy},
+            {"Stage",    currentStage}
     };
 }
+
+

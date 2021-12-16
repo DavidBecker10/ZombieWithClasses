@@ -4,7 +4,7 @@
 #include "Vector2D.h"
 #include "Ent.h"
 
-//Lists::EntityList* Entities::Characters::Character::EL = NULL;
+Lists::EntityList* Entities::Characters::Character::EL = NULL;
 
 Entities::Characters::Character::Character(Vector2F pos, Ids::Ids ID, const char* tPath, int lf) :
 	Entity(pos, { 0.0f,0.0f }, ID, tPath, lf), isGround(false)
@@ -17,7 +17,6 @@ Entities::Characters::Character::~Character()
 
 void Entities::Characters::Character::update(float t)
 {
-	//position += vel * t;
 }
 
 void Entities::Characters::Character::initialize(Managers::GraphicManager* GM, Managers::EventManager* EM, Managers::CollisionManager* CM)
@@ -31,11 +30,3 @@ void Entities::Characters::Character::draw()
 {
 }
 
-
-//void Entities::Characters::Character::setEL(Lists::EntityList *El) {
-//    EL = El;
-//}
-//
-//Lists::EntityList *Entities::Characters::Character::getEL() {
-//    return EL;
-//}

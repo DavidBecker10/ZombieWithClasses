@@ -7,7 +7,7 @@ Entities::Entity::Entity(Vector2F pos, Vector2F v, Ids::Ids ID, const char* tP, 
     vel{ v },
     position(pos),
     scale(Vector2F(1.f, 1.f)),
-    life(lf)
+    energy(lf)
 {
 }
 
@@ -22,18 +22,16 @@ void Entities::Entity::draw()
 
 nlohmann::json Entities::Entity::convertJSON() {
     return {
-            {"ID", ID},
+            {"ID",       ID},
             {"position", position.convertJSON()},
-            //{"vel", vel.convertJSON()},
-            //{"textPath", textPath},
-            {"life", life},
-            {"Stage", currentStage}
+            {"life",     energy},
+            {"Stage",    currentStage}
     };
 }
 
-
-/*void Entities::Entity::update(float t) {
-    position += (vel*t);
-}*/
-Lists::EntityList* Entities::Entity::EL = NULL;
 int Entities::Entity::currentStage = -1;
+
+void Entities::Entity::adjust() {
+    position += adjusts;
+    adjusts = Vector2F(0.0f, 0.0f);
+}

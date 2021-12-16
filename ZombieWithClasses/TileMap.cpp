@@ -29,8 +29,6 @@ unsigned short TileMapLine::operator[](unsigned int i) const
 TileMap::TileMap(const char* filePath) :
     map{ nullptr },
     path{ filePath }
-    //mapDimensions{ 0, 0},
-    //tile()
 {
     if (path) loadMap();
 }
@@ -88,7 +86,7 @@ TileMapLine TileMap::operator[](unsigned int i) const
 
 float TileMap::getDown()
 {
-    return  0;// posTile.y - tile.getSize() * 0.5;
+    return  0;
 }
 
 unsigned short** TileMap::getMap() const
@@ -115,7 +113,6 @@ void TileMap::loadMap()
 
     mapDimensions = { json["width"], json["height"] };
 
-    //std::cout << mapDimensions << std::endl;
 
     json = json["data"];
 
@@ -136,8 +133,20 @@ void TileMap::loadMap()
 
         if (i >= mapDimensions.y) break;
 
+        if (s == 9) {
+            int z = rand() % 2;
+            if (z)
+                s = 6;
+            else
+                s = 2;
+        }
+        else if (s == 10) {
+            int z = rand() % 2;
+            if (z)
+                s = 7;
+            else
+                s = 2;
+        }
         map[i][j++] = s;
     }
-    //printf("%f", getDown());
-    //printMap();
 }

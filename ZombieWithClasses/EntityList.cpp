@@ -3,11 +3,9 @@
 
 Lists::EntityList::EntityList() :
     list() {
-    //std::cout << "Estou criando lista" <<std::endl;
 }
 
 Lists::EntityList::~EntityList() {
-    //std::cout<< "Estou destruindo Lista" << std::endl;
     destroyEntities();
 }
 
@@ -25,7 +23,7 @@ int Lists::EntityList::getSize() {
 
 void Lists::EntityList::update(float t) {
     for (int i = 0; i < list.getSize(); i++) {
-        if (list[i]->getLife() <= 0) {
+        if (list[i]->getEnergy() <= 0) {
             remove(list[i]);
             i--;
             if (i < 0)i = 0;

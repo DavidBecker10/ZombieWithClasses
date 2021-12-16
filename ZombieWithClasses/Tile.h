@@ -1,13 +1,10 @@
 #pragma once
 
-//#include "Vector2D.h"
-//#include "Ids.h"
-//#include "GraphicManager.h"
 #include "Entity.h"
 #include "Ent.h"
-//#include "CollisionManager.h"
 
-namespace Entities {
+
+namespace Tiles {
     class Tile : public Ent {
     protected:
         Vector2F size;

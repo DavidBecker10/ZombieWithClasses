@@ -39,15 +39,7 @@ void Managers::GraphicManager::draw(const std::string& path, Vector2F pos)
 
     text = textures[path];
 
-    /*body.setTexture(*text, true);
-    body.setScale(1, 1);
-    body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
-    body.setPosition(pos.x, pos.y);
-
-    window->draw(body);*/
-
     sprite.setTexture(*text, true);
-    //sprite.setTextureRect(text->getSize();)
     sprite.setScale(1, 1);
     sprite.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
     sprite.setPosition(pos.x, pos.y);
@@ -80,19 +72,10 @@ void Managers::GraphicManager::draw(const std::string& path, Vector2F position, 
     }
 
     text = textures[path];
-    //body.setTexture(*text, true);
     sprite.setTexture(*text, true);
 
     sf::Vector2i size = { (int)text->getSize().x / (int)nFrames.y, (int)text->getSize().y / (int)nFrames.x };
     sf::Vector2i positionFrame = { (int)size.x * (int)frame.y, (int)size.y * (int)frame.x };
-
-    //body->setTextureRect({ positionFrame, size });
-    //body.setScale(scale);
-    //body.setOrigin(text->getSize().x * 0.5, text->getSize().x * 0.5);
-    //body.setPosition(position.x, position.y);
-    //body->setOrigin({ size.x * 0.5f, size.y * 0.5f });
-    //body->setPosition(size.x, size.y);
-    //window->draw(body);
 
     sprite.setTextureRect({ positionFrame, size });
 
@@ -112,7 +95,6 @@ bool Managers::GraphicManager::loadTexture(const std::string& path)
             exit(715);
         }
 
-        //texturas.insert(std::pair<const std::string, sf::Texture*>(caminho, text));
         textures.emplace(path, text); //c++11
         return true;
     }
@@ -148,7 +130,6 @@ void Managers::GraphicManager::initializeView()
 
 void Managers::GraphicManager::drawSolidRectangle(Vector2F center, Vector2F dimensions, const sf::Color color) {
     sf::RectangleShape rect = sf::RectangleShape({ dimensions.x, dimensions.y });
-    /*rect.setFillColor({ 128, 128, 128, 255});*/
     rect.setFillColor(color);
     rect.setOrigin(dimensions.x / 2, dimensions.y / 2);
     rect.setPosition(center.x, center.y);

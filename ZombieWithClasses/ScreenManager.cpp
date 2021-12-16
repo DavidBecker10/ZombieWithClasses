@@ -3,15 +3,17 @@
 #include "RacoonCity.h"
 #include "MainMenuState.h"
 #include "PauseMenuState.h"
-#include "LeaderboardState.h"
-#include "EndGameState.h"
+#include "LeaderBoardState.h"
 #include <fstream>
 #include "Subway.h"
 #include "stdafx.h"
+#include "EndGameState.h"
+
 using namespace Managers;
 
-ScreenManager::ScreenManager(GraphicManager* gm/*, Entities::Characters::Player *p1*/) :
-    GM{ gm }, twoPlayers(false)/*, player1{p1}*/ {
+ScreenManager::ScreenManager(GraphicManager* gm) :
+    GM{ gm }, twoPlayers(false) {
+    player1 = nullptr;
     push(new States::MainMenuState(*GM));
 }
 
@@ -20,16 +22,14 @@ bool ScreenManager::processCode(int returnCode) {
     case end:
         return true;
     case goRacoonCity: {
-        player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
+        player1 = new Entities::Characters::Player(Vector2F(100.0f, 1450.0f));
         auto* racoon = new States::RacoonCity(GM, player1);
         racoon->initialize(twoPlayers);
         push(racoon);
         return false;
     }
     case goSubway: {
-        //if(!player1)
-            player1 = new Entities::Characters::Player(Vector2F(100.0f, 3040.0f));
-        
+        player1 = new Entities::Characters::Player(Vector2F(100.0f, 1450.0f));
         auto* subway = new States::Subway(GM, player1);
         subway->initialize(twoPlayers);
         push(subway);
@@ -49,13 +49,13 @@ bool ScreenManager::processCode(int returnCode) {
         nlohmann::json j;
         file >> j;
         int a;
-
         j = j["Entity"][0];
         a = static_cast<int>(j["Stage"]);
 
         if (a == 1) {
             auto* player1 = new Entities::Characters::Player();
             auto* rc = new States::RacoonCity(GM, player1);
+
             //States::RacoonCity* stage = new States::RacoonCity(GM, new Entities::Characters::Player());
             try {
                 rc->load("../saves/saves.json");
@@ -86,20 +86,19 @@ bool ScreenManager::processCode(int returnCode) {
         push(new States::PauseMenuState(*GM));
         return false;
     }
-    case goLeaderboard: {
-        push(new States::LeaderboardState(*GM));
+    case resume: {
+        pop();
+        return false;
+    }
+    case goLeaderBoard: {
+        push(new States::LeaderBoardState(*GM));
         return false;
     }
     case goEndGame: {
         push(new States::EndGameState(*GM, player1->getScore()));
         return false;
     }
-    case resume: {
-        pop();
-        return false;
-    }
     case goMainMenu: {
-        player1->setScore(0);
         emptyStack();
         push(new States::MainMenuState(*GM));
         return false;

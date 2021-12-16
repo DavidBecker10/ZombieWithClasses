@@ -1,14 +1,9 @@
 #pragma once
-//#include "Vector2D.h"
+
 #include "TileMap.h"
-//#include "Tile.h"
-//#include "Ids.h"
+
 
 namespace Managers {
-
-    //class GraphicManager;
-    //class EventManager;
-    //class CollisionManager;
 
     class TilesManager {
     public:
@@ -22,10 +17,12 @@ namespace Managers {
         TileMap tileMap;
         Vector2F tileDimensions;
         const char* path;
-        std::vector<Entities::Tile*> tiles;
+        std::vector<Tiles::Tile*> tiles;
+        Vector2U webSpawn;
+        Vector2U fireSpawn;
 
     public:
-        TilesManager(std::vector<Entities::Tile*> tls = {}, Vector2F tileDim = { 0.0f, 0.0f }, const char* p = nullptr);
+        TilesManager(std::vector<Tiles::Tile*> tls = {}, Vector2F tileDim = { 0.0f, 0.0f }, const char* p = nullptr);
 
         ~TilesManager();
 
@@ -35,10 +32,12 @@ namespace Managers {
 
         std::vector<IdPositionSize> checkCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
 
-        std::vector<Entities::Tile*> getTiles() const;
+        std::vector<Tiles::Tile*> getTiles() const;
 
-        void setTiles(Entities::Tile* newTile);
-        //std::vector<IdPositionSize> checkMapCollisions(const Ids::Ids id, Vector2F pos, Vector2F s);
+        void setTiles(Tiles::Tile* newTile);
+
+        void regenTiles();
+
     private:
         const Vector2F coordinatesForScreen(const Vector2U pos) const;
     };

@@ -14,7 +14,7 @@ namespace States
         nlohmann::json convertJSON() override;
         void load(const std::string& path) override;
         void initialize(bool twoPlayers) override;
-        //int execute() override;
+
     };
 }
 

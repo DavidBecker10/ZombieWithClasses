@@ -1,104 +1,47 @@
 #include "Ghoul.h"
 #include "stdafx.h"
-
-Entities::Characters::Ghoul::Ghoul(Vector2F pos, Player* p1) :
-    Enemy(pos, Ids::Ids::Ghoul, GHOUL_PATH, 2, p1) {
-    //jumpTime = 0;
-    //isJumping = false;
+Entities::Characters::Ghoul::Ghoul(Vector2F pos, Player* p1, PlayerTwo* p2) :
+    Enemy(pos, Ids::Ids::Ghoul, GHOUL_PATH, 2, p1, p2), attackCooldown(0), rock() {
     faceLeft = true;
-}
 
-Entities::Characters::Ghoul::Ghoul(Vector2F pos, int lf, Player* p1) :
-    Enemy(pos, Ids::Ids::Ghoul, GHOUL_PATH, lf, p1)
+}
+Entities::Characters::Ghoul::Ghoul(Vector2F pos, int lf, Player* p1, PlayerTwo* p2) :
+    Enemy(pos, Ids::Ids::Ghoul, GHOUL_PATH, lf, p1, p2), attackCooldown(0), rock()
 {
     faceLeft = true;
-    //jumpTime = 0;
-    //isJumping = false;
 }
-
 Entities::Characters::Ghoul::~Ghoul() {
-
+    rock = nullptr;
 }
 
 void Entities::Characters::Ghoul::update(float t) {
     frame += t;
+    attackCooldown += t;
     if (distancePlayer() < 600.0f) {
         if (faceLeft)
             position.x += -100 * t;
         else
             position.x += 100 * t;
+        if (attackCooldown > 3) {
+            createProjectile(position);
+            attackCooldown = 0;
+        }
     }
     if (!isGround)
         position.y += vel.y * t + GRAVITY;
 }
 
+void Entities::Characters::Ghoul::createProjectile(Vector2F pos) {
+    float v, px;
+    bool dir;
 
-//    if (position.x < 1555.f)
-//        position.x += vel.x * t;
-//    else {
-//        vel.x *= -1;
-//        scale.x = -1;
-//    }
-//    if (position.x > 76)
-//        position.x += vel.x * t;
-//    else {
-//        vel.x *= -1;
-//        scale.x = 1;
-//    }
-//    if (!isGround)
-//        position.y += vel.y * t + GRAVITY;
-//}
+    scale.x == 1 ? dir = false : dir = true;
 
-//void Entities::Characters::Ghoul::collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther) {
-//    if (idOther != Ids::ground2)
-//        isGround = false;
-//
-//    switch (idOther) {
-//        case Ids::lava:
-//            isJumping = false;
-//            vel.x *= -1;
-//            break;
-//        case Ids::ground2:
-//            isJumping = false;
-//            isGround = true;
-//            break;
-//        case Ids::air:
-//            isJumping = true;
-//            isGround = false;
-//            break;
-//        case Ids::wallL:
-//            isJumping = false;
-//            isGround = true;
-//            vel.x *= -1;
-//            scale.x = -1;
-//            break;
-//        case Ids::wallR:
-//            isJumping = false;
-//            isGround = true;
-//            vel.x *= -1;
-//            scale.x = -1;
-//            break;
-//        case Ids::Bullet:
-//            if(frame>0.4) {
-//                life--;
-//                frame = 0;
-//            }
-//            isGround = true;
-//            //EL->remove(this);
-//            break;
-//        case Ids::Homer:
-//            isGround = true;
-//            break;
-//        case Ids::Ghoul:
-//            isGround = true;
-//            break;
-//        case Ids::Nemesis:
-//            isGround = true;
-//            break;
-//        case Ids::Player:
-//            isGround = true;
-//            break;
-//        default:
-//            break;
-//    }
-//}
+    scale.x == 1 ? v = -700.0f : v = 700.0f;
+
+    scale.x == 1 ? px = -35.0f : px = 35.0f;
+
+    rock = new Rock(Vector2F(pos.x + px, pos.y - 10), Vector2F(v, 0.0f), dir);
+
+    EL->insert(rock);
+}

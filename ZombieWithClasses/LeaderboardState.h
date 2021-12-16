@@ -2,13 +2,12 @@
 #define ZOMBIEWITHCLASSES_LEADERBOARDSTATE_H
 
 #include "Menu.h"
-#include "Ent.h"
 #include "TextField.h"
-#include "Leaderboard.h"
+#include "LeaderBoard.h"
 
 namespace States
 {
-    class LeaderboardState :
+    class LeaderBoardState :
         public Menu
     {
     private:
@@ -16,9 +15,10 @@ namespace States
         LeaderBoard LB;
 
     public:
-        LeaderboardState(Managers::GraphicManager& gm);
+        LeaderBoardState(Managers::GraphicManager& gm);
         int execute() override;
     };
 }
+
 
 #endif //ZOMBIEWITHCLASSES_LEADERBOARDSTATE_H

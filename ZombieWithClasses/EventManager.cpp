@@ -1,26 +1,21 @@
 #include "EventManager.h"
 
+unsigned int Managers::EventManager::proxID{  };
+
 Managers::EventManager::EventManager() {
 
 }
 
 Managers::EventManager::~EventManager() {
-
+    window = NULL;
+    GM = NULL;
 }
-
-/*void Managers::EventManager::setGraphicManager(Managers::GraphicManager *gm) {
-    if(gm) {
-        GM = gm;
-        setWindow(GM->getWindow());
-    }
-}*/
 
 void Managers::EventManager::manageEvent() {
     while (window->pollEvent(event)) {
         if (event.type == sf::Event::MouseWheelScrolled
             || event.type == sf::Event::MouseButtonPressed
             || event.type == sf::Event::MouseButtonReleased
-            //|| event.type == sf::Event::MouseMoved
             ) {
             for (auto it : listenMouse) {
                 it.second(event);
@@ -78,4 +73,4 @@ void Managers::EventManager::removeListenOthers(int id) {
     listenOthers.erase(id);
 }
 
-unsigned int Managers::EventManager::proxID{ 1 };
+

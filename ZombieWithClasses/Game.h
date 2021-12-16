@@ -6,7 +6,6 @@ class Game
 {
 private:
     Managers::GraphicManager GM;
-    //Entities::Characters::Player player1;
     Managers::ScreenManager SM;
     bool end;
 

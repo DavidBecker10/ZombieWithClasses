@@ -1,6 +1,5 @@
 #include "Clock.h"
 #include <iostream>
-
 Clock::Clock() :last(clock()), current(0.0), dt(0.0), pause(false) {
 
 }
@@ -16,7 +15,6 @@ double Clock::getTime() {
     }
     current = clock();
     dt = (double)(current - last) / CLOCKS_PER_SEC;
-    //std::cout << current/(double)CLOCKS_PER_SEC << std::endl;
     return dt;
 }
 

@@ -8,11 +8,11 @@ namespace Entities {
         class Homer : public Enemy {
 
         public:
-            Homer(Vector2F pos = { 0.0f,0.0f }, Player* p1 = nullptr);
-            Homer(Vector2F pos, int lf, Player* p1);
+            Homer(Vector2F pos = { 0.0f,0.0f }, Player* p1 = nullptr, PlayerTwo* p2 = nullptr);
+            Homer(Vector2F pos = 0, int lf = 0, Player* p1 = nullptr, PlayerTwo* p2 = nullptr);
             ~Homer();
             void update(float t) override;
-            //void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+
         };
     }
 }

@@ -1,21 +1,16 @@
 #include "Game.h"
-#include "Tile.h"
 
 Game::Game() :
-    //player1(Entities::Characters::Player(Vector2F(100.0f,3000.0f))),
-    //SM(&GM, &player1),
     SM(&GM),
-    end{ false }
-{
+    end{ false } {
     execute();
 }
-Game::~Game()
-{
+
+Game::~Game() {
 
 }
 
-void Game::execute()
-{
+void Game::execute() {
     while (!end) {
         GM.clear();
         end = SM.execute();

@@ -2,20 +2,21 @@
 #define ZOMBIEWITHCLASSES_GHOUL_H
 
 #include "Enemy.h"
-
+#include "Rock.h"
 namespace Entities {
     namespace Characters {
         class Ghoul : public Enemy {
         private:
-            //float jumpTime;
-            //bool isJumping;
-            //static const float attackTime;
+            Rock* rock;
+            float attackCooldown;
+
         public:
-            Ghoul(Vector2F pos = { 0.0f,0.0f }, Player* p1 = nullptr);
-            Ghoul(Vector2F pos, int lf, Player* p1);
+            Ghoul(Vector2F pos = { 0.0f,0.0f }, Player* p1 = nullptr, PlayerTwo* p2 = nullptr);
+            Ghoul(Vector2F pos = 0, int lf = 0, Player* p1 = nullptr, PlayerTwo* p2 = nullptr);
             ~Ghoul();
             void update(float t) override;
-            //            void collide(Ids::Ids idOther, Vector2F positionOther, Vector2F dimensionsOther);
+            void createProjectile(Vector2F pos);
+
         };
     }
 }

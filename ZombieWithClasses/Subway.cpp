@@ -1,39 +1,39 @@
 #include "Subway.h"
 #include "Homer.h"
 #include "Ghoul.h"
-#include "Lava.h"
 #include "Tile.h"
 #include <fstream>
+#include <time.h>
+#include <random>
 #include "Ids.h"
 #include "stdafx.h"
 #include "Nemesis.h"
+#include "Bullet.h"
+#include "Platform.h"
+#include "Fire.h"
+#include "SpiderWeb.h"
+#include "Lava.h"
 
 States::Subway::Subway(Managers::GraphicManager* gm, Entities::Characters::Player* p1) :
     Stage{ gm,
            new Managers::TilesManager{
                    {
-                           new Entities::Tile(Ids::empty, "../assets/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::air, "../assets/Tiles/Platformer/Air.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground1, "../assets/Tiles/Platformer/Ground_01.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground2, "../assets/Tiles/Platformer/Ground_02.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground3, "../assets/Tiles/Platformer/Ground_03.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground4, "../assets/Tiles/Platformer/Ground_04.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground5, "../assets/Tiles/Platformer/Ground_05.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground6, "../assets/Tiles/Platformer/Ground_06.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground7, "../assets/Tiles/Platformer/Ground_07.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground8, "../assets/Tiles/Platformer/Ground_08.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground9, "../assets/Tiles/Platformer/Ground_09.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground10, "../assets/Tiles/Platformer/Ground_10.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground11, "../assets/Tiles/Platformer/Ground_11.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::ground12, "../assets/Tiles/Platformer/Ground_12.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::wallL, "../assets/Tiles/Platformer/WallL.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::wallR, "../assets/Tiles/Platformer/WallR.png", {32.0f, 32.0f}),
-                           new Entities::Tile(Ids::spiderweb, "../assets/Tiles/Platformer/spiderWeb.png", {32.0f, 32.0f}),
+                           new Tiles::Tile(Ids::air, "../assets/Tiles/Platformer/Air.png", {32.0f, 32.0f}),
+                           new Tiles::Tile(Ids::empty, "../assets/Tiles/Platformer/Empty.png", {32.0f, 32.0f}),
+                           new Tiles::Tile(Ids::ground, "../assets/Tiles/Platformer/Ground_02.png", {32.0f, 32.0f}),
+                           new Tiles::Tile(Ids::dirt, "../assets/Tiles/Platformer/Ground_06.png", {32.0f, 32.0f}),
+                           new Tiles::Platform(),
+                           new Tiles::SpiderWeb(),
+                           new Tiles::Fire(),
+                           new Tiles::Lava(),
+                           new Tiles::Tile(Ids::wallL, "../assets/Tiles/Platformer/WallL.png", {32.0f, 32.0f}),
+                           new Tiles::Tile(Ids::wallR, "../assets/Tiles/Platformer/WallR.png", {32.0f, 32.0f}),
                    },
                    {32.0f, 32.0f}, SUBWAY_PATH
            },
            p1 }
 {
+    player1->setScore(0);
 }
 
 nlohmann::json States::Subway::convertJSON()
@@ -48,7 +48,7 @@ nlohmann::json States::Subway::convertJSON()
 void States::Subway::load(const std::string& path)
 {
     std::ifstream file(path);
-
+    TM->regenTiles();
     if (file.fail()) throw "path not found!";
     nlohmann::json j;
     file >> j;
@@ -76,24 +76,28 @@ void States::Subway::load(const std::string& path)
             break;
         }
         case Ids::Ids::Homer: {
-            auto* Enemy = new Entities::Characters::Homer(e["position"], e["life"], player1);
-            EL.insert(Enemy);
+            EL.insert(new Entities::Characters::Homer(e["position"], e["life"], player1, player2));
             break;
         }
         case Ids::Ids::Ghoul: {
-            auto* Enemy = new Entities::Characters::Ghoul(e["position"], e["life"], player1);
-            EL.insert(Enemy);
+            EL.insert(new Entities::Characters::Ghoul(e["position"], e["life"], player1, player2));
+            break;
         }
         case Ids::Ids::Nemesis: {
-            auto* Enemy = new Entities::Characters::Nemesis(e["position"], e["life"], player1);
-            EL.insert(Enemy);
+            EL.insert(new Entities::Characters::Nemesis(e["position"], e["life"], player1, player2));
             break;
         }
         case Ids::Ids::Bullet: {
-            EL.insert(new Entities::Bullet(e));
+            EL.insert(new Entities::Bullet(e["position"], e["vel"], e["dir"]));
+            break;
+        }
+        case Ids::Ids::Rock: {
+            EL.insert(new Entities::Rock(e["position"], e["vel"], e["dir"]));
+            break;
         }
         case Ids::Ids::Bone: {
-            EL.insert(new Entities::Bone(e));
+            EL.insert(new Entities::Bone(e["position"], e["vel"], e["dir"]));
+            break;
         }
         default:
             break;
@@ -110,19 +114,22 @@ void States::Subway::initialize(bool twoPlayers)
     player1->setEL(&EL);
     player1->setStage(2);
     player1->setScore(playerScore);
-
+    player2 = nullptr;
     if (twoPlayers)
     {
-        player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 3040));
+        player2 = new Entities::Characters::PlayerTwo(Vector2F(200, 1450));
         EL.insert(player2);
     }
 
-    Vector2F pos = { 500.0f, 3000.0f };
 
-    EL.insert(new Entities::Characters::Homer(Vector2F(pos), player1));
-    EL.insert(new Entities::Characters::Nemesis(Vector2F(700, 3000), player1));
+    int i = (rand() % 2) + 3;
+    while (i > 0) {
+        EL.insert(new Entities::Characters::Homer(Vector2F((((rand() % 430) + 100) * 10.0f), 1450.f), player1, player2));
+        EL.insert(new Entities::Characters::Ghoul(Vector2F((((rand() % 430) + 100) * 10.0f), 1450.f), player1, player2));
+        i--;
+    }
 
-    pos.x += 1000.0f;
+    EL.insert(new Entities::Characters::Nemesis(Vector2F(6300, 1380), player1, player2));
 
     EL.initialize(GM, &EM, &CM);
 

@@ -4,18 +4,14 @@
 #include<map>
 #include"GraphicManager.h"
 #include "EventManager.h"
-#include "Ent.h"
 
-class LeaderBoard : 
-    public Ent
+class LeaderBoard
 {
 private:
     std::multimap<unsigned int, std::string> scores;
-    //Managers::GraphicManager* GM;
     Managers::EventManager* EM;
     Vector2F position;
     Vector2F size;
-    int offset;
     unsigned int mouseID;
     unsigned int fontSize;
     const char* path;
@@ -25,8 +21,6 @@ public:
     ~LeaderBoard();
 
     void initialize(Managers::EventManager& em);
-    void subscribe();
-    void update(float t);
     void addScore(const unsigned int score, const std::string name);
     void loadScores();
     void removeListeners();

@@ -1,12 +1,12 @@
 #include "Text.h"
 
-Text::Text(Managers::EventManager* em, unsigned short maxL) :
-    idListenKeyboard{ 0 }, startCapture(false), textDone(false), EM{ em }, maxLenght(maxL) {
+Text::Text(Managers::EventManager& em, unsigned short maxL) :
+    idListenKeyboard(0), startCapture(false), textDone(false), EM{ em }, maxLenght(maxL) {
 
 }
 
 Text::~Text() {
-    EM->removeListenKeyboard(idListenKeyboard);
+    EM.removeListenKeyboard(idListenKeyboard);
 }
 
 void Text::inicialize() {
@@ -15,7 +15,7 @@ void Text::inicialize() {
 
     text.clear();
 
-    idListenKeyboard = EM->addListenKeyboard([this](const sf::Event& e) {get(e);});
+    idListenKeyboard = EM.addListenKeyboard([this](const sf::Event& e) {get(e); });
 }
 
 void Text::get(const sf::Event& e) {
@@ -35,7 +35,6 @@ void Text::get(const sf::Event& e) {
         else if (e.key.code == sf::Keyboard::Key::Enter) {
             textDone = true;
             startCapture = false;
-            //EM->removeListenKeyboard(idListenKeyboard);
             idListenKeyboard = 0;
         }
     }

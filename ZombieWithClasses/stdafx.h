@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#define GRAVITY 5
+#define GRAVITY 7
 
 using std::cout;
 using std::endl;
@@ -17,8 +17,8 @@ using std::endl;
 #define BONE_PATH "../assets/projectiles/bone.png"
 #define ROCK_PATH "../assets/projectiles/Rock.png"
 
-#define RACOON_PATH "../assets/Maps/mapStage1.json"
-#define SUBWAY_PATH "../assets/Maps/mapStage2.json"
+#define RACOON_PATH "../assets/Maps/RacoonCity.json"
+#define SUBWAY_PATH "../assets/Maps/Subway.json"
 
 #define PLAYER_PATH "../assets/Terrorists/Leoncio.png"
 #define PLAYER2_PATH  "../assets/Terrorists/Barreth.png"

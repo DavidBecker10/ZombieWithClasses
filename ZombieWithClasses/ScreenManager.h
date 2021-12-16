@@ -15,23 +15,23 @@ namespace Managers {
         loadGame,
         goMainMenu,
         goPauseMenu,
-        goLeaderboard,
-        goEndGame,
         resume,
         saveGame,
         onePlayer,
         twoPlayer,
-        goSubway
+        goSubway,
+        goLeaderBoard,
+        goEndGame
     };
 
     class ScreenManager : public States::StateMachine {
     private:
         GraphicManager* GM;
         bool twoPlayers;
-        Entities::Characters::Player *player1;
+        Entities::Characters::Player* player1;
 
     public:
-        ScreenManager(GraphicManager* gm/*, Entities::Characters::Player *p1 = nullptr*/);
+        ScreenManager(GraphicManager* gm);
 
     protected:
         bool processCode(int returnCode) override;

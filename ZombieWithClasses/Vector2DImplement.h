@@ -1,6 +1,5 @@
 #ifndef ZOMBIEWITHCLASSES_VECTOR2DIMPLEMENT_H
 #define ZOMBIEWITHCLASSES_VECTOR2DIMPLEMENT_H
-
 #include<cmath>
 
 template <typename T>

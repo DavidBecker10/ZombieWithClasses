@@ -1,18 +1,18 @@
 #include "EndGameState.h"
 #include "ScreenManager.h"
 
-States::EndGameState::EndGameState(Managers::GraphicManager& gm, int scr):
+States::EndGameState::EndGameState(Managers::GraphicManager& gm, int scr) :
     Menu(gm), tField{ &EM, 15, { 960.0f, 50.0f }, { 300.0f, 50.0f }, 30U }, print(false), score(scr)
 {
     BM.addButton(&tField);
     tField.startCapture();
-	BM.addButton(new Button({ 960.0f, 250.0f }, { 400, 75 }, "Return to Main Menu", [this] { setReturnCode(Managers::goMainMenu); }, 40U, sf::Color::Red));
+    BM.addButton(new Button({ 960.0f, 250.0f }, { 400, 75 }, "Return to Main Menu", [this] { setReturnCode(Managers::goMainMenu); }, 40U, sf::Color::Red));
 }
 
 int States::EndGameState::execute()
 {
     int ret = Menu::execute();
-    if(!print && tField.getTextDone()){
+    if (!print && tField.getTextDone()) {
         print = true;
         LB.addScore(score, tField.getText());
     }

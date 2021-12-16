@@ -7,3 +7,9 @@
 50 Willian
 10 Player
 20 Scorpion
+20 Everaldo
+0 Jogador
+20 Lopes
+110 Stephen
+0 Davis
+160 Becker

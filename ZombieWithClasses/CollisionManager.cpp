@@ -1,5 +1,6 @@
 #include "CollisionManager.h"
 #include "stdafx.h"
+#include <deque>
 
 namespace Managers {
     CollisionManager::CollisionManager() :
@@ -19,14 +20,13 @@ namespace Managers {
         Vector2F position2 = c2->getPosition();
         Vector2F dimensions2 = c2->getDimensions();
 
-        Vector2F distance = position1 - position2;
+        Vector2F collision1 = position1 + dimensions1 * .5;
+        Vector2F collision2 = position2 + dimensions2 * .5;
 
         if (c1 == c2) return false;
 
-        /*if (position1 == position2)
-            return true;*/
-        return (fabs(distance.x) < (dimensions1.x + dimensions2.x) * 0.5) &&
-            (fabs(distance.y) < (dimensions1.y + dimensions2.y) * 0.5);
+        return (abs(collision1.x - collision2.x) < (dimensions1.x + dimensions2.x) * 0.5) &&
+            (abs(collision1.y - collision2.y) < (dimensions1.y + dimensions2.y) * 0.5);
         return false;
     }
 
@@ -39,44 +39,12 @@ namespace Managers {
 
     void CollisionManager::removeCollide(Entities::Entity* c) {
         EntityL->remove(c);
-        //list.erase(c);
     }
 
     void CollisionManager::removeAll() {
-        // list.clear();
         EntityL->destroyEntities();
     }
 
-    /*
-    void CollisionManager::verifyCollisions() {
-        for (auto first = list.begin(); first != list.end(); first++) {
-
-            Entities::Entity* p1 = *first;
-
-            auto collisionWithTiles = TM->checkCollisions(p1->getID(), p1->getPosition(), p1->getDimensions());
-            //std::cout << p1->getDimensions() << std::endl;
-            for (auto collision : collisionWithTiles)
-                p1->collide(collision.id, collision.position, collision.size);
-
-            auto other = first;
-            other++;
-
-            for (; other != list.end(); other++) {
-                Entities::Entity* p2 = *other;
-
-                if (isColliding(p1, p2)) {
-
-                    p1->collide(p2->getID(), p2->getPosition(), p2->getDimensions());
-                    p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
-
-                }
-
-            }
-
-            //std::cout << '\n' << std::endl;
-        }
-    }
-    */
     void CollisionManager::verifyCollisions() {
         for (int i = 0; i < EntityL->getSize(); i++) {
 
@@ -86,9 +54,8 @@ namespace Managers {
                 p1->getPosition(),
                 p1->getDimensions());
 
-            for (TilesManager::IdPositionSize collision : collisionWithTiles)
+            for (const TilesManager::IdPositionSize& collision : collisionWithTiles)
                 p1->collide(collision.id, collision.position, collision.size);
-
             for (int j = i + 1; j < EntityL->getSize(); j++) {
                 Entities::Entity* p2 = (*EntityL)[j];
 
@@ -98,10 +65,8 @@ namespace Managers {
                     p2->collide(p1->getID(), p1->getPosition(), p1->getDimensions());
 
                 }
-
+                p1->adjust();
             }
-
-            //std::cout << '\n' << std::endl;
         }
     }
 
