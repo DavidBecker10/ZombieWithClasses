@@ -1,2 +1,2 @@
 # ZombieWithClasses
-Jogo para disciplina de Técnicas de Programação da UTFPR, desenvolvido em C++ OO (Orientado à Objetos) utilizando SFML.
+Jogo desenvolvido para a disciplina de Técnicas de Programação da UTFPR, feito com C++ OO (Orientado à Objetos) utilizando SFML.
